@@ -111,7 +111,7 @@ Timeline page
   overflow: hidden; }
 
 .timeline > li.timeline-inverted > .timeline-panel {
-  float: left; }
+  float: right; }
 
 .timeline > li.timeline-inverted > .timeline-panel:before {
   right: auto;

@@ -25,11 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      if(!Auth::check()) return redirect('/login');
+
+      return view('home');
     }
 
     public function login(Request $request){
-        
+
         if(Auth::check()) return redirect('/home');
 
         $userName = $request->input('userName');

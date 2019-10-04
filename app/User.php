@@ -37,6 +37,40 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    function getUsers(){
+        return DB::table('users')->get();
+    }
+
+    function getUser($id){
+        return DB::table('users')->find($id);
+    }
+
+    function insertUser($user, $pass, $full, $mob, $path=null){
+        return DB::table('users')->insertGetId([
+            "username"  =>  $user,
+            "password"  =>  Hash::make($pass),
+            "fullname"  =>  $full,
+            "mobNumber" =>  $mob,
+            "image"     =>  $path
+        ]);
+    }
+
+    function updateUser($user, $pass, $full, $mob, $path=null, $id){
+
+        $updateArr = [
+            "username"  =>  $user,
+            "fullname"  =>  $full,
+            "mobNumber" =>  $mob
+        ];
+
+        if($path !== null && strcmp($path, '') != 0)
+            $updateArr['image']     =   $path; 
+
+        if($path !== null && strcmp($path, '') != 0)
+            $updateArr['pass']     =   Hash::make($pass); 
+
+        return DB::table('users')->update()->where("id", $id);
+    }
 
     function checkCredentials($userName, $passWord){
         return DB::table('users')->where('USER_UNAME', $userName)->where('USER_PSWD', $passWord)->count();

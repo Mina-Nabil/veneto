@@ -4,7 +4,7 @@ Author: Niravjoshi / Wrappixel
 File: scss
 */
 
-@import 'variable';
+@import 'variable'; 
 
 //Colors
 @import 'colors/default';
@@ -41,6 +41,3 @@ File: scss
 
 //In This scss you can write your scss
 @import 'custom';
-
-// RTL
-@import 'rtl';

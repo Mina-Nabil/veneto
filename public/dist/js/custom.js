@@ -85,6 +85,7 @@ $(function () {
     // Perfact scrollbar
     // ==============================================================
     $('.scroll-sidebar, .right-side-panel, .message-center, .right-sidebar').perfectScrollbar();
+    $('#chat, #msg, #comment, #todo').perfectScrollbar();
     // ==============================================================
     // Resize all elements
     // ==============================================================

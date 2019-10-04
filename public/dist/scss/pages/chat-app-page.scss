@@ -17,7 +17,7 @@ chat application Page
     .chat-left-aside {
         position: relative;
         width: 250px;
-        float: $lft;
+        float: left;
         z-index: 9;
         top: 0px;
         border-right: 1px solid $border-color;
@@ -64,7 +64,7 @@ chat application Page
     }
     .chat-right-aside {
         width: calc(100% - 250px);
-        float:$lft;
+        float:left;
         .chat-rbox{
             height: auto;
             position: relative;
@@ -78,16 +78,16 @@ chat application Page
             }
             li .chat-time {
                 display: block;
-                text-align: $lft;
+                text-align: left;
             }
             li.reverse .chat-time{
                 margin-left: auto;
-                text-align: $rgt;
+                text-align: right;
             }
         }
         .send-chat-box {
             position: relative;
-            .form-control { 
+            .form-control {
                 border: none;
                 border-top: 1px solid $border-color;
                 resize: none;

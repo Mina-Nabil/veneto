@@ -66,7 +66,7 @@ Contact app Page
       .list-style-none li a:hover {
         color: #fb9678; }
       .list-style-none li a span {
-        float: left; }
+        float: right; }
 
 .social-profile {
   text-align: center;
