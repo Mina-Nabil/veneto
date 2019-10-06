@@ -6,6 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -37,15 +40,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    function getUsers(){
+    static function getUsers(){
         return DB::table('users')->get();
     }
 
-    function getUser($id){
+    static function getUser($id){
         return DB::table('users')->find($id);
     }
 
-    function insertUser($user, $pass, $full, $mob, $path=null){
+    static function insertUser($user, $pass, $full, $mob, $path=null){
         return DB::table('users')->insertGetId([
             "username"  =>  $user,
             "password"  =>  Hash::make($pass),
@@ -55,7 +58,7 @@ class User extends Authenticatable
         ]);
     }
 
-    function updateUser($user, $pass, $full, $mob, $path=null, $id){
+    static function updateUser($id, $user, $pass, $full, $mob, $path=null, $oldPath=null){
 
         $updateArr = [
             "username"  =>  $user,
@@ -63,16 +66,20 @@ class User extends Authenticatable
             "mobNumber" =>  $mob
         ];
 
-        if($path !== null && strcmp($path, '') != 0)
+        if($path !== null && strcmp($path, '') != 0){
             $updateArr['image']     =   $path; 
+            if (file_exists($oldPath)){
+                unlink($oldPath);
+            }
+        }
 
-        if($path !== null && strcmp($path, '') != 0)
-            $updateArr['pass']     =   Hash::make($pass); 
-
-        return DB::table('users')->update()->where("id", $id);
+        if($pass !== null && strcmp(trim($pass), '') != 0)
+            $updateArr['password']     =   Hash::make($pass); 
+    
+        return DB::table('users')->where("id", $id)->update($updateArr);
     }
 
-    function checkCredentials($userName, $passWord){
+    static function checkCredentials($userName, $passWord){
         return DB::table('users')->where('USER_UNAME', $userName)->where('USER_PSWD', $passWord)->count();
     }
 }

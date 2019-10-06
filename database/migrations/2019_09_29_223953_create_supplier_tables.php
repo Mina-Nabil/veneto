@@ -13,22 +13,20 @@ class CreateSupplierTables extends Migration
      */
     public function up()
     {
-      Schema::create('supplier_type', function(Blueprint $table){
-        $table->smallIncrements('id');
+
+      Schema::create('supplier_types', function(Blueprint $table){
+        $table->increments('id');
         $table->string('SPTP_NAME');
       });
 
       Schema::create('suppliers', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('SUPP_NAME');
-          $table->string('SUPP_ADRS')->nullable();
-          $table->double('SUPP_BLNC')->nullable();
+          $table->string('SUPP_ARBC_NAME')->nullable();
+          $table->double('SUPP_BLNC')->default(0);
+          $table->unsignedInteger('SUPP_SPTP_ID');
+          $table->foreign('SUPP_SPTP_ID')->references('id')->on('supplier_types');
           $table->timestamps();
-      });
-
-      Schema::create('supplier_to_type', function (Blueprint $table){
-        $table->mediumIncrements('id');
-        $table->bigInteger('STOP_SUPP_ID')->fo
       });
 
 
@@ -42,5 +40,6 @@ class CreateSupplierTables extends Migration
     public function down()
     {
         Schema::dropIfExists('suppliers');
+        Schema::dropIfExists('supplier_types');
     }
 }

@@ -14,25 +14,15 @@ class CreateUsersTable extends Migration
     public function up()
     {
 
-        Schema::dropIfExists('user_types');
-        Schema::create('user_types', function(Blueprint $table){
-            $table->increments('id');
-            $table->string('name');
-
-        });
-
         Schema::dropIfExists('users');
 
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('username')->unique();
-            $table->string('fullname');
+            $table->string('fullname')->nullable();
             $table->string('image')->nullable();
             $table->string('password');
-            $table->string('mobNumber');
-            $table->unsignedInteger('typeID');
-            $table->foreign('typeID')->references('id')
-                    ->on('user_types');
+            $table->string('mobNumber')->nullable();
             $table->rememberToken();
         });
     }
@@ -45,6 +35,5 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('user_types');
     }
 }

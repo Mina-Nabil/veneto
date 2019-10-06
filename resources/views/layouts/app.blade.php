@@ -62,14 +62,14 @@
                             <!-- Dark Logo icon -->
                             <!-- <img src="{{ asset('assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo" /> -->
                             <!-- Light Logo icon -->
-                            <img src="{{ asset('images/logo.png') }}" alt="homepage" class="dark-logo" />
+                            <img src="{{ asset('images/logo.png') }}" height=50px alt="homepage" class="dark-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
                          <!-- dark Logo text -->
-                         <img src="{{ asset('images/logo-text.png') }}" alt="homepage" class="dark-logo" />
+                         <img src="{{ asset('images/logo.png') }}" height=50px alt="homepage" class="dark-logo" />
                          <!-- Light Logo text -->
-                         <img src="{{ asset('images/logo-text.png') }}" class="light-logo" alt="homepage" /></span> </a>
+                         <img src="{{ asset('images/logo.png') }}" height=50px class="light-logo" alt="homepage" /></span> </a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -144,9 +144,11 @@
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">Suppliers</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('suppliers/show')}}">Show</a></li>
-                                <li><a href="{{url('suppliers/pw')}}">Add</a></li>
-                                <li><a href="{{url('clients/show/18')}}">Report</a></li>
+                                <li><a href="{{url('suppliers/report')}}">Report</a></li>
+                                <li><a href="{{url('suppliers/show')}}">All</a></li>
+                                <li><a href="{{url('suppliers/add')}}">Add Supplier</a></li>
+                                <li><a href="{{url('suppliers/types/show')}}">Types</a></li>
+                                <li><a href="{{url('suppliers/types/add')}}">Add Type</a></li>
                             </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" fas fa-cogs"></i><span class="hide-menu">Production </span></a>
@@ -196,14 +198,14 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor"> الحسابات</h4>
+                        <h4 class="text-themecolor">Via Veneto Management System</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
-                            <a  href="{{url('ledger/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> اضافه يوميه </a>
-                            <a  href="{{url('invoice/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> اضافه فاتوره </a>
-                            <a  href="{{url('transactions/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> اضافه تعاملات ورش </a>
-                            <a  href="{{url('invoice/addrevert')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> اضافه فاتوره مرتجع </a>
+                            <a  href="{{url('ledger/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Client Op.</a>
+                            <a  href="{{url('invoice/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Supplier Op.</a>
+                            <a  href="{{url('transactions/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Account Op.</a>
+                            <a  href="{{url('invoice/addrevert')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Inventory Op.</a>
                         </div>
                     </div>
                 </div>
