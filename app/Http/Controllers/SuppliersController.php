@@ -7,9 +7,88 @@ use App\Suppliers;
 
 class SuppliersController extends Controller
 {
-    //
-    function home(){
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    ////////Supplier Transactions/////////////
+    function quickReport($id=null){
+
+        $data['ops'] = Suppliers::getTrans($id);
+        return view("suppliers.report", $data);
+    }
+
+    //prepare report page
+    function report(){
+        
         $data['suppliers'] = Suppliers::getSuppliers();
+
+        $data['accountStatFormURL'] = url('suppliers/account/statement');
+        $data['mainReportFormURL'] = url('suppliers/main/account');
+
+        return view('suppliers.prepare', $data);
+    }
+    
+    function accountStatement(Request $request){
+
+        $data['arr'] = Suppliers::getAccountStatement($request->supplier, $request->from, $request->to);
+        $data['supplier'] = Suppliers::getSupplier($request->supplier);
+
+        if($data['supplier'] == null) return abort(404);
+
+        $data['totals'] = $data['arr']['totals'];
+        $data['ops']    = $data['arr']['trans'];
+
+        if($data['totals'] == null){
+            $data['totals'] = (object)[
+                'totalPurch' => 0,
+                'totalDisc' => 0,
+                'totalReturn' => 0,
+                'totalNotes' => 0,
+                'totalCash' => 0
+            ];
+        }
+
+        $data['reportTitle'] = $data['supplier']->SUPP_NAME . " Account Statement";
+        $data['reportDesc'] = $data['supplier']->SUPP_NAME . " Current Balance is " . $data['supplier']->SUPP_BLNC;
+
+        $data['startBalance'] = $data['supplier']->SUPP_BLNC - $data['totals']->totalPurch + $data['totals']->totalDisc + $data['totals']->totalCash +
+                                $data['totals']->totalReturn + $data['totals']->totalNotes ;
+
+        return view('suppliers.accnt_stat', $data);
+
+    }
+
+    function mainReport(Request $request){
+        $data['ops'] = Suppliers::getTotals($request->from, $request->to);
+        return view('suppliers.main_report', $data);
+    }
+
+    function addTransPage(){
+
+        $data['suppliers']  = Suppliers::getSuppliers();
+
+        $data['pageTitle']  = "Add Supplier Operation";
+        $data['pageDescription']    = "Add New Supplier Operation";
+        $data['formURL']            = url("suppliers/trans/insert");
+
+        return view('suppliers.add_trans', $data);
+    }
+    
+    function insertTrans(Request $request){
+
+        Suppliers::insertTrans( $request->supplier, $request->purchase, $request->cash, 
+                                    $request->notes, $request->disc, $request->return, $request->comment);
+        
+        return redirect("suppliers/trans/quick");
+
+    }
+    
+    ///////////Supplier Pages///////////////////
+    function home(){
+        $data['suppliers']  = Suppliers::getSuppliers();
+        $data['total']      = Suppliers::getTotalBalance(); 
         return view('suppliers.home', $data);
     }
 

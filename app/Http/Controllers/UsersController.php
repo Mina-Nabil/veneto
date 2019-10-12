@@ -7,7 +7,11 @@ use App\User;
 
 class UsersController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+ 
     function home(){
         $table = User::getUsers();
         return view("users.home", ["users" => $table]);

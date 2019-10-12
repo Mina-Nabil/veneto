@@ -57,7 +57,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="اسم المورد بالعربي" name=arbcName aria-label="Supplier Name" aria-describedby="basic-addon11" value="{{ (isset($supplier)) ? $supplier->SUPP_ARBC_NAME : old('arbcName')}}" required>
+                            <input type="text" class="form-control" placeholder="اسم المورد بالعربي" name=arbcName aria-label="Supplier Name" aria-describedby="basic-addon11" value="{{ (isset($supplier)) ? $supplier->SUPP_ARBC_NAME : old('arbcName')}}" >
                         </div>
                     </div>
 

@@ -21,14 +21,24 @@
                         <tbody>
                             @foreach($suppliers as $supplier)
                             <tr>
-                                <td>{{$supplier->SUPP_NAME}}</td>
+                                <td>
+                                    <a href="{{url('suppliers/trans/quick/' . $supplier->id)}}">
+                                        {{$supplier->SUPP_NAME}}
+                                    </a>
+                                </td>
                                 <td>{{$supplier->SUPP_ARBC_NAME}}</td>
                                 <td>{{$supplier->SPTP_NAME}}</td>
-                                <td>{{number_format($supplier->SUPP_BLNC)}}</td>
+                                <td>{{number_format($supplier->SUPP_BLNC, 2)}}</td>
                                 <td><a href="{{ url('suppliers/edit/' . $supplier->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></img></a></td>                               
                             </tr> 
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                            <td colspan=3>Total Balance: </td>
+                            <td>{{number_format($total, 2)}}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

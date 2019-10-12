@@ -13,6 +13,14 @@
 
 
 //Suppliers Routes
+Route::get("suppliers/trans/prepare",     'SuppliersController@report');
+Route::get("suppliers/trans/quick",     'SuppliersController@quickReport');
+Route::get("suppliers/trans/quick/{id}",     'SuppliersController@quickReport');
+Route::get("suppliers/trans/add",       'SuppliersController@addTransPage');
+Route::post("suppliers/trans/insert",   'SuppliersController@insertTrans');
+Route::post("suppliers/account/statement", 'SuppliersController@accountStatement');
+Route::post("suppliers/main/account", 'SuppliersController@mainReport');
+
 Route::get("suppliers/show",        'SuppliersController@home');
 Route::get("suppliers/add",         'SuppliersController@addPage');
 Route::get("suppliers/edit/{id}",   'SuppliersController@edit');
