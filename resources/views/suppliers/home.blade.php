@@ -29,14 +29,14 @@
                                 <td>{{$supplier->SUPP_ARBC_NAME}}</td>
                                 <td>{{$supplier->SPTP_NAME}}</td>
                                 <td>{{number_format($supplier->SUPP_BLNC, 2)}}</td>
-                                <td><a href="{{ url('suppliers/edit/' . $supplier->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></img></a></td>                               
+                                <td><a href="{{ url('suppliers/edit/' . $supplier->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></a></td>                               
                             </tr> 
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                            <td colspan=3>Total Balance: </td>
-                            <td>{{number_format($total, 2)}}</td>
+                            <td colspan=3><strong>Total Balance: </strong></td>
+                            <td><strong>{{number_format($total, 2)}}</strong></td>
                             </tr>
                         </tfoot>
                     </table>

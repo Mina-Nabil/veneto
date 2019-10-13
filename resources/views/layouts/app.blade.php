@@ -134,7 +134,28 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-list"></i><span class="hide-menu">Raw Inventory</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-list"></i><span class="hide-menu">Accounts</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li>
+                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" >Cash</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{url('cash/show')}}">Show</a></li>
+                                        <li><a href="{{url('cash/prepare/report')}}">Report</a></li>
+                                        <li><a href="{{url('cash/add')}}">Add</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" >Bank</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{url('bank/show')}}">Show</a></li>
+                                        <li><a href="{{url('bank/prepare/report')}}">Report</a></li>
+                                        <li><a href="{{url('bank/add')}}">Add</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">Raw Inventory</span></a>
                             <ul aria-expanded="false" class="collapse">
                             <li><a href="{{url('inventory/show')}}">Show</a></li>
                             <li><a href="{{url('inventory/add')}}">Add</a></li>

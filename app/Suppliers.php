@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\DB;
 
+use App\Cash;
+use App\Bank;
+
 class Suppliers extends Model
 {
     ///////////////////////Reports/////////////////////
@@ -85,7 +88,7 @@ class Suppliers extends Model
 
                     $newBalance     =   $oldBalance + $purchase - $cash - $notespay - $return - $discount;
 
-                    DB::table("supplier_trans")->insertGetId([
+                    $id = DB::table("supplier_trans")->insertGetId([
                         "SPTR_SUPP_ID"      => $supp,
                         "SPTR_PRCH_AMNT"    => (double) $purchase,
                         "SPTR_PRCH_BLNC"    => (double) $prchBalance + $purchase,
@@ -101,6 +104,12 @@ class Suppliers extends Model
                         "SPTR_Date"         => date("Y-m-d H:i:s"),
                         "SPTR_CMNT"         =>  $comment
                     ]);
+
+                    if($cash > 0)
+                        Cash::insertTran("Supplier Transaction# " . $id , 0, $cash);
+                    if($notespay > 0)
+                        Bank::insertTran("Supplier Transaction# " . $id , 0, $notespay);
+                    
 
                     self::updateBalance($supp, $newBalance);
         });

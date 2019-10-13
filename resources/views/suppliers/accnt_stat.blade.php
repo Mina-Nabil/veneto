@@ -41,13 +41,14 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td>Start Balance: {{number_format($startBalance, 1)}}</td>
-                                <td>{{number_format($totals->totalPurch, 2)}} </td>
-                                <td>{{number_format($totals->totalCash, 2)}}</td>
-                                <td>{{number_format($totals->totalNotes, 2)}}</td>
-                                <td>{{number_format($totals->totalDisc, 2)}}</td>
-                                <td>{{number_format($totals->totalReturn, 2)}}</td>
-                                <td>End: {{number_format($supplier->SUPP_BLNC, 2)}}</td>
+                                <td><strong>Start Balance: {{number_format($startBalance, 1)}}</strong></td>
+                                <td><strong>{{number_format($totals->totalPurch, 2)}} </strong></td>
+                                <td><strong>{{number_format($totals->totalCash, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->totalNotes, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->totalDisc, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->totalReturn, 2)}}</strong></td>
+                                <td><strong>End: {{number_format($supplier->SUPP_BLNC, 2)}}</strong></td>
+                              
                             </tr>
                         </tfoot>
                     </table>

@@ -23,7 +23,7 @@
                                 <td>{{$user->username}}</td>
                                 <td>{{$user->fullname}}</td>
                                 <td>{{$user->mobNumber}}</td>
-                                <td><a href="{{ url('users/edit/' . $user->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></img></a></td>                               
+                                <td><a href="{{ url('users/edit/' . $user->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></a></td>                               
                             </tr> 
                             @endforeach
                         </tbody>

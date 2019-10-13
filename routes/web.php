@@ -11,6 +11,20 @@
 |
 */
 
+//Bank Account
+Route::get("bank/show",         'BankController@show');
+Route::get("bank/add",         'BankController@addPage');
+Route::post("bank/insert",         'BankController@insert');
+Route::get("bank/prepare/report",         'BankController@reportPage');
+Route::post("bank/report",         'BankController@report');
+
+//Cash Account
+Route::get("cash/show",             'CashController@show');
+Route::get("cash/add",              'CashController@addPage');
+Route::post("cash/insert",          'CashController@insert');
+Route::get("cash/prepare/report",   'CashController@reportPage');
+Route::post("cash/report",          'CashController@report');
+
 
 //Suppliers Routes
 Route::get("suppliers/trans/prepare",     'SuppliersController@report');
