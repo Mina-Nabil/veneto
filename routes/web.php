@@ -11,6 +11,38 @@
 |
 */
 
+//Raw Inventory
+Route::get('rawinventory/show'  ,   'RawInventoryController@showAvailable');
+Route::get('rawinventory/add'   ,   'RawInventoryController@addPage');
+Route::get('rawinventory/tran'   ,   'RawInventoryController@transactions');
+Route::get('raw/tran/add'       ,   'RawInventoryController@addTran');
+Route::post('raw/tran/insert'   ,   'RawInventoryController@insertTran');
+Route::post('rawinventory/insert',   'RawInventoryController@insert');
+
+//Models
+Route::get("models/show",   'ModelsController@showModels');
+Route::get("models/edit/{id}",  'ModelsController@editModel');
+Route::post("models/update",  'ModelsController@updateModel');
+Route::post("models/insert",  'ModelsController@insertModel');
+
+//Colors
+Route::get("colors/show",   'ModelsController@showColors');
+Route::get("colors/edit/{id}",  'ModelsController@editColor');
+Route::post("colors/update",  'ModelsController@updateColor');
+Route::post("colors/insert",  'ModelsController@insertColor');
+
+//Raws
+Route::get("raw/show",          'ModelsController@showRaw');
+Route::get("raw/edit/{id}",     'ModelsController@editRaw');
+Route::post('raw/update',        'ModelsController@updateRaw');
+Route::post('raw/insert',       'ModelsController@insertRaw');
+
+//Types
+Route::get("types/show",          'ModelsController@showTypes');
+Route::get("types/edit/{id}",     'ModelsController@editType');
+Route::post('types/update',        'ModelsController@updateType');
+Route::post('types/insert',       'ModelsController@insertType');
+
 //Bank Account
 Route::get("bank/show",         'BankController@show');
 Route::get("bank/add",         'BankController@addPage');

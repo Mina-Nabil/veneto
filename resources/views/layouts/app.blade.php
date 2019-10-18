@@ -157,9 +157,21 @@
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">Raw Inventory</span></a>
                             <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{url('inventory/show')}}">Show</a></li>
-                            <li><a href="{{url('inventory/add')}}">Add</a></li>
-                            <li><a href="{{url('inventory/addrevert')}}">Monthly Report</a></li>
+                            <li><a href="{{url('rawinventory/show')}}">Available</a></li>
+                            <li><a href="{{url('rawinventory/tran')}}">Transactions</a></li>
+                            <li><a href="{{url('rawinventory/add')}}">New Entry</a></li>
+                            <li><a href="{{url('raw/tran/add')}}">New Transaction</a></li>
+
+                            <li>
+                            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" >Settings</a>       
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{url('models/show')}}">Models</a></li>
+                                    <li><a href="{{url('types/show')}}">Types</a></li>
+                                    <li><a href="{{url('colors/show')}}">Colors</a></li>
+                                    <li><a href="{{url('raw/show')}}">Raw Materials</a></li> 
+                                </ul>
+                            </li>
+
                             </ul>
                         </li>
 
