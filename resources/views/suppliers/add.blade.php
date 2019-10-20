@@ -46,7 +46,11 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-bar-chart"></i></span>
                             </div>
-                            <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=balance aria-label="Supplier Balance" aria-describedby="basic-addon11" value="{{ (isset($supplier)) ? $supplier->SUPP_BLNC : old('balance')}}" required>
+                            <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=balance aria-label="Supplier Balance" aria-describedby="basic-addon11" value="{{ (isset($supplier)) ? $supplier->SUPP_BLNC : old('balance')}}" required
+                            @if(isset($supplier))
+                            readonly
+                            @endif
+                            >
                         </div>
                         <small class="text-danger">{{$errors->first('balance')}}</small>
                     </div>
@@ -63,7 +67,7 @@
 
                     
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
-                    <a href="{{url('suppliers/types/show') }}" class="btn btn-dark">Cancel</a>
+                    <a href="{{url('suppliers/show') }}" class="btn btn-dark">Cancel</a>
                 </form>
             </div>
         </div>

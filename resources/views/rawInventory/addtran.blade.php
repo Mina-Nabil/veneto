@@ -63,7 +63,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-package"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Example: Returned" name=to  required>
+                            <input type="text" class="form-control" placeholder="Example: Returned to supplier" name=to  required>
                         </div>
                     </div>
                     

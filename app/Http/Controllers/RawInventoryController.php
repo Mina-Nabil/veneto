@@ -10,9 +10,9 @@ use App\RawInventory;
 
 class RawInventoryController extends Controller
 {
-    //
     public function showAvailable(){
         $data['raws'] = RawInventory::getAvailable();
+        $data['isProd'] = false;
         return view('rawInventory.home', $data);
     }
 
@@ -46,7 +46,40 @@ class RawInventoryController extends Controller
 
     }
 
+/////////////////////////////Production Functions///////////////////////////////////
+
+    public function showProduction(){
+    $data['raws'] = RawInventory::getProduction();
+    $data['isProd'] = true;
+    return view('rawInventory.home', $data);
+    }
+
+    public function addProd(){
+
+        $data['raws'] =       RawInventory::getAvailable();
+        $data['pageTitle'] = "Add to Production";
+        $data['pageDescription'] = "Add to Production Lines";
+        $data['formURL'] = url("raw/prod/insert");
+
+        return view('rawInventory.addprod', $data); 
+    }
+
+    public function insertProd(Request $request){
+        $validatedDate = $request->validate([
+            "raw" => "required",
+            "in"    => "required"
+        ]);
+
+        RawInventory::incrementProduction($request->raw, $request->in);
+
+        return redirect('raw/prod/show');
+    }
+
+
+/////////////////////////////Transaction Functions/////////////////////////////////
+
     public function addTran(){
+
         $data['raws'] =       RawInventory::getAvailable();
         $data['pageTitle'] = "Add New Transaction for Raw Inventory";
         $data['pageDescription'] = "Note: This operation can't be reverted!";

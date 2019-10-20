@@ -16,9 +16,14 @@
                                 <th>Type</th>
                                 <th>Model</th>
                                 <th>Supplier</th>
-                                <th>Meters</th>
+                                @if(!$isProd)
+                                <th>Available</th>
+                                @endif
+                                <th>in Prod.</th>
+                                @if(!$isProd)
                                 <th>Price</th>
                                 <th>Total Price</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -29,9 +34,14 @@
                                 <td>{{$raw->TYPS_NAME}}</td>
                                 <td>{{$raw->MODL_NAME}}</td>
                                 <td>{{$raw->SUPP_NAME}}</td>
+                                @if(!$isProd)
                                 <td>{{number_format($raw->RINV_METR, 2)}}</td>
+                                @endif
+                                <td>{{number_format($raw->RINV_PROD_AMNT, 2)}}</td>
+                                @if(!$isProd)
                                 <td>{{number_format($raw->RINV_PRCE, 2)}}</td>
                                 <td>{{number_format($raw->RINV_PRCE * $raw->RINV_METR, 2)}}</td>
+                                @endif
                             </tr> 
                             @endforeach
                         </tbody>

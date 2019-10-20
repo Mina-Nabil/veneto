@@ -11,6 +11,28 @@
 |
 */
 
+//Clients Routes
+Route::get("clients/trans/prepare",     'ClientsController@report');
+Route::get("clients/trans/quick",     'ClientsController@quickReport');
+Route::get("clients/trans/quick/{id}",     'ClientsController@quickReport');
+Route::get("clients/trans/add",       'ClientsController@addTransPage');
+Route::post("clients/trans/insert",   'ClientsController@insertTrans');
+Route::post("clients/account/statement", 'ClientsController@accountStatement');
+Route::post("clients/main/account", 'ClientsController@mainReport');
+
+Route::get("clients/show",        'ClientsController@home');
+Route::get("clients/add",         'ClientsController@addPage');
+Route::get("clients/edit/{id}",   'ClientsController@edit');
+Route::post("clients/insert",     'ClientsController@insert');
+Route::post("clients/update",     'ClientsController@updateSupplier');
+
+
+//Production Inventory
+Route::get('raw/prod/show', 'RawInventoryController@showProduction');
+Route::get('raw/prod/add', 'RawInventoryController@addProd');
+Route::post('raw/prod/insert', 'RawInventoryController@insertProd');
+
+
 //Raw Inventory
 Route::get('rawinventory/show'  ,   'RawInventoryController@showAvailable');
 Route::get('rawinventory/add'   ,   'RawInventoryController@addPage');

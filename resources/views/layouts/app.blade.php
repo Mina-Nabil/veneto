@@ -185,11 +185,21 @@
                                 <li><a href="{{url('suppliers/types/add')}}">Add Type</a></li>
                             </ul>
                         </li>
+
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" fas fa-cogs"></i><span class="hide-menu">Production </span></a>
                             <ul aria-expanded="false" class="collapse">
-                              <li><a href="{{url('prod/show')}}">Show</a></li>
-                                <li><a href="{{url('prod/add/raw')}}">Add from Raw Inventory</a></li>
+                              <li><a href="{{url('raw/prod/show')}}">Show</a></li>
+                                <li><a href="{{url('raw/prod/add')}}">Add from Raw Inventory</a></li>
                                 <li><a href="{{url('prod/add/new')}}">Add to Inventory </a></li>
+                            </ul>
+                        </li>
+
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">Clients</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('clients/trans/prepare')}}">Reports</a></li>
+                                <li><a href="{{url('clients/trans/quick')}}">Operations</a></li>
+                                <li><a href="{{url('clients/show')}}">All</a></li>
+                                <li><a href="{{url('clients/add')}}">Add Client</a></li>
                             </ul>
                         </li>
 
@@ -236,7 +246,7 @@
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
-                            <a  href="{{url('ledger/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Client Op.</a>
+                            <a  href="{{url('clients/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Client Op.</a>
                             <a  href="{{url('suppliers/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Supplier Op.</a>
                             <a  href="{{url('transactions/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Account Op.</a>
                             <a  href="{{url('invoice/addrevert')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Inventory Op.</a>
