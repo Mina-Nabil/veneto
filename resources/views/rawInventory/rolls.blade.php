@@ -50,14 +50,18 @@
                             <tr>
                                 @if($transPage)
                                 <td>
-                                    @if(isset($mod->MODL_IMGE))
-                                        <img src="{{ asset( 'storage/'. $mod->MODL_IMGE ) }}" width=50 height=50>
+                                    @if(isset($raw->MODL_IMGE))
+                                        <img src="{{ asset( 'storage/'. $raw->MODL_IMGE ) }}" width=50 height=50>
                                     @endif
                                 </td>
                                 <td>{{$raw->RAW_NAME}}</td>
                                 <td>{{$raw->TYPS_NAME}}</td>
                                 <td>{{$raw->MODL_NAME}}</td>
-                                <td>{{$raw->SUPP_NAME}}</td>
+                                <td>
+                                    <a href="{{url('suppliers/trans/quick/' . $supplier->id)}}">
+                                        {{$supplier->SUPP_NAME}}
+                                    </a>
+                               </td>
                                 <td>{{$raw->MODL_PRCE}}</td>
                                 @endif
                                 <td>
