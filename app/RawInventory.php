@@ -86,7 +86,7 @@ class RawInventory extends Model
                                          ->join('raw', 'TYPS_RAW_ID', '=', 'raw.id')
                                          ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
                                          ->select(DB::raw('COUNT(raw_inventory.id) as rolls'), 'models.MODL_NAME', 'models.MODL_IMGE', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'suppliers.SUPP_NAME', 'types.TYPS_NAME', DB::raw('SUM(raw_inventory.RINV_METR) as meters'), DB::raw('SUM(raw_inventory.RINV_PROD_AMNT) as amount'), 'models.id as RINV_MODL_ID', 'models.MODL_CMNT' )
-                                         ->groupBy('models.id', 'models.MODL_NAME', 'models.MODL_IMGE','models.MODL_CMNT')
+                                         ->groupBy('models.id')
                                          ->where('RINV_METR', '>', '0')
                                          ->get();
     }
