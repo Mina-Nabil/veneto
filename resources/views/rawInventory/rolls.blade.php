@@ -32,6 +32,7 @@
                         <thead>
                             <tr>
                                 @if($transPage)
+                                <th>Photo</th>
                                 <th>Raw</th>
                                 <th>Type</th>
                                 <th>Model</th>
@@ -48,6 +49,11 @@
                             @foreach($raws as $raw)
                             <tr>
                                 @if($transPage)
+                                <td>
+                                    @if(isset($mod->MODL_IMGE))
+                                        <img src="{{ asset( 'storage/'. $mod->MODL_IMGE ) }}" width=50 height=50>
+                                    @endif
+                                </td>
                                 <td>{{$raw->RAW_NAME}}</td>
                                 <td>{{$raw->TYPS_NAME}}</td>
                                 <td>{{$raw->MODL_NAME}}</td>

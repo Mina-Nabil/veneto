@@ -11,7 +11,6 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th>Image</th>
                                 <th>Raw</th>
                                 <th>Type</th>
                                 <th>Model</th>
@@ -29,26 +28,14 @@
                         <tbody>
                             @foreach($raws as $raw)
                             <tr>
-                                <td>
-                                    @if(isset($raw->MODL_IMGE))
-                                    <img src="{{ asset( 'storage/'. $raw->MODL_IMGE ) }}" width=50 height=50>
-                                    @endif
-                                </td>
                                 <td>{{$raw->RAW_NAME}}</td>
                                 <td>{{$raw->TYPS_NAME}}</td>
-                                <td>
-                                @if(isset($raw->MODL_CMNT) && strcmp($raw->MODL_CMNT, '')!=0 )
-                                    <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$raw->MODL_CMNT}}" data-original-title="{{$raw->MODL_NAME}}">
-                                @endif
-                                        {{$raw->MODL_NAME}}
-                                </button>
-                                </td>
+                                <td> {{$raw->MODL_NAME}}</td>
                                 <td>{{$raw->SUPP_NAME}}</td>
                                 @if(!$isProd)
                                 <td>
-                                    <a href={{url("rawinventory/model/$raw->RINV_MODL_ID")}}>
-                                        {{number_format($raw->rolls)}}
-                                    </a>                           
+                                    <a href="{{url('rawinventory/model/' . $raw->MODL_NAME . '/' . $raw->RAW_ID . '/' . $raw->TYPS_ID . '/' . $raw->MODL_SUPP_ID )}}" >
+                                        {{number_format($raw->rolls)}}              
                                 </td>
                                 <td>{{number_format($raw->meters, 2)}}</td>
                                 @endif

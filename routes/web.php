@@ -36,7 +36,7 @@ Route::post('raw/prod/insert', 'RawInventoryController@insertProd');
 
 //Raw Inventory
 Route::get('rawinventory/show'  ,   'RawInventoryController@showAvailable');
-Route::get('rawinventory/model/{id}'  ,   'RawInventoryController@showModelRolls');
+Route::get('rawinventory/model/{modelName}/{rawID}/{suppID}/{typeID}',   'RawInventoryController@showModelRolls');
 Route::get('rawinventory/bytrans/{tran}'  ,   'RawInventoryController@showFullTransaction');
 Route::get('rawinventory/add'   ,   'RawInventoryController@addPage');
 Route::post('rawinventory/addentry'   ,   'RawInventoryController@setEntry');

@@ -17,16 +17,11 @@ class RawInventoryController extends Controller
         return view('rawInventory.home', $data);
     }
 
-    public function showModelRolls($id){
+    public function showModelRolls($modelName, $rawID, $suppID, $typeID){
 
-        $data['model'] = Models::getModel($id);
-        if($data['model'] == null) return abort(404);
-        $data['transPage'] =  false;
-        $data['raws'] = RawInventory::getRollsByModel($id);
+        $data['transPage'] =  true;
+        $data['raws'] = RawInventory::getRollsByGroup($modelName, $rawID, $suppID, $typeID);
 
-        if(strcmp($data['model']->MODL_UNID, '') != 0 ){
-            $data['pageDesc'] = "for Model: "  . $data['model']->MODL_UNID;
-        }
         $data['isProd'] = false;
         return view('rawInventory.rolls', $data);
     }

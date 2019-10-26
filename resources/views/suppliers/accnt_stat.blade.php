@@ -17,7 +17,7 @@
                                 <th>Notes Payables</th>
                                 <th>Discount</th>
                                 <th>Return</th>
-                                <th>Supplier Balance</th>
+                                <th>Balance</th>
                             </tr>
                         </thead>
                         <tbody>
