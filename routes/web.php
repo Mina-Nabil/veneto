@@ -24,18 +24,23 @@ Route::get("clients/show",        'ClientsController@home');
 Route::get("clients/add",         'ClientsController@addPage');
 Route::get("clients/edit/{id}",   'ClientsController@edit');
 Route::post("clients/insert",     'ClientsController@insert');
-Route::post("clients/update",     'ClientsController@updateSupplier');
+Route::post("clients/update",     'ClientsController@updateClient');
 
 
 //Production Inventory
 Route::get('raw/prod/show', 'RawInventoryController@showProduction');
 Route::get('raw/prod/add', 'RawInventoryController@addProd');
+Route::get('raw/prod/full/insert/{id}', 'RawInventoryController@insertProdFull');
 Route::post('raw/prod/insert', 'RawInventoryController@insertProd');
 
 
 //Raw Inventory
 Route::get('rawinventory/show'  ,   'RawInventoryController@showAvailable');
+Route::get('rawinventory/model/{id}'  ,   'RawInventoryController@showModelRolls');
+Route::get('rawinventory/bytrans/{tran}'  ,   'RawInventoryController@showFullTransaction');
 Route::get('rawinventory/add'   ,   'RawInventoryController@addPage');
+Route::post('rawinventory/addentry'   ,   'RawInventoryController@setEntry');
+Route::get('rawinventory/cancel'   ,   'RawInventoryController@cancelEntry');
 Route::get('rawinventory/tran'   ,   'RawInventoryController@transactions');
 Route::get('raw/tran/add'       ,   'RawInventoryController@addTran');
 Route::post('raw/tran/insert'   ,   'RawInventoryController@insertTran');

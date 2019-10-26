@@ -110,7 +110,7 @@ class SuppliersController extends Controller
             "balance" => "required"
         ]);
 
-        Suppliers::insert($request->name, $request->arbcName, $request->type, $request->balance);
+        Suppliers::insert($request->name, $request->arbcName, $request->type, $request->balance, $request->address, $request->tele, $request->comment);
 
         return redirect("suppliers/show");
     }
@@ -119,6 +119,8 @@ class SuppliersController extends Controller
 
         $data['types']      =   Suppliers::getTypes();
         $data['supplier']   =   Suppliers::getSupplier($id);
+
+        if($data['supplier'] == null )abort(404);
 
         $data['pageTitle'] = "Supplier: " . $data['supplier']->SUPP_NAME;
         $data['pageDescription'] = "Edit ("  . $data['supplier']->SUPP_NAME .  ") - Data Required: Name - Type - Balance";
@@ -136,7 +138,7 @@ class SuppliersController extends Controller
             "balance" => "required"
         ]);
 
-        Suppliers::updateSupplier($request->id, $request->name, $request->arbcName, $request->type, $request->balance);
+        Suppliers::updateSupplier($request->id, $request->name, $request->arbcName, $request->type, $request->balance, $request->address, $request->tele, $request->comment);
 
         return redirect("suppliers/show");
     }
@@ -147,16 +149,11 @@ class SuppliersController extends Controller
     function types(){
         $data['types'] = Suppliers::getTypes();
 
-        return view('suppliers.types', $data);
-    }
-
-    function addType(){
-
         $data['pageTitle'] = "Supplier Type";
         $data['pageDescription'] = "Add New Supplier Type";
         $data['formURL'] = url("suppliers/types/insert");
 
-        return view('suppliers.addType', $data);
+        return view('suppliers.types', $data);
     }
 
     function insertType(Request $request){
@@ -172,12 +169,14 @@ class SuppliersController extends Controller
 
     function editType($id){
 
+        $data['types'] = Suppliers::getTypes();
+
         $data['type'] = Suppliers::getType($id);
         $data['pageTitle'] = "Supplier Type";
         $data['pageDescription'] = "Editing Supplier Type: " . $data['type']->SPTP_NAME;
         $data['formURL'] = url("suppliers/types/update");
 
-        return view('suppliers.addType', $data);
+        return view('suppliers.types', $data);
     }
 
     function update(Request $request){

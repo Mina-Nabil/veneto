@@ -11,6 +11,7 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
+                                <th>Trans #</th>
                                 <th>Raw</th>
                                 <th>Type</th>
                                 <th>Model</th>
@@ -25,6 +26,11 @@
                         <tbody>
                             @foreach($trans as $tran)
                             <tr>
+                                <td>
+                                    <a href="{{url('rawinventory/bytrans/' . $tran->RINV_TRNS)}}"> 
+                                        {{$tran->RINV_TRNS}}
+                                    <a>
+                                </td>
                                 <td>{{$tran->RAW_NAME}}</td>
                                 <td>{{$tran->TYPS_NAME}}</td>
                                 <td>{{$tran->MODL_NAME}}</td>

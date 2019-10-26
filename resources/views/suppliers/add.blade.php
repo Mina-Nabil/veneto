@@ -13,7 +13,7 @@
                 <input type=hidden name=id value={{$supplier->id}} >
                 @endif
                     <div class="form-group">
-                        <label>Supplier Name*</label>
+                        <label>Name*</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-user"></i></span>
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Supplier Balance*</label>
+                        <label>Balance*</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-bar-chart"></i></span>
@@ -56,12 +56,42 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Supplier Arabic Name</label>
+                        <label>Arabic Name</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-user"></i></span>
                             </div>
                             <input type="text" class="form-control" placeholder="اسم المورد بالعربي" name=arbcName aria-label="Supplier Name" aria-describedby="basic-addon11" value="{{ (isset($supplier)) ? $supplier->SUPP_ARBC_NAME : old('arbcName')}}" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-map"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name=address  value="{{ (isset($supplier)) ? $supplier->SUPP_ADRS : old('address')}}" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telephone</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-mobile"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="0123456778" name=tele value="{{ (isset($supplier)) ? $supplier->SUPP_TELE : old('tele')}}" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Comment</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-list"></i></span>
+                            </div>
+                            <input type="text" class="form-control"  name=comment  value="{{ (isset($supplier)) ? $supplier->SUPP_CMNT : old('comment')}}" >
                         </div>
                     </div>
 

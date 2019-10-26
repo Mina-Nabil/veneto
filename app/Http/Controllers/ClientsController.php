@@ -107,7 +107,7 @@ class ClientsController extends Controller
             "balance" => "required"
         ]);
 
-        Clients::insert($request->name, $request->arbcName, $request->balance);
+        Clients::insert($request->name, $request->arbcName, $request->balance, $request->address, $request->tele, $request->comment);
 
         return redirect("clients/show");
     }
@@ -115,7 +115,7 @@ class ClientsController extends Controller
     function edit($id){
 
         $data['client']   =   Clients::getClient($id);
-
+        if($data['client'] == null )abort(404);
         $data['pageTitle'] = "Client: " . $data['client']->CLNT_NAME;
         $data['pageDescription'] = "Edit ("  . $data['client']->CLNT_NAME .  ") - Data Required: Name - Balance";
         $data['formURL']        =   url("clients/update");
@@ -131,7 +131,7 @@ class ClientsController extends Controller
             "balance" => "required"
         ]);
 
-        Clients::updateClient($request->id, $request->name, $request->arbcName, $request->balance);
+        Clients::updateClient($request->id, $request->name, $request->arbcName, $request->balance, $request->address, $request->tele, $request->comment);
 
         return redirect("clients/show");
     }

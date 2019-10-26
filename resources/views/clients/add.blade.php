@@ -13,7 +13,7 @@
                 <input type=hidden name=id value={{$client->id}} >
                 @endif
                     <div class="form-group">
-                        <label>Client Name*</label>
+                        <label>Name*</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-user"></i></span>
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Client Balance*</label>
+                        <label>Balance*</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-bar-chart"></i></span>
@@ -40,12 +40,42 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Client Arabic Name</label>
+                        <label>Arabic Name</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-user"></i></span>
                             </div>
                             <input type="text" class="form-control" placeholder="اسم العميل بالعربي" name=arbcName aria-label="Client Name" aria-describedby="basic-addon11" value="{{ (isset($client)) ? $client->CLNT_ARBC_NAME : old('arbcName')}}" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-map"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name=address  value="{{ (isset($client)) ? $client->CLNT_ADRS : old('address')}}" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telephone</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-mobile"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="0123456778" name=tele value="{{ (isset($client)) ? $client->CLNT_TELE : old('tele')}}" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Comment</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-list"></i></span>
+                            </div>
+                            <input type="text" class="form-control"  name=comment  value="{{ (isset($client)) ? $client->CLNT_CMNT : old('comment')}}" >
                         </div>
                     </div>
 

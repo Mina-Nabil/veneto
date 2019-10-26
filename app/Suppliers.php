@@ -138,21 +138,27 @@ class Suppliers extends Model
                                         ->first();
     }
 
-    static function insert($name, $arbcName, $type, $balance){
+    static function insert($name, $arbcName, $type, $balance, $address=null, $tele=null, $comment=null){
         return DB::table('suppliers')->insertGetId([
             "SUPP_NAME" => $name,
             "SUPP_ARBC_NAME" => $arbcName,
             "SUPP_SPTP_ID" => $type,
+            "SUPP_ADRS" => $address,
+            "SUPP_TELE" => $tele,
+            "SUPP_CMNT" => $comment,
             "SUPP_BLNC" =>  $balance
         ]);
     }
     
-    static function updateSupplier($id, $name, $arbcName, $type, $balance){
+    static function updateSupplier($id, $name, $arbcName, $type, $balance, $address=null, $tele=null, $comment=null){
         
         return DB::table('suppliers')->where('id', $id)->update([
             "SUPP_NAME"         => $name,
             "SUPP_ARBC_NAME"    => $arbcName,
             "SUPP_SPTP_ID"      => $type,
+            "SUPP_ADRS"         => $address,
+            "SUPP_TELE"         => $tele,
+            "SUPP_CMNT"         => $comment,
             "SUPP_BLNC"         => $balance
         ]);
     }

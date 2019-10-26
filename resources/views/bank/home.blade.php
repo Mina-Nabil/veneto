@@ -20,13 +20,14 @@
                         </thead>
                         <tbody>
                             @foreach($ops as $op)
-                            <tr 
-                            @if(isset($op->BANK_CMNT) && strcmp($op->BANK_CMNT, '')!=0 )
-                            style="font-style: italic"
-                            @endif
-                            title="{{$op->BANK_CMNT}}"
-                            >
-                                <td>{{$op->BANK_DATE}}</td>
+                            <tr>
+                                <td>
+                                @if(isset($op->BANK_CMNT) && strcmp($op->BANK_CMNT, '')!=0 )
+                                    <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->BANK_CMNT}}" data-original-title="Comment:">
+                                @endif
+                                {{$op->BANK_DATE}}
+                                    </button>
+                                </td>
                                 <td>{{$op->BANK_NAME}}</td>
                                 <td>{{number_format($op->BANK_OUT, 2)}}</td>
                                 <td>{{number_format($op->BANK_IN, 2)}}</td>

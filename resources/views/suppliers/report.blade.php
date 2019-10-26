@@ -23,13 +23,13 @@
                         </thead>
                         <tbody>
                             @foreach($ops as $op)
-                            <tr 
-                            @if(isset($op->SPTR_CMNT) && strcmp($op->SPTR_CMNT, '')!=0 )
-                            style="font-style: italic"
-                            @endif
-                            title="{{$op->SPTR_CMNT}}"
-                            >
-                                <td>{{$op->SPTR_DATE}}</td>
+                            <tr>
+                                <td>
+                                @if(isset($op->SPTR_CMNT) && strcmp($op->SPTR_CMNT, '')!=0 )
+                                    <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->SPTR_CMNT}}" data-original-title="Comment:">
+                                @endif
+                                    {{$op->SPTR_DATE}}
+                                </td>
                                 <td>
                                     <a href="{{url('suppliers/trans/quick/' . $op->SPTR_SUPP_ID)}}">
                                         {{$op->SUPP_NAME}}

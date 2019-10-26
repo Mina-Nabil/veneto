@@ -87,7 +87,8 @@ class Models extends Model
                     ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
                     ->join('raw', 'types.TYPS_RAW_ID', '=', 'raw.id')
                     ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
-                    ->select('models.*', 'types.TYPS_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'raw.RAW_NAME')
+                    ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
+                    ->select('models.*', 'types.TYPS_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'raw.RAW_NAME', 'suppliers.SUPP_NAME')
                     ->get();
 
     }
@@ -105,29 +106,35 @@ class Models extends Model
         return DB::table('models')
                     ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
                     ->join('raw', 'types.TYPS_RAW_ID', '=', 'raw.id')
-                    ->select('models.*', 'types.TYPS_NAME', 'raw.RAW_NAME')
+                    ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
+                    ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
+                    ->select('models.*', 'types.TYPS_NAME', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'suppliers.SUPP_NAME')
                     ->where('models.id', $id)
                     ->first();
 
     }
 
-    static function insertModel($name, $typeID, $colorID, $image=null, $serialID=null, $comment=null){
+    static function insertModel($name, $typeID, $colorID, $suppID, $price, $image=null, $serialID=null, $comment=null){
         return DB::table('models')->insertGetId([
             "MODL_NAME" => $name,
             "MODL_TYPS_ID" => $typeID,
             "MODL_COLR_ID" => $colorID,
+            "MODL_SUPP_ID" => $suppID,
+            "MODL_PRCE" => $price,
             "MODL_IMGE" => $image,
             "MODL_UNID" => $serialID,
             "MODL_CMNT" => $comment
         ]);
     }
 
-    static function updateModel($id, $name, $typeID, $colorID, $image=null, $serialID=null, $comment=null, $oldPath=null){
+    static function updateModel($id, $name, $typeID, $colorID, $suppID, $price, $image=null, $serialID=null, $comment=null, $oldPath=null){
 
         $updateArr = [
             "MODL_NAME" => $name,
             "MODL_TYPS_ID" => $typeID,
             "MODL_COLR_ID" => $colorID,
+            "MODL_SUPP_ID" => $suppID,
+            "MODL_PRCE" => $price,
             "MODL_UNID" => $serialID,
             "MODL_CMNT" => $comment
         ];

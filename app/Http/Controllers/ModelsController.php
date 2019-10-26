@@ -4,25 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models;
+use App\Suppliers;
 class ModelsController extends Controller
 {
     ////////////////////////////////////////////Models/////////////////////////////////////////
+
     function showModels(){
+
         $data['types'] = Models::getTypes();
         $data['colors']  = Models::getColors();
         $data['models']  = Models::getModels();
+        
         $data['pageTitle'] = "Add New Model";
         $data['formURL'] = url("models/insert");
+
         return view("models.models", $data);
     }
 
     function editModel($id){
+
         $data['types'] = Models::getTypes();
         $data['colors']  = Models::getColors();
         $data['models']  = Models::getModels();
+        $data['suppliers']  = Suppliers::getSuppliers();
         $data['model']  = Models::getModel($id);
+
         $data['pageTitle'] = "Edit " . $data['model']->RAW_NAME . ' ' . $data['model']->TYPS_NAME . ' ' . $data['model']->MODL_NAME ;
         $data['formURL'] = url('models/update');
+
         return view("models.models", $data);
     }
 
@@ -47,20 +56,20 @@ class ModelsController extends Controller
 
     }
 
-    function insertModel(Request $request){
-        $validate = $request->validate([
-            "type" => "required",
-            "color" => "required"
-        ]);
-        $path = null;
-        if ($request->hasFile('photo')) {
-            $path = $request->photo->store('images/models', 'public');
-        }
+    // function insertModel(Request $request){
+    //     $validate = $request->validate([
+    //         "type" => "required",
+    //         "color" => "required"
+    //     ]);
+    //     $path = null;
+    //     if ($request->hasFile('photo')) {
+    //         $path = $request->photo->store('images/models', 'public');
+    //     }
         
-        Models::insertModel($request->name, $request->type, $request->color, $path, $request->serial, $request->comment);
+    //     Models::insertModel($request->name, $request->type, $request->color, $path, $request->serial, $request->comment);
 
-        return \redirect("models/show");
-    }
+    //     return \redirect("models/show");
+    // }
 
 
     ////////////////////////////////////////////Raw Materials/////////////////////////////////

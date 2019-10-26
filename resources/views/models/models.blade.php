@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
             <h4 class="card-title">Models</h4>
@@ -14,21 +14,18 @@
                             <tr>
                                 <th>#</th>
                                 <th>Image</th>
-                                <th>Raw Material</th>
+                                <th>Raw</th>
                                 <th>Type</th>
                                 <th>Name</th>
+                                <th>Supplier</th>
+                                <th>Price</th>
                                 <th>Color</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($models as $mod)
-                            <tr
-                            @if(isset($mod->MODL_CMNT) && strcmp($mod->MODL_CMNT, '')!=0 )
-                            style="font-style: italic" 
-                            title="{{$mod->MODL_CMNT}}"
-                            @endif
-                            >
+                            <tr>
                                 <td>{{$mod->MODL_UNID}}</td>
                                 <td>
                                 @if(isset($mod->MODL_IMGE))
@@ -37,7 +34,15 @@
                                 </td>
                                 <td>{{$mod->RAW_NAME}}</td>
                                 <td>{{$mod->TYPS_NAME}}</td>
-                                <td>{{$mod->MODL_NAME}}</td>
+                                <td>
+                                @if(isset($mod->MODL_CMNT) && strcmp($mod->MODL_CMNT, '')!=0 )
+                                    <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$mod->MODL_CMNT}}" data-original-title="{{$mod->MODL_NAME}}">
+                                @endif
+                                        {{$mod->MODL_NAME}}
+                                </button>
+                                </td>
+                                <td>{{$mod->SUPP_NAME}}</td>
+                                <td>{{$mod->MODL_PRCE}}</td>
                                 <td>{{$mod->COLR_NAME}}</td>
                                 <td><a href="{{ url('models/edit/' . $mod->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></a></td>                               
                             </tr> 
@@ -48,7 +53,8 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    @if(isset($model))
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">{{$pageTitle}}</h4>
@@ -56,12 +62,12 @@
                 <form class="form pt-3" method="post" action="{{ $formURL }}" enctype="multipart/form-data" >
                 @csrf
 
-                @if(isset($model))
+                
                     <input name=id type=hidden value="{{$model->id}}">
                     @if(isset($model->MODL_IMGE))
                     <input name=oldPath type=hidden value="{{$model->MODL_IMGE}}">
                     @endif
-                @endif
+               
 
                 <div class="form-group">
                     <label>Type</label>
@@ -79,6 +85,24 @@
                         </select>
                     </div>
                     <small class="text-danger">{{$errors->first('type')}}</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Supplier</label>
+                    <div class="input-group mb-3">
+                        <select name=supplier class="select2 form-control custom-select" style="width: 100%; height:36px;" required>
+                            <option disabled>Pick From Suppliers</option>
+                            @foreach($suppliers as $sup)
+                            <option value="{{ $sup->id }}"
+                            @if(isset($model) && $model->MODL_SUPP_ID == $sup->id)
+                                selected
+                            @endif
+                            
+                            >{{$sup->SUPP_NAME}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <small class="text-danger">{{$errors->first('supplier')}}</small>
                 </div>
 
                 <div class="form-group">
@@ -109,6 +133,19 @@
                         value="{{ (isset($model)) ? $model->MODL_NAME : old('name') }}" >
                     </div>
                     <small class="text-danger">{{$errors->first('name')}}</small>
+                </div>
+  
+
+                <div class="form-group">
+                    <label>Model Price</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon11"><i class="ti-receipt"></i></span>
+                        </div>
+                        <input type="text" placeholder="Enter Model Meter Price, Example: 350 " class="form-control" name=price  
+                        value="{{ (isset($model)) ? $model->MODL_PRCE : old('price') }}" >
+                    </div>
+                    <small class="text-danger">{{$errors->first('price')}}</small>
                 </div>
 
                 <div class="form-group">
@@ -147,5 +184,6 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 @endsection

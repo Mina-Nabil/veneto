@@ -136,19 +136,25 @@ class Clients extends Model
                                         ->first();
     }
 
-    static function insert($name, $arbcName, $balance){
+    static function insert($name, $arbcName, $balance, $address=null, $tele=null, $comment=null){
         return DB::table('clients')->insertGetId([
             "CLNT_NAME" => $name,
             "CLNT_ARBC_NAME" => $arbcName,
+            "CLNT_ADRS"      => $address,
+            "CLNT_TELE"      => $tele,
+            "CLNT_CMNT"      => $comment,
             "CLNT_BLNC" =>  $balance
         ]);
     }
     
-    static function updateClient($id, $name, $arbcName, $balance){
+    static function updateClient($id, $name, $arbcName, $balance, $address=null, $tele=null, $comment=null){
         
         return DB::table('clients')->where('id', $id)->update([
             "CLNT_NAME"         => $name,
             "CLNT_ARBC_NAME"    => $arbcName,
+            "CLNT_ADRS"      => $address,
+            "CLNT_TELE"      => $tele,
+            "CLNT_CMNT"      => $comment,
             "CLNT_BLNC"         => $balance
         ]);
     }

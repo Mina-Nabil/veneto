@@ -155,6 +155,16 @@
                             </ul>
                         </li>
 
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">Suppliers</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('suppliers/trans/prepare')}}">Reports</a></li>
+                                <li><a href="{{url('suppliers/trans/quick')}}">Operations</a></li>
+                                <li><a href="{{url('suppliers/show')}}">All</a></li>
+                                <li><a href="{{url('suppliers/add')}}">Add Supplier</a></li>
+                                <li><a href="{{url('suppliers/types/show')}}">Types</a></li>
+                            </ul>
+                        </li>
+
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">Raw Inventory</span></a>
                             <ul aria-expanded="false" class="collapse">
                             <li><a href="{{url('rawinventory/show')}}">Available</a></li>
@@ -175,23 +185,9 @@
                             </ul>
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">Suppliers</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('suppliers/trans/prepare')}}">Reports</a></li>
-                                <li><a href="{{url('suppliers/trans/quick')}}">Operations</a></li>
-                                <li><a href="{{url('suppliers/show')}}">All</a></li>
-                                <li><a href="{{url('suppliers/add')}}">Add Supplier</a></li>
-                                <li><a href="{{url('suppliers/types/show')}}">Types</a></li>
-                                <li><a href="{{url('suppliers/types/add')}}">Add Type</a></li>
-                            </ul>
-                        </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" fas fa-cogs"></i><span class="hide-menu">Production </span></a>
-                            <ul aria-expanded="false" class="collapse">
-                              <li><a href="{{url('raw/prod/show')}}">Show</a></li>
-                                <li><a href="{{url('raw/prod/add')}}">Add from Raw Inventory</a></li>
-                                <li><a href="{{url('prod/add/new')}}">Add to Inventory </a></li>
-                            </ul>
+                        <li> <a  href="{{url('raw/prod/show')}}" aria-expanded="false"><i class=" fas fa-cogs"></i><span class="hide-menu">Production </span></a>
+                      
                         </li>
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">Clients</span></a>
