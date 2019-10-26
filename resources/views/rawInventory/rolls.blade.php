@@ -57,11 +57,7 @@
                                 <td>{{$raw->RAW_NAME}}</td>
                                 <td>{{$raw->TYPS_NAME}}</td>
                                 <td>{{$raw->MODL_NAME}}</td>
-                                <td>
-                                    <a href="{{url('suppliers/trans/quick/' . $supplier->id)}}">
-                                        {{$supplier->SUPP_NAME}}
-                                    </a>
-                               </td>
+                                <td>{{$raw->SUPP_NAME}}</td>
                                 <td>{{$raw->MODL_PRCE}}</td>
                                 @endif
                                 <td>
