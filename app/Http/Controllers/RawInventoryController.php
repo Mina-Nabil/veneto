@@ -110,7 +110,7 @@ class RawInventoryController extends Controller
         $tranNumber = date("YmdHis");
 
         RawInventory::insertEntry($entries, $totals, $tranNumber);
-        $this->cancelEntries($request);
+        $this->cancelEntries($request, false);
 
         return \redirect("rawinventory/show");
 
@@ -268,7 +268,7 @@ class RawInventoryController extends Controller
         ]));
     }
 
-    private function cancelEntries($request){
+    private function cancelEntries($request, $deletePhoto=true){
         $entries = $request->session()->get("entry", array());
         foreach($entries as $entry)
             if($entry['photo'] !== null && file_exists( 'storage/' . $entry['photo']))
