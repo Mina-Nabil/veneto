@@ -163,7 +163,7 @@ class RawInventoryController extends Controller
 
     public function addTran(){
 
-        $data['raws'] =       RawInventory::getAvailable();
+        $data['raws'] =       RawInventory::getFullInventory();
         $data['pageTitle'] = "Add New Transaction for Raw Inventory";
         $data['pageDescription'] = "Note: This operation can't be reverted!";
         $data['formURL'] = url("raw/tran/insert");

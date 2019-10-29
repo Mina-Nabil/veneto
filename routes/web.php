@@ -58,6 +58,12 @@ Route::get("colors/edit/{id}",  'ModelsController@editColor');
 Route::post("colors/update",  'ModelsController@updateColor');
 Route::post("colors/insert",  'ModelsController@insertColor');
 
+//Brands
+Route::get("brands/show",           'BrandsController@showBrand');
+Route::get("brands/edit/{id}",      'BrandsController@editBrand');
+Route::post('brands/update',        'BrandsController@updateBrand');
+Route::post('brands/insert',        'BrandsController@insertBrand');
+
 //Raws
 Route::get("raw/show",          'ModelsController@showRaw');
 Route::get("raw/edit/{id}",     'ModelsController@editRaw');

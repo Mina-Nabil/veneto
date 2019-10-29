@@ -32,7 +32,7 @@
                                 <td>{{$raw->TYPS_NAME}}</td>
                                 <td> {{$raw->MODL_NAME}}</td>
                                 <td>
-                                    <a href="{{url('suppliers/trans/quick/' . $supplier->id)}}">
+                                    <a href="{{url('suppliers/trans/quick/' . $raw->MODL_SUPP_ID)}}">
                                         {{$raw->SUPP_NAME}}
                                     </a>
                                 </td>
