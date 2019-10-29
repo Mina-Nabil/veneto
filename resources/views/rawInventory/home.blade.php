@@ -13,7 +13,6 @@
                             <tr>
                                 <th>Raw</th>
                                 <th>Type</th>
-                                <th>Model</th>
                                 <th>Supplier</th>
                                 @if(!$isProd)
                                 <th>Rolls</th>
@@ -30,7 +29,6 @@
                             <tr>
                                 <td>{{$raw->RAW_NAME}}</td>
                                 <td>{{$raw->TYPS_NAME}}</td>
-                                <td> {{$raw->MODL_NAME}}</td>
                                 <td>
                                     <a href="{{url('suppliers/trans/quick/' . $raw->MODL_SUPP_ID)}}">
                                         {{$raw->SUPP_NAME}}
@@ -38,7 +36,7 @@
                                 </td>
                                 @if(!$isProd)
                                 <td>
-                                    <a href="{{url('rawinventory/model/' . $raw->MODL_NAME . '/' . $raw->RAW_ID . '/' . $raw->TYPS_ID . '/' . $raw->MODL_SUPP_ID )}}" >
+                                    <a href="{{url('rawinventory/model/' . $raw->RAW_ID . '/' . $raw->TYPS_ID . '/' . $raw->MODL_SUPP_ID )}}" >
                                         {{number_format($raw->rolls)}}              
                                 </td>
                                 <td>{{number_format($raw->meters, 2)}}</td>

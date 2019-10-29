@@ -57,7 +57,7 @@ class RawInventory extends Model
                                          ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
                                          ->join('raw', 'TYPS_RAW_ID', '=', 'raw.id')
                                          ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
-                                         ->select('raw_inventory.*', 'models.MODL_NAME', 'models.MODL_IMGE', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'suppliers.SUPP_NAME', 'types.TYPS_NAME', 'models.MODL_PRCE')
+                                         ->select('raw_inventory.*', 'models.MODL_NAME', 'models.MODL_IMGE', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'suppliers.SUPP_NAME', 'types.TYPS_NAME', 'models.MODL_PRCE', 'models.MODL_UNID')
                                          ->where('RINV_PROD_AMNT', '>', '0')
                                          ->get();
     }
@@ -70,7 +70,20 @@ class RawInventory extends Model
             DB::table("raw_inventory")->where('id', $id)
                     ->increment("RINV_PROD_AMNT", $amount);
 
-            self::insertTransaction($raw->id, 0, $amount, true);
+            self::insertTransaction($raw->id, 0, $amount, true, "مخزن" ,"تصنيع" );
+
+        });
+    }
+
+    static function decrementProduction($id, $amount, $returnRaw){
+
+        DB::transaction(function () use ($id, $amount,$returnRaw){
+
+            DB::table("raw_inventory")->where('id', $id)
+                    ->decrement("RINV_PROD_AMNT", $amount);
+            
+
+            self::insertTransaction($id, $amount, 0, $returnRaw, "تصنيع" , ($returnRaw) ? "مخزن" : "جاهز" );
 
         });
     }
@@ -98,8 +111,8 @@ class RawInventory extends Model
                                          ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
                                          ->join('raw', 'TYPS_RAW_ID', '=', 'raw.id')
                                          ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
-                                         ->select(DB::raw('COUNT(raw_inventory.id) as rolls'), 'models.MODL_NAME', 'raw.RAW_NAME', 'suppliers.SUPP_NAME', 'types.TYPS_NAME', DB::raw('SUM(raw_inventory.RINV_METR) as meters'), DB::raw('SUM(raw_inventory.RINV_PROD_AMNT) as amount'), 'MODL_SUPP_ID', 'types.id as TYPS_ID', 'raw.id as RAW_ID' )
-                                         ->groupBy('raw.id', 'models.MODL_NAME', 'MODL_SUPP_ID', 'types.id')
+                                         ->select(DB::raw('COUNT(raw_inventory.id) as rolls'), 'raw.RAW_NAME', 'suppliers.SUPP_NAME', 'types.TYPS_NAME', DB::raw('SUM(raw_inventory.RINV_METR) as meters'), DB::raw('SUM(raw_inventory.RINV_PROD_AMNT) as amount'), 'MODL_SUPP_ID', 'types.id as TYPS_ID', 'raw.id as RAW_ID' )
+                                         ->groupBy('raw.id', 'MODL_SUPP_ID', 'types.id')
                                          ->where('RINV_METR', '>', '0')
                                          ->get();
     }
@@ -115,15 +128,14 @@ class RawInventory extends Model
                                          ->get();
     }
 
-    static function getRollsByGroup($modelName, $rawID, $suppID, $typeID){
+    static function getRollsByGroup($rawID, $suppID, $typeID){
         return DB::table("raw_inventory")->join('models', 'RINV_MODL_ID', '=', 'models.id')
                             ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
                             ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
                             ->join('raw', 'TYPS_RAW_ID', '=', 'raw.id')
                             ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
-                            ->select('models.MODL_IMGE', 'models.MODL_NAME', 'raw.RAW_NAME', 'suppliers.SUPP_NAME', 'types.TYPS_NAME', 'models.MODL_CMNT', 'models.MODL_PRCE', 'colors.COLR_NAME' , 'raw_inventory.*', 'colors.COLR_CODE', 'MODL_SUPP_ID', 'types.id as TYPS_ID', 'raw.id as RAW_ID')
+                            ->select('models.MODL_IMGE', 'raw.RAW_NAME', 'suppliers.SUPP_NAME', 'models.MODL_NAME', 'types.TYPS_NAME', 'models.MODL_CMNT', 'models.MODL_PRCE', 'models.MODL_UNID', 'colors.COLR_NAME' , 'raw_inventory.*', 'colors.COLR_CODE', 'MODL_SUPP_ID', 'types.id as TYPS_ID', 'raw.id as RAW_ID')
          ->where([
-            ["models.MODL_NAME", $modelName],
             ["raw.id", $rawID],
             ["suppliers.id", $suppID],
             ["types.id", $typeID],

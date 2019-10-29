@@ -40,7 +40,9 @@ class ModelsController extends Controller
         $validate = $request->validate([
             "type" => "required",
             "color" => "required",
-            "id"    => "required"
+            "id"    => "required",
+            "supplier" => "required",
+            "price"     => "required"
         ]);
 
         $path = null;
@@ -50,7 +52,7 @@ class ModelsController extends Controller
             $path = $request->photo->store('images/models', 'public');
         }
         
-        Models::updateModel($request->id, $request->name, $request->type, $request->color, $path, $request->serial, $request->comment);
+        Models::updateModel($request->id, $request->name, $request->type, $request->color, $request->supplier, $request->price, $path, $request->serial, $request->comment);
 
         return \redirect("models/show");
 

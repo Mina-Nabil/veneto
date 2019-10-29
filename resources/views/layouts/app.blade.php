@@ -307,7 +307,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            © 2019 {{config('APP_NAME', 'Mosaad & Ashraf')}} by Mina Nabil
+            © 2019 {{config('APP_NAME', 'Via Veneto')}} by Mina Nabil
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->

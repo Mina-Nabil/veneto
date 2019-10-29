@@ -32,6 +32,7 @@
                         <thead>
                             <tr>
                                 @if($transPage)
+                                <th>Serial#</th>
                                 <th>Photo</th>
                                 <th>Raw</th>
                                 <th>Type</th>
@@ -48,6 +49,7 @@
                         <tbody>
                             @foreach($raws as $raw)
                             <tr>
+                                <td>{{$raw->MODL_UNID}}</td>
                                 @if($transPage)
                                 <td>
                                     @if(isset($raw->MODL_IMGE))
@@ -93,13 +95,18 @@
                                             <h4 class="modal-title">Send Cut to {{ ($isProd) ? 'Raw Inventory' : 'Production'}}</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                         </div>
-                                        <form action="{{ ($isProd) ? url('raw/prod/revert') : url('raw/prod/insert')}}" method=post>
+                                        <form action="{{ ($isProd) ? url('raw/from/prod') : url('raw/prod/insert')}}" method=post>
                                         @csrf
                                         <div class="modal-body">
-                                            <input type=hidden name=raw value={{$raw->id}} >
+                                            <input type=hidden name=raw value="{{$raw->id}}" >
+                                            @if($isProd)
+                                            <input type=hidden name=toRaw value=1 >
+                                            @endif
+
+
                                                 <div class="form-group col-md-12 m-t-0">
                                                 <h5>Amount</h5>
-                                                    <input type="number" step=0.01 class="form-control form-control-line" name=in required >
+                                                    <input type="number" step=0.01 class="form-control form-control-line" name=in max="{{ ($isProd) ?  $raw->RINV_PROD_AMNT : $raw->RINV_METR }}" required >
                                                 </div>
 
                                         </div>
@@ -120,13 +127,14 @@
                                             <h4 class="modal-title">Send Cut to Finished</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                         </div>
-                                        <form action="{{ url('finished/prod/insert') }}" method=post>
+                                        <form action="{{ url('raw/from/prod') }}" method=post>
                                         @csrf
                                         <div class="modal-body">
-                                            <input type=hidden name=raw value={{$raw->id}} >
+                                            <input type=hidden name=raw value="{{$raw->id}}" >
+                                            <input type=hidden name=toRaw value=0 >
                                                 <div class="form-group col-md-12 m-t-0">
                                                 <h5>Amount</h5>
-                                                    <input type="number" step=0.01 class="form-control form-control-line" name=in value="{{ $raw->RINV_PROD_AMNT }}" required >
+                                                    <input type="number" step=0.01 class="form-control form-control-line" name=in value="{{ $raw->RINV_PROD_AMNT }}" max="{{ $raw->RINV_PROD_AMNT  }}" required >
                                                 </div>
 
                                         </div>

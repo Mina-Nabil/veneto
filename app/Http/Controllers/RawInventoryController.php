@@ -17,10 +17,10 @@ class RawInventoryController extends Controller
         return view('rawInventory.home', $data);
     }
 
-    public function showModelRolls($modelName, $rawID, $suppID, $typeID){
+    public function showModelRolls($rawID, $typeID, $suppID){
 
         $data['transPage'] =  true;
-        $data['raws'] = RawInventory::getRollsByGroup(urldecode ( $modelName ), $rawID, $suppID, $typeID);
+        $data['raws'] = RawInventory::getRollsByGroup( $rawID, $suppID, $typeID);
 
         $data['isProd'] = false;
         return view('rawInventory.rolls', $data);
@@ -158,6 +158,17 @@ class RawInventoryController extends Controller
         return redirect('raw/prod/show');
     }
 
+    public function insertFromProd(Request $request){
+        $validatedDate = $request->validate([
+            "raw" => "required",
+            "in"    => "required",
+            "toRaw" => "required"
+        ]);
+
+        RawInventory::decrementProduction($request->raw, $request->in, $request->toRaw);
+
+        return redirect('raw/prod/show');
+    }
 
 /////////////////////////////Transaction Functions/////////////////////////////////
 
