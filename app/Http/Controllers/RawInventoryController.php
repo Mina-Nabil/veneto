@@ -271,7 +271,7 @@ class RawInventoryController extends Controller
     private function cancelEntries($request, $deletePhoto=true){
         $entries = $request->session()->get("entry", array());
         foreach($entries as $entry)
-            if($entry['photo'] !== null && file_exists( 'storage/' . $entry['photo']))
+            if($deletePhoto && $entry['photo'] !== null && file_exists( 'storage/' . $entry['photo']))
                 unlink( 'storage/' . $entry['photo'] );
         $request->session()->forget("entry");
         $request->session()->forget("totals");
