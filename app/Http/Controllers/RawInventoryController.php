@@ -20,7 +20,7 @@ class RawInventoryController extends Controller
     public function showModelRolls($modelName, $rawID, $suppID, $typeID){
 
         $data['transPage'] =  true;
-        $data['raws'] = RawInventory::getRollsByGroup($modelName, $rawID, $suppID, $typeID);
+        $data['raws'] = RawInventory::getRollsByGroup(urldecode ( $modelName ), $rawID, $suppID, $typeID);
 
         $data['isProd'] = false;
         return view('rawInventory.rolls', $data);
