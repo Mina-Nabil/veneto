@@ -19,7 +19,7 @@ class RawInventory extends Model
                                     ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
                                     ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
                                     ->join('raw', 'TYPS_RAW_ID', '=', 'raw.id')
-                                    ->select('raw_trans.*','raw_inventory.RINV_METR', 'raw_inventory.RINV_TRNS', 'models.MODL_NAME', 'models.MODL_IMGE', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'types.TYPS_NAME', 'suppliers.SUPP_NAME')
+                                    ->select('raw_trans.*','raw_inventory.RINV_METR', 'raw_inventory.RINV_TRNS', 'models.MODL_NAME', 'models.MODL_UNID', 'models.MODL_IMGE', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'types.TYPS_NAME', 'suppliers.SUPP_NAME')
                                     ->limit(500)
                                     ->orderBy('id', 'desc')
                                     ->get();
@@ -111,7 +111,7 @@ class RawInventory extends Model
                                          ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
                                          ->join('raw', 'TYPS_RAW_ID', '=', 'raw.id')
                                          ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
-                                         ->select(DB::raw('COUNT(raw_inventory.id) as rolls'), 'raw.RAW_NAME', 'suppliers.SUPP_NAME', 'types.TYPS_NAME', DB::raw('SUM(raw_inventory.RINV_METR) as meters'), DB::raw('SUM(raw_inventory.RINV_PROD_AMNT) as amount'), 'MODL_SUPP_ID', 'types.id as TYPS_ID', 'raw.id as RAW_ID' )
+                                         ->select(DB::raw('COUNT(raw_inventory.id) as rolls'), 'raw.RAW_NAME', 'models.MODL_UNID', 'suppliers.SUPP_NAME', 'types.TYPS_NAME', DB::raw('SUM(raw_inventory.RINV_METR) as meters'), DB::raw('SUM(raw_inventory.RINV_PROD_AMNT) as amount'), 'MODL_SUPP_ID', 'types.id as TYPS_ID', 'raw.id as RAW_ID' )
                                          ->groupBy('raw.id', 'MODL_SUPP_ID', 'types.id')
                                          ->where('RINV_METR', '>', '0')
                                          ->get();
@@ -122,7 +122,7 @@ class RawInventory extends Model
                                          ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
                                          ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
                                          ->join('raw', 'TYPS_RAW_ID', '=', 'raw.id')
-                                         ->select('raw_inventory.*', 'models.MODL_NAME', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'types.TYPS_NAME')
+                                         ->select('raw_inventory.*', 'models.MODL_NAME', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'types.TYPS_NAME', 'models.MODL_UNID')
                                          ->where('RINV_METR', '>', '0')
                                          ->limit(1000)
                                          ->get();
@@ -160,7 +160,7 @@ class RawInventory extends Model
                                          ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
                                          ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
                                          ->join('raw', 'TYPS_RAW_ID', '=', 'raw.id')
-                                         ->select('raw_inventory.*', 'models.MODL_NAME', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE')
+                                         ->select('raw_inventory.*', 'models.MODL_NAME', 'models.MODL_UNID', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE')
                                          ->where('raw_inventory.id', $id)
                                          ->first();
     }

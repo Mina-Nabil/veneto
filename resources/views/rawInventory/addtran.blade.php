@@ -16,7 +16,7 @@
                                 <option disabled>Pick From Inventory</option>
                                 @foreach($raws as $raw)
                                 <option value="{{ $raw->id }}">
-                                    {{$raw->id}}: {{$raw->RAW_NAME}}-{{$raw->TYPS_NAME}}-{{$raw->MODL_NAME}}  ({{$raw->COLR_NAME}}) Amount: {{number_format($raw->RINV_METR, 2)}} 
+                                    {{$raw->MODL_UNID}}: {{$raw->RAW_NAME}}-{{$raw->TYPS_NAME}}-{{$raw->MODL_NAME}}  ({{$raw->COLR_NAME}}) Amount: {{number_format($raw->RINV_METR, 2)}} 
                                 </option>
                                 @endforeach
                             </select>
