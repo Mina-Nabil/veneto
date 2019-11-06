@@ -10,6 +10,12 @@ use App\RawInventory;
 
 class RawInventoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function showAvailable(){
         $data['raws'] = RawInventory::getAvailable();
         $data['isProd'] = false;

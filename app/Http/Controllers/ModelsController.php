@@ -6,7 +6,13 @@ use Illuminate\Http\Request;
 use App\Models;
 use App\Suppliers;
 class ModelsController extends Controller
+
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     ////////////////////////////////////////////Models/////////////////////////////////////////
 
     function showModels(){

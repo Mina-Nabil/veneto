@@ -9,6 +9,11 @@ use App\Brands;
 class BrandsController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     function showBrand(){
         $data['brands'] = Brands::getBrands();
         $data['pageTitle'] = "Add New Brand";

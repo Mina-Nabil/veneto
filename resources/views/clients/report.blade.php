@@ -23,13 +23,15 @@
                         </thead>
                         <tbody>
                             @foreach($ops as $op)
-                            <tr 
-                            @if(isset($op->CLTR_CMNT) && strcmp($op->CLTR_CMNT, '')!=0 )
-                            style="font-style: italic"
-                            @endif
-                            title="{{$op->CLTR_CMNT}}"
-                            >
-                                <td>{{$op->CLTR_DATE}}</td>
+                            <tr>
+                                <td>
+                                @if(isset($op->CLTR_CMNT) && strcmp($op->CLTR_CMNT, '')!=0 )
+                                <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" 
+                                    data-content="{{$op->CLTR_CMNT}}" data-original-title="Comment:">
+                                @endif
+                                        {{$op->CLTR_DATE}}
+                                    </button>
+                                </td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->CLTR_CLNT_ID)}}">
                                         {{$op->CLNT_NAME}}

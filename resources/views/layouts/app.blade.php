@@ -202,9 +202,10 @@
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-barcode"></i><span class="hide-menu">Finished</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('inventory/home')}}">New Sales</a></li>
-                                <li><a href="{{url('inventory/add')}}">Add Type</a></li>
-                                <li><a href="{{url('models/home')}}">Models</a></li>
+                                <li><a href="{{url('finished/show')}}">Available</a></li>
+                                <li><a href="{{url('finished/add')}}">New Entry</a></li>
+                                <li><a href="{{url('sales/show')}}">Sales</a></li>
+                                <li><a href="{{url('sales/add')}}">New Sales</a></li>
                                 <li><li>
                                 <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" >Settings</a>
                                     <ul aria-expanded="false" class="collapse">
@@ -250,7 +251,7 @@
                         <div class="d-flex justify-content-end align-items-center">
                             <a  href="{{url('clients/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Client Op.</a>
                             <a  href="{{url('suppliers/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Supplier Op.</a>
-                            <a  href="{{url('transactions/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Sales Op.</a>
+                            <a  href="{{url('sales/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Sales Op.</a>
                             <a  href="{{url('rawinventory/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> New Raw Entry</a>
                         </div>
                     </div>

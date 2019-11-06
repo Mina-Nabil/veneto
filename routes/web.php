@@ -10,14 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Sales Routes
+Route::get("sales/show",            'SalesController@show');
+Route::get("sales/show/{id}",       'SalesController@show');
+Route::get("sales/items/{salesID}",       'SalesController@sales');
+Route::get("sales/add",            'SalesController@addPage');
+Route::post("sales/insert",        'SalesController@insert');
+Route::post("sales/add/payment",        'SalesController@insertPayment');
+
 
 //Finished Prods
 Route::get("finished/show",                 'FinishedController@show');
 Route::get("finished/add",                  'FinishedController@addPage');
 Route::post("finished/insert",              'FinishedController@insert');
-Route::get("finished/sales/show",            'FinishedController@addSales');
-Route::get("finished/sales/add",            'FinishedController@addSales');
-Route::post("finished/sales/insert",        'FinishedController@insertSales');
+Route::post("finished/edit/price",              'FinishedController@editPrice');
 
 //Clients Routes
 Route::get("clients/trans/prepare",     'ClientsController@report');
