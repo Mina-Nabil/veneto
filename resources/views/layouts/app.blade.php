@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/dark-logo.png') }}">
     <title>{{  config('APP_NAME', 'Via Veneto') }}</title>
     <!-- Custom CSS -->
     <link href="{{asset('dist/css/style.min.css')}}" rel="stylesheet">
@@ -22,6 +22,7 @@
     <link href="{{ asset('assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allerta+Stencil" />
 
     <!-- Sweet Alert Notification -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -60,16 +61,16 @@
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <!-- <img src="{{ asset('assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo" /> -->
+                            <img src="{{ asset('images/dark-logo.png') }}" height=40px alt="homepage" class="dark-logo" />
                             <!-- Light Logo icon -->
-                            <img src="{{ asset('images/logo.png') }}" height=50px alt="homepage" class="dark-logo" />
+                            <img src="{{ asset('images/light-logo.png') }}" height=40px alt="homepage" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
                          <!-- dark Logo text -->
-                         <img src="{{ asset('images/logo.png') }}" height=50px alt="homepage" class="dark-logo" />
+                         <img src="{{ asset('images/dark-text.png') }}" height=40px alt="homepage" class="dark-logo" />
                          <!-- Light Logo text -->
-                         <img src="{{ asset('images/logo.png') }}" height=50px class="light-logo" alt="homepage" /></span> </a>
+                         <img src="{{ asset('images/light-text.png') }}" height=40px class="light-logo" alt="homepage" /></span> </a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -245,14 +246,14 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Via Veneto Management System</h4>
+                        <h4 class="text-themecolor" style="font-family: 'Allerta Stencil' ; font-size:24px">Via Veneto Management System</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
-                            <a  href="{{url('clients/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Client Op.</a>
-                            <a  href="{{url('suppliers/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Supplier Op.</a>
-                            <a  href="{{url('sales/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Sales Op.</a>
-                            <a  href="{{url('rawinventory/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> New Raw Entry</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('clients/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Client Op.</a>
+                            <a style="font-family: 'Allerta Stencil'"  href="{{url('suppliers/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Supplier Op.</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('sales/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Sales Op.</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('rawinventory/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> New Raw Entry</a>
                         </div>
                     </div>
                 </div>
@@ -403,7 +404,7 @@
                       title: 'مسعد و اشرف',
                       customize: function ( win ) {
                         $(win.document.body)
-                        .prepend('<center><img src="{{asset('images/dahab-logo.png')}}" style="position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; opacity:0.4" /></center>')
+                        .prepend('<center><img src="{{asset('images/dark-logo.png')}}" style="position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; opacity:0.4" /></center>')
                         .css( 'font-size', '24px' )
                         .find( 'thead' ).prepend('<tr>' + $('#dt-header').val() + '</tr>')
                         //$('#stampHeader' ).addClass( 'stampHeader' );

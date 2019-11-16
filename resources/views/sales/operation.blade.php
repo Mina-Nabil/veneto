@@ -9,20 +9,24 @@
                 <h4 class="card-title">{{$sales->CLNT_NAME}} Sales #{{$sales->id}} Summary</h4>
                 <div class="row">
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <strong>Date:</strong>
                         <p>{{$sales->SALS_DATE}}</p>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <strong>Number of Items:</strong>
                         <p id=numberOfInv >{{$totalNum}}</p>
                     </div>
                     
-
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <strong>Total Price:</strong>
                         <p id=totalPrice >{{$sales->SALS_TOTL_PRCE}}</p>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <strong>Total Paid:</strong>
+                        <p id=totalPrice >{{$sales->SALS_PAID}}</p>
                     </div>
                 </div>
             </div>
