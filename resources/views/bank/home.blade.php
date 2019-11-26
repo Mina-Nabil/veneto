@@ -11,11 +11,11 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th>Date</th>
+                                <th>تاريخ</th>
                                 <th>Transaction</th>
-                                <th>Debit</th>
-                                <th>Credit</th>
-                                <th>Balance</th>
+                                <th>مدين</th>
+                                <th>دائن</th>
+                                <th>رصيد</th>
                             </tr>
                         </thead>
                         <tbody>

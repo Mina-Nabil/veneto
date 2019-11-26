@@ -33,16 +33,16 @@
                             <tr>
                                 @if($transPage)
                                 <th>Serial#</th>
-                                <th>Photo</th>
-                                <th>Raw</th>
-                                <th>Type</th>
-                                <th>Model</th>
-                                <th>Supplier</th>
-                                <th>Price</th>
+                                <th>صوره</th>
+                                <th>خامه</th>
+                                <th>صنف</th>
+                                <th>موديل</th>
+                                <th>مورد</th>
+                                <th>سعر</th>
                                 @endif
                                 <th>Transaction Number</th>
-                                <th>Amount</th>
-                                <th>in Prod.</th>
+                                <th>كميه</th>
+                                <th>في الانتاج</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

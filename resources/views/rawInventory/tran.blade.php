@@ -12,15 +12,15 @@
                         <thead>
                             <tr>
                                 <th>Trans #</th>
-                                <th>Raw</th>
-                                <th>Type</th>
-                                <th>Model</th>
-                                <th>Supplier</th>
-                                <th>Meters In</th>
-                                <th>From</th>
-                                <th>Meters Out</th>
-                                <th>To</th>
-                                <th>Current Amount</th>
+                                <th>خامه</th>
+                                <th>صنف</th>
+                                <th>موديل</th>
+                                <th>مورد</th>
+                                <th>كميه داخل</th>
+                                <th>من</th>
+                                <th>كميه خارج</th>
+                                <th>الي</th>
+                                <th>متاح</th>
                             </tr>
                         </thead>
                         <tbody>

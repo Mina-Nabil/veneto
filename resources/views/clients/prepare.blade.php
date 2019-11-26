@@ -5,12 +5,12 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Account Statement</h4>
+                <h4 class="card-title">كشف حساب</h4>
                 <h5 class="card-subtitle">Select Client and Time Range for the Account Statement Report</h5>
                 <form class="form pt-3" method="post" action="{{ $accountStatFormURL }}" enctype="multipart/form-data" >
                 @csrf
                     <div class="form-group">
-                        <label>Client*</label>
+                        <label>عميل*</label>
                         <div class="input-group mb-3">
                             <select name=client class="select2 form-control custom-select" style="width: 100%; height:36px;">
                                 <option disabled>Pick From Clients</option>
@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>From</label>
+                        <label>من</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-calendar"></i></span>
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>To</label>
+                        <label>الي</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-calendar"></i></span>
@@ -56,12 +56,12 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Main</h4>
-                <h5 class="card-subtitle">Total Accounts per Client</h5>
+                <h4 class="card-title">اجماليات</h4>
+                <h5 class="card-subtitle">اجماليات عملاء</h5>
                 <form class="form pt-3" method="post" action="{{ $mainReportFormURL }}" enctype="multipart/form-data" >
                 @csrf
                     <div class="form-group">
-                        <label>From</label>
+                        <label>من</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-calendar"></i></span>
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>To</label>
+                        <label>الي</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-calendar"></i></span>

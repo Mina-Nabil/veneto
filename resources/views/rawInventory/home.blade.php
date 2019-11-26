@@ -11,14 +11,14 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th>Raw</th>
-                                <th>Type</th>
-                                <th>Supplier</th>
+                                <th>خامه</th>
+                                <th>صنف</th>
+                                <th>مورد</th>
                                 @if(!$isProd)
-                                <th>Rolls</th>
-                                <th>Amount</th>
+                                <th>موديلات</th>
+                                <th>اجماليات</th>
                                 @endif
-                                <th>in Prod.</th>
+                                <th>في الانتاج</th>
                                 @if(!$isProd)
          
                                 @endif

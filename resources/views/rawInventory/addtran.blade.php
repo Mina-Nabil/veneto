@@ -26,7 +26,7 @@
 
 
                     <div class="form-group">
-                        <label>In</label>
+                        <label>كميه داخل</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-arrow-right"></i></span>
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Out</label>
+                        <label>كميه خارج</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-arrow-left"></i></span>
@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>From</label>
+                        <label>من</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-list"></i></span>
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>To</label>
+                        <label>الي</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-package"></i></span>

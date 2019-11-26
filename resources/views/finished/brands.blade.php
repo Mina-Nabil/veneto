@@ -38,7 +38,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-            <h4 class="card-title">Brands</h4>
+            <h4 class="card-title">ماركات</h4>
                 <h6 class="card-subtitle">Show Available Brands</h6>
                 <div class="table-responsive m-t-40">
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >

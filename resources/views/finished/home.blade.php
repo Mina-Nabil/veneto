@@ -11,9 +11,9 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th>Model</th>
-                                <th>Brand</th>
-                                <th>Price</th>
+                                <th>موديل</th>
+                                <th>ماركه</th>
+                                <th>سعر</th>
                                 <th>36</th>
                                 <th>38</th>
                                 <th>40</th>

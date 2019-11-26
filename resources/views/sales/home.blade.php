@@ -12,12 +12,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Date</th>
+                                <th>تاريخ</th>
                             @if(!$isClntPage)
-                                <th>Client</th>
+                                <th>عميل</th>
                             @endif
-                                <th>Total</th>
-                                <th>Paid</th>
+                                <th>اجمالي</th>
+                                <th>دفع</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
