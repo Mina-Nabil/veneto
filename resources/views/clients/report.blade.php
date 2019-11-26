@@ -13,6 +13,7 @@
                             <tr>
                                 <th>تاريخ</th>
                                 <th>اسم</th>
+                                <th>عمليه بيع</th>
                                 <th>مبيعات</th>
                                 <th>نقديه</th>
                                 <th>اوراق دفع</th>
@@ -36,6 +37,16 @@
                                     <a href="{{url('clients/trans/quick/' . $op->CLTR_CLNT_ID)}}">
                                         {{$op->CLNT_NAME}}
                                     </a>
+                                </td>
+                                <td>
+                                    <?php 
+                                        $salesArr = explode(' ', $op->CLTR_CMNT) ;
+                                    ?>
+                                        @if($salesArr[0]=='Sales' && is_numeric($salesArr[1]) && !isset($salesArr[2]))
+                                            <a href="{{url('/sales/items/' . $salesArr[1]) }}">
+                                                {{$salesArr[1]}}
+                                            </a>
+                                        @endif
                                 </td>
                                 <td>{{number_format($op->CLTR_SALS_AMNT, 2)}}</td>
                                 <td>{{number_format($op->CLTR_CASH_AMNT, 2)}}</td>

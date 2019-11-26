@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                                 <th>تاريخ</th>
+                                <th>عمليه شراء</th>
                                 <th>مشتريات</th>
                                 <th>نقديه</th>
                                 <th>اوراق دفع</th>
@@ -29,6 +30,17 @@
                                 @endif 
                                 {{$op->SPTR_DATE}}
                                 </button>
+                                </td>
+                                <td>
+                                    <?php 
+                                        $commentArr = explode(' ', $op->SPTR_CMNT) ;
+                                    ?>
+                                    @if( $commentArr[0] == "Entry"  && $commentArr[1] == "Serial" && is_numeric($commentArr[2]) )
+                                    <a href="{{url('rawinventory/bytrans/' . $commentArr[2])}}"> 
+                                        {{$commentArr[2]}}
+                                    <a>
+                                    @endif
+
                                 </td>
                                 <td>{{number_format($op->SPTR_PRCH_AMNT, 2)}}</td>
                                 <td>{{number_format($op->SPTR_CASH_AMNT, 2)}}</td>

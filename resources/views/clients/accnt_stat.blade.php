@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                                 <th>تاريخ</th>
+                                <th>عمليه بيع</th>
                                 <th>مبيعات</th>
                                 <th>نقديه</th>
                                 <th>اوراق دفع</th>
@@ -22,14 +23,25 @@
                         </thead>
                         <tbody>
                             @foreach($ops as $op)
-                            <tr 
-                            @if(isset($op->CLTR_CMNT) && strcmp($op->CLTR_CMNT, '')!=0 )
-                            style="font-style: italic"
-                            @endif
-                            title="{{$op->CLTR_CMNT}}"
-                            >
-                                <td>{{$op->CLTR_DATE}}</td>
-                                <td>{{number_format($op->CLTR_PRCH_AMNT, 2)}}</td>
+                            <tr >
+                                <td>                                
+                                    @if(isset($op->CLTR_CMNT) && strcmp($op->CLTR_CMNT, '')!=0 )
+                                        <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->CLTR_CMNT}}" data-original-title="Comment:">
+                                    @endif
+                                        {{$op->CLTR_DATE}}
+                                    </button>
+                                </td>
+                                <td>
+                                    <?php 
+                                        $salesArr = explode(' ', $op->CLTR_CMNT) ;
+                                    ?>
+                                        @if($salesArr[0]=='Sales' && is_numeric($salesArr[1]) && !isset($salesArr[2]))
+                                            <a href="{{url('/sales/items/' . $salesArr[1]) }}">
+                                                {{$salesArr[1]}}
+                                            </a>
+                                        @endif
+                                </td>
+                                <td>{{number_format($op->CLTR_SALS_AMNT, 2)}}</td>
                                 <td>{{number_format($op->CLTR_CASH_AMNT, 2)}}</td>
                                 <td>{{number_format($op->CLTR_NTPY_AMNT, 2)}}</td>
                                 <td>{{number_format($op->CLTR_DISC_AMNT, 2)}}</td>

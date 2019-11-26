@@ -11,7 +11,7 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th>تاريخ</th>
+                                <th>اسم</th>
                                 <th>رصيد مبدئي</th>
                                 <th>مشتريات</th>
                                 <th>نقديه</th>
