@@ -44,9 +44,9 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th>Brand</th>
-                                <th>Type</th>
-                                <th>Model#</th>
+                                <th>ماركه</th>
+                                <th>صنف</th>
+                                <th>موديل#</th>
                                 <th>36</th>
                                 <th>38</th>
                                 <th>40</th>
@@ -55,8 +55,8 @@
                                 <th>46</th>
                                 <th>48</th>
                                 <th>50</th>
-                                <th>Count</th>
-                                <th>Price</th>
+                                <th>عدد</th>
+                                <th>سعر</th>
                             </tr>
                         </thead>
                         <tbody>

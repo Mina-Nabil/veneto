@@ -11,13 +11,13 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Purchase</th>
-                                <th>Cash</th>
-                                <th>Notes Payables</th>
-                                <th>Discount</th>
-                                <th>Return</th>
-                                <th>Balance</th>
+                                <th>تاريخ</th>
+                                <th>مشتريات</th>
+                                <th>نقديه</th>
+                                <th>اوراق دفع</th>
+                                <th>خصم</th>
+                                <th>مرتجع</th>
+                                <th>رصيد</th>
                             </tr>
                         </thead>
                         <tbody>

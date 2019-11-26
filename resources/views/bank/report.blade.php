@@ -5,13 +5,13 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Bank Account Report</h4>
+                <h4 class="card-title">كشف حساب بنك</h4>
                 <h5 class="card-subtitle">Select Time Range for the Bank Account Report</h5>
                 <form class="form pt-3" method="post" action="{{ $reportFormURL }}" enctype="multipart/form-data" >
                 @csrf
 
                     <div class="form-group">
-                        <label>From</label>
+                        <label>من</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-calendar"></i></span>
@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>To</label>
+                        <label>الي</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-calendar"></i></span>

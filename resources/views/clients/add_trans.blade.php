@@ -11,7 +11,7 @@
                 @csrf
 
                     <div class="form-group">
-                        <label>Client*</label>
+                        <label>عميل*</label>
                         <div class="input-group mb-3">
                             <select name=client class="select2 form-control custom-select" style="width: 100%; height:36px;">
                                 <option disabled>Pick From Clients</option>
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Sales</label>
+                        <label>مبيعات</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-arrow-up"></i></span>
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Cash</label>
+                        <label>نقدي</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-arrow-down"></i></span>
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Notes Payabales</label>
+                        <label>اوراق دفع</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-arrow-down"></i></span>
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Discount</label>
+                        <label>خصم</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-arrow-down"></i></span>
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Return</label>
+                        <label>مرتجع</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-arrow-down"></i></span>

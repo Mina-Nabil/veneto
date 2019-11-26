@@ -13,14 +13,14 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Image</th>
-                                <th>Raw</th>
-                                <th>Type</th>
-                                <th>Name</th>
-                                <th>Supplier</th>
-                                <th>Price</th>
-                                <th>Color</th>
-                                <th>Edit</th>
+                                <th>صوره</th>
+                                <th>خامه</th>
+                                <th>صنف</th>
+                                <th>اسم</th>
+                                <th>مورد</th>
+                                <th>سعر</th>
+                                <th>لون</th>
+                                <th>تعديل</th>
                             </tr>
                         </thead>
                         <tbody>
