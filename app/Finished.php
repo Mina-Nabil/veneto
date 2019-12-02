@@ -54,7 +54,7 @@ class Finished extends Model
         });
     }
 
-    public static function insertFinished($modelID, $brandID, $price, $amount36 = 0, $amount38 = 0, $amount40 = 0,                                              $amount42 = 0, $amount44 = 0, $amount46 = 0, $amount48 = 0, $amount50 = 0, $finished=null){
+    public static function insertFinished($modelID, $brandID, $price, $amount36 = 0, $amount38 = 0, $amount40 = 0, $amount42 = 0, $amount44 = 0, $amount46 = 0, $amount48 = 0, $amount50 = 0, $finished=null){
 
             if($finished == null)
                 $finished = self::getFinishedRow($modelID, $brandID);
@@ -76,21 +76,21 @@ class Finished extends Model
                 }
                 else {
                     if($amount36!=0)
-                        DB::table("finished")->increment("FNSH_36_AMNT", $amount36);
+                        DB::table("finished")->where("id", $finished->id)->increment("FNSH_36_AMNT", $amount36);
                     if($amount38!=0)
-                        DB::table("finished")->increment("FNSH_38_AMNT", $amount38);
+                        DB::table("finished")->where("id", $finished->id)->increment("FNSH_38_AMNT", $amount38);
                     if($amount40!=0)
-                        DB::table("finished")->increment("FNSH_40_AMNT", $amount40);
+                        DB::table("finished")->where("id", $finished->id)->increment("FNSH_40_AMNT", $amount40);
                     if($amount42!=0)
-                        DB::table("finished")->increment("FNSH_42_AMNT", $amount42);
+                        DB::table("finished")->where("id", $finished->id)->increment("FNSH_42_AMNT", $amount42);
                     if($amount44!=0)
-                        DB::table("finished")->increment("FNSH_44_AMNT", $amount44);
+                        DB::table("finished")->where("id", $finished->id)->increment("FNSH_44_AMNT", $amount44);
                     if($amount46!=0)
-                        DB::table("finished")->increment("FNSH_46_AMNT", $amount46);
+                        DB::table("finished")->where("id", $finished->id)->increment("FNSH_46_AMNT", $amount46);
                     if($amount48!=0)
-                        DB::table("finished")->increment("FNSH_48_AMNT", $amount48);
+                        DB::table("finished")->where("id", $finished->id)->increment("FNSH_48_AMNT", $amount48);
                     if($amount50!=0)
-                        DB::table("finished")->increment("FNSH_50_AMNT", $amount50);
+                        DB::table("finished")->where("id", $finished->id)->increment("FNSH_50_AMNT", $amount50);
                 }
                 
     }
