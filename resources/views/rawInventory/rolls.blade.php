@@ -67,8 +67,8 @@
                                         {{$raw->RINV_TRNS}}
                                     <a>
                                 </td>
-                                <td>{{$raw->RINV_METR}}</td>
-                                <td>{{$raw->RINV_PROD_AMNT}}</td>
+                                <td>{{number_format($raw->RINV_METR, 2)}}</td>
+                                <td>{{number_format($raw->RINV_PROD_AMNT, 2)}}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
