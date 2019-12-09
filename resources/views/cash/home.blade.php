@@ -16,22 +16,26 @@
                                 <th>مدين</th>
                                 <th>دائن</th>
                                 <th>رصيد</th>
+                                <th>Comment</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($ops as $op)
                             <tr>
                                 <td>
-                                @if(isset($op->CASH_CMNT) && strcmp($op->CASH_CMNT, '')!=0 )
-                                    <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->CASH_CMNT}}" data-original-title="Comment:">
-                                @endif
-                                {{$op->CASH_DATE}}
-                                    </button>
+                                    {{date_format(date_create($op->CASH_DATE), "d-m-Y")}}   
                                 </td>
                                 <td>{{$op->CASH_NAME}}</td>
                                 <td>{{number_format($op->CASH_OUT, 2)}}</td>
                                 <td>{{number_format($op->CASH_IN, 2)}}</td>
                                 <td>{{number_format($op->CASH_BLNC, 2)}}</td>
+                                <td>
+                                    @if(isset($op->CASH_CMNT) && strcmp($op->CASH_CMNT, '')!=0 )
+                                        <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->CASH_CMNT}}" data-original-title="Comment:">
+                                    @endif
+                                    <i class="fas fa-list-alt"></i>
+                                    </button>
+                                </td>
                             </tr> 
                             @endforeach
                         </tbody>

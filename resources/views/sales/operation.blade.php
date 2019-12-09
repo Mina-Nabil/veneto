@@ -29,6 +29,12 @@
                         <p id=totalPrice >{{$sales->SALS_PAID}}</p>
                     </div>
                 </div>
+                <div class=row>
+                    <div class="col-lg-12">
+                    <strong>Comment</strong>
+                    <p>{{($sales->SALS_CMNT) ?? 'N/A'}}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

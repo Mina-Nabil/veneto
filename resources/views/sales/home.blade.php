@@ -18,6 +18,7 @@
                             @endif
                                 <th>اجمالي</th>
                                 <th>دفع</th>
+                                <th>Comment</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -26,22 +27,25 @@
                             <tr>
                                 <td>{{$row->id}}</td>
                                 <td>
+                                    {{date_format(date_create($row->SALS_DATE), "d-m-Y")}}
+                                </td>
+                                @if(!($isClntPage))
+                                    <td>
+                                        <a href="{{url('sales/show/' . $row->SALS_CLNT_ID)}}">
+                                            {{$row->CLNT_NAME}}
+                                        </a>
+                                    </td>
+                                @endif
+                                <td>{{$row->SALS_TOTL_PRCE}}</td>
+                                <td>{{$row->SALS_PAID}}</td>
+                                <td>
                                 @if(isset($row->SALS_CMNT) && strcmp($row->SALS_CMNT, '')!=0 )
                                     <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" 
                                     data-content="{{$row->SALS_CMNT}}" data-original-title="Comment:">
                                 @endif
-                                {{$row->SALS_DATE}}
-                                </button>
+                                    <i class="far fa-list-alt" ></i>
+                                    </button>
                                 </td>
-                            @if(!($isClntPage))
-                                <td>
-                                    <a href="{{url('sales/show/' . $row->SALS_CLNT_ID)}}">
-                                        {{$row->CLNT_NAME}}
-                                    </a>
-                                </td>
-                            @endif
-                                <td>{{$row->SALS_TOTL_PRCE}}</td>
-                                <td>{{$row->SALS_PAID}}</td>
                                 <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

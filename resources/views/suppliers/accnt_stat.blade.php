@@ -19,16 +19,15 @@
                                 <th>خصم</th>
                                 <th>مرتجع</th>
                                 <th>رصيد</th>
+                                <th>Comment</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($ops as $op)
                             <tr>
                                 <td>
-                                @if(isset($op->SPTR_CMNT) && strcmp($op->SPTR_CMNT, '')!=0 )
-                                    <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->SPTR_CMNT}}" data-original-title="Comment:">
-                                @endif 
-                                {{$op->SPTR_DATE}}
+                                
+                                {{date_format(date_create($op->SPTR_DATE), "d-m-Y")}}
                                 </button>
                                 </td>
                                 <td>
@@ -48,20 +47,27 @@
                                 <td>{{number_format($op->SPTR_DISC_AMNT, 2)}}</td>
                                 <td>{{number_format($op->SPTR_RTRN_AMNT, 2)}}</td>
                                 <td>{{number_format($op->SPTR_BLNC, 2)}}</td>
+                                <td>
+                                    @if(isset($op->SPTR_CMNT) && strcmp($op->SPTR_CMNT, '')!=0 )
+                                        <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->SPTR_CMNT}}" data-original-title="Comment:">
+                                    @endif 
+                                    <i class="far fa-list-alt" ></i>
+                                    </button>
+                                </td>
                             </tr> 
                             @endforeach
                             
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td><strong>Start Balance: {{number_format($startBalance, 1)}}</strong></td>
+                                <td colspan=2><strong>Start Balance: {{number_format($startBalance, 1)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalPurch, 2)}} </strong></td>
                                 <td><strong>{{number_format($totals->totalCash, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalNotes, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalDisc, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalReturn, 2)}}</strong></td>
                                 <td><strong>End: {{number_format($supplier->SUPP_BLNC, 2)}}</strong></td>
-                              
+                                <td></td>
                             </tr>
                         </tfoot>
                     </table>
