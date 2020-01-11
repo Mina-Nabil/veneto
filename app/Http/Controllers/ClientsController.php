@@ -16,6 +16,11 @@ class ClientsController extends Controller
     function quickReport($id=null){
 
         $data['ops'] = Clients::getTrans($id);
+        $data['isClient'] = ($id != null);
+        if($data['isClient']){
+            $data['totals'] = Clients::getLastTransaction($id);
+            $data['client'] = Clients::getClient($id);
+        }
         return view("clients.report", $data);
     }
 

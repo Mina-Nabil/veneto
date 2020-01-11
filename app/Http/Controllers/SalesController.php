@@ -24,6 +24,8 @@ class SalesController extends Controller
                 abort(404);
             
             $data['sales'] = Sales::getSalesByClient($clientID);
+            $data['items'] = Sales::getSalesItemsByClient($clientID);
+            $data['totals'] = Sales::getSalesTotalsByClient($clientID);
             $data['isClntPage'] = true;
         } else {
             $data['sales'] = Sales::getSales($clientID);
@@ -63,6 +65,11 @@ class SalesController extends Controller
         Sales::insertPayment($request->salesID, $request->payment, $request->type);
         return back(); 
 
+    }
+
+    public function allItemsSold(){
+        $data['items'] = Sales::getAllSoldItems();
+        return view("sales.sold", $data);
     }
 
     private function getItemsArray($request){

@@ -105,10 +105,14 @@ class Clients extends Model
                         "CLTR_CMNT"         =>  $comment
                     ]);
 
-                    if($cash > 0)
-                        Cash::insertTran("Client Transaction# " . $id , $cash, 0);
-                    if($notespay > 0)
-                        Bank::insertTran("Client Transaction# " . $id , $notespay, 0);
+                    if($cash > 0){
+                        $clientDetails = Clients::getClient($clientID);
+                        Cash::insertTran("Client ({$clientDetails->CLNT_NAME}) Transaction# " . $id  . " Operation Comment: " . $comment , $cash, 0);
+                    }
+                    if($notespay > 0){
+                        $clientDetails = Clients::getClient($clientID);
+                        Bank::insertTran("Client ({$clientDetails->CLNT_NAME}) Transaction# " . $id . " Operation Comment: " . $comment , $notespay, 0);
+                    }
                     
 
                     self::updateBalance($client, $newBalance);

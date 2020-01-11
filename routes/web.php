@@ -12,6 +12,7 @@
 */
 //Sales Routes
 Route::get("sales/show",            'SalesController@show')-> middleware('cors');
+Route::get("sales/sold",            'SalesController@allItemsSold')-> middleware('cors');
 Route::get("sales/show/{id}",       'SalesController@show')-> middleware('cors');
 Route::get("sales/items/{salesID}",       'SalesController@sales')-> middleware('cors');
 Route::get("sales/add",            'SalesController@addPage')-> middleware('cors');

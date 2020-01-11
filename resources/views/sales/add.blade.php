@@ -29,7 +29,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-money"></i></span>
                             </div>
-                            <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=paid value="{{ old('paid')}}" required >
+                            <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=paid value="{{ old('paid') ?? 0}}" required >
                         </div>
                         <small class="text-danger">{{$errors->first('paid')}}</small>
                     </div>
@@ -64,8 +64,8 @@
 
                         <div class="nopadding row col-lg-12">
                             <div class="col-lg-2">
-                                        <div class="input-group mb-3">
-                                            <select name=finished[] class="select2 form-control custom-select" required>
+                                        <div class="input-group mb-2">
+                                            <select name=finished[] id=finished[] class="form-control select2  custom-select" required>
                                                 <option disabled hidden selected value="">Finished Inventory</option>
                                                 @foreach($items as $item)
                                                 <option value="{{ $item->id }}">
@@ -129,16 +129,25 @@
             <div class="card-body">
                 <h4 class="card-title">Sales Summary</h4>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <strong>Number of Items:</strong>
+                    <div class="col-lg-4">
+                        <strong>Totals</strong>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <strong>Number of Items</strong>
                         <p id=numberOfInv >0</p>
                     </div>
-                    
 
-                    <div class="col-lg-6">
-                        <strong>Total Price:</strong>
+                    <div class="col-lg-4">
+                        <strong>Price</strong>
                         <p id=totalPrice >0</p>
                     </div>
+                </div>
+                <div class="row ">                                       
+                <ul class="col-lg-12 list-group" id=itemsList>
+      
+
+                </ul>
                 </div>
             </div>
         </div>
@@ -166,7 +175,7 @@ function addToab() {
     var rdiv = 'removeclass' + room;
     var concatString = "";
     concatString +=   " <div class='col-lg-2'>\
-                                        <div class='input-group mb-3'>\
+                                        <div class='input-group mb-2'>\
                                             <select name=finished[] class='select2 form-control custom-select' style='width: 100%; height:50px;' required>\
                                                 <option disabled selected hidden value='' >Finished Inventory</option>\
                                                 @foreach($items as $item)\
@@ -177,10 +186,10 @@ function addToab() {
                                         </div>\
                                     </div>\
                                 <div class='col-lg-1'>\
-                                    <input type='number'  step=1  min=0class='form-control amount' placeholder='36' name=amount36[] aria-label='Total Amount in Meters' aria-describedby='basic-addon11'  >\
+                                    <input type='number'  step=1  min=0 class='form-control amount' placeholder='36' name=amount36[] aria-label='Total Amount in Meters' aria-describedby='basic-addon11'  >\
                                 </div>\
                                 <div class='col-lg-1'>\
-                                    <input type='number'  step=1  min=0class='form-control amount' placeholder='38' name=amount38[] aria-label='Total Amount in Meters' aria-describedby='basic-addon11'  >\
+                                    <input type='number'  step=1  min=0 class='form-control amount' placeholder='38' name=amount38[] aria-label='Total Amount in Meters' aria-describedby='basic-addon11'  >\
                                     </div> ";
             concatString +=    "<div class='col-lg-1'>\
                                     <input type='number'  step=1  min=0 class='form-control amount' placeholder='40' name=amount40[] aria-label='Total Amount in Meters' aria-describedby='basic-addon11'  >\
@@ -234,21 +243,42 @@ function calculateTotals(){
     amount48 = document.forms[1].elements['amount48[]'];
     amount50 = document.forms[1].elements['amount50[]'];
     prices   = document.forms[1].elements['price[]'];
+    finished = document.forms[1].elements['finished[]'];
 
-    if (typeof prices.length === "undefined") {
+    document.getElementById('itemsList').innerHTML = "";
+
+    if (typeof prices.length === "undefined" && finished.selectedIndex!=0) {
     console.log("1 row")
         numberOfInv =  Number(amount36.value) + Number(amount38.value)  + Number(amount40.value) + Number(amount42.value) + Number(amount44.value) + Number(amount46.value)  + Number(amount48.value)  + Number(amount50.value ) ;
         price = numberOfInv * prices.value;
+        
+        document.getElementById('itemsList').innerHTML = "<li class='list-group-item' >\
+                        <div class='row'>\
+                            <div class='col-lg-4'> " + finished.options[finished.selectedIndex].innerHTML + " </div>\
+                            <div class='col-lg-4'> " + numberOfInv + " </div>\
+                            <div class='col-lg-4 p-l-10'> " + price.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</div>\
+                        </div>\
+                        </li>";
     } else for(i ; i < amount36.length ; i++){
-        let row = Number(amount36[i].value) + Number(amount38[i].value)  + Number(amount40[i].value) + Number(amount42[i].value) + Number(amount44[i].value) + Number(amount46[i].value)  + Number(amount48[i].value)  + Number(amount50[i].value ) ;
-        numberOfInv += row;
-        price += row * prices[i].value;
+        if(finished[i].selectedIndex!=0){
+
+            let row = Number(amount36[i].value) + Number(amount38[i].value)  + Number(amount40[i].value) + Number(amount42[i].value) + Number(amount44[i].value) + Number(amount46[i].value)  + Number(amount48[i].value)  + Number(amount50[i].value ) ;
+            numberOfInv += row;
+            price += row * prices[i].value;
+            document.getElementById('itemsList').innerHTML += " <li class='list-group-item' >\
+                            <div class='row'>\
+                                <div class='col-lg-4'> " + finished[i].options[finished[i].selectedIndex].innerHTML + " </div>\
+                                <div class='col-lg-4'> " + row + " </div>\
+                                <div class='col-lg-4 p-l-10'> " + (prices[i].value * row).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,'); + "</div>\
+                            </div>\
+                            </li>";
+        }
     }
 
     document.getElementById('numberOfInv').innerHTML = numberOfInv;
-    document.getElementById('totalPrice').innerHTML = price;
+    document.getElementById('totalPrice').innerHTML = price.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,');
  }
-
+ 
 
 </script>
 @endsection

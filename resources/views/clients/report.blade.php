@@ -5,14 +5,20 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                @if($isClient)
+                <h4 class="card-title">'{{$client->CLNT_NAME}}' Quick Report</h4>
+                @else
                 <h4 class="card-title">Clients Report</h4>
+                @endif
                 <h6 class="card-subtitle">Show Clients transactions</h6>
                 <div class="table-responsive m-t-40">
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
                                 <th>تاريخ</th>
+                                @if(!$isClient)
                                 <th>اسم</th>
+                                @endif
                                 <th>عمليه بيع</th>
                                 <th>مبيعات</th>
                                 <th>نقديه</th>
@@ -24,16 +30,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($ops as $op)
+                            @foreach($ops as $key => $op)
                             <tr>
                                 <td>
                                     {{date_format(date_create($op->CLTR_DATE), "d-m-Y")}}
                                 </td>
+                                @if(!$isClient)
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->CLTR_CLNT_ID)}}">
                                         {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
+                                @endif
                                 <td>
                                     <?php 
                                         $salesArr = explode(' ', $op->CLTR_CMNT) ;
@@ -61,6 +69,20 @@
                             </tr> 
                             @endforeach
                         </tbody>
+                        @if($isClient)
+                        <tfoot>
+                        <tr>
+                            <td colspan=2><strong>Totals</strong></td>
+                            <td><strong>{{number_format($totals->CLTR_SALS_BLNC, 2)}}</strong></td>
+                            <td><strong>{{number_format($totals->CLTR_CASH_BLNC, 2)}}</strong></td>
+                            <td><strong>{{number_format($totals->CLTR_NTPY_BLNC, 2)}}</strong></td>
+                            <td><strong>{{number_format($totals->CLTR_DISC_BLNC, 2)}}</strong></td>
+                            <td><strong>{{number_format($totals->CLTR_RTRN_BLNC, 2)}}</strong></td>
+                            <td><strong>{{number_format($totals->CLTR_BLNC, 2)}}</strong></td>
+                            <td></td>
+                        </tr>
+                        <tfoot>
+                        @endif
                     </table>
                 </div>
             </div>

@@ -105,10 +105,14 @@ class Suppliers extends Model
                         "SPTR_CMNT"         =>  $comment
                     ]);
 
-                    if($cash > 0)
-                        Cash::insertTran("Supplier Transaction# " . $id , 0, $cash);
-                    if($notespay > 0)
-                        Bank::insertTran("Supplier Transaction# " . $id , 0, $notespay);
+                    if($cash > 0){
+                        $supplier = Supplier::getSupplier($supp);
+                        Cash::insertTran("Supplier ($supplier->SUPP_NAME) Transaction# " . $id . "Operation Comment: " . $comment, 0, $cash);
+                    }
+                    if($notespay > 0){
+                        $supplier = Supplier::getSupplier($supp);
+                        Bank::insertTran("Supplier ($supplier->SUPP_NAME) Transaction# " . $id . "Operation Comment: " . $comment, 0, $notespay);
+                    }
                     
 
                     self::updateBalance($supp, $newBalance);

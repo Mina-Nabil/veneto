@@ -16,6 +16,11 @@ class SuppliersController extends Controller
     function quickReport($id=null){
 
         $data['ops'] = Suppliers::getTrans($id);
+        $data['isSupplier'] = ($id != null);
+        if($data['isSupplier']){
+            $data['totals'] = Suppliers::getLastTransaction($id);
+            $data['supplier'] = Suppliers::getSupplier($id);
+        }
         return view("suppliers.report", $data);
     }
 

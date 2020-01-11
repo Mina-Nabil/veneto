@@ -68,19 +68,19 @@
                         <tbody>
                             @foreach($items as $item)
                             <tr>
-                                <td>{{$item->BRND_NAME}}</td>
-                                <td>{{$item->MODL_UNID}}</td>
-                                <td>{{$item->RAW_NAME}}-{{$item->TYPS_NAME}}</td>
-                                <td>{{$item->FNSH_36_SOLD}}</td>
-                                <td>{{$item->FNSH_38_SOLD}}</td>
-                                <td>{{$item->FNSH_40_SOLD}}</td>
-                                <td>{{$item->FNSH_42_SOLD}}</td>
-                                <td>{{$item->FNSH_44_SOLD}}</td>
-                                <td>{{$item->FNSH_46_SOLD}}</td>
-                                <td>{{$item->FNSH_48_SOLD}}</td>
-                                <td>{{$item->FNSH_50_SOLD}}</td>
-                                <td>{{$item->itemsCount}}</td>
-                                <td>{{$item->SLIT_PRCE}}</td>
+                                <td><strong>{{$item->BRND_NAME}}</strong></td>
+                                <td><strong>{{$item->MODL_UNID}}</strong></td>
+                                <td><strong>{{$item->RAW_NAME}}-{{$item->TYPS_NAME}}</strong></td>
+                                <td><strong>{{$item->FNSH_36_SOLD}}</strong></td>
+                                <td><strong>{{$item->FNSH_38_SOLD}}</strong></td>
+                                <td><strong>{{$item->FNSH_40_SOLD}}</strong></td>
+                                <td><strong>{{$item->FNSH_42_SOLD}}</strong></td>
+                                <td><strong>{{$item->FNSH_44_SOLD}}</strong></td>
+                                <td><strong>{{$item->FNSH_46_SOLD}}</strong></td>
+                                <td><strong>{{$item->FNSH_48_SOLD}}</strong></td>
+                                <td><strong>{{$item->FNSH_50_SOLD}}</strong></td>
+                                <td><strong>{{$item->itemsCount}}</strong></td>
+                                <td><strong>{{$item->SLIT_PRCE}}</strong></td>
                             </tr> 
                             @endforeach
                         </tbody>

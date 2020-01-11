@@ -5,14 +5,20 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+            @if($isSupplier)
+                <h4 class="card-title">'{{$supplier->SUPP_NAME}}' Quick Report</h4>
+                @else
                 <h4 class="card-title">Suppliers Report</h4>
+                @endif
                 <h6 class="card-subtitle">Show Suppliers transactions</h6>
                 <div class="table-responsive m-t-40">
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
                                 <th>تاريخ</th>
+                                @if(!$isSupplier)
                                 <th>الاسم</th>
+                                @endif
                                 <th>عمليه شراء</th>
                                 <th>مشتريات</th>
                                 <th>نقديه</th>
@@ -29,11 +35,13 @@
                                 <td>
                                     {{date_format(date_create($op->SPTR_DATE), "d-m-Y")}}
                                 </td>
+                                @if(!$isSupplier)
                                 <td>
                                     <a href="{{url('suppliers/trans/quick/' . $op->SPTR_SUPP_ID)}}">
                                         {{$op->SUPP_NAME}}
                                     </a>
                                 </td>
+                                @endif
                                 <td>
                                     <?php 
                                         $commentArr = explode(' ', $op->SPTR_CMNT) ;
@@ -61,6 +69,20 @@
                             </tr> 
                             @endforeach
                         </tbody>
+                        @if($isSupplier)
+                        <tfoot>
+                            <tr>
+                                <td colspan=2><strong>Totals</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_PRCH_BLNC, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_CASH_BLNC, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_NTPY_BLNC, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_DISC_BLNC, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_RTRN_BLNC, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_BLNC, 2)}}</strong></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                        @endif
                     </table>
                 </div>
             </div>
