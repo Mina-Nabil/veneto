@@ -107,11 +107,11 @@ class Clients extends Model
 
                     if($cash > 0){
                         $clientDetails = Clients::getClient($client);
-                        Cash::insertTran("Client ({$clientDetails->CLNT_NAME}) Transaction# " . $id  . " Operation Comment: " . $comment , $cash, 0);
+                        Cash::insertTran("Client ({$clientDetails->CLNT_NAME}) TRN.# " . $id , $cash, 0, $comment);
                     }
                     if($notespay > 0){
                         $clientDetails = Clients::getClient($client);
-                        Bank::insertTran("Client ({$clientDetails->CLNT_NAME}) Transaction# " . $id . " Operation Comment: " . $comment , $notespay, 0);
+                        Bank::insertTran("Client ({$clientDetails->CLNT_NAME}) TRN.# " . $id , $notespay, 0, $comment);
                     }
                     
 

@@ -106,12 +106,12 @@ class Suppliers extends Model
                     ]);
 
                     if($cash > 0){
-                        $supplier = Supplier::getSupplier($supp);
-                        Cash::insertTran("Supplier ($supplier->SUPP_NAME) Transaction# " . $id . "Operation Comment: " . $comment, 0, $cash);
+                        $supplier = self::getSupplier($supp);
+                        Cash::insertTran("Supplier ($supplier->SUPP_NAME) TRN.# " . $id , 0, $cash, $comment);
                     }
                     if($notespay > 0){
-                        $supplier = Supplier::getSupplier($supp);
-                        Bank::insertTran("Supplier ($supplier->SUPP_NAME) Transaction# " . $id . "Operation Comment: " . $comment, 0, $notespay);
+                        $supplier = self::getSupplier($supp);
+                        Bank::insertTran("Supplier ($supplier->SUPP_NAME) TRN.# " . $id, 0, $notespay, $comment);
                     }
                     
 

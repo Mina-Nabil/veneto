@@ -12,7 +12,7 @@ class Finished extends Model
     public static function getAvailable(){
         return DB::table("finished")->join("models", "FNSH_MODL_ID", '=', 'models.id')
                             ->join("brands", "FNSH_BRND_ID", '=', "brands.id")
-                            ->select("finished.*", "brands.BRND_NAME", "models.MODL_UNID")
+                            ->select("finished.*", "brands.BRND_NAME", "models.MODL_UNID", "models.MODL_IMGE")
                             ->where("FNSH_36_AMNT"  , '!=', '0')
                             ->orWhere("FNSH_38_AMNT"  , '!=', '0' )   
                             ->orWhere("FNSH_40_AMNT"  , '!=', '0' )   

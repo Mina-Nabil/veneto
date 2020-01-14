@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                                 <th>موديل</th>
+                                <th>صوره</th>
                                 <th>ماركه</th>
                                 <th>سعر</th>
                                 <th>36</th>
@@ -29,6 +30,11 @@
                             @foreach($finished as $row)
                             <tr>
                                 <td>{{$row->MODL_UNID}}</td>
+                                <td>
+                                    @if(isset($raw->MODL_IMGE))
+                                        <img src="{{ asset( 'storage/'. $raw->MODL_IMGE ) }}" width=50 height=50>
+                                    @endif
+                                </td>
                                 <td>{{$row->BRND_NAME}}</td>
                                 <td>{{$row->FNSH_PRCE}}</td>
                                 <td>{{$row->FNSH_36_AMNT}}</td>
