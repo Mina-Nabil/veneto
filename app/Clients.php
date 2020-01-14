@@ -54,7 +54,7 @@ class Clients extends Model
                                     ->select("client_trans.*", "clients.CLNT_NAME", "clients.CLNT_ARBC_NAME");
         if($clientID !== null)
             $query = $query->where("CLTR_CLNT_ID", $clientID);
-        return $query->orderBy('id', 'desc')->limit(500)->get();
+        return $query->orderBy('id', 'acs')->limit(500)->get();
         
     }
 
@@ -106,11 +106,11 @@ class Clients extends Model
                     ]);
 
                     if($cash > 0){
-                        $clientDetails = Clients::getClient($clientID);
+                        $clientDetails = Clients::getClient($client);
                         Cash::insertTran("Client ({$clientDetails->CLNT_NAME}) Transaction# " . $id  . " Operation Comment: " . $comment , $cash, 0);
                     }
                     if($notespay > 0){
-                        $clientDetails = Clients::getClient($clientID);
+                        $clientDetails = Clients::getClient($client);
                         Bank::insertTran("Client ({$clientDetails->CLNT_NAME}) Transaction# " . $id . " Operation Comment: " . $comment , $notespay, 0);
                     }
                     
