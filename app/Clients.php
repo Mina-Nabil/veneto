@@ -54,7 +54,7 @@ class Clients extends Model
                                     ->select("client_trans.*", "clients.CLNT_NAME", "clients.CLNT_ARBC_NAME");
         if($clientID !== null)
             $query = $query->where("CLTR_CLNT_ID", $clientID);
-        return $query->orderBy('id', 'acs')->limit(500)->get();
+        return $query->orderBy('id', 'asc')->limit(500)->get();
         
     }
 
