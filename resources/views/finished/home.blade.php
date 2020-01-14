@@ -31,8 +31,8 @@
                             <tr>
                                 <td>{{$row->MODL_UNID}}</td>
                                 <td>
-                                    @if(isset($raw->MODL_IMGE))
-                                        <img src="{{ asset( 'storage/'. $raw->MODL_IMGE ) }}" width=50 height=50>
+                                    @if(isset($row->MODL_IMGE))
+                                        <img src="{{ asset( 'storage/'. $row->MODL_IMGE ) }}" width=50 height=50>
                                     @endif
                                 </td>
                                 <td>{{$row->BRND_NAME}}</td>
