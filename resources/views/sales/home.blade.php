@@ -40,7 +40,7 @@
                                 <td>{{number_format($row->SALS_PAID)}}</td>
                                 <td>
                                 @if(isset($row->SALS_CMNT) && strcmp($row->SALS_CMNT, '')!=0 )
-                                    <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" 
+                                    <button type="button"  style="padding:.1rem" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" 
                                     data-content="{{$row->SALS_CMNT}}" data-original-title="Comment:">
                                 @endif
                                     <i class="far fa-list-alt" ></i>
@@ -48,11 +48,12 @@
                                 </td>
                                 <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button style="padding:.1rem .2rem" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Action
                                     </button>
                                     <div class="dropdown-menu">
                                         <button class="dropdown-item" data-toggle="modal" data-target="#addPay{{$row->id}}" >Add Payment</button>
+                                        <button class="dropdown-item" onclick="goto('{{url("sales/invoice/$row->id")}}')" >Invoice</button>
                                         <button class="dropdown-item" onclick="goto('{{url("sales/items/$row->id")}}')" >Show details</button>
 
                                     </div> 

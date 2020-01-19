@@ -14,7 +14,7 @@
                             <tr>
                                 <th>ماركه</th>
                                 <th>صنف</th>
-                                <th>موديل#</th>
+                                <th>موديل</th>
                                 <th>36</th>
                                 <th>38</th>
                                 <th>40</th>
@@ -27,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($items as $item)
+                            @foreach($items['data'] as $item)
                             <tr>
                                 <td>{{$item->BRND_NAME}}</td>
                                 <td>{{$item->MODL_UNID}}</td>
@@ -44,6 +44,20 @@
                             </tr> 
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan=3><strong>Totals</strong></td>
+                                <td><strong>{{$items['totals']->sold36}}</strong></td>
+                                <td><strong>{{$items['totals']->sold40}}</strong></td>
+                                <td><strong>{{$items['totals']->sold38}}</strong></td>
+                                <td><strong>{{$items['totals']->sold42}}</strong></td>
+                                <td><strong>{{$items['totals']->sold44}}</strong></td>
+                                <td><strong>{{$items['totals']->sold46}}</strong></td>
+                                <td><strong>{{$items['totals']->sold48}}</strong></td>
+                                <td><strong>{{$items['totals']->sold50}}</strong></td>
+                                <td><strong>{{$items['totals']->itemsCount}}</strong></td>
+                            </tr> 
+                        </tfoot>
                     </table>
                 </div>
             </div>

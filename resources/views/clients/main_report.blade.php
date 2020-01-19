@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($ops as $op)
+                            @foreach($ops['data'] as $op)
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
@@ -39,6 +39,18 @@
                             </tr> 
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td><strong>Totals</strong></td>
+                                <td><strong>{{number_format($ops['totals']->totalBalance - $ops['totals']->totalPurch + $ops['totals']->totalCash + $ops['totals']->totalDisc + $ops['totals']->totalNotes + $ops['totals']->totalReturn, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['totals']->totalPurch, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['totals']->totalCash, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['totals']->totalNotes, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['totals']->totalDisc, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['totals']->totalReturn, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['totals']->totalBalance, 2)}}</strong></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

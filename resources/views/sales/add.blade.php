@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<form id=myForm class="form pt-3" method="post" action="{{ $formURL }}" enctype="multipart/form-data" >
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">{{ $pageTitle }}</h4>
                 <h5 class="card-subtitle">{{ $pageDescription }}</h5>
-                <form id=myForm class="form pt-3" method="post" action="{{ $formURL }}" enctype="multipart/form-data" >
                 @csrf
 
                     <div class="col-lg-12">
@@ -23,38 +23,33 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-12">
-                        <label>Paid</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon11"><i class="ti-money"></i></span>
-                            </div>
-                            <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=paid value="{{ old('paid') ?? 0}}" required >
-                        </div>
-                        <small class="text-danger">{{$errors->first('paid')}}</small>
+                    <div class="row p-l-10 p-r-10 p-b-10">   
+                        <h5 class="card-title p-l-10">Items Added</h5>                                    
+                        <ul class="col-lg-12  list-group" id=itemsList>
+              
+        
+                        </ul>
                     </div>
-
-                    <div class="col-lg-12">
-                        <h5>Payment Type</h5>
-                        <div class="input-group mb-3">
-                            <select class="select form-control form-control-line" name=type  required >
-                                <option selected value=0>Cash</option>
-                                <option value=1>Cheque</option>
-                            </select>
-                        </div>
+                    <hr>
+                    <div class="row p-l-10 p-r-10">  
+                        <h5 class="col-lg-12 card-title p-l-10">Sales Summary</h5>
                     </div>
-
-
-                    <div class="col-lg-12">
-                        <label>Comment</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon11"><i class="ti-list"></i></span>
-                            </div>
-                            <input type="text" class="form-control"  name=comment  value="{{  old('comment')}}" >
+                    <div class="row p-l-20 p-r-20">  
+                        <div class="col-lg-4">
+                            <strong>Totals</strong>
                         </div>
+                        
+                        <div class="col-lg-4">
+                            <strong>Number of Items</strong>
+                            <p id=numberOfInv >0</p>
+                        </div>
+                        
+                        <div class="col-lg-4 p-r-20">
+                            <strong>Price</strong>
+                            <p id=totalPrice >0</p>
+                        </div>     
                     </div>
-
+                <hr>
 
                     <label class="nopadding" for="input-file-now-custom-1"><strong>Entry Details</strong></label>
                     <div class="row ">
@@ -67,7 +62,7 @@
                                         <div class="input-group mb-2">
                                             <select name=finished[] id=finished[] class="form-control select2  custom-select" required>
                                                 <option disabled hidden selected value="">Finished Inventory</option>
-                                                @foreach($items as $item)
+                                                @foreach($items['data'] as $item)
                                                 <option value="{{ $item->id }}">
                                                 {{$item->BRND_NAME}} - {{$item->MODL_UNID}} </option>
                                                 @endforeach 
@@ -111,13 +106,13 @@
                                     </div>
                                 </div>
                             </div>
+                       
                         </div>
                  
 
-                    <button type="submit" id=checker class="btn btn-success mr-2">Submit</button>
+                    
                     <button type="button" onclick="calculateTotals()" class="btn btn-info mr-2">Calculate</button>
                     <a href="{{url('rawinventory/cancel') }}" class="btn btn-dark">Cancel</a>
-                </form>
             </div>
         </div>
     </div>
@@ -127,34 +122,47 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Sales Summary</h4>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <strong>Totals</strong>
+                <h4 class="card-title">More Sales Details</h4>
+                <h5 class="card-subtitle">Values Set by default, change if neccessary</h5>
+                <div class="col-lg-12">
+                    <label>Paid</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon11"><i class="ti-money"></i></span>
+                        </div>
+                        <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=paid value="{{ old('paid') ?? 0}}" required >
                     </div>
+                    <small class="text-danger">{{$errors->first('paid')}}</small>
+                </div>
 
-                    <div class="col-lg-4">
-                        <strong>Number of Items</strong>
-                        <p id=numberOfInv >0</p>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <strong>Price</strong>
-                        <p id=totalPrice >0</p>
+                <div class="col-lg-12">
+                    <h5>Payment Type</h5>
+                    <div class="input-group mb-3">
+                        <select class="select form-control form-control-line" name=type  required >
+                            <option selected value=0>Cash</option>
+                            <option value=1>Cheque</option>
+                        </select>
                     </div>
                 </div>
-                <div class="row ">                                       
-                <ul class="col-lg-12 list-group" id=itemsList>
-      
 
-                </ul>
+
+                <div class="col-lg-12">
+                    <label>Comment</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon11"><i class="ti-list"></i></span>
+                        </div>
+                        <input type="text" class="form-control"  name=comment  value="{{  old('comment')}}" >
+                    </div>
+                </div>
+                <div class=p-10>
+                    <button type="submit" id=checker class="btn btn-success mr-2">&emsp;Submit&emsp;</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
+</form>
 <script>
 
 
@@ -178,7 +186,7 @@ function addToab() {
                                         <div class='input-group mb-2'>\
                                             <select name=finished[] class='select2 form-control custom-select' style='width: 100%; height:50px;' required>\
                                                 <option disabled selected hidden value='' >Finished Inventory</option>\
-                                                @foreach($items as $item)\
+                                                @foreach($items['data'] as $item)\
                                                 <option value='{{ $item->id }}'>\
                                                 {{$item->BRND_NAME}} - {{$item->MODL_UNID}} </option>\
                                                 @endforeach \

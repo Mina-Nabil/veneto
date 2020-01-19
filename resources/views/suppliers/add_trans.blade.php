@@ -13,8 +13,8 @@
                     <div class="form-group">
                         <label>مورد*</label>
                         <div class="input-group mb-3">
-                            <select name=supplier class="select2 form-control custom-select" style="width: 100%; height:36px;">
-                                <option disabled>Pick From Suppliers</option>
+                            <select name=supplier class="select2 form-control custom-select" style="width: 100%; height:36px;" required>
+                                <option selected disabled hidden value="">Pick From Suppliers</option>
                                 @foreach($suppliers as $supplier)
                                 <option value="{{ $supplier->id }}">{{$supplier->SUPP_NAME}}</option>
                                 @endforeach

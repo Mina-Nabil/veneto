@@ -61,7 +61,7 @@
                                 <td>{{number_format($op->SPTR_BLNC, 2)}}</td>
                                 <td>
                                     @if(isset($op->SPTR_CMNT) && strcmp($op->SPTR_CMNT, '')!=0 )
-                                        <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->SPTR_CMNT}}" data-original-title="Comment:">
+                                        <button type="button"  style="padding:.1rem"  class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->SPTR_CMNT}}" data-original-title="Comment:">
                                     @endif
                                         <i class="far fa-list-alt" ></i>
                                     </button>

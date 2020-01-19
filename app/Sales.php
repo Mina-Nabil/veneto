@@ -21,7 +21,8 @@ class Sales extends Model
     }
 
     public static function getAllSoldItems(){
-        return DB::table("sales_items")
+        $ret = array();
+        $ret['data'] = DB::table("sales_items")
                     ->join('sales', 'SLIT_SALS_ID', '=', 'sales.id')
                     ->join("finished", "SLIT_FNSH_ID", '=', 'finished.id')
                     ->join("models", "FNSH_MODL_ID", '=', 'models.id')
@@ -40,6 +41,27 @@ class Sales extends Model
                     DB::raw(" ( (SUM(FNSH_36_SOLD)) + (SUM(FNSH_38_SOLD)) + (SUM(FNSH_40_SOLD)) + (SUM(FNSH_42_SOLD)) + (SUM(FNSH_44_SOLD)) + (SUM(FNSH_46_SOLD)) + (SUM(FNSH_48_SOLD)) + (SUM(FNSH_50_SOLD)) ) as itemsCount"))
                     ->groupBy('finished.id')
                     ->get();
+
+        $ret['totals'] = DB::table("sales_items")
+                    ->join('sales', 'SLIT_SALS_ID', '=', 'sales.id')
+                    ->join("finished", "SLIT_FNSH_ID", '=', 'finished.id')
+                    ->join("models", "FNSH_MODL_ID", '=', 'models.id')
+                    ->join("types", "MODL_TYPS_ID", '=', 'types.id')
+                    ->join("raw", "TYPS_RAW_ID", '=', 'raw.id')
+                    ->join("brands", "FNSH_BRND_ID", '=', "brands.id") 
+                    ->select("sales.*", "brands.BRND_NAME", "models.MODL_UNID", "models.MODL_IMGE", "types.TYPS_NAME", "raw.RAW_NAME" ,
+                    DB::raw(" (SUM(FNSH_36_SOLD)) as sold36"),
+                    DB::raw(" (SUM(FNSH_38_SOLD)) as sold38"),
+                    DB::raw(" (SUM(FNSH_40_SOLD)) as sold40"),
+                    DB::raw(" (SUM(FNSH_42_SOLD)) as sold42"),
+                    DB::raw(" (SUM(FNSH_44_SOLD)) as sold44"),
+                    DB::raw(" (SUM(FNSH_46_SOLD)) as sold46"),
+                    DB::raw(" (SUM(FNSH_48_SOLD)) as sold48"),
+                    DB::raw(" (SUM(FNSH_50_SOLD)) as sold50"),
+                    DB::raw(" ( (SUM(FNSH_36_SOLD)) + (SUM(FNSH_38_SOLD)) + (SUM(FNSH_40_SOLD)) + (SUM(FNSH_42_SOLD)) + (SUM(FNSH_44_SOLD)) + (SUM(FNSH_46_SOLD)) + (SUM(FNSH_48_SOLD)) + (SUM(FNSH_50_SOLD)) ) as itemsCount"))
+                    ->get()->first();
+
+        return $ret;
     }
 
     public static function getSalesByClient($clientID){
@@ -79,7 +101,8 @@ class Sales extends Model
     public static function getOneSalesOp($id){
         $retArr = array();
         $retArr ['sales'] = DB::table("sales")->join('clients', 'SALS_CLNT_ID', '=', 'clients.id')
-                                ->select("sales.*", "clients.CLNT_NAME")
+                                ->select("sales.*", "clients.CLNT_NAME", "clients.CLNT_ADRS", "clients.CLNT_TELE")
+                                ->selectRaw("DATE_FORMAT(sales.SALS_DATE, '%Y-%m-%d') as formatedDate")
                                 ->where("sales.id", $id)->get()->first();
 
         $retArr['items']   = DB::table("sales_items")
@@ -94,11 +117,11 @@ class Sales extends Model
                                     ->get();
 
         
-        $retArr['totalNum']  = DB::table("sales_items")->select(DB::raw("SUM(FNSH_36_SOLD + FNSH_38_SOLD + FNSH_40_SOLD + FNSH_42_SOLD 
-                                                                + FNSH_44_SOLD + FNSH_46_SOLD + FNSH_48_SOLD +  FNSH_50_SOLD) as totalNum"))
-                                                        ->where("SLIT_SALS_ID", $id)
-                                                        ->get()
-                                                        ->first()->totalNum;
+        $retArr['totalNum']  = DB::table("sales_items")
+                                ->select(DB::raw("SUM(FNSH_36_SOLD + FNSH_38_SOLD + FNSH_40_SOLD + FNSH_42_SOLD + FNSH_44_SOLD + FNSH_46_SOLD + FNSH_48_SOLD +  FNSH_50_SOLD) as totalNum"))
+                                ->where("SLIT_SALS_ID", $id)
+                                ->get()
+                                ->first()->totalNum;
         return $retArr;
                          
     }
@@ -114,13 +137,13 @@ class Sales extends Model
                 "SALS_TOTL_PRCE" => $total
             ]);
 
-            Clients::insertTrans($clientID, $total, $paid, 0, 0, 0, "Sales " . $id);
+            Clients::insertTrans($clientID, $total, $paid, 0, 0, 0, "Sales " . $id . " Comment: $comment");
 
            if($paid > 0)
              if($isbank){
-                Bank::insertTran("Sales " . $id, $paid, 0, "Initial Payment for Sales " . $id);
+                Bank::insertTran("Sales " . $id, $paid, 0, "Initial Payment for Sales " . $id . " Sales comment: " . $comment);
             } else {
-                Cash::insertTran("Sales " . $id, $paid, 0, "Initial Payment for Sales " . $id);
+                Cash::insertTran("Sales " . $id, $paid, 0, "Initial Payment for Sales " . $id . " Sales comment: " . $comment);
             }
 
             foreach($itemsArr as $item){

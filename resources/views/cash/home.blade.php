@@ -31,7 +31,7 @@
                                 <td>{{number_format($op->CASH_BLNC, 2)}}</td>
                                 <td>
                                     @if(isset($op->CASH_CMNT) && strcmp($op->CASH_CMNT, '')!=0 )
-                                        <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->CASH_CMNT}}" data-original-title="Comment:">
+                                        <button type="button"  style="padding:.1rem"  class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->CASH_CMNT}}" data-original-title="Comment:">
                                     @endif
                                     <i class="fas fa-list-alt"></i>
                                     </button>

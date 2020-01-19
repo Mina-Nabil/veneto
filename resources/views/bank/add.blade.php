@@ -16,7 +16,11 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="fas fa-list"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Transaction Example" name=name required>
+                            <input type="text" class="form-control" placeholder="Transaction Example" name=name list=transTypes required>
+                            <datalist id=transTypes>
+                                <option value="مرتبات"></option>
+                                <option value="مصاريف عرض"></option>
+                            </datalist>
                         </div>
                         <small class="text-danger">{{$errors->first('name')}}</small>
                     </div>

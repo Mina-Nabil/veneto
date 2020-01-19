@@ -36,7 +36,7 @@
                                 <td>{{$mod->TYPS_NAME}}</td>
                                 <td>
                                 @if(isset($mod->MODL_CMNT) && strcmp($mod->MODL_CMNT, '')!=0 )
-                                    <button type="button" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$mod->MODL_CMNT}}" data-original-title="{{$mod->MODL_NAME}}">
+                                    <button type="button"  style="padding:.1rem" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$mod->MODL_CMNT}}" data-original-title="{{$mod->MODL_NAME}}">
                                 @endif
                                         {{$mod->MODL_NAME}}
                                 </button>

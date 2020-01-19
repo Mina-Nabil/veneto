@@ -8,6 +8,8 @@ use App\Clients;
 use App\Sales;
 use App\Finished;
 
+use convert_ar ;
+
 class SalesController extends Controller
 {
     public function __construct()
@@ -40,6 +42,26 @@ class SalesController extends Controller
     public function sales($salesID){
         $data = Sales::getOneSalesOp($salesID);
         return view("sales.operation", $data);
+    }
+
+    public function invoice($salesID){
+        $data = Sales::getOneSalesOp($salesID);
+        $numberStr = number_format($data['sales']->SALS_TOTL_PRCE, 2);
+        $numArr = explode('.', $numberStr);
+        $decimal = str_replace(",", "", $numArr[1]);
+        $wholeNum = str_replace(",", "", $numArr[0]);
+        $wholeConverter = new convert_ar($wholeNum, "male");
+        $decimalConverter = new convert_ar($decimal, "male");
+
+        $data['totalInArabic'] = $wholeConverter->convert_number() . " جنيها مصريا ";
+        
+        if($decimal != "00") {
+            $data['totalInArabic'] .= " و " . $decimalConverter->convert_number() . " قرشا فقط لا غير" ;
+        } else {
+            $data['totalInArabic'] .= " فقط لا غير " ;
+        }
+        
+        return view("sales.invoice", $data);
     }
 
     public function addPage(){

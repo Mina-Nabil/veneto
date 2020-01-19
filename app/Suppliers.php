@@ -36,8 +36,9 @@ class Suppliers extends Model
 
 
     static function getTotals($from, $to){
+        $ret = array();
 
-        return  DB::table("supplier_trans")->join('suppliers', "SPTR_SUPP_ID", "=", "suppliers.id")
+        $ret['data'] =   DB::table("supplier_trans")->join('suppliers', "SPTR_SUPP_ID", "=", "suppliers.id")
                                             ->select( "suppliers.SUPP_NAME", "suppliers.SUPP_BLNC", "suppliers.id")
                                             ->selectRaw("SUM(SPTR_CASH_AMNT) as totalCash, SUM(SPTR_PRCH_AMNT) as totalPurch, 
                                                          SUM(SPTR_DISC_AMNT) as totalDisc, SUM(SPTR_RTRN_AMNT) as totalReturn, SUM(SPTR_NTPY_AMNT) as totalNotes")
@@ -46,7 +47,16 @@ class Suppliers extends Model
                                 ["SPTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
                             ])->groupBy("SPTR_SUPP_ID")->get();
 
-    }
+        $ret['totals'] = DB::table("supplier_trans")->join('suppliers', "SPTR_SUPP_ID", "=", "suppliers.id")
+                                ->selectRaw("SUM(SPTR_CASH_AMNT) as totalCash, SUM(SPTR_PRCH_AMNT) as totalPurch, SUM(DISTINCT suppliers.SUPP_BLNC) as totalBalance, 
+                                            SUM(SPTR_DISC_AMNT) as totalDisc, SUM(SPTR_RTRN_AMNT) as totalReturn, SUM(SPTR_NTPY_AMNT) as totalNotes")
+                                ->where([
+                                ["SPTR_DATE", '>=', $from],
+                                ["SPTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
+                                ])->get()->first();                          
+        return $ret;
+
+        }
 
     ///////////////////Transactions//////////////////////
     static function getTrans($suppID=null){
@@ -54,7 +64,7 @@ class Suppliers extends Model
                                     ->select("supplier_trans.*", "suppliers.SUPP_NAME", "suppliers.SUPP_ARBC_NAME");
         if($suppID !== null)
             $query = $query->where("SPTR_SUPP_ID", $suppID);
-        return $query->orderBy('id', 'desc')->limit(500)->get();
+        return $query->orderBy('id', 'asc')->limit(500)->get();
         
     }
 

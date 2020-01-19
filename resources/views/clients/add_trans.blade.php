@@ -13,8 +13,8 @@
                     <div class="form-group">
                         <label>عميل*</label>
                         <div class="input-group mb-3">
-                            <select name=client class="select2 form-control custom-select" style="width: 100%; height:36px;">
-                                <option disabled>Pick From Clients</option>
+                            <select name=client class="select2 form-control custom-select" style="width: 100%; height:36px;" required>
+                                <option disabled hidden selected value="">Pick From Clients</option>
                                 @foreach($clients as $client)
                                 <option value="{{ $client->id }}">{{$client->CLNT_NAME}}</option>
                                 @endforeach

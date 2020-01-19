@@ -37,7 +37,8 @@ class Clients extends Model
 
     static function getTotals($from, $to){
 
-        return  DB::table("client_trans")->join('clients', "CLTR_CLNT_ID", "=", "clients.id")
+        $ret = array();
+        $ret['data'] = DB::table("client_trans")->join('clients', "CLTR_CLNT_ID", "=", "clients.id")
                                             ->select( "clients.CLNT_NAME", "clients.CLNT_BLNC", "clients.id")
                                             ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, 
                                                          SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
@@ -46,6 +47,15 @@ class Clients extends Model
                                 ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
                             ])->groupBy("CLTR_CLNT_ID")->get();
 
+        $ret['totals'] = DB::table("client_trans")->join('clients', "CLTR_CLNT_ID", "=", "clients.id")
+                            ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, SUM(DISTINCT clients.CLNT_BLNC) as totalBalance, 
+                                        SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
+                            ->where([
+                                ["CLTR_DATE", '>=', $from],
+                                ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
+                            ])->get()->first();  
+        
+        return $ret;
     }
 
     ///////////////////Transactions//////////////////////
