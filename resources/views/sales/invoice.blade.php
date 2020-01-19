@@ -62,7 +62,7 @@
                                 @endforeach
 
                                 @for ($i ; $i< 15 ; $i++)
-                                <tr style="border-top: 2px solid #141415;">
+                                <tr style="font-size: larger;border-top: 2px solid #141415;">
                                     <td><div class="m-t-25"></div></td>
                                     <td><div class="m-t-25"></div></td>
                                     <td><div class="m-t-25"></div></td>
