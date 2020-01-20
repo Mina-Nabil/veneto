@@ -30,10 +30,7 @@
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-bar-chart"></i></span>
                             </div>
                             <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=balance aria-label="Client Balance" aria-describedby="basic-addon11" value="{{ (isset($client)) ? $client->CLNT_BLNC : old('balance')}}" 
-                            <!-- @if(isset($client))
-                            readonly
-                            @endif
-                            required -->
+                            
                             >
                         </div>
                         <small class="text-danger">{{$errors->first('balance')}}</small>
