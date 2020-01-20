@@ -59,8 +59,15 @@
                                 <td>
                                     <?php 
                                         $salesArr = explode(' ', $op->CLTR_CMNT) ;
-                                    ?>
-                                        @if($salesArr[0]=='Sales' && is_numeric($salesArr[1]) && (!isset($salesArr[2]) || $salesArr[2]=='Comment:')  )
+                                        if(isset($op->CLTR_DESC)){
+                                            $descArr = explode(' ', $op->CLTR_CMNT) ;
+                                        }
+                                    ?>  
+                                        @if(isset($descArr) && $descArr[0]=='Sales' && is_numeric($descArr[1]))
+                                            <a href="{{url('/sales/items/' . $descArr[1]) }}">
+                                                {{$descArr[1]}}
+                                            </a>
+                                        @elseif($salesArr[0]=='Sales' && is_numeric($salesArr[1]) && (!isset($salesArr[2]) || $salesArr[2]=='Comment:')  )
                                             <a href="{{url('/sales/items/' . $salesArr[1]) }}">
                                                 {{$salesArr[1]}}
                                             </a>

@@ -167,16 +167,18 @@ class RawInventory extends Model
 
     static function insertEntry($entryArr, $totals, $tranNumber){
         DB::transaction(function () use ($entryArr, $totals, $tranNumber){
+            $totalAmount = 0;
             foreach($entryArr as $entry){
                 $modelID = Models::insertModel($entry['name'], $entry['type'], $entry['color'], $entry['supplier'],
                                                 $entry['price'], $entry['photo'], $entry['serial'], $entry['comment']);
 
                 foreach($entry['items'] as $key => $amount){
                     self::insert($modelID, $amount, $tranNumber);
+                    $totalAmount += $amount;
                 }
             }
 
-            Suppliers::insertTrans($entry['supplier'], $totals['totalPrice'], 0, 0, 0, 0, "Entry Serial " . $tranNumber);
+            Suppliers::insertTrans($entry['supplier'], $totals['totalPrice'], 0, 0, 0, 0, "Inventory Entry - Total Number of items entered: " . $totalAmount , "Entry Serial " . $tranNumber);
         });
     }
 

@@ -45,11 +45,17 @@
                                 <td>
                                     <?php 
                                         $commentArr = explode(' ', $op->SPTR_CMNT) ;
+                                        if(isset($op->SPTR_DESC))
+                                            $descArr = explode(' ', $op->SPTR_DESC) ;
                                     ?>
-                                    @if( $commentArr[0] == "Entry"  && $commentArr[1] == "Serial" && is_numeric($commentArr[2]) )
-                                    <a href="{{url('rawinventory/bytrans/' . $commentArr[2])}}"> 
-                                        {{$commentArr[2]}}
-                                    <a>
+                                    @if( isset($descArr) && $descArr[0] == "Entry"  && $descArr[1] == "Serial" && is_numeric($descArr[2]) )
+                                        <a href="{{url('rawinventory/bytrans/' . $descArr[2])}}"> 
+                                            {{$descArr[2]}}
+                                        <a>
+                                    @elseif( $commentArr[0] == "Entry"  && $commentArr[1] == "Serial" && is_numeric($commentArr[2]) )
+                                        <a href="{{url('rawinventory/bytrans/' . $commentArr[2])}}"> 
+                                            {{$commentArr[2]}}
+                                        <a>
                                     @endif
 
                                 </td>

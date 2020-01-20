@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                                 <th>تاريخ</th>
+                                <th>وصف</th>
                                 <th>عمليه شراء</th>
                                 <th>مشتريات</th>
                                 <th>نقديه</th>
@@ -41,6 +42,7 @@
                                     @endif
 
                                 </td>
+                                <td>{{$op->SPTR_DESC}}</td>
                                 <td>{{number_format($op->SPTR_PRCH_AMNT, 2)}}</td>
                                 <td>{{number_format($op->SPTR_CASH_AMNT, 2)}}</td>
                                 <td>{{number_format($op->SPTR_NTPY_AMNT, 2)}}</td>

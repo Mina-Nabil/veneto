@@ -83,8 +83,8 @@ class ClientsController extends Controller
     
     function insertTrans(Request $request){
 
-        Clients::insertTrans( $request->client, $request->sales, $request->cash, 
-                                    $request->notes, $request->disc, $request->return, $request->comment);
+        Clients::insertTrans( $request->client, $request->sales, $request->cash,  $request->notes,
+                              $request->disc, $request->return, $request->comment, $request->desc);
         
         return redirect("clients/trans/quick");
 

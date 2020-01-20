@@ -72,7 +72,7 @@ class Clients extends Model
         return DB::table("client_trans")->where("CLTR_CLNT_ID", $clientID)->orderBy('id', 'desc')->first();
     }
 
-    static function insertTrans($client, $sales, $cash, $notespay, $discount, $return, $comment){
+    static function insertTrans($client, $sales, $cash, $notespay, $discount, $return, $comment, $desc=null){
         
         $clientLastTrans  = self::getLastTransaction($client);
         if($clientLastTrans !== null) {
@@ -93,7 +93,7 @@ class Clients extends Model
         }
 
         DB::transaction(function () use ($client, $sales, $cash, $notespay, $discount, $return, $comment,
-                                        $cashBalance, $discBalance, $salsBalance, $notesBalance, $returnBalance, $oldBalance)
+                                        $cashBalance, $discBalance, $salsBalance, $notesBalance, $returnBalance, $oldBalance, $desc)
                 {
 
                     $newBalance     =   $oldBalance + $sales - $cash - $notespay - $return - $discount;
@@ -112,7 +112,8 @@ class Clients extends Model
                         "CLTR_RTRN_BLNC"    => (double) $returnBalance + $return,
                         "CLTR_BLNC"         => $newBalance,
                         "CLTR_Date"         => date("Y-m-d H:i:s"),
-                        "CLTR_CMNT"         =>  $comment
+                        "CLTR_CMNT"         =>  $comment,
+                        "CLTR_DESC"         =>  $desc
                     ]);
 
                     if($cash > 0){

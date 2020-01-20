@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                                 <th>تاريخ</th>
+                                <th>وصف</th>
                                 <th>عمليه بيع</th>
                                 <th>مبيعات</th>
                                 <th>نقديه</th>
@@ -28,6 +29,7 @@
                                 <td>                                
                                     {{date_format(date_create($op->CLTR_DATE), "d-m-Y")}}
                                 </td>
+                                <td>{{$op->CLTR_DESC}}</td>
                                 <td>
                                     <?php 
                                         $salesArr = explode(' ', $op->CLTR_CMNT) ;
@@ -37,7 +39,7 @@
                                                 {{$salesArr[1]}}
                                             </a>
                                         @endif
-                                </td>
+                                </td>                              
                                 <td>{{number_format($op->CLTR_SALS_AMNT, 2)}}</td>
                                 <td>{{number_format($op->CLTR_CASH_AMNT, 2)}}</td>
                                 <td>{{number_format($op->CLTR_NTPY_AMNT, 2)}}</td>
@@ -57,7 +59,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan=2><strong>Start Balance: {{number_format($startBalance, 1)}}</strong></td>
+                                <td colspan=3><strong>Start Balance: {{number_format($startBalance, 1)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalPurch, 2)}} </strong></td>
                                 <td><strong>{{number_format($totals->totalCash, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalNotes, 2)}}</strong></td>

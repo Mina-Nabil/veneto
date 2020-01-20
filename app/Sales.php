@@ -137,7 +137,7 @@ class Sales extends Model
                 "SALS_TOTL_PRCE" => $total
             ]);
 
-            Clients::insertTrans($clientID, $total, $paid, 0, 0, 0, "Sales " . $id . " Comment: $comment");
+            Clients::insertTrans($clientID, $total, $paid, 0, 0, 0, "Sales Comment: $comment", "Sales " . $id);
 
            if($paid > 0)
              if($isbank){
@@ -173,9 +173,9 @@ class Sales extends Model
             DB::table("sales")->where('id', $sales)->increment("SALS_PAID", $payment);
             $clientID = self::getClientID($sales);
             if($isbank)
-                Clients::insertTrans($clientID, 0, $payment, 0, 0, 0, "Payment for Sales " . $sales);
+                Clients::insertTrans($clientID, 0, $payment, 0, 0, 0, "Payment added for Specific Sales Operation " . $sales, "Sales " . $sales);
             else
-                Clients::insertTrans($clientID, 0, 0, $payment, 0, 0, "Payment for Sales " . $sales);
+                Clients::insertTrans($clientID, 0, 0, $payment, 0, 0, "Payment added for Specific Sales Operation " . $sales, "Sales " . $sales);
 
         });
     }

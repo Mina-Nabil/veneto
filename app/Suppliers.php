@@ -72,7 +72,7 @@ class Suppliers extends Model
         return DB::table("supplier_trans")->where("SPTR_SUPP_ID", $suppID)->orderBy('id', 'desc')->first();
     }
 
-    static function insertTrans($supp, $purchase, $cash, $notespay, $discount, $return, $comment){
+    static function insertTrans($supp, $purchase, $cash, $notespay, $discount, $return, $comment, $desc=null){
         
         $suppLastTrans  = self::getLastTransaction($supp);
         if($suppLastTrans !== null) {
@@ -93,7 +93,7 @@ class Suppliers extends Model
         }
 
         DB::transaction(function () use ($supp, $purchase, $cash, $notespay, $discount, $return, $comment,
-                                        $cashBalance, $discBalance, $prchBalance, $notesBalance, $returnBalance, $oldBalance)
+                                        $cashBalance, $discBalance, $prchBalance, $notesBalance, $returnBalance, $oldBalance, $desc)
                 {
 
                     $newBalance     =   $oldBalance + $purchase - $cash - $notespay - $return - $discount;
@@ -112,7 +112,8 @@ class Suppliers extends Model
                         "SPTR_RTRN_BLNC"    => (double) $returnBalance + $return,
                         "SPTR_BLNC"         => $newBalance,
                         "SPTR_Date"         => date("Y-m-d H:i:s"),
-                        "SPTR_CMNT"         =>  $comment
+                        "SPTR_CMNT"         =>  $comment,
+                        "SPTR_DESC"         =>  $desc
                     ]);
 
                     if($cash > 0){

@@ -84,7 +84,7 @@ class SuppliersController extends Controller
     function insertTrans(Request $request){
 
         Suppliers::insertTrans( $request->supplier, $request->purchase, $request->cash, 
-                                    $request->notes, $request->disc, $request->return, $request->comment);
+                                $request->notes, $request->disc, $request->return, $request->comment, $request->desc);
         
         return redirect("suppliers/trans/quick");
 

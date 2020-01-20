@@ -24,6 +24,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label>وصف العمليه</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-list"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name=desc >
+                        </div>
+                        <small class="text-danger">{{$errors->first('desc')}}</small>
+                    </div>
+
+                    <div class="form-group">
                         <label>مبيعات</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">

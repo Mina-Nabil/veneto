@@ -47,9 +47,9 @@
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-bar-chart"></i></span>
                             </div>
                             <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=balance aria-label="Supplier Balance" aria-describedby="basic-addon11" value="{{ (isset($supplier)) ? $supplier->SUPP_BLNC : old('balance')}}" required
-                            @if(isset($supplier))
+                            <!-- @if(isset($supplier))
                             readonly
-                            @endif
+                            @endif -->
                             >
                         </div>
                         <small class="text-danger">{{$errors->first('balance')}}</small>
