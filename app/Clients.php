@@ -23,13 +23,19 @@ class Clients extends Model
                             ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
                         ])->orderBy('id', 'asc')->get();
 
-        $ret['totals']  =   DB::table("client_trans")->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, 
+        $ret['totals']  =   DB::table("client_trans")->selectRaw(" SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, 
                                                                     SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
                             ->where([
                                 ["CLTR_CLNT_ID", '=', $clientID],
                                 ["CLTR_DATE", '>=', $from],
                                 ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
                             ])->groupBy("CLTR_CLNT_ID")->first();
+
+        $ret['balance'] =   DB::table("client_trans")->select("CLTR_BLNC")->where([
+            ["CLTR_CLNT_ID", '=', $clientID],
+            ["CLTR_DATE", '>=', $from],
+            ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]])
+            ->orderBy('id', 'desc')->first()->CLTR_BLNC;           
 
         return $ret;
     }

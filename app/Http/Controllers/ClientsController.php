@@ -44,6 +44,7 @@ class ClientsController extends Controller
 
         $data['totals'] = $data['arr']['totals'];
         $data['ops']    = $data['arr']['trans'];
+        $data['balance']    = $data['arr']['balance'];
 
         if($data['totals'] == null){
             $data['totals'] = (object)[
@@ -58,7 +59,7 @@ class ClientsController extends Controller
         $data['reportTitle'] = $data['client']->CLNT_NAME . " Account Statement";
         $data['reportDesc'] = $data['client']->CLNT_NAME . " Current Balance is " . $data['client']->CLNT_BLNC;
 
-        $data['startBalance'] = $data['client']->CLNT_BLNC - $data['totals']->totalPurch + $data['totals']->totalDisc + $data['totals']->totalCash +
+        $data['startBalance'] = $data['balance'] - $data['totals']->totalPurch + $data['totals']->totalDisc + $data['totals']->totalCash +
                                 $data['totals']->totalReturn + $data['totals']->totalNotes ;
 
         return view('clients.accnt_stat', $data);
