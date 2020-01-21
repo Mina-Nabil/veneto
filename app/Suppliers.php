@@ -35,7 +35,7 @@ class Suppliers extends Model
             ["SPTR_SUPP_ID", '=', $suppID],
             ["SPTR_DATE", '>=', $from],
             ["SPTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]])
-            ->orderBy('id', 'desc')->first()->SPTR_BLNC;  
+            ->orderBy('id', 'desc')->first()->SPTR_BLNC ?? 0;   
 
         return $ret;
     }

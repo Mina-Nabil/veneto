@@ -35,7 +35,7 @@ class Clients extends Model
             ["CLTR_CLNT_ID", '=', $clientID],
             ["CLTR_DATE", '>=', $from],
             ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]])
-            ->orderBy('id', 'desc')->first()->CLTR_BLNC;           
+            ->orderBy('id', 'desc')->first()->CLTR_BLNC ?? 0;           
 
         return $ret;
     }

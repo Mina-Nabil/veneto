@@ -44,6 +44,7 @@ class SuppliersController extends Controller
 
         $data['totals'] = $data['arr']['totals'];
         $data['ops']    = $data['arr']['trans'];
+        $data['balance']    = $data['arr']['balance'];
 
         if($data['totals'] == null){
             $data['totals'] = (object)[
@@ -58,7 +59,7 @@ class SuppliersController extends Controller
         $data['reportTitle'] = $data['supplier']->SUPP_NAME . " Account Statement";
         $data['reportDesc'] = $data['supplier']->SUPP_NAME . " Current Balance is " . $data['supplier']->SUPP_BLNC;
 
-        $data['startBalance'] = $data['supplier']->SUPP_BLNC - $data['totals']->totalPurch + $data['totals']->totalDisc + $data['totals']->totalCash +
+        $data['startBalance'] = $data['balance'] - $data['totals']->totalPurch + $data['totals']->totalDisc + $data['totals']->totalCash +
                                 $data['totals']->totalReturn + $data['totals']->totalNotes ;
 
         return view('suppliers.accnt_stat', $data);
