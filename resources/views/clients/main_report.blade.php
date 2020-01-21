@@ -39,7 +39,7 @@
                             </tr> 
                             @endforeach
                         </tbody>
-                        if(isset($ops['totals']))
+                        @if(isset($ops['totals']))
                         <tfoot>
                             <tr>
                                 <td><strong>Totals</strong></td>
