@@ -69,7 +69,7 @@
                                 <td><strong>{{number_format($totals->totalNotes, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalDisc, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalReturn, 2)}}</strong></td>
-                                <td><strong>End: {{number_format($supplier->SUPP_BLNC, 2)}}</strong></td>
+                                <td><strong>End: {{number_format($balance, 2)}}</strong></td>
                                 <td></td>
                             </tr>
                         </tfoot>

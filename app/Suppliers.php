@@ -31,6 +31,12 @@ class Suppliers extends Model
                                 ["SPTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
                             ])->groupBy("SPTR_SUPP_ID")->first();
 
+        $ret['balance'] =   DB::table("supplier_trans")->select("SPTR_BLNC")->where([
+            ["SPTR_SUPP_ID", '=', $suppID],
+            ["SPTR_DATE", '>=', $from],
+            ["SPTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]])
+            ->orderBy('id', 'desc')->first()->SPTR_BLNC;  
+
         return $ret;
     }
 
