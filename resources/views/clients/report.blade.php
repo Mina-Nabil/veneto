@@ -90,7 +90,7 @@
                             </tr> 
                             @endforeach
                         </tbody>
-                        @if($isClient)
+                        @if($isClient && isset($totals))
                         <tfoot>
                         <tr>
                             <td colspan=2><strong>Totals</strong></td>
