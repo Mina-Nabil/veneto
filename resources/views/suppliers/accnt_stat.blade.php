@@ -63,7 +63,7 @@
                         @if(isset($totals))
                         <tfoot>
                             <tr>
-                                <td colspan=2><strong>Start Balance: {{number_format($startBalance, 1)}}</strong></td>
+                                <td colspan=3><strong>Start Balance: {{number_format($startBalance, 1)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalPurch, 2)}} </strong></td>
                                 <td><strong>{{number_format($totals->totalCash, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalNotes, 2)}}</strong></td>
