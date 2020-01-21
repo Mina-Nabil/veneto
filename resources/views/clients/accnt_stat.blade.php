@@ -60,13 +60,13 @@
                         @if(isset($totals))
                         <tfoot>
                             <tr>
-                                <td colspan=3><strong>Start Balance: {{number_format($balance, 1)}}</strong></td>
+                                <td colspan=3><strong>Start Balance: {{number_format($startBalance, 1)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalPurch, 2)}} </strong></td>
                                 <td><strong>{{number_format($totals->totalCash, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalNotes, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalDisc, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalReturn, 2)}}</strong></td>
-                                <td><strong>End: {{number_format($client->CLNT_BLNC, 2)}}</strong></td>
+                                <td><strong>End: {{number_format($balance, 2)}}</strong></td>
                                 <td></td>
                             </tr>
                         </tfoot>
