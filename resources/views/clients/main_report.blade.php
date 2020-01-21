@@ -39,6 +39,7 @@
                             </tr> 
                             @endforeach
                         </tbody>
+                        if(isset($ops['totals']))
                         <tfoot>
                             <tr>
                                 <td><strong>Totals</strong></td>
@@ -51,6 +52,7 @@
                                 <td><strong>{{number_format($ops['totals']->totalBalance, 2)}}</strong></td>
                             </tr>
                         </tfoot>
+                        @endif
                     </table>
                 </div>
             </div>

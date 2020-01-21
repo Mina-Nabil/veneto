@@ -75,7 +75,7 @@
                             </tr> 
                             @endforeach
                         </tbody>
-                        @if($isSupplier)
+                        @if($isSupplier && isset($totals))
                         <tfoot>
                             <tr>
                                 <td colspan=2><strong>Totals</strong></td>

@@ -60,6 +60,7 @@
                             @endforeach
                             
                         </tbody>
+                        @if(isset($totals))
                         <tfoot>
                             <tr>
                                 <td colspan=2><strong>Start Balance: {{number_format($startBalance, 1)}}</strong></td>
@@ -72,6 +73,7 @@
                                 <td></td>
                             </tr>
                         </tfoot>
+                        @endif
                     </table>
                 </div>
             </div>
