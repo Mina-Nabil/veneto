@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ Session::token() }}"> 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/dark-logo.png') }}">
     <title>{{  config('APP_NAME', 'Via Veneto') }}</title>
@@ -25,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allerta+Stencil" />
 
     <!-- Sweet Alert Notification -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -372,7 +373,7 @@
 
 
     $(function() {
-        $('#myTable').DataTable();
+    
         $(function() {
             var table = $('#example').DataTable({
                 "columnDefs": [{
@@ -411,17 +412,17 @@
     });
     $(function() {
         $(function() {
-            var table = $('#yomeya').DataTable({
+            var table = $('#myTable').DataTable({
                 "displayLength": 25,
                 dom: 'Bfrtip',
                 buttons: [
                   {
                       extend: 'print',
-                      text: 'اطبع',
-                      title: 'مسعد و اشرف',
+                      text: 'Print',
+                      title: 'Via Veneto',
                       customize: function ( win ) {
                         $(win.document.body)
-                        .prepend('<center><img src="{{asset('images/dark-logo.png')}}" style="position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; opacity:0.4" /></center>')
+                        .prepend('<center><img src="{{asset('images/dark-logo.png')}}" style="position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; opacity:0.3" /></center>')
                         .css( 'font-size', '24px' )
                         .find( 'thead' ).prepend('<tr>' + $('#dt-header').val() + '</tr>')
                         //$('#stampHeader' ).addClass( 'stampHeader' );
@@ -443,7 +444,7 @@
                        .css('border','!important')
                        .css('border-width','1px')
                         }
-                    }
+                    } , 'excel'
                 ]
             });
             // Order by the grouping
@@ -457,115 +458,9 @@
             });
         });
     });
-    $(function() {
-        $('#myTable2').DataTable();
-        $(function() {
-            var table = $('#example').DataTable({
-                "columnDefs": [{
-                    "visible": false,
-                    "targets": 2
-                }],
-                "order": [
-                ],
-                "displayLength": 25,
-                "drawCallback": function(settings) {
-                    var api = this.api();
-                    var rows = api.rows({
-                        page: 'current'
-                    }).nodes();
-                    var last = null;
-                    api.column(2, {
-                        page: 'current'
-                    }).data().each(function(group, i) {
-                        if (last !== group) {
-                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
-                            last = group;
-                        }
-                    });
-                }
-            });
-            // Order by the grouping
-            $('#example tbody').on('click', 'tr.group', function() {
-                var currentOrder = table.order()[0];
-                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                    table.order([2, 'desc']).draw();
-                } else {
-                    table.order([2, 'asc']).draw();
-                }
-            });
-        });
-    });
-    $('#example23').DataTable({
-      "ordering": false,
-        dom: 'Bfrtip',
-        buttons: [
-          {
-              extend: 'print',
-              text: 'اطبع',
-              title: 'مسعد و اشرف',
-              customize: function ( win ) {
-                $(win.document.body)
-                .prepend('<center><img src="{{asset('images/dahab-logo.png')}}" style="position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0;" /></center>')
-                .css( 'font-size', '24px' )
-                .find( 'thead' ).prepend('<tr>' + $('#dt-header').val() + '</tr>')
-                //$('#stampHeader' ).addClass( 'stampHeader' );
-                $(win.document.body).find( 'table' )
-                       .css( 'border', 'solid')
-                       .css( 'margin-top', '20px')
-                       .css( 'font-size', 'inherit' );
-               $(win.document.body).find('th')
-               .css('border','solid')
-               .css('border','!important')
-               .css('border-width','1px')
-               .css('font-size','inherit')
-               $(win.document.body).find('td')
-               .css('border','solid')
-               .css('border','!important')
-               .css('border-width','1px');
-               $(win.document.body).find('tr')
-               .css('border','solid')
-               .css('border','!important')
-               .css('border-width','1px')
-                }
-            }
-        ]
-    } );
-    $('#example233').DataTable({
-      "ordering": false,
-        dom: 'Bfrtip',
-        buttons: [
-          {
-              extend: 'print',
-              footer: true,
-              text: 'اطبع',
-              title: 'مسعد و اشرف',
-              customize: function ( win ) {
-                $(win.document.body)
-                  .prepend('<img src="{{asset('images/dahab-logo.png')}}" style="position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; opacity:0.4; " />')
-                .css( 'font-size', '24px' )
-                .find( 'thead' ).prepend('<tr>' + $('#dt-header').val() + '</tr>')
-                //$('#stampHeader' ).addClass( 'stampHeader' );
-                $(win.document.body).find( 'table' )
-                       .css( 'margin-top', '20px')
-                       .css( 'border', 'solid')
-                       .css( 'font-size', 'inherit' );
-               // $(win.document.body).find('th')
-               // .css('border','solid')
-               // .css('border','!important')
-               // .css('border-width','1px')
-               $(win.document.body).find('td')
-               .css('border','solid')
-               .css('border','!important')
-               .css('border-width','1px');
-               $(win.document.body).find('tr')
-               .css('border','solid')
-               .css('border','!important')
-               .css('border-width','1px')
-          }
-        },
-        ]
-    });
-    $(' .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+    
+ 
+    $(' .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-info mr-1');
     // File Upload JS
     $(document).ready(function() {
         // Basic
@@ -638,61 +533,8 @@
                 //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
             });
         });
-        var init = 0;
-        @if(isset($invoice) && array_key_exists('invoiceItems', $invoice ) )
-        init = {{count($invoice['invoiceItems'])}} - 1
-        @endif
-        @if(isset($isDynamicForm))
-            var room = init + 1;
-            function education_fields() {
-                room++;
-                var objTo = document.getElementById('dynamicContainer')
-                var divtest = document.createElement("div");
-                divtest.setAttribute("class", "form-group removeclass" + room);
-                var rdiv = 'removeclass' + room;
-                var concatString = "";
-                concatString += '<div class="row"><div class="col-lg-1 ">\
-                  <div class="form-group">\
-                    <input type="number" step="0.01" min=0 class="form-control" name="milli[]" placeholder="مللي">\
-                  </div>\
-                </div>\
-                <div class="col-lg-2 ">\
-                  <div class="form-group">\
-                    <input type="number" step="0.01" min=0 class="form-control" name="gram[]" placeholder="جرام" required>\
-                  </div>\
-                </div>\
-                <div class="col-lg-2 ">\
-                  <div class="form-group">\
-                    <input type="number" step="0.01" min=1 class="form-control" name="count[]" placeholder="عدد">\
-                  </div>\
-                </div>\
-                <div class="col-lg-4 ">\
-                <div class="form-group">\
-                  <select name="item[]" class="select form-control custom-select" required>\
-                    @foreach($inventory as $models)\
-                      <option value="{{$models->INVT_NAME}}"\
-                        >{{$models->INVT_NAME. " - عدد:  " . $models->INVT_CONT}}</option>\
-                    @endforeach\
-                  </select>\
-                </div>\
-                </div>\
-                <div class="col-sm-3 nopadding">\
-                  <div class="form-group">\
-                  <div class="input-group">\
-                      <input type="number" step=0.01 min=0 class="form-control" name="price[]" placeholder="فئه" required>\
-                    <div class="input-group-append"> <button class="btn btn-danger" type="button" onclick="remove_education_fields(' + room + ');">\
-                     <i class="fa fa-minus"></i> </button>\
-                     </div>\
-                     </div>\
-                     </div>\
-                     </div><div class="clear"></div></row>';
-                divtest.innerHTML = concatString;
-                objTo.appendChild(divtest);
-            }
-            function remove_education_fields(rid) {
-                $('.removeclass' + rid).remove();
-            }
-            @endif
+
+
     </script>
     <!-- End Table Search Script -->
 </body>

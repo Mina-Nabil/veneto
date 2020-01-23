@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Bank;
+use Validator;
 
 class BankController extends Controller
 {
@@ -18,6 +19,7 @@ class BankController extends Controller
 
     function report(Request $request){
         $data['ops'] = Bank::getReport($request->from, $request->to);
+        $data['report'] = true;
         return view("bank.home", $data);
     }
 
@@ -26,6 +28,7 @@ class BankController extends Controller
     ///////////////Transactions///////////
     function show(){
         $data['ops'] = Bank::getTrans();
+        $data['report'] = false;
         return view("bank.home", $data);
     }
 
@@ -49,5 +52,20 @@ class BankController extends Controller
         Bank::insertTran($request->name, $request->in, $request->out, $request->comment);
 
         return \redirect("bank/show");
+    }
+
+    function markError(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'tranId' => 'required'
+        ]);
+
+        if ($validator->fails())
+            echo 0;
+        else
+            echo Bank::correctFaultyTran($request->tranId);
+
+        return;
+
     }
 }

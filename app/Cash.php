@@ -16,13 +16,14 @@ class Cash extends Model
     static function getReport($from, $to){
         return DB::table('cash')->where([
             ['CASH_DATE', '>', $from],
-            ['CASH_DATE', '<', date('Y-m-d', strtotime('+1 day', strtotime($to)))]
+            ['CASH_DATE', '<', date('Y-m-d', strtotime('+1 day', strtotime($to)))],
+            ['CASH_EROR', 0]
         ])->orderBy('id', 'desc')->limit(500)->get();
     }
 
-    static function insertTran($title, $in=0, $out=0, $comment=null){
+    static function insertTran($title, $in=0, $out=0, $comment=null, $isError=0){
 
-        DB::transaction(function () use ($title, $in, $out, $comment) {
+        DB::transaction(function () use ($title, $in, $out, $comment, $isError) {
 
             $balance = self::getCashBalance() + $in - $out;
             DB::table('cash')->insertGetId([
@@ -31,6 +32,7 @@ class Cash extends Model
                 'CASH_OUT'  => $out,
                 'CASH_BLNC' => $balance,
                 'CASH_CMNT' => $comment,
+                'CASH_EROR' => $isError,
                 'CASH_DATE' => date('Y-m-d H:i:s')
             ]);
         });
@@ -38,5 +40,30 @@ class Cash extends Model
 
     static function getCashBalance(){
         return DB::table('cash')->latest('id')->first()->CASH_BLNC;
+    }
+
+    static function correctFaultyTran($id){
+        $faulty = self::getOneRecord($id);
+        if($faulty==null || $faulty->CASH_EROR!=0) return 0;
+        try {
+            $exception = DB::transaction(function () use ($id, $faulty) {
+                self::markTranError($id);
+                self::insertTran("Error Correction for TR#" . $id, $faulty->CASH_IN*-1, $faulty->CASH_OUT*-1, "Automated Transaction to correct Transaction number " . $id, 2);
+            });
+            return 1;
+        } catch (Exception $e){
+            return 0;
+        }
+        
+    }
+
+    static private function getOneRecord($id){
+        return DB::table('cash')->find($id);
+    }
+
+    static private function markTranError($id){
+       return DB::table("cash")->where('id', $id)->update([
+           "CASH_EROR" => 1
+       ]);
     }
 }

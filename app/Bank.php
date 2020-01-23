@@ -16,13 +16,14 @@ class Bank extends Model
     static function getReport($from, $to){
         return DB::table('bank')->where([
             ['BANK_DATE', '>', $from],
-            ['BANK_DATE', '<', date('Y-m-d', strtotime('+1 day', strtotime($to)))]
+            ['BANK_DATE', '<', date('Y-m-d', strtotime('+1 day', strtotime($to)))],
+            ['BANK_EROR', 0]
         ])->orderBy('id', 'desc')->limit(500)->get();
     }
 
-    static function insertTran($title, $in=0, $out=0, $comment=null){
+    static function insertTran($title, $in=0, $out=0, $comment=null, $isError=0){
 
-        DB::transaction(function () use ($title, $in, $out, $comment) {
+        DB::transaction(function () use ($title, $in, $out, $comment, $isError) {
 
             $balance = self::getBankBalance() + $in - $out;
             DB::table('bank')->insertGetId([
@@ -31,6 +32,7 @@ class Bank extends Model
                 'BANK_OUT'  => $out,
                 'BANK_BLNC' => $balance,
                 'BANK_CMNT' => $comment,
+                'BANK_EROR' => $isError,
                 'BANK_DATE' => date('Y-m-d H:i:s')
             ]);
 
@@ -41,5 +43,30 @@ class Bank extends Model
 
     static function getBankBalance(){
         return DB::table('bank')->latest('id')->first()->BANK_BLNC;
+    }
+
+    static function correctFaultyTran($id){
+        $faulty = self::getOneRecord($id);
+        if($faulty==null || $faulty->BANK_EROR!=0) return 0;
+        try {
+            $exception = DB::transaction(function () use ($id, $faulty) {
+                self::markTranError($id);
+                self::insertTran("Error Correction for TR#" . $id, $faulty->BANK_IN*-1, $faulty->BANK_OUT*-1, "Automated Transaction to correct Transaction number " . $id, 2);
+            });
+            return 1;
+        } catch (Exception $e){
+            return 0;
+        }
+        
+    }
+
+    static private function getOneRecord($id){
+        return DB::table('bank')->find($id);
+    }
+
+    static private function markTranError($id){
+       return DB::table("bank")->where('id', $id)->update([
+           "BANK_EROR" => 1
+       ]);
     }
 }
