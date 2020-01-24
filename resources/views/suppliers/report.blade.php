@@ -161,11 +161,11 @@
                                 <td>
                                     {{date_format(date_create($op->SPTR_DATE), "d-m-Y")}}
                                 </td>
-                                <td title="{{$op->SPTR_DESC}}">{{ (strlen($op->SPTR_DESC)>20) ?  substr($op->SPTR_DESC,0,20) . '...' : $op->SPTR_DESC}}</td>
+                                <td title="{{$op->SPTR_DESC}}">{{ (strlen($op->SPTR_DESC)>15) ?  substr($op->SPTR_DESC,0,15) . '...' : $op->SPTR_DESC}}</td>
                                 @if(!$isSupplier)
                                 <td>
                                     <a href="{{url('suppliers/trans/quick/' . $op->SPTR_SUPP_ID)}}" title="{{$op->SUPP_NAME}}">
-                                        {{ (strlen($op->SUPP_NAME)>8) ?  substr($op->SUPP_NAME,0,8) . '...' : $op->SUPP_NAME}}
+                                        {{ (strlen($op->SUPP_NAME)>12) ?  substr($op->SUPP_NAME,0,12) . '...' : $op->SUPP_NAME}}
                                     </a>
                                 </td>
                                 @endif
