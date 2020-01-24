@@ -175,7 +175,7 @@
                                 <td>
                                     {{date_format(date_create($op->CLTR_DATE), "d-m-Y")}}
                                 </td>
-                                <td title="{{$op->CLTR_DESC}}">{{ (strlen($op->CLTR_DESC)>15) ?  substr($op->CLTR_DESC,0,15) . '...' : $op->CLTR_DESC}}</td>
+                                <td title="{{$op->CLTR_DESC}}">{{ (strlen($op->CLTR_DESC)>18) ?  substr($op->CLTR_DESC,0,15) . '...' : $op->CLTR_DESC}}</td>
                                 @if(!$isClient)
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->CLTR_CLNT_ID)}}" title="{{$op->CLNT_NAME}}">
