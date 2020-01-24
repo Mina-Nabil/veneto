@@ -48,13 +48,21 @@ class Cash extends Model
         try {
             $exception = DB::transaction(function () use ($id, $faulty) {
                 self::markTranError($id);
-                self::insertTran("Error Correction for TR#" . $id, $faulty->CASH_IN*-1, $faulty->CASH_OUT*-1, "Automated Transaction to correct Transaction number " . $id, 2);
+                //self::insertTran("Error Correction for TR#" . $id, $faulty->CASH_IN*-1, $faulty->CASH_OUT*-1, "Automated Transaction to correct Transaction number " . $id, 2);
             });
             return 1;
         } catch (Exception $e){
             return 0;
         }
         
+    }
+
+    static function unmarkTranError($id){
+        $faulty = self::getOneRecord($id);
+        if($faulty==null || $faulty->CASH_EROR==0) return 0;
+        return DB::table("cash")->where('id', $id)->update([
+            "CASH_EROR" => 0
+        ]); 
     }
 
     static private function getOneRecord($id){

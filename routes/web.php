@@ -33,6 +33,8 @@ Route::get("clients/trans/quick",     'ClientsController@quickReport')-> middlew
 Route::get("clients/trans/quick/{id}",     'ClientsController@quickReport')-> middleware('cors');
 Route::get("clients/trans/add",       'ClientsController@addTransPage')-> middleware('cors');
 Route::post("clients/trans/insert",   'ClientsController@insertTrans')-> middleware('cors');
+Route::post("clients/trans/error",   'ClientsController@markError')-> middleware('cors');
+Route::post("clients/trans/unmark",   'ClientsController@unmarkError')-> middleware('cors');
 Route::post("clients/account/statement", 'ClientsController@accountStatement')-> middleware('cors');
 Route::post("clients/main/account", 'ClientsController@mainReport')-> middleware('cors');
 
@@ -101,6 +103,7 @@ Route::post("bank/insert",         'BankController@insert')-> middleware('cors')
 Route::get("bank/prepare/report",         'BankController@reportPage')-> middleware('cors');
 Route::post("bank/report",         'BankController@report')-> middleware('cors');
 Route::post("bank/error",         'BankController@markError')-> middleware('cors');
+Route::post("bank/unmark",         'BankController@unmarkError')-> middleware('cors');
 
 //Cash Account
 Route::get("cash/show",             'CashController@show')-> middleware('cors');
@@ -109,6 +112,7 @@ Route::post("cash/insert",          'CashController@insert')-> middleware('cors'
 Route::get("cash/prepare/report",   'CashController@reportPage')-> middleware('cors');
 Route::post("cash/report",          'CashController@report')-> middleware('cors');
 Route::post("cash/error",         'CashController@markError')-> middleware('cors');
+Route::post("cash/unmark",         'CashController@unmarkError')-> middleware('cors');
 
 
 //Suppliers Routes
@@ -117,6 +121,8 @@ Route::get("suppliers/trans/quick",     'SuppliersController@quickReport')-> mid
 Route::get("suppliers/trans/quick/{id}",     'SuppliersController@quickReport')-> middleware('cors');
 Route::get("suppliers/trans/add",       'SuppliersController@addTransPage')-> middleware('cors');
 Route::post("suppliers/trans/insert",   'SuppliersController@insertTrans')-> middleware('cors');
+Route::post("suppliers/trans/error",   'SuppliersController@markError')-> middleware('cors');
+Route::post("suppliers/trans/unmark",   'SuppliersController@unmarkError')-> middleware('cors');
 Route::post("suppliers/account/statement", 'SuppliersController@accountStatement')-> middleware('cors');
 Route::post("suppliers/main/account", 'SuppliersController@mainReport')-> middleware('cors');
 

@@ -20,7 +20,7 @@
                                 <th>خصم</th>
                                 <th>مرتجع</th>
                                 <th>رصيد</th>
-                                <th>Comment</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,8 +29,9 @@
                                 <td>
                                 
                                 {{date_format(date_create($op->SPTR_DATE), "d-m-Y")}}
-                                </button>
+                                
                                 </td>
+                                <td>{{$op->SPTR_DESC}}</td>
                                 <td>
                                     <?php 
                                         $commentArr = explode(' ', $op->SPTR_CMNT) ;
@@ -42,7 +43,6 @@
                                     @endif
 
                                 </td>
-                                <td>{{$op->SPTR_DESC}}</td>
                                 <td>{{number_format($op->SPTR_PRCH_AMNT, 2)}}</td>
                                 <td>{{number_format($op->SPTR_CASH_AMNT, 2)}}</td>
                                 <td>{{number_format($op->SPTR_NTPY_AMNT, 2)}}</td>

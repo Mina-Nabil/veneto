@@ -28,16 +28,10 @@
                 text: "You won't be able to mark this!",
                 icon: 'warning',
             });
-        } else if(errorState==2){
-            Swal.fire({
-                title: 'Transaction already is marked as an Error Correction',
-                text: "You won't be able to mark this!",
-                icon: 'warning',
-            })
         } else {
             Swal.fire({
                 title: 'Transaction Error, Are you sure?',
-                text: "You won't be able to revert this!",
+                text: "You can revert this in the future",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -57,7 +51,57 @@
                         if (IsNumeric(this.responseText) && this.responseText=='1' && this.readyState == 4 && this.status == 200) {
                             Swal.fire({
                                 title: 'Marked!',
-                                text: 'New record added to counter the error, please refresh!',
+                                text: 'Please refresh for an updated view!',
+                                icon: 'success',
+                                confirmButtonText: 'Refresh'
+                                }).then((refresh) => {
+                                    document.location.reload();
+                                })
+                            
+                        } else if(this.readyState == 4 && this.status == 200 && IsNumeric(this.responseText) && this.responseText=='0') {
+                            Swal.fire("Error", "Process Failed, please try again", 'error');
+                        } 
+                        };
+                    http.send(params);
+                }
+            })
+        }
+    
+        
+    }
+    
+    function unmarkError(id, errorState){
+    
+        if(errorState==0){
+            Swal.fire({
+                title: 'Transaction already is unmarked',
+                text: "You won't be able to unmark this!",
+                icon: 'warning',
+            });
+        } else {
+            Swal.fire({
+                title: 'Transaction not Error, Are you sure?',
+                text: "You can revert this in the future",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, unmark it!'
+            }).then((result) => {
+                if (result.value) {
+                    const csrf = getMeta('csrf-token');
+                    var http = new XMLHttpRequest();
+                    var url  = '{{url("cash/unmark")}}';
+                    var params = '_token=' + csrf + '&tranId=' + id;
+                    http.open('POST', url, true);
+                    //Send the proper header information along with the request
+                    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    http.onreadystatechange = function() {
+                        console.log(this.responseText=='1')
+                        if (IsNumeric(this.responseText) && this.responseText=='1' && this.readyState == 4 && this.status == 200) {
+                            Swal.fire({
+                                title: 'Unmarked!',
+                                text: 'please refresh for updated view!',
                                 icon: 'success',
                                 confirmButtonText: 'Refresh'
                                 }).then((refresh) => {
@@ -90,13 +134,13 @@
                             <tr>
                                 <th>TR#</th>
                                 <th>تاريخ</th>
-                                <th>رقم المعاملات</th>
+                                <th>وصف</th>
                                 <th>مدين</th>
                                 <th>دائن</th>
                                 <th>رصيد</th>
-                                <th>Comment</th>
+                                <th></th>
                                 @if(isset($report) && !$report)
-                                <th>Error</th>
+                                <th><i class="fas fa-times"></i></th>
                                 @endif
                             </tr>
                         </thead>
@@ -105,13 +149,8 @@
                             <tr
                             @if($op->CASH_EROR==1)
 
-                                style="background-color: lightcoral;"
+                                style="background-color: #ffbdbd;"
                                 title="Wrong Transaction"
-
-                            @elseif($op->CASH_EROR==2)
-
-                                style="background-color: lightgoldenrodyellow; color:#02587e"
-                                title="Error Correction Transaction"
                                 
                             @endif
                             >
@@ -131,9 +170,15 @@
                                     </button>
                                 </td>
                                 @if(isset($report) && !$report)
+                                @if($op->CASH_EROR==0)
                                 <td><button style="padding:.1rem" class="btn btn-danger">
                                     <i class="fas fa-exclamation-triangle" onclick="confirmError({{$op->id}}, {{$op->CASH_EROR}})" ></i>
                                 </button></td>
+                                @else
+                                <td><button style="padding:.1rem" class="btn btn-success">
+                                    <i class="fas fa-exclamation-triangle" onclick="unmarkError({{$op->id}}, {{$op->CASH_EROR}})" ></i>
+                                </button></td>
+                                @endif
                                 @endif
                             </tr
                             > 

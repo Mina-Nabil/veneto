@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Suppliers;
 
+use Validator;
+
 class SuppliersController extends Controller
 {
     public function __construct()
@@ -12,7 +14,7 @@ class SuppliersController extends Controller
         $this->middleware('auth');
     }
 
-    ////////Supplier Transactions/////////////
+    //////////////////////////////////////////////////Supplier Transactions////////////////////////////////////////////
     function quickReport($id=null){
 
         $data['ops'] = Suppliers::getTrans($id);
@@ -90,8 +92,36 @@ class SuppliersController extends Controller
         return redirect("suppliers/trans/quick");
 
     }
+
+    function markError(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'tranId' => 'required'
+        ]);
+
+        if ($validator->fails())
+            echo 0;
+        else
+            echo Suppliers::correctFaultyTran($request->tranId);
+
+        return;
+    }
+
+    function unmarkError(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'tranId' => 'required'
+        ]);
+
+        if ($validator->fails())
+            echo 0;
+        else
+            echo Suppliers::unmarkTranError($request->tranId);
+
+        return;
+    }
     
-    ///////////Supplier Pages///////////////////
+    //////////////////////////////////////////////Supplier Pages//////////////////////////////////////////////////////
     function home(){
         $data['suppliers']  = Suppliers::getSuppliers();
         $data['total']      = Suppliers::getTotalBalance(); 

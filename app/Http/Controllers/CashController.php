@@ -68,4 +68,19 @@ class CashController extends Controller
 
     }
 
+    function unmarkError(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'tranId' => 'required'
+        ]);
+
+        if ($validator->fails())
+            echo 0;
+        else
+            echo Cash::unmarkTranError($request->tranId);
+
+        return;
+
+    }
+
 }

@@ -68,4 +68,19 @@ class BankController extends Controller
         return;
 
     }
+
+    function unmarkError(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'tranId' => 'required'
+        ]);
+
+        if ($validator->fails())
+            echo 0;
+        else
+            echo Bank::unmarkTranError($request->tranId);
+
+        return;
+
+    }
 }

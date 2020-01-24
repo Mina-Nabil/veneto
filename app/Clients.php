@@ -20,7 +20,8 @@ class Clients extends Model
                         ->where([
                             ["CLTR_CLNT_ID", '=', $clientID],
                             ["CLTR_DATE", '>=', $from],
-                            ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
+                            ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))],
+                            ["CLTR_EROR", 0]
                         ])->orderBy('id', 'asc')->get();
 
         $ret['totals']  =   DB::table("client_trans")->selectRaw(" SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, 
@@ -138,9 +139,37 @@ class Clients extends Model
     
     
     
-    
-    static function counterTrans($tranID){
+    static function correctFaultyTran($id){
+        $faulty = self::getOneRecord($id);
+        if($faulty==null || $faulty->CLTR_EROR!=0) return 0;
+        try {
+            $exception = DB::transaction(function () use ($id, $faulty) {
+                self::markTranError($id);
+                //self::insertTran("Error Correction for TR#" . $id, $faulty->CLTR_IN*-1, $faulty->CLTR_OUT*-1, "Automated Transaction to correct Transaction number " . $id, 2);
+            });
+            return 1;
+        } catch (Exception $e){
+            return 0;
+        }
+        
+    }
 
+    static function unmarkTranError($id){
+        $faulty = self::getOneRecord($id);
+        if($faulty==null || $faulty->CLTR_EROR==0) return 0;
+        return DB::table("client_trans")->where('id', $id)->update([
+            "CLTR_EROR" => 0
+        ]); 
+    }
+
+    static private function getOneRecord($id){
+        return DB::table('client_trans')->find($id);
+    }
+
+    static private function markTranError($id){
+       return DB::table("client_trans")->where('id', $id)->update([
+           "CLTR_EROR" => 1
+       ]);
     }
      
     

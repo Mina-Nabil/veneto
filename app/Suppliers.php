@@ -20,6 +20,7 @@ class Suppliers extends Model
                         ->where([
                             ["SPTR_SUPP_ID", '=', $suppID],
                             ["SPTR_DATE", '>=', $from],
+                            ["SPTR_EROR", 0],
                             ["SPTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
                         ])->orderBy('id', 'asc')->get();
 
@@ -65,6 +66,7 @@ class Suppliers extends Model
         }
 
     ///////////////////Transactions//////////////////////
+
     static function getTrans($suppID=null){
         $query = DB::table("supplier_trans")->join('suppliers', "SPTR_SUPP_ID", "=", "suppliers.id")
                                     ->select("supplier_trans.*", "suppliers.SUPP_NAME", "suppliers.SUPP_ARBC_NAME");
@@ -139,8 +141,37 @@ class Suppliers extends Model
     
     
     
-    static function counterTrans($tranID){
+    static function correctFaultyTran($id){
+        $faulty = self::getOneRecord($id);
+        if($faulty==null || $faulty->SPTR_EROR!=0) return 0;
+        try {
+            $exception = DB::transaction(function () use ($id, $faulty) {
+                self::markTranError($id);
+                //self::insertTran("Error Correction for TR#" . $id, $faulty->SPTR_IN*-1, $faulty->SPTR_OUT*-1, "Automated Transaction to correct Transaction number " . $id, 2);
+            });
+            return 1;
+        } catch (Exception $e){
+            return 0;
+        }
+        
+    }
 
+    static function unmarkTranError($id){
+        $faulty = self::getOneRecord($id);
+        if($faulty==null || $faulty->SPTR_EROR==0) return 0;
+        return DB::table("supplier_trans")->where('id', $id)->update([
+            "SPTR_EROR" => 0
+        ]); 
+    }
+
+    static private function getOneRecord($id){
+        return DB::table('supplier_trans')->find($id);
+    }
+
+    static private function markTranError($id){
+       return DB::table("supplier_trans")->where('id', $id)->update([
+           "SPTR_EROR" => 1
+       ]);
     }
      
     

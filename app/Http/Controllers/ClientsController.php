@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Clients;
+use Validator;
 
 class ClientsController extends Controller
 {
@@ -89,6 +90,35 @@ class ClientsController extends Controller
         
         return redirect("clients/trans/quick");
 
+    }
+
+
+    function markError(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'tranId' => 'required'
+        ]);
+
+        if ($validator->fails())
+            echo 0;
+        else
+            echo Clients::correctFaultyTran($request->tranId);
+
+        return;
+    }
+
+    function unmarkError(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'tranId' => 'required'
+        ]);
+
+        if ($validator->fails())
+            echo 0;
+        else
+            echo Clients::unmarkTranError($request->tranId);
+
+        return;
     }
     
     ///////////Client Pages///////////////////
