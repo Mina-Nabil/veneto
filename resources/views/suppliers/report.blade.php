@@ -177,11 +177,11 @@
                                     ?>
                                     @if( isset($descArr) && $descArr[0] == "Entry"  && $descArr[1] == "Serial" && is_numeric($descArr[2]) )
                                         <a href="{{url('rawinventory/bytrans/' . $descArr[2])}}" title="{{$descArr[2]}}"> 
-                                            {{substr($descArr[2],0,6) . '..'}}
+                                            {{substr($descArr[2],0,4) . '..' . substr($descArr[2], strlen($descArr[2])-4, strlen($descArr[2])-1 ) }}
                                         <a>
                                     @elseif( $commentArr[0] == "Entry"  && $commentArr[1] == "Serial" && is_numeric($commentArr[2]) )
                                         <a href="{{url('rawinventory/bytrans/' . $commentArr[2])}}" title="{{$commentArr[2]}}"> 
-                                            {{substr($commentArr[2],0,6) . '..'}}
+                                            {{substr($commentArr[2],0,4) . '..' . substr($commentArr[2], strlen($commentArr[2])-4, strlen($commentArr[2])-1) }}
                                         <a>
                                     @endif
 
