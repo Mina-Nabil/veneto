@@ -187,7 +187,7 @@
                                     <?php 
                                         $salesArr = explode(' ', $op->CLTR_CMNT) ;
                                         if(isset($op->CLTR_DESC)){
-                                            $descArr = explode(' ', $op->CLTR_CMNT) ;
+                                            $descArr = explode(' ', $op->CLTR_DESC) ;
                                         }
                                     ?>  
                                         @if(isset($descArr) && $descArr[0]=='Sales' && is_numeric($descArr[1]))
