@@ -206,9 +206,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('finished/show')}}">متاح جاهز</a></li>
                                 <li><a href="{{url('finished/add')}}">وارد جديد</a></li>
-                                <li><a href="{{url('sales/show')}}">مجمع مبيعات</a></li>
                                 <li><a href="{{url('sales/sold')}}">مجمع جاهز مباع</a></li>
-                                <li><a href="{{url('sales/add')}}">عمليه بيع جديده</a></li>
                                 <li><li>
                                 <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" >اعدادات</a>
                                     <ul aria-expanded="false" class="collapse">
