@@ -201,11 +201,11 @@
                                 </td>
                                 <td>
                                 @if($op->SPTR_EROR==0)
-                                    <button style="padding:.1rem" class="btn btn-danger">
+                                    <button style="padding:.1rem" class="btn btn-success">
                                         <i class="fas fa-exclamation-triangle" onclick="confirmError({{$op->id}}, {{$op->SPTR_EROR}})" ></i>
                                     </button>
                                 @else
-                                    <button style="padding:.1rem" class="btn btn-success">
+                                    <button style="padding:.1rem" class="btn btn-danger">
                                         <i class="fas fa-exclamation-triangle" onclick="unmarkError({{$op->id}}, {{$op->SPTR_EROR}})" ></i>
                                     </button>
                                 @endif

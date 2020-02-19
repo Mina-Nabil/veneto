@@ -166,9 +166,15 @@ function unmarkError(id, errorState){
                                     </button>
                                 </td>
                                 @if(isset($report) && !$report)
-                                <td><button style="padding:.1rem" class="btn btn-danger">
+                                @if($op->BANK_EROR==0)
+                                <td><button style="padding:.1rem" class="btn btn-success">
                                     <i class="fas fa-exclamation-triangle" onclick="confirmError({{$op->id}}, {{$op->BANK_EROR}})" ></i>
                                 </button></td>
+                                @else
+                                <td><button style="padding:.1rem" class="btn btn-danger">
+                                    <i class="fas fa-exclamation-triangle" onclick="unmarkError({{$op->id}}, {{$op->CASH_EROR}})" ></i>
+                                </button></td>
+                                @endif
                                 @endif
                             </tr> 
                             @endforeach
