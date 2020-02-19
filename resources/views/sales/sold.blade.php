@@ -9,7 +9,7 @@
                 <h4 class="card-title">All Items Sold</h4>
                 <h6 class="card-subtitle">Show All Invoice items</h6>
                 <div class="table-responsive m-t-40">
-                    <table id="myTable2" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
+                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
                                 <th>ماركه</th>
