@@ -69,9 +69,12 @@ class Clients extends Model
     static function getTrans($clientID=null){
         $query = DB::table("client_trans")->join('clients', "CLTR_CLNT_ID", "=", "clients.id")
                                     ->select("client_trans.*", "clients.CLNT_NAME", "clients.CLNT_ARBC_NAME");
-        if($clientID !== null)
+        if($clientID !== null){
             $query = $query->where("CLTR_CLNT_ID", $clientID);
-        return $query->orderBy('id', 'asc')->limit(500)->get();
+            return $query->orderBy('id', 'asc')->limit(500)->get();
+        } else {
+            return $query->orderBy('id', 'desc')->limit(500)->get(); 
+        }
         
     }
 
