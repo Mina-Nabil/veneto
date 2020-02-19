@@ -171,11 +171,11 @@
                                 </td>
                                 @if(isset($report) && !$report)
                                 @if($op->CASH_EROR==0)
-                                <td><button style="padding:.1rem" class="btn btn-danger">
+                                <td><button style="padding:.1rem" class="btn btn-success">
                                     <i class="fas fa-exclamation-triangle" onclick="confirmError({{$op->id}}, {{$op->CASH_EROR}})" ></i>
                                 </button></td>
                                 @else
-                                <td><button style="padding:.1rem" class="btn btn-success">
+                                <td><button style="padding:.1rem" class="btn btn-danger">
                                     <i class="fas fa-exclamation-triangle" onclick="unmarkError({{$op->id}}, {{$op->CASH_EROR}})" ></i>
                                 </button></td>
                                 @endif

@@ -172,7 +172,7 @@ function unmarkError(id, errorState){
                                 </button></td>
                                 @else
                                 <td><button style="padding:.1rem" class="btn btn-danger">
-                                    <i class="fas fa-exclamation-triangle" onclick="unmarkError({{$op->id}}, {{$op->CASH_EROR}})" ></i>
+                                    <i class="fas fa-exclamation-triangle" onclick="unmarkError({{$op->id}}, {{$op->BANK_EROR}})" ></i>
                                 </button></td>
                                 @endif
                                 @endif
