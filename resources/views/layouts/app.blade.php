@@ -217,6 +217,18 @@
                                 </li></li>
                             </ul>
                         </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-boxes"></i><span class="hide-menu">مبيعات</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('sales/show')}}">مجمع مبيعات</a></li>
+                                <li><a href="{{url('sales/add')}}">عمليه بيع جديده</a></li>
+                                <li><li>
+                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" >اعدادات</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{url('brands/show')}}">مركات</a></li>
+                                    </ul>
+                                </li></li>
+                            </ul>
+                        </li>
 
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" fas fa-users"></i><span class="hide-menu">Users</span></a>
