@@ -150,7 +150,6 @@
                                 @if(!$isClient)
                                 <th>اسم</th>
                                 @endif
-                                <th>عمليه بيع</th>
                                 <th>مبيعات</th>
                                 <th>نقديه</th>
                                 <th>اوراق دفع</th>
@@ -175,7 +174,25 @@
                                 <td>
                                     {{date_format(date_create($op->CLTR_DATE), "d-m-Y")}}
                                 </td>
-                                <td title="{{$op->CLTR_DESC}}">{{ (strlen($op->CLTR_DESC)>25) ?  substr($op->CLTR_DESC,0,22) . '...' : $op->CLTR_DESC}}</td>
+                                <td title="{{$op->CLTR_DESC}}">{{ (strlen($op->CLTR_DESC)>25) ?  substr($op->CLTR_DESC,0,22) . '...' : $op->CLTR_DESC}}
+
+                                <?php 
+                                    $salesArr = explode(' ', $op->CLTR_CMNT) ;
+                                    if(isset($op->CLTR_DESC)){
+                                        $descArr = explode(' ', $op->CLTR_DESC) ;
+                                    }
+                                ?>  
+                                    @if(isset($descArr) && $descArr[0]=='Sales' && is_numeric($descArr[1]))
+                                        <a href="{{url('/sales/items/' . $descArr[1]) }}">
+                                            {{$descArr[1]}}
+                                        </a>
+                                    @elseif($salesArr[0]=='Sales' && is_numeric($salesArr[1]) && (!isset($salesArr[2]) || $salesArr[2]=='Comment:')  )
+                                        <a href="{{url('/sales/items/' . $salesArr[1]) }}">
+                                            {{$salesArr[1]}}
+                                        </a>
+                                    @endif
+
+                                </td>
                                 @if(!$isClient)
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->CLTR_CLNT_ID)}}" title="{{$op->CLNT_NAME}}">
@@ -183,23 +200,7 @@
                                     </a>
                                 </td>
                                 @endif
-                                <td>
-                                    <?php 
-                                        $salesArr = explode(' ', $op->CLTR_CMNT) ;
-                                        if(isset($op->CLTR_DESC)){
-                                            $descArr = explode(' ', $op->CLTR_DESC) ;
-                                        }
-                                    ?>  
-                                        @if(isset($descArr) && $descArr[0]=='Sales' && is_numeric($descArr[1]))
-                                            <a href="{{url('/sales/items/' . $descArr[1]) }}">
-                                                {{$descArr[1]}}
-                                            </a>
-                                        @elseif($salesArr[0]=='Sales' && is_numeric($salesArr[1]) && (!isset($salesArr[2]) || $salesArr[2]=='Comment:')  )
-                                            <a href="{{url('/sales/items/' . $salesArr[1]) }}">
-                                                {{$salesArr[1]}}
-                                            </a>
-                                        @endif
-                                </td>
+                                
                                 <td>{{number_format($op->CLTR_SALS_AMNT, 1)}}</td>
                                 <td>{{number_format($op->CLTR_CASH_AMNT, 1)}}</td>
                                 <td>{{number_format($op->CLTR_NTPY_AMNT, 1)}}</td>
