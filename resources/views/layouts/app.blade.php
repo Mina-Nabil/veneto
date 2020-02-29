@@ -154,6 +154,7 @@
                                         <li><a href="{{url('bank/add')}}">اضافه</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="{{url('transtype/show')}}">اعدادات</a></li>
                             </ul>
                         </li>
 

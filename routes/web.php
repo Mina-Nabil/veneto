@@ -114,6 +114,15 @@ Route::post("cash/report",          'CashController@report')-> middleware('cors'
 Route::post("cash/error",         'CashController@markError')-> middleware('cors');
 Route::post("cash/unmark",         'CashController@unmarkError')-> middleware('cors');
 
+//TransactionTypes
+Route::get("transtype/show",           'TransTypeController@showTransType')-> middleware('cors');
+Route::get("transtype/edit/{id}",      'TransTypeController@editTransType')-> middleware('cors');
+Route::post('transtype/update',        'TransTypeController@updateTransType')-> middleware('cors');
+Route::post('transtype/insert',        'TransTypeController@insertTransType')-> middleware('cors');
+Route::get("transsubtype/edit/{id}",      'TransTypeController@editTransSubType')-> middleware('cors');
+Route::post('transsubtype/update',        'TransTypeController@updateTransSubType')-> middleware('cors');
+Route::post('transsubtype/insert',        'TransTypeController@insertTransSubType')-> middleware('cors');
+
 
 //Suppliers Routes
 Route::get("suppliers/trans/prepare",     'SuppliersController@report')-> middleware('cors');

@@ -5,8 +5,21 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                <div class=row>
+
+ 
+                <div class="col-lg-7">
                 <h4 class="card-title">{{ ($isClntPage) ? $client->CLNT_NAME : ''  }} Sales Operations</h4>
                 <h6 class="card-subtitle">Show All Sales Operations {{ ($isClntPage) ? "for " . $client->CLNT_NAME : ''  }}</h6>
+                </div>
+                @if($isClntPage)
+                    <div class="col-lg-5 align-self-center text-right">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('clients/trans/quick/'.$client->id)}}" class="btn btn-success d-none d-lg-block m-l-15">Client Transactions</a>
+                        </div>
+                    </div>
+                    @endif
+                </div>
                 <div class="table-responsive m-t-40">
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cash;
+use App\TransType;
 
 use Validator;
 
@@ -37,6 +38,8 @@ class CashController extends Controller
         $data['pageDescription'] = "Add New Cash Transaction";
         $data['formURL'] = url("cash/insert");
 
+        $data['transSubTypes'] = TransType::getTransSubTypes();
+
         return view("cash.add", $data);
     }
 
@@ -48,7 +51,7 @@ class CashController extends Controller
             'out'   => "required",
         ]);
         
-        Cash::insertTran($request->name, $request->in, $request->out, $request->comment);
+        Cash::insertTran($request->name, $request->in, $request->out, $request->comment, 0, $request->typeID);
 
         return \redirect("cash/show");
     }

@@ -158,7 +158,13 @@
                                 <td>
                                     {{date_format(date_create($op->CASH_DATE), "d-m-Y")}}   
                                 </td>
-                                <td>{{$op->CASH_NAME}}</td>
+                                <td>
+                                    @if($op->CASH_TRST_ID == null)
+                                        {{$op->CASH_NAME}}
+                                    @else
+                                        {{$op->TRTP_NAME}}-{{$op->TRST_NAME}}
+                                    @endif
+                                </td>
                                 <td>{{number_format($op->CASH_OUT, 2)}}</td>
                                 <td>{{number_format($op->CASH_IN, 2)}}</td>
                                 <td>{{number_format($op->CASH_BLNC, 2)}}</td>

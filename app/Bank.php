@@ -10,7 +10,10 @@ class Bank extends Model
 {
     //Bank Model
     static function getTrans(){
-        return DB::table('bank')->orderBy('id', 'desc')->limit(500)->get();
+        return DB::table('bank')->select('bank.*', 'trans_subtype.TRST_NAME', 'trans_type.TRTP_NAME')
+        ->leftJoin('trans_subtype', 'BANK_TRST_ID', '=', 'trans_subtype.id')
+        ->leftJoin('trans_type', 'trans_subtype.TRST_TRTP_ID', '=', 'trans_type.id')
+        ->orderBy('id', 'desc')->limit(500)->get();
     }
 
     static function getReport($from, $to){
@@ -21,9 +24,9 @@ class Bank extends Model
         ])->orderBy('id', 'desc')->limit(500)->get();
     }
 
-    static function insertTran($title, $in=0, $out=0, $comment=null, $isError=0){
+    static function insertTran($title, $in=0, $out=0, $comment=null, $isError=0, $transType=null){
 
-        DB::transaction(function () use ($title, $in, $out, $comment, $isError) {
+        DB::transaction(function () use ($title, $in, $out, $comment, $isError, $transType) {
 
             $balance = self::getBankBalance() + $in - $out;
             DB::table('bank')->insertGetId([
@@ -33,6 +36,7 @@ class Bank extends Model
                 'BANK_BLNC' => $balance,
                 'BANK_CMNT' => $comment,
                 'BANK_EROR' => $isError,
+                'BANK_TRST_ID' => $transType,
                 'BANK_DATE' => date('Y-m-d H:i:s')
             ]);
 

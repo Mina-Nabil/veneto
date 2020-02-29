@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Bank;
+use App\TransType;
 use Validator;
 
 class BankController extends Controller
@@ -38,6 +39,8 @@ class BankController extends Controller
         $data['pageDescription'] = "Add New Bank Transaction";
         $data['formURL'] = url("bank/insert");
 
+        $data['transSubTypes'] = TransType::getTransSubTypes();
+
         return view("bank.add", $data);
     }
 
@@ -49,7 +52,7 @@ class BankController extends Controller
             'out'   => "required",
         ]);
         
-        Bank::insertTran($request->name, $request->in, $request->out, $request->comment);
+        Bank::insertTran($request->name, $request->in, $request->out, $request->comment, 0, $request->typeID);
 
         return \redirect("bank/show");
     }

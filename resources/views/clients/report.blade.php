@@ -238,7 +238,7 @@
                         @if($isClient && isset($totals))
                         <tfoot>
                         <tr>
-                            <td colspan=3><strong>Totals</strong></td>
+                            <td colspan=2><strong>Totals</strong></td>
                             <td><strong>{{number_format($totals->CLTR_SALS_BLNC, 2)}}</strong></td>
                             <td><strong>{{number_format($totals->CLTR_CASH_BLNC, 2)}}</strong></td>
                             <td><strong>{{number_format($totals->CLTR_NTPY_BLNC, 2)}}</strong></td>

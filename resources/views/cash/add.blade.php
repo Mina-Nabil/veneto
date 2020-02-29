@@ -24,6 +24,19 @@
                         <small class="text-danger">{{$errors->first('name')}}</small>
                     </div>
                     <div class="form-group">
+                        <div class="input-group mb-3">
+                            <select name=typeID class="select2 form-control custom-select">
+                                <option disabled hidden selected value="">الانواع</option>
+                                @foreach($transSubTypes as $transSubType)
+                                <option value="{{ $transSubType->id }}">
+                                    {{$transSubType->TRTP_NAME}}-{{$transSubType->TRST_NAME}}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <small class="text-danger">{{$errors->first('typeID')}}</small>
+                    </div>
+                    <div class="form-group">
                         <label>Debit</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
