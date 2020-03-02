@@ -45,7 +45,7 @@
                                         </a>
 
                                     @else
-                                    {{ (strlen($op->CLTR_DESC)>25) ?  substr($op->CLTR_DESC,0,22) . '...' : $op->CLTR_DESC}}
+                                    {{ (strlen($op->CLTR_DESC)>25) ?  mb_substr($op->CLTR_DESC,0,22, "utf-8") . '...' : $op->CLTR_DESC}}
                                     @endif
                                 </td>                              
                                 <td>{{number_format($op->CLTR_SALS_AMNT, 2)}}</td>

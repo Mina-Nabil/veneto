@@ -124,11 +124,11 @@ class Suppliers extends Model
                         "SPTR_DESC"         =>  $desc
                     ]);
 
-                    if($cash > 0){
+                    if($cash != 0){
                         $supplier = self::getSupplier($supp);
                         Cash::insertTran("Supplier ($supplier->SUPP_NAME) TRN.# " . $id , 0, $cash, $comment);
                     }
-                    if($notespay > 0){
+                    if($notespay != 0){
                         $supplier = self::getSupplier($supp);
                         Bank::insertTran("Supplier ($supplier->SUPP_NAME) TRN.# " . $id, 0, $notespay, $comment);
                     }

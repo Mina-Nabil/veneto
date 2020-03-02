@@ -194,14 +194,14 @@
                                         </a>
 
                                     @else
-                                    {{ (strlen($op->CLTR_DESC)>25) ?  substr($op->CLTR_DESC,0,22) . '...' : $op->CLTR_DESC}}
+                                    {{ (strlen($op->CLTR_DESC)>25) ?  mb_substr($op->CLTR_DESC,0,22, "utf-8") . '...' : $op->CLTR_DESC}}
                                     @endif
 
                                 </td>
                                 @if(!$isClient)
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->CLTR_CLNT_ID)}}" title="{{$op->CLNT_NAME}}">
-                                        {{ (strlen($op->CLNT_NAME)>12) ?  substr($op->CLNT_NAME,0,12) . '...' : $op->CLNT_NAME}}
+                                        {{ (strlen($op->CLNT_NAME)>12) ?  mb_substr($op->CLNT_NAME,0,12, "utf-8") . '...' : $op->CLNT_NAME }}
                                     </a>
                                 </td>
                                 @endif

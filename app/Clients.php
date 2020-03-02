@@ -126,11 +126,11 @@ class Clients extends Model
                         "CLTR_DESC"         =>  $desc
                     ]);
 
-                    if($cash > 0){
+                    if($cash != 0){
                         $clientDetails = Clients::getClient($client);
                         Cash::insertTran("Client ({$clientDetails->CLNT_NAME}) TRN.# " . $id , $cash, 0, $comment);
                     }
-                    if($notespay > 0){
+                    if($notespay != 0){
                         $clientDetails = Clients::getClient($client);
                         Bank::insertTran("Client ({$clientDetails->CLNT_NAME}) TRN.# " . $id , $notespay, 0, $comment);
                     }

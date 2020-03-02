@@ -161,11 +161,11 @@
                                 <td>
                                     {{date_format(date_create($op->SPTR_DATE), "d-m-Y")}}
                                 </td>
-                                <td title="{{$op->SPTR_DESC}}">{{ (strlen($op->SPTR_DESC)>18) ?  substr($op->SPTR_DESC,0,15) . '...' : $op->SPTR_DESC}}</td>
+                                <td title="{{$op->SPTR_DESC}}">{{ (strlen($op->SPTR_DESC)>18) ?  mb_substr($op->SPTR_DESC,0,15, "utf-8") . '...' : $op->SPTR_DESC}}</td>
                                 @if(!$isSupplier)
                                 <td>
                                     <a href="{{url('suppliers/trans/quick/' . $op->SPTR_SUPP_ID)}}" title="{{$op->SUPP_NAME}}">
-                                        {{ (strlen($op->SUPP_NAME)>12) ?  substr($op->SUPP_NAME,0,12) . '...' : $op->SUPP_NAME}}
+                                        {{ (strlen($op->SUPP_NAME)>12) ?  mb_substr($op->SUPP_NAME,0,12, "utf-8") . '...' : $op->SUPP_NAME}}
                                     </a>
                                 </td>
                                 @endif
@@ -177,11 +177,11 @@
                                     ?>
                                     @if( isset($descArr) && $descArr[0] == "Entry"  && $descArr[1] == "Serial" && is_numeric($descArr[2]) )
                                         <a href="{{url('rawinventory/bytrans/' . $descArr[2])}}" title="{{$descArr[2]}}"> 
-                                            {{substr($descArr[2],0,4) . '..' . substr($descArr[2], strlen($descArr[2])-4, strlen($descArr[2])-1 ) }}
+                                            {{mb_substr($descArr[2],0,4, "utf-8") . '..' . mb_substr($descArr[2], strlen($descArr[2])-4, strlen($descArr[2])-1 , "utf-8") }}
                                         <a>
                                     @elseif( $commentArr[0] == "Entry"  && $commentArr[1] == "Serial" && is_numeric($commentArr[2]) )
                                         <a href="{{url('rawinventory/bytrans/' . $commentArr[2])}}" title="{{$commentArr[2]}}"> 
-                                            {{substr($commentArr[2],0,4) . '..' . substr($commentArr[2], strlen($commentArr[2])-4, strlen($commentArr[2])-1) }}
+                                            {{mb_substr($commentArr[2],0,4, "utf-8") . '..' . mb_substr($commentArr[2], strlen($commentArr[2])-4, strlen($commentArr[2])-1, "utf-8") }}
                                         <a>
                                     @endif
 
