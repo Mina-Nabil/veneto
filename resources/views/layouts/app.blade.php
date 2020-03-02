@@ -424,7 +424,7 @@
                   {
                       extend: 'print',
                       text: 'Print',
-                      title: 'Via Veneto',
+                      title: 'Veneto',
                       customize: function ( win ) {
                         $(win.document.body)
                         .prepend('<center><img src="{{asset('images/dark-logo.png')}}" style="position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; opacity:0.3" /></center>')
