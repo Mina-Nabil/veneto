@@ -157,7 +157,6 @@
                                 <th>مرتجع</th>
                                 <th>رصيد</th>
                                 <th></th>
-                                <th><i class="fas fa-times"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -219,8 +218,6 @@
                                     @endif
                                     <i class="far fa-list-alt" ></i>
                                     </button>
-                                </td>
-                                <td>
                                 @if($op->CLTR_EROR==0)
                                     <button style="padding:.1rem" class="btn btn-success">
                                         <i class="fas fa-exclamation-triangle" onclick="confirmError({{$op->id}}, {{$op->CLTR_EROR}})" ></i>
@@ -245,7 +242,6 @@
                             <td><strong>{{number_format($totals->CLTR_DISC_BLNC, 2)}}</strong></td>
                             <td><strong>{{number_format($totals->CLTR_RTRN_BLNC, 2)}}</strong></td>
                             <td><strong>{{number_format($totals->CLTR_BLNC, 2)}}</strong></td>
-                            <td></td>
                             <td></td>
                         </tr>
                         <tfoot>

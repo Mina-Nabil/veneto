@@ -145,9 +145,24 @@
                                 <th>مرتجع</th>
                                 <th>رصيد</th>
                                 <th></th>
-                                <th><i class="fas fa-times"></i></th>
                             </tr>
                         </thead>
+                        @if($isSupplier && isset($totals))
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td><strong>Totals</strong></td>
+                                <td></td>
+                                <td><strong>{{number_format($totals->SPTR_PRCH_BLNC, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_CASH_BLNC, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_NTPY_BLNC, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_DISC_BLNC, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_RTRN_BLNC, 2)}}</strong></td>
+                                <td><strong>{{number_format($totals->SPTR_BLNC, 2)}}</strong></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                        @endif
                         <tbody>
                             @foreach($ops as $op)
                             <tr
@@ -165,7 +180,7 @@
                                 @if(!$isSupplier)
                                 <td>
                                     <a href="{{url('suppliers/trans/quick/' . $op->SPTR_SUPP_ID)}}" title="{{$op->SUPP_NAME}}">
-                                        {{ (strlen($op->SUPP_NAME)>12) ?  mb_substr($op->SUPP_NAME,0,12, "utf-8") . '...' : $op->SUPP_NAME}}
+                                        {{ (strlen($op->SUPP_NAME)>18) ?  mb_substr($op->SUPP_NAME,0,18, "utf-8") . '...' : $op->SUPP_NAME}}
                                     </a>
                                 </td>
                                 @endif
@@ -198,8 +213,6 @@
                                     @endif
                                         <i class="far fa-list-alt" ></i>
                                     </button>
-                                </td>
-                                <td>
                                 @if($op->SPTR_EROR==0)
                                     <button style="padding:.1rem" class="btn btn-success">
                                         <i class="fas fa-exclamation-triangle" onclick="confirmError({{$op->id}}, {{$op->SPTR_EROR}})" ></i>
@@ -214,21 +227,7 @@
                             > 
                             @endforeach
                         </tbody>
-                        @if($isSupplier && isset($totals))
-                        <tfoot>
-                            <tr>
-                                <td colspan=2><strong>Totals</strong></td>
-                                <td><strong>{{number_format($totals->SPTR_PRCH_BLNC, 2)}}</strong></td>
-                                <td><strong>{{number_format($totals->SPTR_CASH_BLNC, 2)}}</strong></td>
-                                <td><strong>{{number_format($totals->SPTR_NTPY_BLNC, 2)}}</strong></td>
-                                <td><strong>{{number_format($totals->SPTR_DISC_BLNC, 2)}}</strong></td>
-                                <td><strong>{{number_format($totals->SPTR_RTRN_BLNC, 2)}}</strong></td>
-                                <td><strong>{{number_format($totals->SPTR_BLNC, 2)}}</strong></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tfoot>
-                        @endif
+                   
                     </table>
                 </div>
             </div>

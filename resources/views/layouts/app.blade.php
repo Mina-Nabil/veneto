@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf-token" content="{{ Session::token() }}"> 
+    <meta name="csrf-token" content="{{ Session::token() }}">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/dark-logo.png') }}">
     <title>{{  config('APP_NAME', 'Via Veneto') }}</title>
@@ -19,10 +19,12 @@
     <link href="{{ asset('assets/node_modules/datatables/media/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <!-- Form CSS -->
     <link href="{{ asset('dist/css/pages/file-upload.css')}}" rel="stylesheet">
-    <link href="{{ asset('assets/node_modules/dropify/dist/css/dropify.min.css') }}"  rel="stylesheet">
-    <link href="{{ asset('assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/node_modules/dropify/dist/css/dropify.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet"
+        type="text/css" />
     <link href="{{ asset('assets/node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allerta+Stencil" />
 
     <!-- Sweet Alert Notification -->
@@ -62,16 +64,20 @@
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{{ asset('images/dark-logo.png') }}" height=40px alt="homepage" class="dark-logo" />
+                            <img src="{{ asset('images/dark-logo.png') }}" height=40px alt="homepage"
+                                class="dark-logo" />
                             <!-- Light Logo icon -->
-                            <img src="{{ asset('images/light-logo.png') }}" height=40px alt="homepage" class="light-logo" />
+                            <img src="{{ asset('images/light-logo.png') }}" height=40px alt="homepage"
+                                class="light-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
-                         <!-- dark Logo text -->
-                         <img src="{{ asset('images/dark-text.png') }}" height=40px alt="homepage" class="dark-logo" />
-                         <!-- Light Logo text -->
-                         <img src="{{ asset('images/light-text.png') }}" height=40px class="light-logo" alt="homepage" /></span> </a>
+                            <!-- dark Logo text -->
+                            <img src="{{ asset('images/dark-text.png') }}" height=40px alt="homepage"
+                                class="dark-logo" />
+                            <!-- Light Logo text -->
+                            <img src="{{ asset('images/light-text.png') }}" height=40px class="light-logo"
+                                alt="homepage" /></span> </a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -82,8 +88,11 @@
                     <!-- ============================================================== -->
                     <ul class="navbar-nav mr-auto">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark"
+                                href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a
+                                class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark"
+                                href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
@@ -100,7 +109,8 @@
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
-                        <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light" href="javascript:void(0)"><i class="ti-settings"></i></a></li>
+                        <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light"
+                                href="javascript:void(0)"><i class="ti-settings"></i></a></li>
                     </ul>
                 </div>
             </nav>
@@ -118,15 +128,20 @@
                 <div class="user-profile">
                     <div class="user-pro-body">
                         @if(isset(Auth::user()->image))
-                        <div><img src="{{ asset( 'storage/'. Auth::user()->image ) }} " alt="user-img" class="img-circle"></div>
+                        <div><img src="{{ asset( 'storage/'. Auth::user()->image ) }} " alt="user-img"
+                                class="img-circle"></div>
                         @else
-                        <div><img src="{{ asset('assets/images/users/def-user.png') }} " alt="user-img" class="img-circle"></div>
+                        <div><img src="{{ asset('assets/images/users/def-user.png') }} " alt="user-img"
+                                class="img-circle"></div>
                         @endif
                         <div class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->username }} <span class="caret"></span></a>
+                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu"
+                                data-toggle="dropdown" role="button" aria-haspopup="true"
+                                aria-expanded="false">{{ Auth::user()->username }} <span class="caret"></span></a>
                             <div class="dropdown-menu animated flipInY">
                                 <!-- text-->
-                                <a href="{{route('logout')}}" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                                <a href="{{route('logout')}}" class="dropdown-item"><i class="fa fa-power-off"></i>
+                                    Logout</a>
                                 <!-- text-->
                             </div>
                         </div>
@@ -136,10 +151,12 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-list"></i><span class="hide-menu">الحسابات</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                                aria-expanded="false"><i class="fas fa-list"></i><span
+                                    class="hide-menu">الحسابات</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li>
-                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" >الخزينه</a>
+                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">الخزينه</a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="{{url('cash/show')}}">رصيد</a></li>
                                         <li><a href="{{url('cash/prepare/report')}}">كشف حساب</a></li>
@@ -147,7 +164,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" >البنك</a>
+                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">البنك</a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="{{url('bank/show')}}">رصيد</a></li>
                                         <li><a href="{{url('bank/prepare/report')}}">كشف حساب</a></li>
@@ -158,7 +175,9 @@
                             </ul>
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">الموردين</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                                aria-expanded="false"><i class="icon-people"></i><span
+                                    class="hide-menu">الموردين</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('suppliers/trans/prepare')}}">كشف حساب</a></li>
                                 <li><a href="{{url('suppliers/trans/quick')}}">تعاملات</a></li>
@@ -169,32 +188,37 @@
                             </ul>
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">مخزن قماش</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                                aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">مخزن
+                                    قماش</span></a>
                             <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{url('rawinventory/show')}}">متاح قماش</a></li>
-                            <li><a href="{{url('rawinventory/tran')}}">مجمع تعاملات</a></li>
-                            <li><a href="{{url('rawinventory/add')}}">وارد جديد</a></li>
-                            <li><a href="{{url('raw/tran/add')}}">عمليه جديده</a></li>
+                                <li><a href="{{url('rawinventory/show')}}">متاح قماش</a></li>
+                                <li><a href="{{url('rawinventory/tran')}}">مجمع تعاملات</a></li>
+                                <li><a href="{{url('rawinventory/add')}}">وارد جديد</a></li>
+                                <li><a href="{{url('raw/tran/add')}}">عمليه جديده</a></li>
 
-                            <li>
-                            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" >اعدادات</a>       
-                                <ul aria-expanded="false" class="collapse">
-                                    <li><a href="{{url('models/show')}}">متاح مجمع موديلات</a></li>
-                                    <li><a href="{{url('types/show')}}">اصناف خامات</a></li>
-                                    <li><a href="{{url('colors/show')}}">الوان</a></li>
-                                    <li><a href="{{url('raw/show')}}">انواع خامات</a></li> 
-                                </ul>
-                            </li>
+                                <li>
+                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{url('models/show')}}">متاح مجمع موديلات</a></li>
+                                        <li><a href="{{url('types/show')}}">اصناف خامات</a></li>
+                                        <li><a href="{{url('colors/show')}}">الوان</a></li>
+                                        <li><a href="{{url('raw/show')}}">انواع خامات</a></li>
+                                    </ul>
+                                </li>
 
                             </ul>
                         </li>
 
 
-                        <li> <a  href="{{url('raw/prod/show')}}" aria-expanded="false"><i class=" fas fa-cogs"></i><span class="hide-menu">انتاج </span></a>
-                      
+                        <li> <a href="{{url('raw/prod/show')}}" aria-expanded="false"><i class=" fas fa-cogs"></i><span
+                                    class="hide-menu">انتاج </span></a>
+
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">عملاء</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                                aria-expanded="false"><i class="icon-people"></i><span
+                                    class="hide-menu">عملاء</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('clients/trans/prepare')}}">كشف حساب</a></li>
                                 <li><a href="{{url('clients/trans/quick')}}">تعاملات</a></li>
@@ -203,33 +227,39 @@
                             </ul>
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-barcode"></i><span class="hide-menu">مخزن جاهز</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                                aria-expanded="false"><i class="fas fa-barcode"></i><span class="hide-menu">مخزن
+                                    جاهز</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('finished/show')}}">متاح جاهز</a></li>
                                 <li><a href="{{url('finished/add')}}">وارد جديد</a></li>
                                 <li><a href="{{url('sales/sold')}}">مجمع جاهز مباع</a></li>
-                                <li><li>
-                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" >اعدادات</a>
+                                <li>
+                                <li>
+                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="{{url('brands/show')}}">مركات</a></li>
                                     </ul>
-                                </li></li>
-                            </ul>
+                                </li>
                         </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-boxes"></i><span class="hide-menu">مبيعات</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('sales/show')}}">مجمع مبيعات</a></li>
-                                <li><a href="{{url('sales/add')}}">عمليه بيع جديده</a></li>
-                            </ul>
-                        </li>
-
-
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" fas fa-users"></i><span class="hide-menu">Users</span></a>
+                    </ul>
+                    </li>
+                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                                class="fas fa-boxes"></i><span class="hide-menu">مبيعات</span></a>
                         <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('users/show')}}">Show</a></li>
-                                <li><a href="{{url('users/add')}}">Add</a></li>
-                            </ul>
-                        </li>
+                            <li><a href="{{url('sales/show')}}">مجمع مبيعات</a></li>
+                            <li><a href="{{url('sales/add')}}">عمليه بيع جديده</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                                class=" fas fa-users"></i><span class="hide-menu">Users</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{url('users/show')}}">Show</a></li>
+                            <li><a href="{{url('users/add')}}">Add</a></li>
+                        </ul>
+                    </li>
 
                     </ul>
                 </nav>
@@ -253,14 +283,23 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor" style="font-family: 'Allerta Stencil' ; font-size:24px">Via Veneto Management System</h4>
+                        <h4 class="text-themecolor" style="font-family: 'Allerta Stencil' ; font-size:24px">Via Veneto
+                            Management System</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
-                            <a style="font-family: 'Allerta Stencil'" href="{{url('clients/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Client Op.</a>
-                            <a style="font-family: 'Allerta Stencil'"  href="{{url('suppliers/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Supplier Op.</a>
-                            <a style="font-family: 'Allerta Stencil'" href="{{url('sales/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Sales Op.</a>
-                            <a style="font-family: 'Allerta Stencil'" href="{{url('rawinventory/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> New Raw Entry</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('clients/trans/add')}}"
+                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Client
+                                Op.</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('suppliers/trans/add')}}"
+                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Supplier
+                                Op.</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('sales/add')}}"
+                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Sales
+                                Op.</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('rawinventory/add')}}"
+                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> New Raw
+                                Entry</a>
                         </div>
                     </div>
                 </div>
@@ -280,23 +319,31 @@
                 <!-- .right-sidebar -->
                 <div class="right-sidebar">
                     <div class="slimscrollright">
-                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
+                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span>
+                        </div>
                         <div class="r-panel-body">
                             <ul id="themecolors" class="m-t-20">
                                 <li><b>With Light sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-default" class="default-theme working">1</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-default"
+                                        class="default-theme working">1</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-green" class="green-theme">2</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-red" class="red-theme">3</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-blue" class="blue-theme">4</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-purple" class="purple-theme">5</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-megna" class="megna-theme">6</a></li>
                                 <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme ">7</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-green-dark" class="green-dark-theme">8</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme">9</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-blue-dark" class="blue-dark-theme">10</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme ">12</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-default-dark"
+                                        class="default-dark-theme ">7</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-green-dark"
+                                        class="green-dark-theme">8</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme">9</a>
+                                </li>
+                                <li><a href="javascript:void(0)" data-skin="skin-blue-dark"
+                                        class="blue-dark-theme">10</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-purple-dark"
+                                        class="purple-dark-theme">11</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-megna-dark"
+                                        class="megna-dark-theme ">12</a></li>
                             </ul>
                         </div>
                     </div>
@@ -345,8 +392,8 @@
     <script src="{{ asset('dist/js/custom.min.js') }}"></script>
     <!-- This is data table -->
     <script src="{{ asset('assets/node_modules/datatables/datatables.min.js') }}"></script>
-  <!-- This is for printing invoices -->
-  <script src="{{ asset('dist/js/pages/jquery.PrintArea.js') }}" type="text/JavaScript"></script>
+    <!-- This is for printing invoices -->
+    <script src="{{ asset('dist/js/pages/jquery.PrintArea.js') }}" type="text/JavaScript"></script>
     <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
@@ -355,156 +402,169 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
-    
+
     <!-- End export script -->
     <!-- Form JS -->
     <script src="{{ asset('dist/js/pages/jasny-bootstrap.js') }}"></script>
     <script src="{{ asset('assets/node_modules/dropify/dist/js/dropify.min.js')}}"></script>
-    <script src="{{ asset('assets/node_modules/select2/dist/js/select2.full.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/node_modules/select2/dist/js/select2.full.min.js') }}"
+        type="text/javascript"></script>
 
     <!-- Start Table Search Script -->
     <script>
-    $(document).ready(function() {
-        $("#print").click(function() {
-            var mode = 'iframe'; //popup
-            var close = mode == "popup";
-            var options = {
-                mode: mode,
-                popClose: close
-            };
-            $("div.printableArea").printArea(options);
+        $(document).ready(function () {
+            $("#print").click(function () {
+                var mode = 'iframe'; //popup
+                var close = mode == "popup";
+                var options = {
+                    mode: mode,
+                    popClose: close
+                };
+                $("div.printableArea").printArea(options);
+            });
         });
-    });
 
 
-    $(function() {
-    
-        $(function() {
-            var table = $('#example').DataTable({
-                "columnDefs": [{
-                    "visible": false,
-                    "targets": 2
-                }],
-                "order": [
-                ],
-                "displayLength": 25,
-                "drawCallback": function(settings) {
-                    var api = this.api();
-                    var rows = api.rows({
-                        page: 'current'
-                    }).nodes();
-                    var last = null;
-                    api.column(2, {
-                        page: 'current'
-                    }).data().each(function(group, i) {
-                        if (last !== group) {
-                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
-                            last = group;
+        $(function () {
+
+            $(function () {
+                var table = $('#example').DataTable({
+                    "columnDefs": [{
+                        "visible": false,
+                        "targets": 2
+                    }],
+                    "order": [
+                    ],
+                    "displayLength": 25,
+                    "drawCallback": function (settings) {
+                        var api = this.api();
+                        var rows = api.rows({
+                            page: 'current'
+                        }).nodes();
+                        var last = null;
+                        api.column(2, {
+                            page: 'current'
+                        }).data().each(function (group, i) {
+                            if (last !== group) {
+                                $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                                last = group;
+                            }
+                        });
+                    }
+                });
+                // Order by the grouping
+                $('#example tbody').on('click', 'tr.group', function () {
+                    var currentOrder = table.order()[0];
+                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                        table.order([2, 'desc']).draw();
+                    } else {
+                        table.order([2, 'asc']).draw();
+                    }
+                });
+            });
+        });
+        const d = new Date();
+        const year = d.getFullYear(); // 2019
+        const day = d.getDay();
+        const month = d.getMonth();
+        const formatted = day + "/" + month + "/" + year;
+        $(function () {
+            $(function () {
+                var table = $('#myTable').DataTable({
+                    "displayLength": 25,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend: 'print',
+                            text: 'Print',
+                            title: 'Veneto',
+                            footer: true,
+                            messageTop: "Date: " + formatted,
+                            customize: function (win) {
+                                $(win.document.body)
+                                    .prepend('<center><img src="{{asset('images/dark-logo.png')}}" style="position:absolute; margin: auto; ; margin-top: 460px ; left: 0; right: 0; opacity:0.2" /></center>')
+                                    .css('font-size', '24px')
+                                    
+                                //$('#stampHeader' ).addClass( 'stampHeader' );
+                                $(win.document.body).find('table')
+                                    .css('border', 'solid')
+                                    .css('margin-top', '20px')
+                                    .css('font-size', 'inherit');
+                                $(win.document.body).find('th')
+                                    .css('border', 'solid')
+                                    .css('border', '!important')
+                                    .css('border-width', '1px')
+                                    .css('font-size', 'inherit')
+                                $(win.document.body).find('td')
+                                    .css('border', 'solid')
+                                    .css('border', '!important')
+                                    .css('border-width', '1px');
+                                $(win.document.body).find('tr')
+                                    .css('border', 'solid')
+                                    .css('border', '!important')
+                                    .css('border-width', '1px')
+                            }
+                        }, {
+                            extend: 'excel',
+                            title: 'Veneto',
+                            footer: true,
+                            
                         }
-                    });
+                    ]
+                });
+                // Order by the grouping
+                $('#example tbody').on('click', 'tr.group', function () {
+                    var currentOrder = table.order()[0];
+                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                        table.order([2, 'desc']).draw();
+                    } else {
+                        table.order([2, 'asc']).draw();
+                    }
+                });
+            });
+        });
+
+
+        $(' .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-info mr-1');
+        // File Upload JS
+        $(document).ready(function () {
+            // Basic
+            $('.dropify').dropify();
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove: 'Supprimer',
+                    error: 'Désolé, le fichier trop volumineux'
                 }
             });
-            // Order by the grouping
-            $('#example tbody').on('click', 'tr.group', function() {
-                var currentOrder = table.order()[0];
-                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                    table.order([2, 'desc']).draw();
+            // Used events
+            var drEvent = $('#input-file-events').dropify();
+            drEvent.on('dropify.beforeClear', function (event, element) {
+                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            });
+            drEvent.on('dropify.afterClear', function (event, element) {
+                alert('File deleted');
+            });
+            drEvent.on('dropify.errors', function (event, element) {
+                console.log('Has Errors');
+            });
+            var drDestroy = $('#input-file-to-destroy').dropify();
+            drDestroy = drDestroy.data('dropify')
+            $('#toggleDropify').on('click', function (e) {
+                e.preventDefault();
+                if (drDestroy.isDropified()) {
+                    drDestroy.destroy();
                 } else {
-                    table.order([2, 'asc']).draw();
+                    drDestroy.init();
                 }
-            });
+            })
         });
-    });
-    $(function() {
-        $(function() {
-            var table = $('#myTable').DataTable({
-                "displayLength": 25,
-                dom: 'Bfrtip',
-                buttons: [
-                  {
-                      extend: 'print',
-                      text: 'Print',
-                      title: 'Veneto',
-                      customize: function ( win ) {
-                        $(win.document.body)
-                        .prepend('<center><img src="{{asset('images/dark-logo.png')}}" style="position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; opacity:0.3" /></center>')
-                        .css( 'font-size', '24px' )
-                        .find( 'thead' ).prepend('<tr>' + $('#dt-header').val() + '</tr>')
-                        //$('#stampHeader' ).addClass( 'stampHeader' );
-                        $(win.document.body).find( 'table' )
-                               .css( 'border', 'solid')
-                               .css( 'margin-top', '20px')
-                               .css( 'font-size', 'inherit' );
-                       $(win.document.body).find('th')
-                       .css('border','solid')
-                       .css('border','!important')
-                       .css('border-width','1px')
-                       .css('font-size','inherit')
-                       $(win.document.body).find('td')
-                       .css('border','solid')
-                       .css('border','!important')
-                       .css('border-width','1px');
-                       $(win.document.body).find('tr')
-                       .css('border','solid')
-                       .css('border','!important')
-                       .css('border-width','1px')
-                        }
-                    } , 'excel'
-                ]
-            });
-            // Order by the grouping
-            $('#example tbody').on('click', 'tr.group', function() {
-                var currentOrder = table.order()[0];
-                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                    table.order([2, 'desc']).draw();
-                } else {
-                    table.order([2, 'asc']).draw();
-                }
-            });
-        });
-    });
-    
- 
-    $(' .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-info mr-1');
-    // File Upload JS
-    $(document).ready(function() {
-        // Basic
-        $('.dropify').dropify();
-        // Translated
-        $('.dropify-fr').dropify({
-            messages: {
-                default: 'Glissez-déposez un fichier ici ou cliquez',
-                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
-                remove: 'Supprimer',
-                error: 'Désolé, le fichier trop volumineux'
-            }
-        });
-        // Used events
-        var drEvent = $('#input-file-events').dropify();
-        drEvent.on('dropify.beforeClear', function(event, element) {
-            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
-        });
-        drEvent.on('dropify.afterClear', function(event, element) {
-            alert('File deleted');
-        });
-        drEvent.on('dropify.errors', function(event, element) {
-            console.log('Has Errors');
-        });
-        var drDestroy = $('#input-file-to-destroy').dropify();
-        drDestroy = drDestroy.data('dropify')
-        $('#toggleDropify').on('click', function(e) {
-            e.preventDefault();
-            if (drDestroy.isDropified()) {
-                drDestroy.destroy();
-            } else {
-                drDestroy.init();
-            }
-        })
-    });
-    $(function () {
-     // For select 2
-    $(".select2").select2();
-    $(".ajax").select2({
+        $(function () {
+            // For select 2
+            $(".select2").select2();
+            $(".ajax").select2({
                 ajax: {
                     url: "https://api.github.com/search/repositories",
                     dataType: 'json',
