@@ -44,7 +44,7 @@
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">{{ config('APP_NAME', 'Via Veneto') }}</p>
+            <p class="loader__label">{{ config('APP_NAME', 'Veneto') }}</p>
         </div>
     </div>
     <!-- ============================================================== -->
