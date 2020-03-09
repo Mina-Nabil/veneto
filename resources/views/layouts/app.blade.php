@@ -171,6 +171,14 @@
                                         <li><a href="{{url('bank/add')}}">اضافه</a></li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">حساب عام</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{url('ledger/show')}}">رصيد</a></li>
+                                        <li><a href="{{url('ledger/prepare/report')}}">كشف حساب</a></li>
+                                        <li><a href="{{url('ledger/add')}}">اضافه</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="{{url('transtype/show')}}">اعدادات</a></li>
                             </ul>
                         </li>

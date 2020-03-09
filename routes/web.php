@@ -105,6 +105,15 @@ Route::post("bank/report",         'BankController@report')-> middleware('cors')
 Route::post("bank/error",         'BankController@markError')-> middleware('cors');
 Route::post("bank/unmark",         'BankController@unmarkError')-> middleware('cors');
 
+//Ledger Account
+Route::get("ledger/show",         'LedgerController@show')-> middleware('cors');
+Route::get("ledger/add",         'LedgerController@addPage')-> middleware('cors');
+Route::post("ledger/insert",         'LedgerController@insert')-> middleware('cors');
+Route::get("ledger/prepare/report",         'LedgerController@reportPage')-> middleware('cors');
+Route::post("ledger/report",         'LedgerController@report')-> middleware('cors');
+Route::post("ledger/error",         'LedgerController@markError')-> middleware('cors');
+Route::post("ledger/unmark",         'LedgerController@unmarkError')-> middleware('cors');
+
 //Cash Account
 Route::get("cash/show",             'CashController@show')-> middleware('cors');
 Route::get("cash/add",              'CashController@addPage')-> middleware('cors');
