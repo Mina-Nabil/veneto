@@ -67,7 +67,7 @@
                     </div>
                     
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
-                    <a href="{{url('cash/show') }}" class="btn btn-dark">Cancel</a>
+                    <a href="{{url('ledger/show') }}" class="btn btn-dark">Cancel</a>
                 </form>
             </div>
         </div>

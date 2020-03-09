@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
     {
         //$this->call(UsersTableSeeder::class);
 
-        DB::table('users')->insert([
-            'username' => "dev",
-            'fullname' => 'Mina Nabil',
-            'password' => bcrypt('dev@veneto'),
-            'mobNumber' => "01225212014",
-        ]);
+        // DB::table('users')->insert([
+        //     'username' => "dev",
+        //     'fullname' => 'Mina Nabil',
+        //     'password' => bcrypt('dev@veneto'),
+        //     'mobNumber' => "01225212014",
+        // ]);
 
         // DB::table('cash')->insert([
         //     'CASH_NAME' =>  'Initial Balance',
@@ -37,5 +37,14 @@ class DatabaseSeeder extends Seeder
         //     'BANK_CMNT' =>  null,
         //     'BANK_DATE' =>  date('Y-m-d')
         // ]);
+
+        DB::table('ledger')->insert([
+            'LDGR_NAME' =>  'Initial Balance',
+            'LDGR_IN'   =>  0,
+            'LDGR_OUT'  =>  0,
+            'LDGR_BLNC'  => 0,
+            'LDGR_CMNT' =>  null,
+            'LDGR_DATE' =>  date('Y-m-d')
+        ]);
     }
 }
