@@ -48,8 +48,8 @@
                             <tr>
                                 <td colspan=3><strong>Totals</strong></td>
                                 <td><strong>{{$items['totals']->sold36}}</strong></td>
-                                <td><strong>{{$items['totals']->sold40}}</strong></td>
                                 <td><strong>{{$items['totals']->sold38}}</strong></td>
+                                <td><strong>{{$items['totals']->sold40}}</strong></td>
                                 <td><strong>{{$items['totals']->sold42}}</strong></td>
                                 <td><strong>{{$items['totals']->sold44}}</strong></td>
                                 <td><strong>{{$items['totals']->sold46}}</strong></td>
