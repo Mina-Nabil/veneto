@@ -38,6 +38,22 @@
                                 <td>{{number_format($op->CLNT_BLNC, 2)}}</td>
                             </tr> 
                             @endforeach
+                            @foreach($ops['others'] as $op)
+                            <tr>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $op->id)}}">
+                                        {{$op->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{number_format($op->CLNT_BLNC, 2)}}</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>{{number_format($op->CLNT_BLNC, 2)}}</td>
+                            </tr> 
+                            @endforeach
                         </tbody>
                         @if(isset($ops['totals']))
                         <tfoot>
