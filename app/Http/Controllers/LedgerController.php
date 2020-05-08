@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ledger;
+use App\LedgerType;
 use App\TransType;
 
 use Validator;
@@ -16,18 +17,19 @@ class LedgerController extends Controller
 
     ////////////////Reports//////////////
     function reportPage(){
-        return view("ledger.report", ["reportFormURL" => url("ledger/report")]);
+        $data['ledgerSubTypes'] = LedgerType::getLedgerSubTypes();
+        return view("ledger.report", ["reportFormURL" => url("ledger/report")], $data);
     }
 
     function report(Request $request){
-        $data['ops'] = Ledger::getReport($request->from, $request->to);
+        $data['ops'] = Ledger::getReport($request->from, $request->to, $request->typeID);
         $data['report'] = true;
         return view("ledger.home", $data);
     }
 
     ///////////////Transactions///////////
-    function show(){
-        $data['ops'] = Ledger::getTrans();
+    function show($subtypeID=0){
+        $data['ops'] = Ledger::getTrans($subtypeID);
         $data['report'] = false;
         return view("ledger.home", $data);
     }
@@ -38,7 +40,7 @@ class LedgerController extends Controller
         $data['pageDescription'] = "Add New Ledger Transaction";
         $data['formURL'] = url("ledger/insert");
 
-        $data['transSubTypes'] = TransType::getTransSubTypes();
+        $data['ledgerSubTypes'] = LedgerType::getLedgerSubTypes();
 
         return view("ledger.add", $data);
     }

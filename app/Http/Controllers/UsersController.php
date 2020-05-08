@@ -18,7 +18,12 @@ class UsersController extends Controller
     }
 
     function addpage(){
-        return view("users.add");
+
+        $data['pageTitle'] = "Add User";
+        $data['pageDescription'] = ' ';
+        $data['formURL']        = url('users/insert');
+        $data['isPassNeeded']   = true;
+        return view("users.add", $data);
     }
 
     function edit($id){
@@ -66,19 +71,20 @@ class UsersController extends Controller
 
         $validatedDate = $request->validate([
             'name'      =>  'required',
-            'pass'      =>  'required',
+            'password'      =>  'required',
         ]);
 
         $username   =   $request->name;
-        $pass       =   $request->pass;
+        $pass       =   $request->password;
         $fullName   =   $request->fullName;
-        $mobNumber  =   $request->mob;
+        $mobNumber  =   $request->mobNumber;
+        $path = null;
 
         if ($request->hasFile('photo')) {
             $path = $request->photo->store('images/users', 'public');
         }
 
         $id = User::insertUser($username, $pass, $fullName, $mobNumber, $path);
-
+        return redirect('users/show');
     }
 }
