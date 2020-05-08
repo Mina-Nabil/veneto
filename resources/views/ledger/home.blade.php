@@ -159,10 +159,10 @@
                                     {{date_format(date_create($op->LDGR_DATE), "d-m-Y")}}   
                                 </td>
                                 <td>
-                                    @if($op->LDGR_TRST_ID == null)
+                                    @if($op->LDGR_LDST_ID == null)
                                         {{$op->LDGR_NAME}}
                                     @else
-                                        {{$op->TRTP_NAME}}-{{$op->TRST_NAME}}
+                                       <a href="{{url('ledger/show/'.$op->LDGR_LDST_ID)}}">{{$op->LDTP_NAME}}-{{$op->LDST_NAME}}</a> {{$op->LDGR_NAME}}
                                     @endif
                                 </td>
                                 <td>{{number_format($op->LDGR_OUT, 2)}}</td>

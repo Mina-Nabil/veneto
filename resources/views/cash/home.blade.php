@@ -162,7 +162,7 @@
                                     @if($op->CASH_TRST_ID == null)
                                         {{$op->CASH_NAME}}
                                     @else
-                                        {{$op->TRTP_NAME}}-{{$op->TRST_NAME}}
+                                   <strong>{{$op->TRTP_NAME}}-{{$op->TRST_NAME}}</strong> {{$op->CASH_NAME}}
                                     @endif
                                 </td>
                                 <td>{{number_format($op->CASH_OUT, 2)}}</td>

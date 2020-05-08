@@ -25,11 +25,11 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group mb-3">
-                            <select name=typeID class="select2 form-control custom-select">
+                            <select name=typeID class="select2 form-control custom-select" required>
                                 <option disabled hidden selected value="">الانواع</option>
-                                @foreach($transSubTypes as $transSubType)
-                                <option value="{{ $transSubType->id }}">
-                                    {{$transSubType->TRTP_NAME}}-{{$transSubType->TRST_NAME}}
+                                @foreach($ledgerSubTypes as $ledgerSubType)
+                                <option value="{{ $ledgerSubType->id }}">
+                                    {{$ledgerSubType->LDTP_NAME}}-{{$ledgerSubType->LDST_NAME}}
                                 </option>
                                 @endforeach
                             </select>

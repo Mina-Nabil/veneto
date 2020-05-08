@@ -33,9 +33,11 @@ class UpdateCashbankTables extends Migration
     {
         //
         Schema::table('cash', function(Blueprint $table){
+            $table->dropForeign('cash_cash_trst_id_foreign');
             $table->dropColumn('CASH_TRST_ID');
         });
         Schema::table('bank', function(Blueprint $table){
+            $table->dropForeign('bank_bank_trst_id_foreign');
             $table->dropColumn('BANK_TRST_ID');
         });
     }

@@ -32,6 +32,21 @@
                         <small class="text-danger">{{$errors->first('to')}}</small>
                     </div>
 
+                    <div class="form-group">
+                        <label>الحساب</label>
+                        <div class="input-group mb-3">
+                            <select name=typeID class="select2 form-control custom-select">
+                                <option selected value="0">All Accounts</option>
+                                @foreach($ledgerSubTypes as $ledgerSubType)
+                                <option value="{{ $ledgerSubType->id }}">
+                                    {{$ledgerSubType->LDTP_NAME}}-{{$ledgerSubType->LDST_NAME}}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <small class="text-danger">{{$errors->first('typeID')}}</small>
+                    </div>
+
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
 
                 </form>

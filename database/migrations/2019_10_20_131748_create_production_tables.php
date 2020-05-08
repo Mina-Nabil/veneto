@@ -25,6 +25,8 @@ class CreateProductionTables extends Migration
      */
     public function down()
     {
-        Schema::dropColumn('RINV_PROD_AMNT');
+        Schema::table('raw_inventory', function (Blueprint $table) {
+            $table->dropColumn('RINV_PROD_AMNT');
+        });
     }
 }

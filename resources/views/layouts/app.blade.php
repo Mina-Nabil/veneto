@@ -171,16 +171,20 @@
                                         <li><a href="{{url('bank/add')}}">اضافه</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">حساب عام</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="{{url('ledger/show')}}">رصيد</a></li>
-                                        <li><a href="{{url('ledger/prepare/report')}}">كشف حساب</a></li>
-                                        <li><a href="{{url('ledger/add')}}">اضافه</a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="{{url('transtype/show')}}">اعدادات</a></li>
                             </ul>
+                        </li>
+
+                        <li>
+                            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
+                                aria-expanded="false"><i class="fas fa-newspaper"></i><span
+                                    class="hide-menu">حساب عام</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{url('ledger/show')}}">رصيد</a></li>
+                                    <li><a href="{{url('ledger/prepare/report')}}">كشف حساب</a></li>
+                                    <li><a href="{{url('ledger/add')}}">اضافه</a></li>
+                                    <li><a href="{{url('ledger/types/show')}}">انواع حسابات</a></li>
+                                </ul>
                         </li>
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
@@ -490,9 +494,9 @@
                             messageTop: "Date: " + formatted,
                             customize: function (win) {
                                 $(win.document.body)
-                                    .prepend('<center><img src="{{asset('images/dark-logo.png')}}" style="position:absolute; margin: auto; ; margin-top: 460px ; left: 0; right: 0; opacity:0.2" /></center>')
+                                    .prepend('<center><img src="{{asset('images / dark - logo.png')}}" style="position:absolute; margin: auto; ; margin-top: 460px ; left: 0; right: 0; opacity:0.2" /></center>')
                                     .css('font-size', '24px')
-                                    
+
                                 //$('#stampHeader' ).addClass( 'stampHeader' );
                                 $(win.document.body).find('table')
                                     .css('border', 'solid')
@@ -516,7 +520,7 @@
                             extend: 'excel',
                             title: 'Veneto',
                             footer: true,
-                            
+
                         }
                     ]
                 });

@@ -11,6 +11,9 @@
 |
 */
 //Sales Routes
+
+use Illuminate\Support\Facades\Route;
+
 Route::get("sales/show",            'SalesController@show')-> middleware('cors');
 Route::get("sales/sold",            'SalesController@allItemsSold')-> middleware('cors');
 Route::get("sales/show/{id}",       'SalesController@show')-> middleware('cors');
@@ -107,6 +110,7 @@ Route::post("bank/unmark",         'BankController@unmarkError')-> middleware('c
 
 //Ledger Account
 Route::get("ledger/show",         'LedgerController@show')-> middleware('cors');
+Route::get("ledger/show/{subtypeID}",         'LedgerController@show')-> middleware('cors');
 Route::get("ledger/add",         'LedgerController@addPage')-> middleware('cors');
 Route::post("ledger/insert",         'LedgerController@insert')-> middleware('cors');
 Route::get("ledger/prepare/report",         'LedgerController@reportPage')-> middleware('cors');
@@ -131,6 +135,15 @@ Route::post('transtype/insert',        'TransTypeController@insertTransType')-> 
 Route::get("transsubtype/edit/{id}",      'TransTypeController@editTransSubType')-> middleware('cors');
 Route::post('transsubtype/update',        'TransTypeController@updateTransSubType')-> middleware('cors');
 Route::post('transsubtype/insert',        'TransTypeController@insertTransSubType')-> middleware('cors');
+
+//LedgervTypes
+Route::get(" ledger/types/show",           'LedgerTypeController@showLedgerType')-> middleware('cors');
+Route::get(" ledger/types/edit/{id}",      'LedgerTypeController@editLedgerType')-> middleware('cors');
+Route::post('ledger/types/update',        'LedgerTypeController@updateLedgerType')-> middleware('cors');
+Route::post('ledger/types/insert',        'LedgerTypeController@insertLedgerType')-> middleware('cors');
+Route::get(" ledger/subtypes/edit/{id}",      'LedgerTypeController@editLedgerSubType')-> middleware('cors');
+Route::post('ledger/subtypes/update',        'LedgerTypeController@updateLedgerSubType')-> middleware('cors');
+Route::post('ledger/subtypes/insert',        'LedgerTypeController@insertLedgerSubType')-> middleware('cors');
 
 
 //Suppliers Routes
