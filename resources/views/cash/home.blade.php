@@ -134,6 +134,7 @@
                             <tr>
                                 <th>TR#</th>
                                 <th>تاريخ</th>
+                                <th>نوع</th>
                                 <th>وصف</th>
                                 <th>مدين</th>
                                 <th>دائن</th>
@@ -159,11 +160,10 @@
                                     {{date_format(date_create($op->CASH_DATE), "d-m-Y")}}   
                                 </td>
                                 <td>
-                                    @if($op->CASH_TRST_ID == null)
-                                        {{$op->CASH_NAME}}
-                                    @else
-                                   <strong>{{$op->TRTP_NAME}}-{{$op->TRST_NAME}}</strong> {{$op->CASH_NAME}}
-                                    @endif
+                                    <a  href="{{url('cash/show/'.$op->CASH_TRST_ID)}}">{{$op->TRTP_NAME}} {{$op->TRST_NAME}}</a>
+                                </td>
+                                <td>
+                                   {{$op->CASH_NAME}}
                                 </td>
                                 <td>{{number_format($op->CASH_OUT, 2)}}</td>
                                 <td>{{number_format($op->CASH_IN, 2)}}</td>

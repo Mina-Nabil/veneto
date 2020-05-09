@@ -9,11 +9,14 @@ use Illuminate\Support\Facades\DB;
 class Bank extends Model
 {
     //Bank Model
-    static function getTrans(){
-        return DB::table('bank')->select('bank.*', 'trans_subtype.TRST_NAME', 'trans_type.TRTP_NAME')
+    static function getTrans($subType=0){
+        $baseQuery = DB::table('bank')->select('bank.*', 'trans_subtype.TRST_NAME', 'trans_type.TRTP_NAME')
         ->leftJoin('trans_subtype', 'BANK_TRST_ID', '=', 'trans_subtype.id')
-        ->leftJoin('trans_type', 'trans_subtype.TRST_TRTP_ID', '=', 'trans_type.id')
-        ->orderBy('id', 'desc')->limit(500)->get();
+        ->leftJoin('trans_type', 'trans_subtype.TRST_TRTP_ID', '=', 'trans_type.id');
+        if ($subType != 0 && is_numeric($subType))
+        $baseQuery = $baseQuery->where([["BANK_TRST_ID", $subType]]);
+
+    return  $baseQuery->orderBy('id', 'desc')->limit(500)->get();
     }
 
     static function getReport($from, $to){

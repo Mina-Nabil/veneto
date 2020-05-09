@@ -9,12 +9,16 @@ use Illuminate\Support\Facades\DB;
 class Cash extends Model
 {
     //Cash Model
-    static function getTrans()
+    static function getTrans($subType = 0)
     {
-        return DB::table('cash')->select('cash.*', 'trans_subtype.TRST_NAME', 'trans_type.TRTP_NAME')
+        $baseQuery = DB::table('cash')->select('cash.*', 'trans_subtype.TRST_NAME', 'trans_type.TRTP_NAME')
             ->leftJoin('trans_subtype', 'CASH_TRST_ID', '=', 'trans_subtype.id')
-            ->leftJoin('trans_type', 'trans_subtype.TRST_TRTP_ID', '=', 'trans_type.id')
-            ->orderBy('id', 'desc')->limit(500)->get();
+            ->leftJoin('trans_type', 'trans_subtype.TRST_TRTP_ID', '=', 'trans_type.id');
+
+        if ($subType != 0 && is_numeric($subType))
+            $baseQuery = $baseQuery->where([["CASH_TRST_ID", $subType]]);
+
+        return  $baseQuery->orderBy('id', 'desc')->limit(500)->get();
     }
 
     static function getReport($from, $to)

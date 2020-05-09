@@ -29,13 +29,13 @@
                                         {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
-                                <td>{{number_format($op->CLNT_BLNC - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
+                                <td>{{number_format($ops['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
                                 <td>{{number_format($op->totalPurch, 2)}}</td>
                                 <td>{{number_format($op->totalCash, 2)}}</td>
                                 <td>{{number_format($op->totalNotes, 2)}}</td>
                                 <td>{{number_format($op->totalDisc, 2)}}</td>
                                 <td>{{number_format($op->totalReturn, 2)}}</td>
-                                <td>{{number_format($op->CLNT_BLNC, 2)}}</td>
+                                <td>{{number_format($ops['balances'][$op->id], 2)}}</td>
                             </tr> 
                             @endforeach
                             @foreach($ops['others'] as $op)

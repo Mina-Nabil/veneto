@@ -101,6 +101,7 @@ Route::post('types/insert',       'ModelsController@insertType')-> middleware('c
 
 //Bank Account
 Route::get("bank/show",         'BankController@show')-> middleware('cors');
+Route::get("bank/show/{typeID}",         'BankController@show')-> middleware('cors');
 Route::get("bank/add",         'BankController@addPage')-> middleware('cors');
 Route::post("bank/insert",         'BankController@insert')-> middleware('cors');
 Route::get("bank/prepare/report",         'BankController@reportPage')-> middleware('cors');
@@ -120,6 +121,7 @@ Route::post("ledger/unmark",         'LedgerController@unmarkError')-> middlewar
 
 //Cash Account
 Route::get("cash/show",             'CashController@show')-> middleware('cors');
+Route::get("cash/show/{typeID}",             'CashController@show')-> middleware('cors');
 Route::get("cash/add",              'CashController@addPage')-> middleware('cors');
 Route::post("cash/insert",          'CashController@insert')-> middleware('cors');
 Route::get("cash/prepare/report",   'CashController@reportPage')-> middleware('cors');

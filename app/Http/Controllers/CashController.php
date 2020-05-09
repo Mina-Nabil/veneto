@@ -26,8 +26,8 @@ class CashController extends Controller
     }
 
     ///////////////Transactions///////////
-    function show(){
-        $data['ops'] = Cash::getTrans();
+    function show($subtypeID=0){
+        $data['ops'] = Cash::getTrans($subtypeID);
         $data['report'] = false;
         return view("cash.home", $data);
     }

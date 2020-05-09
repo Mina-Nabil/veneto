@@ -48,29 +48,36 @@ class Clients extends Model
     {
 
         $ret = array();
+        $to = date('Y-m-d', strtotime('+1 day', strtotime($to)));
         $ret['data'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
-            ->select("clients.CLNT_NAME", "clients.CLNT_BLNC", "clients.id")
-            ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, 
+            ->select("clients.CLNT_NAME", "clients.id")
+            ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch,
                                                          SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
-            ->where([
-                ["CLTR_DATE", '>=', $from],
-                ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
-            ])->groupBy("CLTR_CLNT_ID")->get();
+            ->whereBetween("CLTR_DATE", [$from, $to])->groupBy("CLTR_CLNT_ID")->orderByDesc("client_trans.id")->get();
 
 
-        $ret['others'] = DB::table("clients")->select(['id', 'CLNT_BLNC', 'CLNT_NAME'])->whereNotIn('id', $ret['data']->pluck('id'))->get();
+        $balances = DB::table("client_trans as t1")->selectRaw("id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
+            ->havingRaw("id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}' ) ")           
+            ->get();
+
+
+        $ret['balances'] = [];
+        foreach ($balances as $balance) {
+            $ret['balances'][$balance->CLTR_CLNT_ID] = $balance->CLTR_BLNC;
+        }
+
+        $ret['others'] = DB::table("clients")->select(['id', 'CLNT_BLNC', 'CLNT_NAME'])->whereNotIn('id', $balances->pluck('CLTR_CLNT_ID'))->get();
+
 
         $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
             ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, SUM(DISTINCT clients.CLNT_BLNC) as totalBalance, 
                                         SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
-            ->where([
-                ["CLTR_DATE", '>=', $from],
-                ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
-            ])->get()->first();
+            ->whereBetween("CLTR_DATE", [$from, $to])->get()->first();
 
-        foreach($ret['others'] as $mloshTrans){
+        foreach ($ret['others'] as $mloshTrans) {
             $ret['totals']->totalBalance += $mloshTrans->CLNT_BLNC;
         }
+
 
         return $ret;
     }

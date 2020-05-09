@@ -27,8 +27,8 @@ class BankController extends Controller
 
 
     ///////////////Transactions///////////
-    function show(){
-        $data['ops'] = Bank::getTrans();
+    function show($subType=0){
+        $data['ops'] = Bank::getTrans($subType);
         $data['report'] = false;
         return view("bank.home", $data);
     }

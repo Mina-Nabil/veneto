@@ -6,23 +6,23 @@
     function IsNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
-    
+
     function getMeta(metaName) {
-      const metas = document.getElementsByTagName('meta');
-    
-      for (let i = 0; i < metas.length; i++) {
-        if (metas[i].getAttribute('name') === metaName) {
-          return metas[i].getAttribute('content');
+        const metas = document.getElementsByTagName('meta');
+
+        for (let i = 0; i < metas.length; i++) {
+            if (metas[i].getAttribute('name') === metaName) {
+                return metas[i].getAttribute('content');
+            }
         }
-      }
-    
-      return '';
+
+        return '';
     }
-    
-    
-    function confirmError(id, errorState){
-    
-        if(errorState==1){
+
+
+    function confirmError(id, errorState) {
+
+        if (errorState == 1) {
             Swal.fire({
                 title: 'Transaction already is marked as an Error',
                 text: "You won't be able to mark this!",
@@ -41,38 +41,38 @@
                 if (result.value) {
                     const csrf = getMeta('csrf-token');
                     var http = new XMLHttpRequest();
-                    var url  = '{{url("ledger/error")}}';
+                    var url = '{{url("ledger/error")}}';
                     var params = '_token=' + csrf + '&tranId=' + id;
                     http.open('POST', url, true);
                     //Send the proper header information along with the request
                     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    http.onreadystatechange = function() {
-                        console.log(this.responseText=='1')
-                        if (IsNumeric(this.responseText) && this.responseText=='1' && this.readyState == 4 && this.status == 200) {
+                    http.onreadystatechange = function () {
+                        console.log(this.responseText == '1')
+                        if (IsNumeric(this.responseText) && this.responseText == '1' && this.readyState == 4 && this.status == 200) {
                             Swal.fire({
                                 title: 'Marked!',
                                 text: 'Please refresh for an updated view!',
                                 icon: 'success',
                                 confirmButtonText: 'Refresh'
-                                }).then((refresh) => {
-                                    document.location.reload();
-                                })
-                            
-                        } else if(this.readyState == 4 && this.status == 200 && IsNumeric(this.responseText) && this.responseText=='0') {
+                            }).then((refresh) => {
+                                document.location.reload();
+                            })
+
+                        } else if (this.readyState == 4 && this.status == 200 && IsNumeric(this.responseText) && this.responseText == '0') {
                             Swal.fire("Error", "Process Failed, please try again", 'error');
-                        } 
-                        };
+                        }
+                    };
                     http.send(params);
                 }
             })
         }
-    
-        
+
+
     }
-    
-    function unmarkError(id, errorState){
-    
-        if(errorState==0){
+
+    function unmarkError(id, errorState) {
+
+        if (errorState == 0) {
             Swal.fire({
                 title: 'Transaction already is unmarked',
                 text: "You won't be able to unmark this!",
@@ -91,36 +91,36 @@
                 if (result.value) {
                     const csrf = getMeta('csrf-token');
                     var http = new XMLHttpRequest();
-                    var url  = '{{url("ledger/unmark")}}';
+                    var url = '{{url("ledger/unmark")}}';
                     var params = '_token=' + csrf + '&tranId=' + id;
                     http.open('POST', url, true);
                     //Send the proper header information along with the request
                     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    http.onreadystatechange = function() {
-                        console.log(this.responseText=='1')
-                        if (IsNumeric(this.responseText) && this.responseText=='1' && this.readyState == 4 && this.status == 200) {
+                    http.onreadystatechange = function () {
+                        console.log(this.responseText == '1')
+                        if (IsNumeric(this.responseText) && this.responseText == '1' && this.readyState == 4 && this.status == 200) {
                             Swal.fire({
                                 title: 'Unmarked!',
                                 text: 'please refresh for updated view!',
                                 icon: 'success',
                                 confirmButtonText: 'Refresh'
-                                }).then((refresh) => {
-                                    document.location.reload();
-                                })
-                            
-                        } else if(this.readyState == 4 && this.status == 200 && IsNumeric(this.responseText) && this.responseText=='0') {
+                            }).then((refresh) => {
+                                document.location.reload();
+                            })
+
+                        } else if (this.readyState == 4 && this.status == 200 && IsNumeric(this.responseText) && this.responseText == '0') {
                             Swal.fire("Error", "Process Failed, please try again", 'error');
-                        } 
-                        };
+                        }
+                    };
                     http.send(params);
                 }
             })
         }
-    
-        
+
+
     }
-    
-    </script>
+
+</script>
 
 <div class="row">
     <div class="col-12">
@@ -129,11 +129,14 @@
                 <h4 class="card-title">General Account</h4>
                 <h6 class="card-subtitle">Show All General Accounts transactions</h6>
                 <div class="table-responsive m-t-40">
-                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
+                    <table id="myTable"
+                        class="table color-bordered-table table-striped full-color-table full-info-table hover-table"
+                        data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th>TR#</th>
                                 <th>تاريخ</th>
+                                <th>نوع</th>
                                 <th>وصف</th>
                                 <th>مدين</th>
                                 <th>دائن</th>
@@ -146,48 +149,49 @@
                         </thead>
                         <tbody>
                             @foreach($ops as $op)
-                            <tr
-                            @if($op->LDGR_EROR==1)
+                            <tr @if($op->LDGR_EROR==1)
 
                                 style="background-color: #ffbdbd;"
                                 title="Wrong Transaction"
-                                
-                            @endif
-                            >
+
+                                @endif
+                                >
                                 <td>{{$op->id}}</td>
                                 <td>
-                                    {{date_format(date_create($op->LDGR_DATE), "d-m-Y")}}   
+                                    {{date_format(date_create($op->LDGR_DATE), "d-m-Y")}}
                                 </td>
                                 <td>
-                                    @if($op->LDGR_LDST_ID == null)
-                                        {{$op->LDGR_NAME}}
-                                    @else
-                                       <a href="{{url('ledger/show/'.$op->LDGR_LDST_ID)}}">{{$op->LDTP_NAME}}-{{$op->LDST_NAME}}</a> {{$op->LDGR_NAME}}
-                                    @endif
+                                    <a href="{{url('ledger/show/'.$op->LDGR_LDST_ID)}}">{{$op->LDTP_NAME}} {{$op->LDST_NAME}}</a>
+                                </td>
+                                <td>
+                                    {{$op->LDGR_NAME}}
                                 </td>
                                 <td>{{number_format($op->LDGR_OUT, 2)}}</td>
                                 <td>{{number_format($op->LDGR_IN, 2)}}</td>
                                 <td>{{number_format($op->LDGR_BLNC, 2)}}</td>
                                 <td>
                                     @if(isset($op->LDGR_CMNT) && strcmp($op->LDGR_CMNT, '')!=0 )
-                                        <button type="button"  style="padding:.1rem"  class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->LDGR_CMNT}}" data-original-title="Comment:">
-                                    @endif
-                                    <i class="fas fa-list-alt"></i>
+                                    <button type="button" style="padding:.1rem" class="btn btn-secondary"
+                                        data-container="body" title="" data-toggle="popover" data-placement="bottom"
+                                        data-content="{{$op->LDGR_CMNT}}" data-original-title="Comment:">
+                                        @endif
+                                        <i class="fas fa-list-alt"></i>
                                     </button>
                                 </td>
                                 @if(isset($report) && !$report)
                                 @if($op->LDGR_EROR==0)
                                 <td><button style="padding:.1rem" class="btn btn-success">
-                                    <i class="fas fa-exclamation-triangle" onclick="confirmError({{$op->id}}, {{$op->LDGR_EROR}})" ></i>
-                                </button></td>
+                                        <i class="fas fa-exclamation-triangle"
+                                            onclick="confirmError({{$op->id}}, {{$op->LDGR_EROR}})"></i>
+                                    </button></td>
                                 @else
                                 <td><button style="padding:.1rem" class="btn btn-danger">
-                                    <i class="fas fa-exclamation-triangle" onclick="unmarkError({{$op->id}}, {{$op->LDGR_EROR}})" ></i>
-                                </button></td>
+                                        <i class="fas fa-exclamation-triangle"
+                                            onclick="unmarkError({{$op->id}}, {{$op->LDGR_EROR}})"></i>
+                                    </button></td>
                                 @endif
                                 @endif
-                            </tr
-                            > 
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>

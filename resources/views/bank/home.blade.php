@@ -130,6 +130,7 @@ function unmarkError(id, errorState){
                             <tr>
                                 <th>TR#</th>
                                 <th>تاريخ</th>
+                                <th>نوع</th>
                                 <th>وصف</th>
                                 <th>مدين</th>
                                 <th>دائن</th>
@@ -155,11 +156,10 @@ function unmarkError(id, errorState){
                                     {{date_format(date_create($op->BANK_DATE), "d-m-Y")}}
                                 </td>
                                 <td>
-                                @if($op->BANK_TRST_ID == null)
-                                    {{$op->BANK_NAME}}
-                                @else
-                                    {{$op->TRTP_NAME}}-{{$op->TRST_NAME}}
-                                @endif
+                                    <a  href="{{url('bank/show/'.$op->BANK_TRST_ID)}}">{{$op->TRTP_NAME}} {{$op->TRST_NAME}}</a>
+                                </td>
+                                <td>
+                                   {{$op->BANK_NAME}}
                                 </td>
                                 <td>{{number_format($op->BANK_OUT, 2)}}</td>
                                 <td>{{number_format($op->BANK_IN, 2)}}</td>
