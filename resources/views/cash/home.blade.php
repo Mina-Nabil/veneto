@@ -138,6 +138,7 @@
                                 <th>وصف</th>
                                 <th>مدين</th>
                                 <th>دائن</th>
+                                <th>رصيد حساب</th>
                                 <th>رصيد</th>
                                 <th></th>
                                 @if(isset($report) && !$report)
@@ -167,6 +168,7 @@
                                 </td>
                                 <td>{{number_format($op->CASH_OUT, 2)}}</td>
                                 <td>{{number_format($op->CASH_IN, 2)}}</td>
+                                <td>{{number_format($op->CASH_TRST_BLNC, 2)}}</td>
                                 <td>{{number_format($op->CASH_BLNC, 2)}}</td>
                                 <td>
                                     @if(isset($op->CASH_CMNT) && strcmp($op->CASH_CMNT, '')!=0 )

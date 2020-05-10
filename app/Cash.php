@@ -35,9 +35,9 @@ class Cash extends Model
     {
 
         DB::transaction(function () use ($title, $in, $out, $comment, $isError, $transType) {
-
+            
             $balance = self::getCashBalance() + $in - $out;
-            DB::table('cash')->insertGetId([
+            $insertArr = [
                 'CASH_NAME' => $title,
                 'CASH_IN'   => $in,
                 'CASH_OUT'  => $out,
@@ -46,13 +46,30 @@ class Cash extends Model
                 'CASH_EROR' => $isError,
                 'CASH_TRST_ID' => $transType,
                 'CASH_DATE' => date('Y-m-d H:i:s')
-            ]);
+            ];
+            if(isset($transType)){
+                $typeBalance = self::getCashTypeBalance($transType) - $in + $out;
+                $insertArr['CASH_TRST_BLNC'] = $typeBalance;
+            }
+            DB::table('cash')->insertGetId($insertArr);
         });
     }
 
     static function getCashBalance()
     {
         return DB::table('cash')->latest('id')->first()->CASH_BLNC;
+    }
+
+    static function getCashTypeBalance($subtype)
+    {
+        $latestRow = DB::table('cash')->where([[
+            "CASH_TRST_ID", $subtype
+        ]])->orderByDesc("id")->first();
+
+        if (isset($latestRow->CASH_TRST_BLNC) && $latestRow->CASH_TRST_BLNC != 0)
+            return $latestRow->CASH_TRST_BLNC;
+        else
+            return 0;
     }
 
     static function correctFaultyTran($id)
