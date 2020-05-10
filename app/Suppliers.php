@@ -63,7 +63,10 @@ class Suppliers extends Model
             $ret['balances'][$balance->SPTR_SUPP_ID] = $balance->SPTR_BLNC;
         }
 
-        $ret['others'] = DB::table("suppliers")->select(['id', 'SUPP_BLNC', 'SUPP_NAME'])->whereNotIn('id', $balances->pluck('SPTR_SUPP_ID'))->get();
+        $ret['others'] = DB::table("suppliers as t1")->join('supplier_trans', "SPTR_SUPP_ID", "=", "t1.id")
+            ->select(['t1.id', 'SPTR_BLNC', 'SUPP_NAME'])->whereNotIn('t1.id', $balances->pluck('SPTR_SUPP_ID'))
+            ->whereRaw(" supplier_trans.id = (SELECT MAX(id) FROM supplier_trans WHERE SPTR_SUPP_ID = t1.id AND SPTR_DATE <= '{$to}' ) ")->get();
+
         $ret['totals'] = DB::table("supplier_trans")->join('suppliers', "SPTR_SUPP_ID", "=", "suppliers.id")
             ->selectRaw("SUM(SPTR_CASH_AMNT) as totalCash, SUM(SPTR_PRCH_AMNT) as totalPurch, SUM(DISTINCT suppliers.SUPP_BLNC) as totalBalance, 
                                             SUM(SPTR_DISC_AMNT) as totalDisc, SUM(SPTR_RTRN_AMNT) as totalReturn, SUM(SPTR_NTPY_AMNT) as totalNotes")

@@ -66,7 +66,9 @@ class Clients extends Model
             $ret['balances'][$balance->CLTR_CLNT_ID] = $balance->CLTR_BLNC;
         }
 
-        $ret['others'] = DB::table("clients")->select(['id', 'CLNT_BLNC', 'CLNT_NAME'])->whereNotIn('id', $balances->pluck('CLTR_CLNT_ID'))->get();
+        $ret['others'] = DB::table("clients as t1")->join('client_trans', "CLTR_CLNT_ID", "=", "t1.id")
+        ->select(['t1.id', 'CLTR_BLNC', 'CLNT_NAME'])->whereNotIn('t1.id', $balances->pluck('CLTR_CLNT_ID'))
+        ->whereRaw(" client_trans.id = (SELECT MAX(id) FROM client_trans WHERE CLTR_CLNT_ID = t1.id AND CLTR_DATE <= '{$to}' ) ")->get();
 
 
         $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
@@ -75,7 +77,7 @@ class Clients extends Model
             ->whereBetween("CLTR_DATE", [$from, $to])->get()->first();
 
         foreach ($ret['others'] as $mloshTrans) {
-            $ret['totals']->totalBalance += $mloshTrans->CLNT_BLNC;
+            $ret['totals']->totalBalance += $mloshTrans->CLTR_BLNC;
         }
 
 

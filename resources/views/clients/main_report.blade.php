@@ -45,13 +45,13 @@
                                         {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
-                                <td>{{number_format($op->CLNT_BLNC, 2)}}</td>
+                                <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
-                                <td>{{number_format($op->CLNT_BLNC, 2)}}</td>
+                                <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
                             </tr> 
                             @endforeach
                         </tbody>
