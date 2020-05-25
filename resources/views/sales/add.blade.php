@@ -124,6 +124,14 @@
             <div class="card-body">
                 <h4 class="card-title">More Sales Details</h4>
                 <h5 class="card-subtitle">Values Set by default, change if neccessary</h5>
+
+                <div class="col-lg-12 bt-switch">
+                    <label>Type</label>
+                    <div class="input-group mb-3 ">
+                        <input type="checkbox" data-size="large" data-on-color="info" data-off-color="warning" data-on-text="Online" data-off-text="Normal" name="isOnline">
+                    </div>
+                    <small class="text-danger">{{$errors->first('paid')}}</small>
+                </div>
                 <div class="col-lg-12">
                     <label>Paid</label>
                     <div class="input-group mb-3">

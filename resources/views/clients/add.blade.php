@@ -12,6 +12,17 @@
                 @if(isset($client))
                 <input type=hidden name=id value={{$client->id}} >
                 @endif
+                <div class="col-lg-12 bt-switch">
+                    <label>Type</label>
+                    <div class="input-group mb-3 ">
+                        <input type="checkbox" data-size="large" data-on-color="info" data-off-color="warning" data-on-text="Online" data-off-text="Normal" name="isOnline" 
+                        {{ ( isset($client) && $client->CLNT_ONLN==1 ) ? 'checked' : ''}}
+                        
+                        >
+                    </div>
+                    <small class="text-danger">{{$errors->first('paid')}}</small>
+                </div>
+
                     <div class="form-group">
                         <label>Name*</label>
                         <div class="input-group mb-3">

@@ -44,7 +44,7 @@ class Clients extends Model
     }
 
 
-    static function getTotals($from, $to)
+    static function getTotals($from, $to, $isOnline = -1)
     {
 
         $ret = array();
@@ -53,12 +53,24 @@ class Clients extends Model
             ->select("clients.CLNT_NAME", "clients.id")
             ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch,
                                                          SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
-            ->whereBetween("CLTR_DATE", [$from, $to])->groupBy("CLTR_CLNT_ID")->orderByDesc("client_trans.id")->get();
+            ->whereBetween("CLTR_DATE", [$from, $to]);
 
+        if ($isOnline == 0) {
+            $ret['data'] = $ret['data']->where("CLNT_ONLN", 0);
+        } elseif ($isOnline == 1) {
+            $ret['data'] = $ret['data']->where("CLNT_ONLN", 1);
+        }
+        $ret['data'] = $ret['data']->groupBy("CLTR_CLNT_ID")->orderByDesc("client_trans.id")->get();
 
-        $balances = DB::table("client_trans as t1")->selectRaw("id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
-            ->havingRaw("id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}' ) ")           
-            ->get();
+        if ($isOnline != -1)
+            $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
+                ->join("clients", "clients.id", '=', 't1.CLTR_CLNT_ID')
+                ->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE CLNT_ONLN={$isOnline} AND t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}' ) ")
+                ->get();
+        else
+            $balances = DB::table("client_trans as t1")->selectRaw("id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
+                ->havingRaw("id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}' ) ")
+                ->get();
 
 
         $ret['balances'] = [];
@@ -67,17 +79,39 @@ class Clients extends Model
         }
 
         $ret['others'] = DB::table("clients as t1")->join('client_trans', "CLTR_CLNT_ID", "=", "t1.id")
-        ->select(['t1.id', 'CLTR_BLNC', 'CLNT_NAME'])->whereNotIn('t1.id', $balances->pluck('CLTR_CLNT_ID'))
-        ->whereRaw(" client_trans.id = (SELECT MAX(id) FROM client_trans WHERE CLTR_CLNT_ID = t1.id AND CLTR_DATE <= '{$to}' ) ")->get();
+            ->select(['t1.id', 'CLTR_BLNC', 'CLNT_NAME'])
+            ->whereNotIn('t1.id', $balances->pluck('CLTR_CLNT_ID'))
+            ->whereRaw(" client_trans.id = (SELECT MAX(id) FROM client_trans WHERE CLTR_CLNT_ID = t1.id AND CLTR_DATE <= '{$to}' ) ");
+
+        $ret['onlineOthers'] = [];
+
+        if ($isOnline == 0) {
+            $ret['others'] = $ret['others']->where("CLNT_ONLN", 0);
+        } elseif ($isOnline == 1) {
+            $ret['onlineOthers'] = $ret['others']->where("CLNT_ONLN", 1)->get();
+        }
+        $ret['others'] = $ret['others']->get();
 
 
         $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
             ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, SUM(DISTINCT clients.CLNT_BLNC) as totalBalance, 
                                         SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
-            ->whereBetween("CLTR_DATE", [$from, $to])->get()->first();
+            ->whereBetween("CLTR_DATE", [$from, $to]);
+
+        $ret['onlineTotals'] = [] ;
+
+        if ($isOnline == 0) {
+            $ret['totals'] = $ret['totals']->where("CLNT_ONLN", 0);
+        } elseif ($isOnline == 1) {
+            $ret['onlineTotals'] = $ret['totals']->where("CLNT_ONLN", 1)->get()->first();
+        }
+        $ret['totals'] = $ret['totals']->get()->first();
 
         foreach ($ret['others'] as $mloshTrans) {
             $ret['totals']->totalBalance += $mloshTrans->CLTR_BLNC;
+        }
+        foreach ($ret['onlineOthers'] as $mloshTrans) {
+            $ret['onlineTotals']->totalBalance += $mloshTrans->CLTR_BLNC;
         }
 
 
@@ -228,7 +262,7 @@ class Clients extends Model
             ->first();
     }
 
-    static function insert($name, $arbcName, $balance, $address = null, $tele = null, $comment = null)
+    static function insert($name, $arbcName, $balance, $address = null, $tele = null, $comment = null, $isOnline=0)
     {
         return DB::table('clients')->insertGetId([
             "CLNT_NAME" => $name,
@@ -236,11 +270,12 @@ class Clients extends Model
             "CLNT_ADRS"      => $address,
             "CLNT_TELE"      => $tele,
             "CLNT_CMNT"      => $comment,
+            "CLNT_ONLN"      => $isOnline,
             "CLNT_BLNC" =>  $balance
         ]);
     }
 
-    static function updateClient($id, $name, $arbcName, $balance, $address = null, $tele = null, $comment = null)
+    static function updateClient($id, $name, $arbcName, $balance, $address = null, $tele = null, $comment = null, $isOnline=0)
     {
 
         return DB::table('clients')->where('id', $id)->update([
@@ -249,6 +284,7 @@ class Clients extends Model
             "CLNT_ADRS"      => $address,
             "CLNT_TELE"      => $tele,
             "CLNT_CMNT"      => $comment,
+            "CLNT_ONLN"      => $isOnline,
             "CLNT_BLNC"         => $balance
         ]);
     }

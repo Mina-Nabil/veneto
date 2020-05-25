@@ -17,6 +17,9 @@
     <link href="{{asset('dist/css/style.min.css')}}" media=print rel="stylesheet">
     <!-- Datatable CSS -->
     <link href="{{ asset('assets/node_modules/datatables/media/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
+    <!-- BT Switch -->
+    <link href="{{ asset('dist/css/pages/bootstrap-switch.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/node_modules/bootstrap-switch/bootstrap-switch.min.css') }}" rel="stylesheet">
     <!-- Form CSS -->
     <link href="{{ asset('dist/css/pages/file-upload.css')}}" rel="stylesheet">
     <link href="{{ asset('assets/node_modules/dropify/dist/css/dropify.min.css') }}" rel="stylesheet">
@@ -177,14 +180,14 @@
 
                         <li>
                             <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                                aria-expanded="false"><i class="fas fa-newspaper"></i><span
-                                    class="hide-menu">حساب عام</span></a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li><a href="{{url('ledger/show')}}">رصيد</a></li>
-                                    <li><a href="{{url('ledger/prepare/report')}}">كشف حساب</a></li>
-                                    <li><a href="{{url('ledger/add')}}">اضافه</a></li>
-                                    <li><a href="{{url('ledger/types/show')}}">انواع حسابات</a></li>
-                                </ul>
+                                aria-expanded="false"><i class="fas fa-newspaper"></i><span class="hide-menu">حساب
+                                    عام</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('ledger/show')}}">رصيد</a></li>
+                                <li><a href="{{url('ledger/prepare/report')}}">كشف حساب</a></li>
+                                <li><a href="{{url('ledger/add')}}">اضافه</a></li>
+                                <li><a href="{{url('ledger/types/show')}}">انواع حسابات</a></li>
+                            </ul>
                         </li>
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
@@ -406,6 +409,31 @@
     <script src="{{ asset('assets/node_modules/datatables/datatables.min.js') }}"></script>
     <!-- This is for printing invoices -->
     <script src="{{ asset('dist/js/pages/jquery.PrintArea.js') }}" type="text/JavaScript"></script>
+    <!-- This is for the bt switch -->
+    <script src="{{ asset('assets/node_modules/bootstrap-switch/bootstrap-switch.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(".bt-switch input[type='checkbox'], .bt-switch input[type='radio']").bootstrapSwitch();
+        var radioswitch = function () {
+            var bt = function () {
+                $(".radio-switch").on("switch-change", function () {
+                    $(".radio-switch").bootstrapSwitch("toggleRadioState")
+                }), $(".radio-switch").on("switch-change", function () {
+                    $(".radio-switch").bootstrapSwitch("toggleRadioStateAllowUncheck")
+                }), $(".radio-switch").on("switch-change", function () {
+                    $(".radio-switch").bootstrapSwitch("toggleRadioStateAllowUncheck", !1)
+                })
+            };
+            return {
+                init: function () {
+                    bt()
+                }
+            }
+        }();
+        $(document).ready(function () {
+            radioswitch.init()
+        });
+    </script>
     <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
@@ -424,6 +452,7 @@
 
     <!-- Start Table Search Script -->
     <script>
+
         $(document).ready(function () {
             $("#print").click(function () {
                 var mode = 'iframe'; //popup

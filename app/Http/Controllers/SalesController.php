@@ -30,7 +30,8 @@ class SalesController extends Controller
             $data['totals'] = Sales::getSalesTotalsByClient($clientID);
             $data['isClntPage'] = true;
         } else {
-            $data['sales'] = Sales::getSales($clientID);
+            $data['sales'] = Sales::getSales(0);
+            $data['onlineSales'] = Sales::getSales(1);
             $data['isClntPage'] = false;
 
         }
@@ -78,7 +79,8 @@ class SalesController extends Controller
 
     public function insert(Request $request){
         $itemsArr = $this->getItemsArray($request);
-        Sales::insertSales($request->clientID, $itemsArr['items'], $itemsArr['totalPrice'], $request->paid, $request->type, $request->comment);
+        $isOnline = ($request->isOnline == "on") ? 1 : 0;
+        Sales::insertSales($request->clientID, $itemsArr['items'], $itemsArr['totalPrice'], $request->paid, $request->type, $request->comment, $isOnline);
         return redirect("sales/show");
     }
 
