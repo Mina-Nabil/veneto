@@ -209,7 +209,7 @@
             </div>
         </div>
         <div class="table-responsive m-t-40">
-            <table id="myTable"
+            <table id="myTable2"
                 class="table color-bordered-table table-striped full-color-table full-info-table hover-table"
                 data-display-length='25' data-order="[]">
                 <thead>

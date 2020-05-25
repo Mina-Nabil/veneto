@@ -511,7 +511,50 @@
         const formatted = day + "/" + month + "/" + year;
         $(function () {
             $(function () {
+
                 var table = $('#myTable').DataTable({
+                    "displayLength": 25,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend: 'print',
+                            text: 'Print',
+                            title: 'Veneto',
+                            footer: true,
+                            messageTop: "Date: " + formatted,
+                            customize: function (win) {
+                                $(win.document.body)
+                                    .prepend('<center><img src="{{asset('images / dark - logo.png')}}" style="position:absolute; margin: auto; ; margin-top: 460px ; left: 0; right: 0; opacity:0.2" /></center>')
+                                    .css('font-size', '24px')
+
+                                //$('#stampHeader' ).addClass( 'stampHeader' );
+                                $(win.document.body).find('table')
+                                    .css('border', 'solid')
+                                    .css('margin-top', '20px')
+                                    .css('font-size', 'inherit');
+                                $(win.document.body).find('th')
+                                    .css('border', 'solid')
+                                    .css('border', '!important')
+                                    .css('border-width', '1px')
+                                    .css('font-size', 'inherit')
+                                $(win.document.body).find('td')
+                                    .css('border', 'solid')
+                                    .css('border', '!important')
+                                    .css('border-width', '1px');
+                                $(win.document.body).find('tr')
+                                    .css('border', 'solid')
+                                    .css('border', '!important')
+                                    .css('border-width', '1px')
+                            }
+                        }, {
+                            extend: 'excel',
+                            title: 'Veneto',
+                            footer: true,
+
+                        }
+                    ]
+                });
+                var table = $('#myTable2').DataTable({
                     "displayLength": 25,
                     dom: 'Bfrtip',
                     buttons: [

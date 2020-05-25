@@ -19,9 +19,12 @@ class Sales extends Model
         $query = DB::table("sales")->join('clients', 'SALS_CLNT_ID', '=', 'clients.id')
             ->select("sales.*", "clients.CLNT_NAME");
         if ($online == 0)
-            $query = $query->where("SALS_ONLN", 0);
+            $query = $query->where([
+                ["SALS_ONLN", 0],
+                ['CLNT_ONLN', 0]
+                ]);
         elseif ($online == 1)
-            $query = $query->where("SALS_ONLN", 1);
+            $query = $query->where("SALS_ONLN", 1)->orWhere("CLNT_ONLN", 1);
 
         return       $query->orderBy('sales.id', 'desc')->limit(500)->get();
     }

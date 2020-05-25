@@ -79,7 +79,7 @@
                 <h4 class="card-title">Online Clients Report</h4>
                 <h6 class="card-subtitle">Show Clients totals during the selected period for online clients only</h6>
                 <div class="table-responsive m-t-40">
-                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='25' data-order="[]" >
+                    <table id="myTable2" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='25' data-order="[]" >
                         <thead>
                             <tr>
                                 <th>اسم</th>
