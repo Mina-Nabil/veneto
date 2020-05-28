@@ -8,7 +8,9 @@
                 <h4 class="card-title">{{$reportTitle}}</h4>
                 <h6 class="card-subtitle">{{$reportDesc}}</h6>
                 <div class="table-responsive m-t-40">
-                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
+                    <table id="myTable"
+                        class="table color-bordered-table table-striped full-color-table full-info-table hover-table"
+                        data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th>تاريخ</th>
@@ -24,8 +26,8 @@
                         </thead>
                         <tbody>
                             @foreach($ops as $op)
-                            <tr >
-                                <td>                                
+                            <tr>
+                                <td>
                                     {{date_format(date_create($op->CLTR_DATE), "d-m-Y")}}
                                 </td>
                                 <td>
@@ -33,21 +35,27 @@
                                     $salesArr = explode(' ', $op->CLTR_CMNT) ;
                                     if(isset($op->CLTR_DESC)){
                                         $descArr = explode(' ', $op->CLTR_DESC) ;
+                                        echo $descArr[0];
                                     }
-                                ?>  
+                                ?>
                                     @if(isset($descArr) && $descArr[0]=='Sales' && is_numeric($descArr[1]))
-                                        <a href="{{url('/sales/items/' . $descArr[1]) }}">
-                                            مبيعات {{$descArr[1]}}
-                                        </a>
-                                    @elseif($salesArr[0]=='Sales' && is_numeric($salesArr[1]) && (!isset($salesArr[2]) || $salesArr[2]=='Comment:')  )
-                                        <a href="{{url('/sales/items/' . $salesArr[1]) }}">
-                                            مبيعات {{$salesArr[1]}}
-                                        </a>
+                                    <a href="{{url('/sales/items/' . $descArr[1]) }}">
+                                        مبيعات {{$descArr[1]}}
+                                    </a>
+                                    @elseif(isset($descArr) && $descArr[0]=='Sales' && $descArr[1]=='Return') )
+                                    <a href="{{url('/sales/items/' . $descArr[2]) }}">
+                                        مرتجع {{$descArr[2]}}
+                                    </a>
+                                    @elseif($salesArr[0]=='Sales' && is_numeric($salesArr[1]) && (!isset($salesArr[2])
+                                    || $salesArr[2]=='Comment:') )
+                                    <a href="{{url('/sales/items/' . $salesArr[1]) }}">
+                                        مبيعات {{$salesArr[1]}}
+                                    </a>
 
                                     @else
                                     {{ (strlen($op->CLTR_DESC)>25) ?  mb_substr($op->CLTR_DESC,0,22, "utf-8") . '...' : $op->CLTR_DESC}}
                                     @endif
-                                </td>                              
+                                </td>
                                 <td>{{number_format($op->CLTR_SALS_AMNT, 2)}}</td>
                                 <td>{{number_format($op->CLTR_CASH_AMNT, 2)}}</td>
                                 <td>{{number_format($op->CLTR_NTPY_AMNT, 2)}}</td>
@@ -56,14 +64,16 @@
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
                                 <td>
                                     @if(isset($op->CLTR_CMNT) && strcmp($op->CLTR_CMNT, '')!=0 )
-                                        <button type="button"  style="padding:.1rem"  class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->CLTR_CMNT}}" data-original-title="Comment:">
-                                    @endif
-                                    <i class="far fa-list-alt" ></i>
+                                    <button type="button" style="padding:.1rem" class="btn btn-secondary"
+                                        data-container="body" title="" data-toggle="popover" data-placement="bottom"
+                                        data-content="{{$op->CLTR_CMNT}}" data-original-title="Comment:">
+                                        @endif
+                                        <i class="far fa-list-alt"></i>
                                     </button>
                                 </td>
-                            </tr> 
+                            </tr>
                             @endforeach
-                            
+
                         </tbody>
                         @if(isset($totals))
                         <tfoot>

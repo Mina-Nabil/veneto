@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Cash;
 use App\TransType;
 
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class CashController extends Controller
 {

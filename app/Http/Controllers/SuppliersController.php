@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Suppliers;
 
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class SuppliersController extends Controller
 {

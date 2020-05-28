@@ -264,6 +264,8 @@
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{{url('sales/show')}}">مجمع مبيعات</a></li>
                             <li><a href="{{url('sales/add')}}">عمليه بيع جديده</a></li>
+                            <li><a href="{{url('sales/return/show')}}">عرض مرتجعات</a></li>
+                            <li><a href="{{url('sales/return/add')}}">عمليه مرتجع</a></li>
                         </ul>
                     </li>
 
@@ -378,7 +380,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            © 2019 {{config('APP_NAME', 'Via Veneto')}} by Mina Nabil
+            © 2019 {{config('APP_NAME', 'Via Veneto')}} by mSquareApps
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->

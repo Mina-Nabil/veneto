@@ -65,10 +65,10 @@ class Finished extends Model
         });
     }
 
-    public static function insertSoldEntry($entryArr){
-        DB::transaction(function () use ($entryArr){
+    public static function insertSoldEntry($entryArr, $isReturn=-1){
+        DB::transaction(function () use ($entryArr, $isReturn){
             foreach($entryArr as $entry){
-                self::insertFinished(null, null, -1*$entry['price'], -1*$entry['amount36'], -1*$entry['amount38'], -1*$entry['amount40'], -1*$entry['amount42'], -1*$entry['amount44'], -1*$entry['amount46'], -1*$entry['amount48'], -1*$entry['amount50'], $entry['finished']);
+                self::insertFinished(null, null, $isReturn*$entry['price'], $isReturn*$entry['amount36'], $isReturn*$entry['amount38'], $isReturn*$entry['amount40'], $isReturn*$entry['amount42'], $isReturn*$entry['amount44'], $isReturn*$entry['amount46'], $isReturn*$entry['amount48'], $isReturn*$entry['amount50'], $entry['finished']);
             }
         });
     }

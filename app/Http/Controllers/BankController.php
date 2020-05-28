@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Bank;
 use App\TransType;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class BankController extends Controller
 {

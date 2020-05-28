@@ -209,6 +209,42 @@ class Sales extends Model
         });
     }
 
+    public static function insertReturn($clientID, $itemsArr, $total, $comment = null)
+    {
+        DB::transaction(function () use ($clientID, $itemsArr, $total, $comment) {
+
+            $id = DB::table("sales")->insertGetId([
+                "SALS_DATE" => date("Y-m-d H:i:s"),
+                "SALS_CLNT_ID" => $clientID,
+                "SALS_CMNT"     => "(مرتجع) " . $comment,
+                "SALS_PAID"     => 0,
+                "SALS_ONLN"     => 0,
+                "SALS_TOTL_PRCE" => -1*$total
+            ]);
+
+            Clients::insertTrans($clientID, 0, 0, 0, 0, $total, "Sales Comment: $comment", "Sales Return " . $id);
+
+
+            foreach ($itemsArr as $item) {
+                DB::table("sales_items")->insert([
+                    "SLIT_FNSH_ID" => $item['finished'],
+                    "SLIT_SALS_ID" => $id,
+                    "SLIT_PRCE" => $item['price'],
+                    "FNSH_36_SOLD" => ($item['amount36']) ? -$item['amount36'] : 0,
+                    "FNSH_38_SOLD" => ($item['amount38']) ? -$item['amount38'] : 0,
+                    "FNSH_40_SOLD" => ($item['amount40']) ? -$item['amount40'] : 0,
+                    "FNSH_42_SOLD" => ($item['amount42']) ? -$item['amount42'] : 0,
+                    "FNSH_44_SOLD" => ($item['amount44']) ? -$item['amount44'] : 0,
+                    "FNSH_46_SOLD" => ($item['amount46']) ? -$item['amount46'] : 0,
+                    "FNSH_48_SOLD" => ($item['amount48']) ? -$item['amount48'] : 0,
+                    "FNSH_50_SOLD" => ($item['amount50']) ? -$item['amount50'] : 0
+                ]);
+            }
+
+            Finished::insertSoldEntry($itemsArr, 1);
+        });
+    }
+
     public static function insertPayment($sales, $payment, $isbank)
     {
         DB::transaction(function () use ($sales, $payment, $isbank) {

@@ -73,6 +73,7 @@ class SalesController extends Controller
         $data['pageTitle'] = "Add Sales";
         $data['pageDescription'] = "Add New Sales Operation";
         $data['formURL'] = url("sales/insert");
+        $data['isReturn'] = false;
 
         return view("sales.add", $data);
     }
@@ -95,6 +96,29 @@ class SalesController extends Controller
         $data['items'] = Sales::getAllSoldItems();
         return view("sales.sold", $data);
     }
+
+    ///////////////?Return Pages//////////////////////
+
+
+    public function addReturnPage(){
+
+        $data['items'] = Finished::getAvailable();
+        $data['clients'] = Clients::getClients();
+
+        $data['pageTitle'] = "Add New Return";
+        $data['pageDescription'] = "Add New Return Operation";
+        $data['formURL'] = url("sales/return/insert");
+        $data['isReturn'] = true;
+
+        return view("sales.add", $data);
+    }
+
+    public function insertReturn(Request $request){
+        $itemsArr = $this->getItemsArray($request);
+        Sales::insertReturn($request->clientID, $itemsArr['items'], $itemsArr['totalPrice'], $request->comment);
+        return redirect("sales/show");
+    }
+
 
     private function getItemsArray($request){
 

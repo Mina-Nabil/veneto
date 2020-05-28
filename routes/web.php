@@ -14,6 +14,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get("sales/return/add", "SalesController@addReturnPage")-> middleware('cors');
+Route::post("sales/return/insert", "SalesController@insertReturn")-> middleware('cors');
+
+
 Route::get("sales/show",            'SalesController@show')-> middleware('cors');
 Route::get("sales/sold",            'SalesController@allItemsSold')-> middleware('cors');
 Route::get("sales/show/{id}",       'SalesController@show')-> middleware('cors');
@@ -22,6 +26,7 @@ Route::get("sales/items/{salesID}",       'SalesController@sales')-> middleware(
 Route::get("sales/add",            'SalesController@addPage')-> middleware('cors');
 Route::post("sales/insert",        'SalesController@insert')-> middleware('cors');
 Route::post("sales/add/payment",        'SalesController@insertPayment')-> middleware('cors');
+
 
 
 //Finished Prods

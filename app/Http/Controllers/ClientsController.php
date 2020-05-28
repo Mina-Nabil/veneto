@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Clients;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class ClientsController extends Controller
 {

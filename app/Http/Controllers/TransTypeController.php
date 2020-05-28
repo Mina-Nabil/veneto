@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Brands;
 use App\TransType;
 
 class TransTypeController extends Controller

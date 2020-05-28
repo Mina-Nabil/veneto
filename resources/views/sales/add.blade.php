@@ -1,180 +1,202 @@
 @extends('layouts.app')
 
 @section('content')
-<form id=myForm class="form pt-3" method="post" action="{{ $formURL }}" enctype="multipart/form-data" >
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">{{ $pageTitle }}</h4>
-                <h5 class="card-subtitle">{{ $pageDescription }}</h5>
-                @csrf
+<form id=myForm class="form pt-3" method="post" action="{{ $formURL }}" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ $pageTitle }}</h4>
+                    <h5 class="card-subtitle">{{ $pageDescription }}</h5>
+                    @csrf
 
                     <div class="col-lg-12">
-                    <label>Client</label>
+                        <label>Client</label>
                         <div class="input-group mb-3">
-                            <select name=clientID class="select2 form-control custom-select" style="width: 100%; height:50px;" required>
+                            <select name=clientID class="select2 form-control custom-select"
+                                style="width: 100%; height:50px;" required>
                                 <option disabled selected hidden value="">Clients</option>
                                 @foreach($clients as $client)
                                 <option value="{{ $client->id }}">
-                                {{$client->CLNT_NAME}} </option>
-                                @endforeach 
+                                    {{$client->CLNT_NAME}} </option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
 
-                    <div class="row p-l-10 p-r-10 p-b-10">   
-                        <h5 class="card-title p-l-10">Items Added</h5>                                    
+                    <div class="row p-l-10 p-r-10 p-b-10">
+                        <h5 class="card-title p-l-10">Items Added</h5>
                         <ul class="col-lg-12  list-group" id=itemsList>
-              
-        
+
+
                         </ul>
                     </div>
                     <hr>
-                    <div class="row p-l-10 p-r-10">  
+                    <div class="row p-l-10 p-r-10">
                         <h5 class="col-lg-12 card-title p-l-10">Sales Summary</h5>
                     </div>
-                    <div class="row p-l-20 p-r-20">  
+                    <div class="row p-l-20 p-r-20">
                         <div class="col-lg-4">
                             <strong>Totals</strong>
                         </div>
-                        
+
                         <div class="col-lg-4">
                             <strong>Number of Items</strong>
-                            <p id=numberOfInv >0</p>
+                            <p id=numberOfInv>0</p>
                         </div>
-                        
+
                         <div class="col-lg-4 p-r-20">
                             <strong>Price</strong>
-                            <p id=totalPrice >0</p>
-                        </div>     
+                            <p id=totalPrice>0</p>
+                        </div>
                     </div>
-                <hr>
+                    <hr>
 
                     <label class="nopadding" for="input-file-now-custom-1"><strong>Entry Details</strong></label>
                     <div class="row ">
-         
+
                         <div id="dynamicContainer">
                         </div>
 
                         <div class="nopadding row col-lg-12">
                             <div class="col-lg-2">
-                                        <div class="input-group mb-2">
-                                            <select name=finished[] id=finished[] class="form-control select2  custom-select" required>
-                                                <option disabled hidden selected value="">Finished Inventory</option>
-                                                @foreach($items['data'] as $item)
-                                                <option value="{{ $item->id }}">
-                                                {{$item->BRND_NAME}} - {{$item->MODL_UNID}} </option>
-                                                @endforeach 
-                                            </select>
-                                        </div>
+                                <div class="input-group mb-2">
+                                    <select name=finished[] id=finished[] class="form-control select2  custom-select"
+                                        required>
+                                        <option disabled hidden selected value="">Finished Inventory</option>
+                                        @foreach($items['data'] as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{$item->BRND_NAME}} - {{$item->MODL_UNID}} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
 
                             <div class="col-lg-1">
-                                    <input type="number"  step=1  min=0  class="form-control amount" placeholder="36" name=amount36[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11" >
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="36"
+                                    name=amount36[] aria-label="Total Amount in Meters"
+                                    aria-describedby="basic-addon11">
                             </div>
                             <div class="col-lg-1">
-                                    <input type="number"  step=1  min=0  class="form-control amount" placeholder="38" name=amount38[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11" >
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="38"
+                                    name=amount38[] aria-label="Total Amount in Meters"
+                                    aria-describedby="basic-addon11">
                             </div>
                             <div class="col-lg-1">
-                                    <input type="number"  step=1  min=0  class="form-control amount" placeholder="40" name=amount40[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11" >
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="40"
+                                    name=amount40[] aria-label="Total Amount in Meters"
+                                    aria-describedby="basic-addon11">
                             </div>
-                                
-                            <div class="col-lg-1">
-                                    <input type="number"  step=1  min=0  class="form-control amount" placeholder="42" name=amount42[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11" >
-                                </div>
-                                <div class="col-lg-1">
 
-                                    <input type="number"  step=1  min=0  class="form-control amount" placeholder="44" name=amount44[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11" >
-                                </div>
-                                <div class="col-lg-1">
-                                    <input type="number"  step=1  min=0  class="form-control amount" placeholder="46" name=amount46[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11"  >
-                                </div>
-                                <div class="col-lg-1">
-                                    <input type="number"  step=1  min=0  class="form-control amount" placeholder="48" name=amount48[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11"  >
-                                </div>
-                                <div class="col-lg-1">
-                                    <input type="number"  step=1  min=0  class="form-control amount" placeholder="50" name=amount50[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11"  >
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="input-group mb-3">
-                                        <input type="number" step=0.01   class="form-control amount" placeholder="Price" name=price[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11"  required>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-success" id="dynamicAddButton" type="button" onclick="addToab();"><i class="fa fa-plus"></i></button>
-                                        </div>
+                            <div class="col-lg-1">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="42"
+                                    name=amount42[] aria-label="Total Amount in Meters"
+                                    aria-describedby="basic-addon11">
+                            </div>
+                            <div class="col-lg-1">
+
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="44"
+                                    name=amount44[] aria-label="Total Amount in Meters"
+                                    aria-describedby="basic-addon11">
+                            </div>
+                            <div class="col-lg-1">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="46"
+                                    name=amount46[] aria-label="Total Amount in Meters"
+                                    aria-describedby="basic-addon11">
+                            </div>
+                            <div class="col-lg-1">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="48"
+                                    name=amount48[] aria-label="Total Amount in Meters"
+                                    aria-describedby="basic-addon11">
+                            </div>
+                            <div class="col-lg-1">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="50"
+                                    name=amount50[] aria-label="Total Amount in Meters"
+                                    aria-describedby="basic-addon11">
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="input-group mb-3">
+                                    <input type="number" step=0.01 class="form-control amount" placeholder="Price"
+                                        name=price[] aria-label="Total Amount in Meters"
+                                        aria-describedby="basic-addon11" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" id="dynamicAddButton" type="button"
+                                            onclick="addToab();"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>
-                       
                         </div>
-                 
 
-                    
+                    </div>
+
+
+
                     <button type="button" onclick="calculateTotals()" class="btn btn-info mr-2">Calculate</button>
                     <a href="{{url('rawinventory/cancel') }}" class="btn btn-dark">Cancel</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">More Sales Details</h4>
-                <h5 class="card-subtitle">Values Set by default, change if neccessary</h5>
-
-                <div class="col-lg-12 bt-switch">
-                    <label>Type</label>
-                    <div class="input-group mb-3 ">
-                        <input type="checkbox" data-size="large" data-on-color="info" data-off-color="warning" data-on-text="Online" data-off-text="Normal" name="isOnline">
-                    </div>
-                    <small class="text-danger">{{$errors->first('paid')}}</small>
-                </div>
-                <div class="col-lg-12">
-                    <label>Paid</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon11"><i class="ti-money"></i></span>
-                        </div>
-                        <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=paid value="{{ old('paid') ?? 0}}" required >
-                    </div>
-                    <small class="text-danger">{{$errors->first('paid')}}</small>
-                </div>
-
-                <div class="col-lg-12">
-                    <h5>Payment Type</h5>
-                    <div class="input-group mb-3">
-                        <select class="select form-control form-control-line" name=type  required >
-                            <option selected value=0>Cash</option>
-                            <option value=1>Cheque</option>
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-12">
-                    <label>Comment</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon11"><i class="ti-list"></i></span>
-                        </div>
-                        <input type="text" class="form-control"  name=comment  value="{{  old('comment')}}" >
-                    </div>
-                </div>
-                <div class=p-10>
-                    <button type="submit" id=checker class="btn btn-success mr-2">&emsp;Submit&emsp;</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+ 
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">More Sales Details</h4>
+                    <h5 class="card-subtitle">Values Set by default, change if neccessary</h5>
+                    @if(!$isReturn)
+                    <div class="col-lg-12 bt-switch">
+                        <label>Type</label>
+                        <div class="input-group mb-3 ">
+                            <input type="checkbox" data-size="large" data-on-color="info" data-off-color="warning"
+                                data-on-text="Online" data-off-text="Normal" name="isOnline">
+                        </div>
+                        <small class="text-danger">{{$errors->first('paid')}}</small>
+                    </div>
+                    <div class="col-lg-12">
+                        <label>Paid</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-money"></i></span>
+                            </div>
+                            <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=paid
+                                value="{{ old('paid') ?? 0}}" required>
+                        </div>
+                        <small class="text-danger">{{$errors->first('paid')}}</small>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <h5>Payment Type</h5>
+                        <div class="input-group mb-3">
+                            <select class="select form-control form-control-line" name=type required>
+                                <option selected value=0>Cash</option>
+                                <option value=1>Cheque</option>
+                            </select>
+                        </div>
+                    </div>
+                    @endif
+
+                    <div class="col-lg-12">
+                        <label>Comment</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-list"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name=comment value="{{  old('comment')}}">
+                        </div>
+                    </div>
+                    <div class=p-10>
+                        <button type="submit" id=checker class="btn btn-success mr-2">&emsp;Submit&emsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
 </form>
 <script>
-
-
-var room = 1;
+    var room = 1;
 var brand;
 
 function setDefaultBrand(){

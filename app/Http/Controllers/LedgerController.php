@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ledger;
 use App\LedgerType;
-use App\TransType;
 
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class LedgerController extends Controller
 {
