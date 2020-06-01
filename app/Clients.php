@@ -74,9 +74,12 @@ class Clients extends Model
 
 
         $ret['balances'] = [];
+        $ret['totalBalance'] = 0;
         foreach ($balances as $balance) {
             $ret['balances'][$balance->CLTR_CLNT_ID] = $balance->CLTR_BLNC;
+            $ret['totalBalance'] += $balance->CLTR_BLNC;
         }
+        
 
         $ret['others'] = DB::table("clients as t1")->join('client_trans', "CLTR_CLNT_ID", "=", "t1.id")
             ->select(['t1.id', 'CLTR_BLNC', 'CLNT_NAME'])
@@ -107,11 +110,11 @@ class Clients extends Model
         $ret['totals'] = $ret['totals']->get()->first();
 
         foreach ($ret['others'] as $mloshTrans) {
-            $ret['totals']->totalBalance += $mloshTrans->CLTR_BLNC;
+            $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
 
         foreach ($ret['onlineOthers'] as $mloshTrans) {
-            $ret['onlineTotals']->totalBalance += $mloshTrans->CLTR_BLNC;
+            $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
 
 

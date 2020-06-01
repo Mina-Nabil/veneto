@@ -59,14 +59,14 @@
 
                             <tr class="table-info">
                                 <td><strong>Offline Totals</strong></td>
-                                <td><strong>{{number_format($ops['totals']->totalBalance - $ops['totals']->totalPurch + $ops['totals']->totalCash + $ops['totals']->totalDisc + $ops['totals']->totalNotes + $ops['totals']->totalReturn, 2)}}</strong>
+                                <td><strong>{{number_format($ops['totalBalance'] - $ops['totals']->totalPurch + $ops['totals']->totalCash + $ops['totals']->totalDisc + $ops['totals']->totalNotes + $ops['totals']->totalReturn, 2)}}</strong>
                                 </td>
                                 <td><strong>{{number_format($ops['totals']->totalPurch, 2)}}</strong></td>
                                 <td><strong>{{number_format($ops['totals']->totalCash, 2)}}</strong></td>
                                 <td><strong>{{number_format($ops['totals']->totalNotes, 2)}}</strong></td>
                                 <td><strong>{{number_format($ops['totals']->totalDisc, 2)}}</strong></td>
                                 <td><strong>{{number_format($ops['totals']->totalReturn, 2)}}</strong></td>
-                                <td><strong>{{number_format($ops['totals']->totalBalance, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['totalBalance'], 2)}}</strong></td>
                             </tr>
 
                             @endif
@@ -106,17 +106,17 @@
                             @endforeach
 
                             @if(isset($onlineOps['onlineTotals']))
-                            {{dd($onlineOps)}}
+
                             <tr class="table-info">
                                 <td><strong>Online Totals</strong></td>
-                                <td><strong>{{number_format($onlineOps['onlineTotals']->totalBalance - $onlineOps['onlineTotals']->totalPurch + $onlineOps['onlineTotals']->totalCash + $onlineOps['onlineTotals']->totalDisc + $onlineOps['onlineTotals']->totalNotes + $onlineOps['onlineTotals']->totalReturn, 2)}}</strong>
+                                <td><strong>{{number_format($onlineOps['totalBalance'] - $onlineOps['onlineTotals']->totalPurch + $onlineOps['onlineTotals']->totalCash + $onlineOps['onlineTotals']->totalDisc + $onlineOps['onlineTotals']->totalNotes + $onlineOps['onlineTotals']->totalReturn, 2)}}</strong>
                                 </td>
                                 <td><strong>{{number_format($onlineOps['onlineTotals']->totalPurch, 2)}}</strong></td>
                                 <td><strong>{{number_format($onlineOps['onlineTotals']->totalCash, 2)}}</strong></td>
                                 <td><strong>{{number_format($onlineOps['onlineTotals']->totalNotes, 2)}}</strong></td>
                                 <td><strong>{{number_format($onlineOps['onlineTotals']->totalDisc, 2)}}</strong></td>
                                 <td><strong>{{number_format($onlineOps['onlineTotals']->totalReturn, 2)}}</strong></td>
-                                <td><strong>{{number_format($onlineOps['onlineTotals']->totalBalance, 2)}}</strong></td>
+                                <td><strong>{{number_format($onlineOps['totalBalance'], 2)}}</strong></td>
                             </tr>
 
                             @endif
