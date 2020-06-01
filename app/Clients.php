@@ -117,7 +117,7 @@ class Clients extends Model
             $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
 
-
+        dd($ret);
         return $ret;
     }
 

@@ -68,7 +68,7 @@ class ClientsController extends Controller
     }
 
     function mainReport(Request $request){
-        $data['ops'] = Clients::getTotals($request->from, $request->to, 0);
+        // $data['ops'] = Clients::getTotals($request->from, $request->to, 0);
         $data['onlineOps'] = Clients::getTotals($request->from, $request->to, 1);
         $data['koloTotals'] = Clients::getFullTotals($request->from, $request->to);
         return view('clients.main_report', $data);
