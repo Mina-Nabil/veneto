@@ -137,7 +137,7 @@ class Clients extends Model
         }
 
         foreach ($ret['others'] as $mloshTrans) {
-            $ret['totals']->totalBalance += $mloshTrans->CLTR_BLNC;
+            $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
         return $ret;
     }
