@@ -99,7 +99,7 @@ class Clients extends Model
             ->whereBetween("CLTR_DATE", [$from, $to]);
 
         $ret['onlineTotals'] = [] ;
-
+        $ret['koloTotals'] = [];
         if ($isOnline == 0) {
             $ret['koloTotals'] = $ret['totals']->get()->first();
             $ret['totals'] = $ret['totals']->where("CLNT_ONLN", 0);
