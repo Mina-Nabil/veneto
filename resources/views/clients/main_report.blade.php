@@ -126,14 +126,14 @@
 
                             <tr class="table-info">
                                 <td><strong>General Totals</strong></td>
-                                <td><strong>{{number_format($koloTotals->totalBalance - $koloTotals->totalPurch + $koloTotals->totalCash + $koloTotals->totalDisc + $koloTotals->totalNotes + $koloTotals->totalReturn, 2)}}</strong>
+                                <td><strong>{{number_format($koloTotals['totalBalance'] - $koloTotals['totals']->totalPurch + $koloTotals['totals']->totalCash + $koloTotals['totals']->totalDisc + $koloTotals['totals']->totalNotes + $koloTotals['totals']->totalReturn, 2)}}</strong>
                                 </td>
-                                <td><strong>{{number_format($koloTotals->totalPurch, 2)}}</strong></td>
-                                <td><strong>{{number_format($koloTotals->totalCash, 2)}}</strong></td>
-                                <td><strong>{{number_format($koloTotals->totalNotes, 2)}}</strong></td>
-                                <td><strong>{{number_format($koloTotals->totalDisc, 2)}}</strong></td>
-                                <td><strong>{{number_format($koloTotals->totalReturn, 2)}}</strong></td>
-                                <td><strong>{{number_format($koloTotals->totalBalance, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals['totals']->totalPurch, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals['totals']->totalCash, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals['totals']->totalNotes, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals['totals']->totalDisc, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals['totals']->totalReturn, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals['totalBalance'], 2)}}</strong></td>
                             </tr>
 
                             @endif
