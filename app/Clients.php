@@ -105,7 +105,7 @@ class Clients extends Model
             $ret['onlineTotals'] = $ret['totals']->where("CLNT_ONLN", 1)->get()->first();
         }
         $ret['totals'] = $ret['totals']->get()->first();
-        dd($ret['onlineTotals']);
+        // dd($ret['onlineTotals']);
         foreach ($ret['others'] as $mloshTrans) {
             $ret['totals']->totalBalance += $mloshTrans->CLTR_BLNC;
         }
