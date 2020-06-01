@@ -109,7 +109,7 @@
                             {{dd($onlineOps['onlineTotals'])}}
                             <tr class="table-info">
                                 <td><strong>Online Totals</strong></td>
-                                <td><strong>{{number_format($onlineOps['balances'][]->totalBalance - $onlineOps['onlineTotals']->totalPurch + $onlineOps['onlineTotals']->totalCash + $onlineOps['onlineTotals']->totalDisc + $onlineOps['onlineTotals']->totalNotes + $onlineOps['onlineTotals']->totalReturn, 2)}}</strong>
+                                <td><strong>{{number_format($onlineOps['onlineTotals']->totalBalance - $onlineOps['onlineTotals']->totalPurch + $onlineOps['onlineTotals']->totalCash + $onlineOps['onlineTotals']->totalDisc + $onlineOps['onlineTotals']->totalNotes + $onlineOps['onlineTotals']->totalReturn, 2)}}</strong>
                                 </td>
                                 <td><strong>{{number_format($onlineOps['onlineTotals']->totalPurch, 2)}}</strong></td>
                                 <td><strong>{{number_format($onlineOps['onlineTotals']->totalCash, 2)}}</strong></td>
