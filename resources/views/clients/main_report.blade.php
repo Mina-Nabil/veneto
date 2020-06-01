@@ -88,7 +88,7 @@
                                 <td>{{number_format($onlineOps['balances'][$op->id], 2)}}</td>
                             </tr>
                             @endforeach
-                            @foreach($onlineOps['onlineOthers'] as $op)
+                            @foreach($onlineOps['others'] as $op)
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">

@@ -88,12 +88,11 @@ class Clients extends Model
 
         $ret['onlineOthers'] = [];
 
-        if ($isOnline == 0) {
-            $ret['others'] = $ret['others']->where("CLNT_ONLN", 0);
-        } elseif ($isOnline == 1) {
-            $ret['onlineOthers'] = $ret['others']->where("CLNT_ONLN", 1)->get();
+        if ($isOnline == -1) {
+            $ret['others'] = $ret['others']->get();
+        } else  {
+            $ret['others'] = $ret['others']->where("CLNT_ONLN", $isOnline)->get();
         }
-        $ret['others'] = $ret['others']->get();
 
 
         $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
@@ -113,11 +112,6 @@ class Clients extends Model
             $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
 
-        foreach ($ret['onlineOthers'] as $mloshTrans) {
-            $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
-        }
-
-        dd($ret);
         return $ret;
     }
 
