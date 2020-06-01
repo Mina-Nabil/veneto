@@ -122,18 +122,18 @@
                             @endif
                         </tbody>
                         <tfoot>
-                            @if(isset($ops['koloTotals']))
+                            @if(isset($koloTotals))
 
                             <tr class="table-info">
-                                <td><strong>Online Totals</strong></td>
-                                <td><strong>{{number_format($ops['koloTotals']->totalBalance - $onlineOps['koloTotals']->totalPurch + $onlineOps['koloTotals']->totalCash + $onlineOps['koloTotals']->totalDisc + $ops['koloTotals']->totalNotes + $onlineOps['koloTotals']->totalReturn, 2)}}</strong>
+                                <td><strong>General Totals</strong></td>
+                                <td><strong>{{number_format($koloTotals->totalBalance - $koloTotals->totalPurch + $koloTotals->totalCash + $koloTotals->totalDisc + $koloTotals->totalNotes + $koloTotals->totalReturn, 2)}}</strong>
                                 </td>
-                                <td><strong>{{number_format($ops['koloTotals']->totalPurch, 2)}}</strong></td>
-                                <td><strong>{{number_format($ops['koloTotals']->totalCash, 2)}}</strong></td>
-                                <td><strong>{{number_format($ops['koloTotals']->totalNotes, 2)}}</strong></td>
-                                <td><strong>{{number_format($ops['koloTotals']->totalDisc, 2)}}</strong></td>
-                                <td><strong>{{number_format($ops['koloTotals']->totalReturn, 2)}}</strong></td>
-                                <td><strong>{{number_format($ops['koloTotals']->totalBalance, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals->totalPurch, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals->totalCash, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals->totalNotes, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals->totalDisc, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals->totalReturn, 2)}}</strong></td>
+                                <td><strong>{{number_format($koloTotals->totalBalance, 2)}}</strong></td>
                             </tr>
 
                             @endif
