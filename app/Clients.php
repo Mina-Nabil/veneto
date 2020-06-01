@@ -118,14 +118,15 @@ class Clients extends Model
     static function getFullTotals($from, $to)
     {
         $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
-                ->join("clients", "clients.id", '=', 't1.CLTR_CLNT_ID')
-                ->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}' ) ")
-                ->get();
+            ->join("clients", "clients.id", '=', 't1.CLTR_CLNT_ID')
+            ->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}' ) ")
+            ->get();
 
         $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
-            ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, 
-                                        SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
-            ->whereBetween("CLTR_DATE", [$from, $to])->get()->first();
+            ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch,
+                                            SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
+            ->whereBetween("CLTR_DATE", [$from, $to]);
+        $ret['totals'] = $ret['totals']->get()->first();
 
         $ret['others'] = DB::table("clients as t1")->join('client_trans', "CLTR_CLNT_ID", "=", "t1.id")
             ->select(['t1.id', 'CLTR_BLNC', 'CLNT_NAME'])
@@ -140,6 +141,7 @@ class Clients extends Model
         foreach ($ret['others'] as $mloshTrans) {
             $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
+    
         return $ret;
     }
 
