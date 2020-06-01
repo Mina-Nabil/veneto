@@ -96,7 +96,7 @@ class Clients extends Model
 
 
         $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
-            ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, SUM(CLTR_BLNC) as totalBalance, 
+            ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch,
                                         SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
             ->whereBetween("CLTR_DATE", [$from, $to]);
 
