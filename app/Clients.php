@@ -117,6 +117,7 @@ class Clients extends Model
 
     static function getFullTotals($from, $to)
     {
+        $to = date('Y-m-d', strtotime('+1 day', strtotime($to)));
         $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
             ->join("clients", "clients.id", '=', 't1.CLTR_CLNT_ID')
             ->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}' ) ")
@@ -126,7 +127,6 @@ class Clients extends Model
             ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch,
                                         SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
             ->whereBetween("CLTR_DATE", [$from, $to])
-            ->whereRaw(" ( CLNT_ONLN=0 OR CLNT_ONLN=1 ) ")
             ->get()->first();
 
 
