@@ -106,7 +106,7 @@
                             @endforeach
 
                             @if(isset($onlineOps['onlineTotals']))
-                            {{dd($onlineOps['onlineTotals'])}}
+                            {{dd($onlineOps)}}
                             <tr class="table-info">
                                 <td><strong>Online Totals</strong></td>
                                 <td><strong>{{number_format($onlineOps['onlineTotals']->totalBalance - $onlineOps['onlineTotals']->totalPurch + $onlineOps['onlineTotals']->totalCash + $onlineOps['onlineTotals']->totalDisc + $onlineOps['onlineTotals']->totalNotes + $onlineOps['onlineTotals']->totalReturn, 2)}}</strong>
