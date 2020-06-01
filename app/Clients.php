@@ -101,6 +101,7 @@ class Clients extends Model
         $ret['onlineTotals'] = [] ;
 
         if ($isOnline == 0) {
+            $ret['koloTotals'] = $ret['totals']->get()->first();
             $ret['totals'] = $ret['totals']->where("CLNT_ONLN", 0);
         } elseif ($isOnline == 1) {
             $ret['onlineTotals'] = $ret['totals']->where("CLNT_ONLN", 1)->get()->first();
@@ -109,6 +110,7 @@ class Clients extends Model
 
         foreach ($ret['others'] as $mloshTrans) {
             $ret['totals']->totalBalance += $mloshTrans->CLTR_BLNC;
+            $ret['koloTotals']->totalBalance += $mloshTrans->CLTR_BLNC;
         }
         foreach ($ret['onlineOthers'] as $mloshTrans) {
             $ret['onlineTotals']->totalBalance += $mloshTrans->CLTR_BLNC;

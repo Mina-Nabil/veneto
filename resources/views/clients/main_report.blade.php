@@ -58,7 +58,7 @@
                             @if(isset($ops['totals']))
 
                             <tr class="table-info">
-                                <td><strong>Totals</strong></td>
+                                <td><strong>Offline Totals</strong></td>
                                 <td><strong>{{number_format($ops['totals']->totalBalance - $ops['totals']->totalPurch + $ops['totals']->totalCash + $ops['totals']->totalDisc + $ops['totals']->totalNotes + $ops['totals']->totalReturn, 2)}}</strong>
                                 </td>
                                 <td><strong>{{number_format($ops['totals']->totalPurch, 2)}}</strong></td>
@@ -108,7 +108,7 @@
                             @if(isset($onlineOps['onlineTotals']))
 
                             <tr class="table-info">
-                                <td><strong>Totals</strong></td>
+                                <td><strong>Online Totals</strong></td>
                                 <td><strong>{{number_format($onlineOps['onlineTotals']->totalBalance - $onlineOps['onlineTotals']->totalPurch + $onlineOps['onlineTotals']->totalCash + $onlineOps['onlineTotals']->totalDisc + $onlineOps['onlineTotals']->totalNotes + $onlineOps['onlineTotals']->totalReturn, 2)}}</strong>
                                 </td>
                                 <td><strong>{{number_format($onlineOps['onlineTotals']->totalPurch, 2)}}</strong></td>
@@ -121,6 +121,23 @@
 
                             @endif
                         </tbody>
+                        <tfoot>
+                            @if(isset($ops['koloTotals']))
+
+                            <tr class="table-info">
+                                <td><strong>Online Totals</strong></td>
+                                <td><strong>{{number_format($ops['koloTotals']->totalBalance - $onlineOps['koloTotals']->totalPurch + $onlineOps['koloTotals']->totalCash + $onlineOps['koloTotals']->totalDisc + $ops['koloTotals']->totalNotes + $onlineOps['koloTotals']->totalReturn, 2)}}</strong>
+                                </td>
+                                <td><strong>{{number_format($ops['koloTotals']->totalPurch, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['koloTotals']->totalCash, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['koloTotals']->totalNotes, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['koloTotals']->totalDisc, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['koloTotals']->totalReturn, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['koloTotals']->totalBalance, 2)}}</strong></td>
+                            </tr>
+
+                            @endif
+                        </tfoot>
                     </table>
                 </div>
             </div>
