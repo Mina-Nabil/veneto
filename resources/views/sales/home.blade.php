@@ -74,8 +74,10 @@
                                         <div class="dropdown-menu">
                                             <button class="dropdown-item" data-toggle="modal"
                                                 data-target="#addPay{{$row->id}}">Add Payment</button>
+                                                @if($row->SALS_TOTL_PRCE >= 0)
                                             <button class="dropdown-item"
                                                 onclick="goto('{{url("sales/invoice/$row->id")}}')">Invoice</button>
+                                                @endif
                                             <button class="dropdown-item"
                                                 onclick="goto('{{url("sales/items/$row->id")}}')">Show details</button>
 

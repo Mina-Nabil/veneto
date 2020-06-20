@@ -44,10 +44,11 @@ class Finished extends Model
         return $ret;
     }
     public static function getAllFinished(){
-        DB::table("finished")->join("models", "FNSH_MODL_ID", '=', 'models.id')
+        $ret['data'] = DB::table("finished")->join("models", "FNSH_MODL_ID", '=', 'models.id')
                             ->join("brands", "FNSH_BRND_ID", '=', "brands.id")
                             ->select("finished.*", "brands.BRND_NAME", "models.MODL_UNID")
                             ->get();
+        return $ret;
     }
 
     public static function getFinishedRow($modelID, $brandID){
@@ -73,7 +74,7 @@ class Finished extends Model
         });
     }
 
-    public static function insertFinished($modelID, $brandID, $price, $amount36 = 0, $amount38 = 0, $amount40 = 0, $amount42 = 0, $amount44 = 0, $amount46 = 0, $amount48 = 0, $amount50 = 0, $finished=null){
+    public static function insertFinished($modelID, $brandID, $price=0, $amount36 = 0, $amount38 = 0, $amount40 = 0, $amount42 = 0, $amount44 = 0, $amount46 = 0, $amount48 = 0, $amount50 = 0, $finished=null){
 
             if($finished == null){
                 $finished = self::getFinishedRow($modelID, $brandID);

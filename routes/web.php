@@ -73,6 +73,8 @@ Route::get('rawinventory/tran'   ,   'RawInventoryController@transactions')-> mi
 Route::get('raw/tran/add'       ,   'RawInventoryController@addTran')-> middleware('cors');
 Route::post('raw/tran/insert'   ,   'RawInventoryController@insertTran')-> middleware('cors');
 Route::post('rawinventory/insert',   'RawInventoryController@insert')-> middleware('cors');
+Route::post('raw/adjust/entry', 'RawInventoryController@adjustEntry')-> middleware('cors');
+Route::post('rawinventory/tran/addentry'   ,   'RawInventoryController@addTranEntry')-> middleware('cors');
 
 //Models
 Route::get("models/show",   'ModelsController@showModels')-> middleware('cors');

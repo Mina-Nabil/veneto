@@ -49,6 +49,8 @@ class Ledger extends Model
                 'LDGR_LDST_ID' => $transType,
                 'LDGR_DATE' => date('Y-m-d H:i:s')
             ]);
+
+            Cash::insertTran("عمليه حساب عام" . "(" . $title . ")", $out, $in, "Automatic entry from General Ledger");
         });
     }
 

@@ -209,7 +209,7 @@ function addToab() {
     room++;
     var objTo = document.getElementById('dynamicContainer')
     var divtest = document.createElement("div");
-    divtest.setAttribute("class", "removeclass row col-lg-12 " + room);
+    divtest.setAttribute("class", " row col-lg-12 removeclass" + room);
     var rdiv = 'removeclass' + room;
     var concatString = "";
     concatString +=   " <div class='col-lg-2'>\

@@ -8,9 +8,7 @@
                 <h4 class="card-title">{{$reportTitle}}</h4>
                 <h6 class="card-subtitle">{{$reportDesc}}</h6>
                 <div class="table-responsive m-t-40">
-                    <table id="myTable"
-                        class="table color-bordered-table table-striped full-color-table full-info-table hover-table"
-                        data-display-length='-1' data-order="[]">
+                    <table id="myTable-client" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th>تاريخ</th>
@@ -35,14 +33,14 @@
                                     $salesArr = explode(' ', $op->CLTR_CMNT) ;
                                     if(isset($op->CLTR_DESC)){
                                         $descArr = explode(' ', $op->CLTR_DESC) ;
-                                        echo $descArr[0];
+                                       
                                     }
                                 ?>
                                     @if(isset($descArr) && $descArr[0]=='Sales' && is_numeric($descArr[1]))
                                     <a href="{{url('/sales/items/' . $descArr[1]) }}">
                                         مبيعات {{$descArr[1]}}
                                     </a>
-                                    @elseif(isset($descArr) && $descArr[0]=='Sales' && $descArr[1]=='Return') )
+                                    @elseif(isset($descArr) && $descArr[0]=='Sales' && $descArr[1]=='Return')
                                     <a href="{{url('/sales/items/' . $descArr[2]) }}">
                                         مرتجع {{$descArr[2]}}
                                     </a>
@@ -64,8 +62,7 @@
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
                                 <td>
                                     @if(isset($op->CLTR_CMNT) && strcmp($op->CLTR_CMNT, '')!=0 )
-                                    <button type="button" style="padding:.1rem" class="btn btn-secondary"
-                                        data-container="body" title="" data-toggle="popover" data-placement="bottom"
+                                    <button type="button" style="padding:.1rem" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom"
                                         data-content="{{$op->CLTR_CMNT}}" data-original-title="Comment:">
                                         @endif
                                         <i class="far fa-list-alt"></i>
@@ -78,14 +75,16 @@
                         @if(isset($totals))
                         <tfoot>
                             <tr>
-                                <td colspan=3><strong>Start Balance: {{number_format($startBalance, 1)}}</strong></td>
+                                <td ><strong>Start Balance</strong></td>
+                                <td ><strong>{{number_format($startBalance, 1)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalPurch, 2)}} </strong></td>
                                 <td><strong>{{number_format($totals->totalCash, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalNotes, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalDisc, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalReturn, 2)}}</strong></td>
-                                <td><strong>End: {{number_format($balance, 2)}}</strong></td>
-                                <td></td>
+                                <td ><strong>End: {{number_format($balance, 2)}}</strong></td>
+                                <td ></td>
+
                             </tr>
                         </tfoot>
                         @endif
@@ -95,4 +94,71 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('assets/node_modules/jquery/jquery-3.2.1.min.js') }}"></script>
+<!-- This is data table -->
+<script src="{{ asset('assets/node_modules/datatables/datatables.min.js') }}"></script>
+
+<!-- start - This is for export functionality only -->
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+<script>
+    const dclient = new Date();
+        const yearClient = dclient.getFullYear(); // 2019
+        const dayClient = dclient.getDay();
+        const monthClient = dclient.getMonth();
+        const formattedClient = dayClient + "/" + monthClient + "/" + yearClient;
+
+
+    var table = $('#myTable-client').DataTable({
+                    "displayLength": 25,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: [ 0, 1, 2, 3,4,5 ,6,7]
+                            },
+                            text: 'Print',
+                            title: 'Veneto - {{$reportTitle}}',
+                            footer: true,
+                            messageTop: "Date: " + formattedClient,
+                            customize: function (win) {
+                                $(win.document.body)
+                                    .prepend('<center><img src="{{asset('images / dark - logo.png')}}" style="position:absolute; margin: auto; ; margin-top: 460px ; left: 0; right: 0; opacity:0.2" /></center>')
+                                    .css('font-size', '24px')
+
+                                //$('#stampHeader' ).addClass( 'stampHeader' );
+                                $(win.document.body).find('table')
+                                    .css('border', 'solid')
+                                    .css('margin-top', '20px')
+                                    .css('font-size', 'inherit');
+                                $(win.document.body).find('th')
+                                    .css('border', 'solid')
+                                    .css('border', '!important')
+                                    .css('border-width', '1px')
+                                    .css('font-size', 'inherit')
+                                $(win.document.body).find('td')
+                                    .css('border', 'solid')
+                                    .css('border', '!important')
+                                    .css('border-width', '1px');
+                                $(win.document.body).find('tr')
+                                    .css('border', 'solid')
+                                    .css('border', '!important')
+                                    .css('border-width', '1px')
+                            }
+                        }, {
+                            extend: 'excel',
+                            title: 'Veneto',
+                            footer: true,
+
+                        }
+                    ]
+                });
+
+</script>
 @endsection

@@ -67,7 +67,7 @@ class SalesController extends Controller
 
     public function addPage(){
 
-        $data['items'] = Finished::getAvailable();
+        $data['items'] = Finished::getAllFinished();
         $data['clients'] = Clients::getClients();
 
         $data['pageTitle'] = "Add Sales";
@@ -102,7 +102,7 @@ class SalesController extends Controller
 
     public function addReturnPage(){
 
-        $data['items'] = Finished::getAvailable();
+        $data['items'] = Finished::getAllFinished();
         $data['clients'] = Clients::getClients();
 
         $data['pageTitle'] = "Add New Return";

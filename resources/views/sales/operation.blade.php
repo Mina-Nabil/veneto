@@ -10,9 +10,11 @@
                 <div class="row">
                     <h4 class="col-lg-7 card-title">{{$sales->CLNT_NAME}} Sales #{{$sales->id}} Summary</h4>
                     <div class="col-lg-5 align-self-center text-right">
+                        @if($sales->SALS_TOTL_PRCE >= 0)
                         <div class="d-flex justify-content-end align-items-center">
                             <a style="font-family: 'Allerta Stencil'" href="{{url('sales/invoice/'.$sales->id)}}" class="btn btn-success d-none d-lg-block m-l-15">Invoice</a>
                         </div>
+                        @endif
                     </div>
                     <div class="col-lg-3">
                         <strong>Date:</strong>

@@ -36,6 +36,8 @@ class RawInventoryController extends Controller
 
 
         $data['raws'] = RawInventory::getRollsByTran($tran);
+        $data['supp'] = RawInventory::getSuppOfTran($tran);
+        $data['tran'] = $tran;
         $data['transPage'] =  true;
         if(!isset($data['raws'][0]))return abort(404);
         $data['model'] = $data['raws'][0];
@@ -44,6 +46,9 @@ class RawInventoryController extends Controller
             $data['pageDesc'] = "for Transaction: "  . $tran;
         }
         $data['isProd'] = false;
+        $data['isTranEdit'] = true;
+        $data['types'] = Models::getTypes();
+        $data['colors']  = Models::getColors();
         return view('rawInventory.rolls', $data);
     }
 
@@ -120,6 +125,38 @@ class RawInventoryController extends Controller
 
         return \redirect("rawinventory/show");
 
+    }
+
+    public function adjustEntry(Request $request){
+        $validatedDate = $request->validate([
+            "raw" => "required",
+            "in"    => "required"
+        ]);
+
+        RawInventory::incrementRaw($request->raw, $request->in);
+
+        return redirect()->back();
+    }
+
+    public function addTranEntry(Request $request){
+
+        $path = null;
+        if ($request->hasFile('photo')) {
+            $path = $request->photo->store('images/models', 'public');
+        }
+
+        $request->validate([
+            'price' => "required",
+            'name'  => 'required',
+            'color' => 'required',
+            'type'  => 'required',
+            'tran'  => 'required',
+            'supp'  => 'required'
+        ]);
+
+        RawInventory::insertOneModelOnOldTran($request->name, $request->type, $request->color, $request->supp, $request->price, $path, $request->serial, $request->comment, $request->tran, $request->amount);
+
+        return redirect(url('rawinventory/bytrans/' . $request->tran));
     }
 
 /////////////////////////////Production Functions///////////////////////////////////

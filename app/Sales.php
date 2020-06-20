@@ -22,7 +22,7 @@ class Sales extends Model
             $query = $query->where([
                 ["SALS_ONLN", 0],
                 ['CLNT_ONLN', 0]
-                ]);
+            ]);
         elseif ($online == 1)
             $query = $query->where("SALS_ONLN", 1)->orWhere("CLNT_ONLN", 1);
 
@@ -167,7 +167,7 @@ class Sales extends Model
         return $retArr;
     }
 
-    public static function insertSales($clientID, $itemsArr, $total, $paid = 0, $isbank = false, $comment = null, $isOnline=0)
+    public static function insertSales($clientID, $itemsArr, $total, $paid = 0, $isbank = false, $comment = null, $isOnline = 0)
     {
         DB::transaction(function () use ($clientID, $itemsArr, $total, $paid, $isbank, $comment, $isOnline) {
 
@@ -219,7 +219,7 @@ class Sales extends Model
                 "SALS_CMNT"     => "(مرتجع) " . $comment,
                 "SALS_PAID"     => 0,
                 "SALS_ONLN"     => 0,
-                "SALS_TOTL_PRCE" => -1*$total
+                "SALS_TOTL_PRCE" => -1 * $total
             ]);
 
             Clients::insertTrans($clientID, 0, 0, 0, 0, $total, "Sales Comment: $comment", "Sales Return " . $id);
@@ -252,9 +252,9 @@ class Sales extends Model
             DB::table("sales")->where('id', $sales)->increment("SALS_PAID", $payment);
             $clientID = self::getClientID($sales);
             if ($isbank)
-                Clients::insertTrans($clientID, 0, $payment, 0, 0, 0, "Payment added for Specific Sales Operation " . $sales, "Sales " . $sales);
-            else
                 Clients::insertTrans($clientID, 0, 0, $payment, 0, 0, "Payment added for Specific Sales Operation " . $sales, "Sales " . $sales);
+            else
+                Clients::insertTrans($clientID, 0, $payment, 0, 0, 0, "Payment added for Specific Sales Operation " . $sales, "Sales " . $sales);
         });
     }
 
