@@ -58,7 +58,7 @@
                             @if(isset($ops['totals']))
 
                             <tr class="table-info">
-                                <td><strong>Offline Totals</strong></td>
+                                <td><strong>Veneto Totals</strong></td>
                                 <td><strong>{{number_format($ops['totalBalance'] - $ops['totals']->totalPurch + $ops['totals']->totalCash + $ops['totals']->totalDisc + $ops['totals']->totalNotes + $ops['totals']->totalReturn, 2)}}</strong>
                                 </td>
                                 <td><strong>{{number_format($ops['totals']->totalPurch, 2)}}</strong></td>
@@ -71,6 +71,54 @@
 
                             @endif
 
+                            @foreach($viaVenetoOps['data'] as $op)
+                            <tr>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $op->id)}}">
+                                        {{$op->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{number_format($viaVenetoOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
+                                <td>{{number_format($op->totalPurch, 2)}}</td>
+                                <td>{{number_format($op->totalCash, 2)}}</td>
+                                <td>{{number_format($op->totalNotes, 2)}}</td>
+                                <td>{{number_format($op->totalDisc, 2)}}</td>
+                                <td>{{number_format($op->totalReturn, 2)}}</td>
+                                <td>{{number_format($viaVenetoOps['balances'][$op->id], 2)}}</td>
+                            </tr>
+                            @endforeach
+                            @foreach($viaVenetoOps['others'] as $op)
+                            <tr>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $op->id)}}">
+                                        {{$op->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
+                            </tr>
+                            @endforeach
+
+                            @if(isset($viaVenetoOps['onlineTotals']))
+
+                            <tr class="table-info">
+                                <td><strong>Via Veneto Totals</strong></td>
+                                <td><strong>{{number_format($viaVenetoOps['totalBalance'] - $viaVenetoOps['onlineTotals']->totalPurch + $viaVenetoOps['onlineTotals']->totalCash + $viaVenetoOps['onlineTotals']->totalDisc + $viaVenetoOps['onlineTotals']->totalNotes + $viaVenetoOps['onlineTotals']->totalReturn, 2)}}</strong>
+                                </td>
+                                <td><strong>{{number_format($viaVenetoOps['onlineTotals']->totalPurch, 2)}}</strong></td>
+                                <td><strong>{{number_format($viaVenetoOps['onlineTotals']->totalCash, 2)}}</strong></td>
+                                <td><strong>{{number_format($viaVenetoOps['onlineTotals']->totalNotes, 2)}}</strong></td>
+                                <td><strong>{{number_format($viaVenetoOps['onlineTotals']->totalDisc, 2)}}</strong></td>
+                                <td><strong>{{number_format($viaVenetoOps['onlineTotals']->totalReturn, 2)}}</strong></td>
+                                <td><strong>{{number_format($viaVenetoOps['totalBalance'], 2)}}</strong></td>
+                            </tr>
+
+                            @endif
 
                             @foreach($onlineOps['data'] as $op)
                             <tr>
@@ -120,6 +168,8 @@
                             </tr>
 
                             @endif
+
+                           
                         </tbody>
                         <tfoot>
                             @if(isset($koloTotals))

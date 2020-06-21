@@ -70,6 +70,7 @@ class ClientsController extends Controller
     function mainReport(Request $request){
         $data['ops'] = Clients::getTotals($request->from, $request->to, 0);
         $data['onlineOps'] = Clients::getTotals($request->from, $request->to, 1);
+        $data['viaVenetoOps'] = Clients::getTotals($request->from, $request->to, 2);
         $data['koloTotals'] = Clients::getFullTotals($request->from, $request->to);
         return view('clients.main_report', $data);
     }
@@ -144,8 +145,7 @@ class ClientsController extends Controller
             "name"  => "required",
             "balance" => "required"
         ]);
-        $isOnline = ($request->isOnline == "on") ? 1 : 0;
-        Clients::insert($request->name, $request->arbcName, $request->balance, $request->address, $request->tele, $request->comment, $isOnline);
+        Clients::insert($request->name, $request->arbcName, $request->balance, $request->address, $request->tele, $request->comment, $request->isOnline);
 
         return redirect("clients/show");
     }
@@ -168,8 +168,8 @@ class ClientsController extends Controller
             "name"  => "required",
             "balance" => "required"
         ]);
-        $isOnline = ($request->isOnline == "on") ? 1 : 0;
-        Clients::updateClient($request->id, $request->name, $request->arbcName, $request->balance, $request->address, $request->tele, $request->comment, $isOnline);
+
+        Clients::updateClient($request->id, $request->name, $request->arbcName, $request->balance, $request->address, $request->tele, $request->comment, $request->isOnline);
 
         return redirect("clients/show");
     }

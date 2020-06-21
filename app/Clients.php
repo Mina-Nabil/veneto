@@ -59,6 +59,8 @@ class Clients extends Model
             $ret['data'] = $ret['data']->where("CLNT_ONLN", 0);
         } elseif ($isOnline == 1) {
             $ret['data'] = $ret['data']->where("CLNT_ONLN", 1);
+        } elseif ($isOnline == 2) {
+            $ret['data'] = $ret['data']->where("CLNT_ONLN", 2);
         }
         $ret['data'] = $ret['data']->groupBy("CLTR_CLNT_ID")->orderBy("CLNT_NAME")->get();
 
@@ -105,6 +107,8 @@ class Clients extends Model
             $ret['totals'] = $ret['totals']->where("CLNT_ONLN", 0);
         } elseif ($isOnline == 1) {
             $ret['onlineTotals'] = $ret['totals']->where("CLNT_ONLN", 1)->get()->first();
+        } elseif ($isOnline == 2) {
+            $ret['onlineTotals'] = $ret['totals']->where("CLNT_ONLN", 2)->get()->first();
         }
         $ret['totals'] = $ret['totals']->get()->first();
 

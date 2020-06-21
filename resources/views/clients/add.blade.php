@@ -12,13 +12,15 @@
                 @if(isset($client))
                 <input type=hidden name=id value={{$client->id}} >
                 @endif
-                <div class="col-lg-12 bt-switch">
+                <div class="form-group ">
                     <label>Type</label>
-                    <div class="input-group mb-3 ">
-                        <input type="checkbox" data-size="large" data-on-color="info" data-off-color="warning" data-on-text="Online" data-off-text="Normal" name="isOnline" 
-                        {{ ( isset($client) && $client->CLNT_ONLN==1 ) ? 'checked' : ''}}
-                        
-                        >
+                    <div class="input-group mb-3 " >
+                        <select class="select2 form-control "  name="isOnline" required>
+                            <option value=0 {{ ( isset($client) && $client->CLNT_ONLN==0 ) ? 'selected' : ''}} >Veneto</option>
+                            <option value=1 {{ ( isset($client) && $client->CLNT_ONLN==1 ) ? 'selected' : ''}} >Online</option>
+                            <option value=2 {{ ( isset($client) && $client->CLNT_ONLN==2 ) ? 'selected' : ''}} >Via Veneto</option>
+
+                        </select>
                     </div>
                     <small class="text-danger">{{$errors->first('paid')}}</small>
                 </div>
