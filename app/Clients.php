@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Cash;
 use App\Bank;
+use DateTime;
 
 class Clients extends Model
 {
@@ -48,7 +49,9 @@ class Clients extends Model
     {
 
         $ret = array();
-        $to = date('Y-m-d', strtotime('+1 day', strtotime($to)));
+        $from = (new DateTime($from))->format('Y-m-d H:i:s');
+        $to = ((new DateTime($to))->setTime(23, 59, 59))->format('Y-m-d H:i:s');
+
         $ret['data'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
             ->select("clients.CLNT_NAME", "clients.id")
             ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch,
@@ -124,7 +127,8 @@ class Clients extends Model
 
     static function getFullTotals($from, $to)
     {
-        $to = date('Y-m-d', strtotime('+23 hours', strtotime($to)));
+        $from = (new DateTime($from))->format('Y-m-d H:i:s');
+        $to = ((new DateTime($to))->setTime(23, 59, 59))->format('Y-m-d H:i:s');
    
         $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
             ->join("clients", "clients.id", '=', 't1.CLTR_CLNT_ID')
