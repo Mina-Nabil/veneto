@@ -133,13 +133,13 @@ class Clients extends Model
 
         $from = (new DateTime($from))->format('Y-m-d H:i:s');
         $to = ((new DateTime($to))->setTime(23, 59, 59))->format('Y-m-d H:i:s');
-   
+
         $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
             ->join("clients", "clients.id", '=', 't1.CLTR_CLNT_ID')
             ->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}' ) ")
             ->get();
 
-            $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
+        $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
             ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch,
                                         SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
             ->where([
@@ -162,7 +162,54 @@ class Clients extends Model
         foreach ($ret['others'] as $mloshTrans) {
             $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
-    
+
+        return $ret;
+    }
+
+    static function getHomeTotals($from, $to, $type = -1)
+    {
+        $from = (new DateTime($from))->format('Y-m-d H:i:s');
+        $to = ((new DateTime($to))->setTime(23, 59, 59))->format('Y-m-d H:i:s');
+
+        $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
+            ->join("clients", "clients.id", '=', 't1.CLTR_CLNT_ID');
+        if ($type == -1)
+            $balances->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}'  ) ");
+        else
+            $balances->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}' AND CLNT_ONLN={$type} ) ");
+        $balances = $balances->get();
+
+        $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
+            ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch,
+                                        SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
+            ->where([
+                ["CLTR_DATE", ">=", $from],
+                ["CLTR_DATE", "<=", $to],
+            ]);
+        if ($type != -1)
+            $ret['totals']->where('CLNT_ONLN', '=', $type);
+
+        $ret['totals'] = $ret['totals']->get()->first();
+
+
+        $ret['others'] = DB::table("clients as t1")->join('client_trans', "CLTR_CLNT_ID", "=", "t1.id")
+            ->select(['t1.id', 'CLTR_BLNC', 'CLNT_NAME'])
+            ->whereNotIn('t1.id', $balances->pluck('CLTR_CLNT_ID'))
+            ->whereRaw(" client_trans.id = (SELECT MAX(id) FROM client_trans WHERE CLTR_CLNT_ID = t1.id AND CLTR_DATE <= '{$to}' ) ");
+        if ($type != -1)
+            $ret['others']->where('CLNT_ONLN', '=', $type);
+
+        $ret['others'] = $ret['others']->get();
+
+        $ret['totalBalance'] = 0;
+        foreach ($balances as $balance) {
+            $ret['totalBalance'] += $balance->CLTR_BLNC;
+        }
+
+        foreach ($ret['others'] as $mloshTrans) {
+            $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
+        }
+
         return $ret;
     }
 

@@ -31,14 +31,31 @@ class HomeController extends Controller
         if (!Auth::check()) return redirect('/login');
 
         $thisYear = new DateTime('now');
-        $data['months'] = [];
-        
+        $data['all']['months'] = [];
+        $data['via']['months'] = [];
+        $data['veneto']['months'] = [];
+        $data['online']['months'] = [];
+
         for ($i = 1; $i <= 12; $i++) {
             $tmpMonth = new DateTime($thisYear->format('Y') . '-' . $i . '-01');
-            $totalArr = Clients::getFullTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'));
-            $totalArr['monthName'] = $this->getArabicMonthName($i);
-            array_push($data['months'], $totalArr);
+            $AllTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'));
+            $VentoTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 0);
+            $OnlineTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 1);
+            $VieVenetoTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 2);
+
+            $AllTotals['monthName']         = $this->getArabicMonthName($i);
+            $VentoTotals['monthName']       = $this->getArabicMonthName($i);
+            $OnlineTotals['monthName']      = $this->getArabicMonthName($i);
+            $VieVenetoTotals['monthName']   = $this->getArabicMonthName($i);
+
+            array_push($data['all']['months'], $AllTotals);
+            array_push($data['via']['months'], $VentoTotals);
+            array_push($data['veneto']['months'], $OnlineTotals);
+            array_push($data['online']['months'], $VieVenetoTotals);
         }
+
+
+
         $startOfYear = new DateTime($thisYear->format('Y') . '-01-01');
         $endOfYear = new DateTime($thisYear->format('Y') . '-12-31');
         $data['fullYear'] = Clients::getFullTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'));
@@ -75,8 +92,9 @@ class HomeController extends Controller
         return redirect('/login');
     }
 
-    private function getArabicMonthName($monthNumber){
-        switch($monthNumber){
+    private function getArabicMonthName($monthNumber)
+    {
+        switch ($monthNumber) {
             case 1:
                 return 'يناير';
             case 2:
