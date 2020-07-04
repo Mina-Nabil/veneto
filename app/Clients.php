@@ -130,6 +130,7 @@ class Clients extends Model
 
     static function getFullTotals($from, $to)
     {
+
         $from = (new DateTime($from))->format('Y-m-d H:i:s');
         $to = ((new DateTime($to))->setTime(23, 59, 59))->format('Y-m-d H:i:s');
    
