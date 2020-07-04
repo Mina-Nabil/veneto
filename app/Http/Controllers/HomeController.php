@@ -49,9 +49,9 @@ class HomeController extends Controller
             $VieVenetoTotals['monthName']   = $this->getArabicMonthName($i);
 
             array_push($data['all']['months'], $AllTotals);
-            array_push($data['via']['months'], $VentoTotals);
-            array_push($data['veneto']['months'], $OnlineTotals);
-            array_push($data['online']['months'], $VieVenetoTotals);
+            array_push($data['via']['months'], $VieVenetoTotals);
+            array_push($data['veneto']['months'], $VentoTotals);
+            array_push($data['online']['months'], $OnlineTotals);
         }
 
 
