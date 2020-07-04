@@ -25,7 +25,7 @@
                             @foreach($months as $month)
                             <tr>
                                 <td>{{$month['monthName']}}</td>
-                                <td>{{number_format(0, 1)}}</td>
+                                <td><strong>{{number_format($month['totalBalance'] - $month['totals']->totalPurch + $month['totals']->totalCash + $month['totals']->totalNotes + $month['totals']->totalDisc + $month['totals']->totalReturn , 1)}}</strong></td>
                                 <td>{{number_format($month['totals']->totalPurch, 2)}}</td>
                                 <td>{{number_format($month['totals']->totalCash, 2)}}</td>
                                 <td>{{number_format($month['totals']->totalNotes, 2)}}</td>
