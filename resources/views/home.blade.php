@@ -39,12 +39,12 @@
                         <tfoot>
                             <td></td>
                             <td><strong>Totals:</strong></td>
-                            <td>{{number_format($fullYear['totals']->totalPurch, 2)}}</td>
-                            <td>{{number_format($fullYear['totals']->totalCash, 2).'('. number_format($fullYear['totals']->totalCash/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYear['totals']->totalNotes, 2).'('. number_format($fullYear['totals']->totalNotes/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYear['totals']->totalDisc, 2) . '('. number_format($fullYear['totals']->totalDisc/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            <td>{{number_format($fullYearAll['totals']->totalPurch, 2)}}</td>
+                            <td>{{number_format($fullYearAll['totals']->totalCash, 2).'('. number_format($fullYearAll['totals']->totalCash/$fullYearAll['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearAll['totals']->totalNotes, 2).'('. number_format($fullYearAll['totals']->totalNotes/$fullYearAll['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearAll['totals']->totalDisc, 2) . '('. number_format($fullYearAll['totals']->totalDisc/$fullYearAll['totals']->totalPurch*100, 2,'.','').'%)'}}
                             </td>
-                            <td>{{number_format($fullYear['totals']->totalReturn, 2).'('. number_format($fullYear['totals']->totalReturn/$fullYear['totals']->totalPurch*100, 2,'.', ''). '%)'}}
+                            <td>{{number_format($fullYearAll['totals']->totalReturn, 2).'('. number_format($fullYearAll['totals']->totalReturn/$fullYearAll['totals']->totalPurch*100, 2,'.', ''). '%)'}}
                             </td>
                             <td></td>
                         </tfoot>
@@ -91,12 +91,12 @@
                         <tfoot>
                             <td></td>
                             <td><strong>Totals:</strong></td>
-                            <td>{{number_format($fullYear['totals']->totalPurch, 2)}}</td>
-                            <td>{{number_format($fullYear['totals']->totalCash, 2).'('. number_format($fullYear['totals']->totalCash/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYear['totals']->totalNotes, 2).'('. number_format($fullYear['totals']->totalNotes/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYear['totals']->totalDisc, 2) . '('. number_format($fullYear['totals']->totalDisc/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            <td>{{number_format($fullYearVeneto['totals']->totalPurch, 2)}}</td>
+                            <td>{{number_format($fullYearVeneto['totals']->totalCash, 2).'('. number_format($fullYearVeneto['totals']->totalCash/$fullYearVeneto['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearVeneto['totals']->totalNotes, 2).'('. number_format($fullYearVeneto['totals']->totalNotes/$fullYearVeneto['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearVeneto['totals']->totalDisc, 2) . '('. number_format($fullYearVeneto['totals']->totalDisc/$fullYearVeneto['totals']->totalPurch*100, 2,'.','').'%)'}}
                             </td>
-                            <td>{{number_format($fullYear['totals']->totalReturn, 2).'('. number_format($fullYear['totals']->totalReturn/$fullYear['totals']->totalPurch*100, 2,'.', ''). '%)'}}
+                            <td>{{number_format($fullYearVeneto['totals']->totalReturn, 2).'('. number_format($fullYearVeneto['totals']->totalReturn/$fullYearVeneto['totals']->totalPurch*100, 2,'.', ''). '%)'}}
                             </td>
                             <td></td>
                         </tfoot>
@@ -143,12 +143,12 @@
                         <tfoot>
                             <td></td>
                             <td><strong>Totals:</strong></td>
-                            <td>{{number_format($fullYear['totals']->totalPurch, 2)}}</td>
-                            <td>{{number_format($fullYear['totals']->totalCash, 2).'('. number_format($fullYear['totals']->totalCash/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYear['totals']->totalNotes, 2).'('. number_format($fullYear['totals']->totalNotes/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYear['totals']->totalDisc, 2) . '('. number_format($fullYear['totals']->totalDisc/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            <td>{{number_format($fullYearOnline['totals']->totalPurch, 2)}}</td>
+                            <td>{{number_format($fullYearOnline['totals']->totalCash, 2).'('. number_format($fullYearOnline['totals']->totalCash/$fullYearOnline['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearOnline['totals']->totalNotes, 2).'('. number_format($fullYearOnline['totals']->totalNotes/$fullYearOnline['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearOnline['totals']->totalDisc, 2) . '('. number_format($fullYearOnline['totals']->totalDisc/$fullYearOnline['totals']->totalPurch*100, 2,'.','').'%)'}}
                             </td>
-                            <td>{{number_format($fullYear['totals']->totalReturn, 2).'('. number_format($fullYear['totals']->totalReturn/$fullYear['totals']->totalPurch*100, 2,'.', ''). '%)'}}
+                            <td>{{number_format($fullYearOnline['totals']->totalReturn, 2).'('. number_format($fullYearOnline['totals']->totalReturn/$fullYearOnline['totals']->totalPurch*100, 2,'.', ''). '%)'}}
                             </td>
                             <td></td>
                         </tfoot>
@@ -195,12 +195,12 @@
                         <tfoot>
                             <td></td>
                             <td><strong>Totals:</strong></td>
-                            <td>{{number_format($fullYear['totals']->totalPurch, 2)}}</td>
-                            <td>{{number_format($fullYear['totals']->totalCash, 2).'('. number_format($fullYear['totals']->totalCash/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYear['totals']->totalNotes, 2).'('. number_format($fullYear['totals']->totalNotes/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYear['totals']->totalDisc, 2) . '('. number_format($fullYear['totals']->totalDisc/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            <td>{{number_format($fullYearVia['totals']->totalPurch, 2)}}</td>
+                            <td>{{number_format($fullYearVia['totals']->totalCash, 2).'('. number_format($fullYearVia['totals']->totalCash/$fullYearVia['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearVia['totals']->totalNotes, 2).'('. number_format($fullYearVia['totals']->totalNotes/$fullYearVia['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearVia['totals']->totalDisc, 2) . '('. number_format($fullYearVia['totals']->totalDisc/$fullYearVia['totals']->totalPurch*100, 2,'.','').'%)'}}
                             </td>
-                            <td>{{number_format($fullYear['totals']->totalReturn, 2).'('. number_format($fullYear['totals']->totalReturn/$fullYear['totals']->totalPurch*100, 2,'.', ''). '%)'}}
+                            <td>{{number_format($fullYearVia['totals']->totalReturn, 2).'('. number_format($fullYearVia['totals']->totalReturn/$fullYearVia['totals']->totalPurch*100, 2,'.', ''). '%)'}}
                             </td>
                             <td></td>
                         </tfoot>
