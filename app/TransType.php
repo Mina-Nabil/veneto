@@ -13,6 +13,13 @@ class TransType extends Model
         return DB::table('trans_subtype')->select("trans_subtype.*", "trans_type.TRTP_NAME")
         ->join('trans_type', 'TRST_TRTP_ID', '=', 'trans_type.id')->get();
     }
+    
+    static function getTransSubTypesByType($type){
+        return DB::table('trans_subtype')->select("trans_subtype.*", "trans_type.TRTP_NAME")
+        ->join('trans_type', 'TRST_TRTP_ID', '=', 'trans_type.id')
+        ->where('TRST_TRTP_ID', '=', $type)
+        ->get();
+    }
 
     static function getTransSubType($id){
         return DB::table('trans_subtype')->find($id);

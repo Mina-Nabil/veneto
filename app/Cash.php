@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\DB;
@@ -31,11 +32,22 @@ class Cash extends Model
             ])->orderBy('id', 'desc')->limit(500)->get();
     }
 
+    static function getCashSpent($from, $to, $subType)
+    {
+        $from = (new DateTime($from))->format('Y-m-d H:i:s');
+        $to = ((new DateTime($to))->setTime(23, 59, 59))->format('Y-m-d H:i:s');
+        return DB::table('cash')->selectRaw("SUM(CASH_IN) as totalIn, SUM(CASH_OUT) as totalOut ")->where([
+            ["CASH_TRST_ID", '=', $subType],
+            ["CASH_DATE", '>=', $from],
+            ["CASH_DATE", '<=', $to],
+        ])->get()->first();
+    }
+
     static function insertTran($title, $in = 0, $out = 0, $comment = null, $isError = 0, $transType = null)
     {
 
         DB::transaction(function () use ($title, $in, $out, $comment, $isError, $transType) {
-            
+
             $balance = self::getCashBalance() + $in - $out;
             $insertArr = [
                 'CASH_NAME' => $title,
@@ -47,7 +59,7 @@ class Cash extends Model
                 'CASH_TRST_ID' => $transType,
                 'CASH_DATE' => date('Y-m-d H:i:s')
             ];
-            if(isset($transType)){
+            if (isset($transType)) {
                 $typeBalance = self::getCashTypeBalance($transType) - $in + $out;
                 $insertArr['CASH_TRST_BLNC'] = $typeBalance;
             }

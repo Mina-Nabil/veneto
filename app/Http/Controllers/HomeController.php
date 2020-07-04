@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cash;
 use App\Clients;
+use App\TransType;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +33,9 @@ class HomeController extends Controller
         if (!Auth::check()) return redirect('/login');
 
         $thisYear = new DateTime('now');
+
+        /////////////////////////////////////// Sales ///////////////////////////////////
+
         $data['all']['months'] = [];
         $data['via']['months'] = [];
         $data['veneto']['months'] = [];
@@ -62,6 +67,30 @@ class HomeController extends Controller
         $data['fullYearVia'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),2);
         $data['fullYearOnline'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),1);
         $data['fullYearVeneto'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),0);
+
+        ////////////////////// Masareeef ///////////////////////////
+
+        $data['masareef'] = [];
+        for ($i = 1; $i <= 13; $i++) {
+        $data['totals']['masareef'][$i] = 0;
+        }
+        $types = TransType::getTransTypes();
+        foreach($types as $type){
+            $subTypes = TransType::getTransSubTypesByType($type->id);
+            foreach($subTypes as $subType){
+                $data['masareef'][$subType->id]['typeID'] = $type->id;
+                $data['masareef'][$subType->id]['typeName'] = $type->TRTP_NAME;
+                $data['masareef'][$subType->id]['subTypeName'] = $subType->TRST_NAME;
+                for ($i = 1; $i <= 12; $i++) {
+                    $tmpMonth = new DateTime($thisYear->format('Y') . '-' . $i . '-01');
+                    $data['masareef'][$subType->id][$i] = Cash::getCashSpent($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), $subType->id);
+                    $data['totals']['masareef'][$i] += ($data['masareef'][$subType->id][$i]->totalIn - $data['masareef'][$subType->id][$i]->totalOut);
+                }
+                $data['masareef'][$subType->id][13] = Cash::getCashSpent($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'), $subType->id);
+                $data['totals']['masareef'][13] += ($data['masareef'][$subType->id][13]->totalIn - $data['masareef'][$subType->id][13]->totalOut);
+            }
+        }
+        
         return view('home', $data);
     }
 

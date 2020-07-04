@@ -41,7 +41,8 @@
                             <td><strong>Totals:</strong></td>
                             <td>{{number_format($fullYearAll['totals']->totalPurch, 2)}}</td>
                             <td>{{number_format($fullYearAll['totals']->totalCash, 2).'('. number_format($fullYearAll['totals']->totalCash/$fullYearAll['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYearAll['totals']->totalNotes, 2).'('. number_format($fullYearAll['totals']->totalNotes/$fullYearAll['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearAll['totals']->totalNotes, 2).'('. number_format($fullYearAll['totals']->totalNotes/$fullYearAll['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            </td>
                             <td>{{number_format($fullYearAll['totals']->totalDisc, 2) . '('. number_format($fullYearAll['totals']->totalDisc/$fullYearAll['totals']->totalPurch*100, 2,'.','').'%)'}}
                             </td>
                             <td>{{number_format($fullYearAll['totals']->totalReturn, 2).'('. number_format($fullYearAll['totals']->totalReturn/$fullYearAll['totals']->totalPurch*100, 2,'.', ''). '%)'}}
@@ -92,8 +93,10 @@
                             <td></td>
                             <td><strong>Totals:</strong></td>
                             <td>{{number_format($fullYearVeneto['totals']->totalPurch, 2)}}</td>
-                            <td>{{number_format($fullYearVeneto['totals']->totalCash, 2).'('. number_format($fullYearVeneto['totals']->totalCash/$fullYearVeneto['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYearVeneto['totals']->totalNotes, 2).'('. number_format($fullYearVeneto['totals']->totalNotes/$fullYearVeneto['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearVeneto['totals']->totalCash, 2).'('. number_format($fullYearVeneto['totals']->totalCash/$fullYearVeneto['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            </td>
+                            <td>{{number_format($fullYearVeneto['totals']->totalNotes, 2).'('. number_format($fullYearVeneto['totals']->totalNotes/$fullYearVeneto['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            </td>
                             <td>{{number_format($fullYearVeneto['totals']->totalDisc, 2) . '('. number_format($fullYearVeneto['totals']->totalDisc/$fullYearVeneto['totals']->totalPurch*100, 2,'.','').'%)'}}
                             </td>
                             <td>{{number_format($fullYearVeneto['totals']->totalReturn, 2).'('. number_format($fullYearVeneto['totals']->totalReturn/$fullYearVeneto['totals']->totalPurch*100, 2,'.', ''). '%)'}}
@@ -144,8 +147,10 @@
                             <td></td>
                             <td><strong>Totals:</strong></td>
                             <td>{{number_format($fullYearOnline['totals']->totalPurch, 2)}}</td>
-                            <td>{{number_format($fullYearOnline['totals']->totalCash, 2).'('. number_format($fullYearOnline['totals']->totalCash/$fullYearOnline['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYearOnline['totals']->totalNotes, 2).'('. number_format($fullYearOnline['totals']->totalNotes/$fullYearOnline['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearOnline['totals']->totalCash, 2).'('. number_format($fullYearOnline['totals']->totalCash/$fullYearOnline['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            </td>
+                            <td>{{number_format($fullYearOnline['totals']->totalNotes, 2).'('. number_format($fullYearOnline['totals']->totalNotes/$fullYearOnline['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            </td>
                             <td>{{number_format($fullYearOnline['totals']->totalDisc, 2) . '('. number_format($fullYearOnline['totals']->totalDisc/$fullYearOnline['totals']->totalPurch*100, 2,'.','').'%)'}}
                             </td>
                             <td>{{number_format($fullYearOnline['totals']->totalReturn, 2).'('. number_format($fullYearOnline['totals']->totalReturn/$fullYearOnline['totals']->totalPurch*100, 2,'.', ''). '%)'}}
@@ -197,12 +202,85 @@
                             <td><strong>Totals:</strong></td>
                             <td>{{number_format($fullYearVia['totals']->totalPurch, 2)}}</td>
                             <td>{{number_format($fullYearVia['totals']->totalCash, 2).'('. number_format($fullYearVia['totals']->totalCash/$fullYearVia['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
-                            <td>{{number_format($fullYearVia['totals']->totalNotes, 2).'('. number_format($fullYearVia['totals']->totalNotes/$fullYearVia['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYearVia['totals']->totalNotes, 2).'('. number_format($fullYearVia['totals']->totalNotes/$fullYearVia['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            </td>
                             <td>{{number_format($fullYearVia['totals']->totalDisc, 2) . '('. number_format($fullYearVia['totals']->totalDisc/$fullYearVia['totals']->totalPurch*100, 2,'.','').'%)'}}
                             </td>
                             <td>{{number_format($fullYearVia['totals']->totalReturn, 2).'('. number_format($fullYearVia['totals']->totalReturn/$fullYearVia['totals']->totalPurch*100, 2,'.', ''). '%)'}}
                             </td>
                             <td></td>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">مصاريف مجمعه</div>
+
+                <div class="card-body">
+                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>بيان</th>
+                                <th>يناير</th>
+                                <th>فبراير</th>
+                                <th>مارس</th>
+                                <th>ابريل</th>
+                                <th>مايو</th>
+                                <th>يونيو</th>
+                                <th>يوليو</th>
+                                <th>اغسطس</th>
+                                <th>سبتمبر</th>
+                                <th>اكتوبر</th>
+                                <th>نوفمبر</th>
+                                <th>ديسمبر</th>
+                                <th>اجمالي</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($masareef as $masroof)
+                            <tr>
+                                <td><strong>{{$masroof['typeName']}}</strong></td>
+                                <td><strong>{{$masroof['subTypeName']}}</strong></td>
+
+                                <td>{{number_format($masroof[1] ->totalIn - $masroof[1] ->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[2] ->totalIn - $masroof[2] ->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[3] ->totalIn - $masroof[3] ->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[4] ->totalIn - $masroof[4] ->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[5] ->totalIn - $masroof[5] ->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[6] ->totalIn - $masroof[6] ->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[7] ->totalIn - $masroof[7] ->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[8] ->totalIn - $masroof[8] ->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[9] ->totalIn - $masroof[9] ->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[10]->totalIn - $masroof[10]->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[11]->totalIn - $masroof[11]->totalOut, 2)}}</td>
+                                <td>{{number_format($masroof[12]->totalIn - $masroof[12]->totalOut, 2)}}</td>
+                                <td><strong>{{number_format($masroof[13]->totalIn - $masroof[13]->totalOut, 2)}}</strong></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <td></td>
+                            <td><strong>Totals</strong></td>
+
+                            <td>{{number_format($totals['masareef'][1], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][2], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][3], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][4], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][5], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][6], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][7], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][8], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][9], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][10], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][11], 2)}}</td>
+                            <td>{{number_format($totals['masareef'][12], 2)}}</td>
+                            <td><strong>{{number_format($totals['masareef'][13], 2)}}</strong></td>
                         </tfoot>
                     </table>
                 </div>
