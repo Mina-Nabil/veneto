@@ -25,7 +25,8 @@
                             @foreach($months as $month)
                             <tr>
                                 <td>{{$month['monthName']}}</td>
-                                <td><strong>{{number_format($month['totalBalance'] - $month['totals']->totalPurch + $month['totals']->totalCash + $month['totals']->totalNotes + $month['totals']->totalDisc + $month['totals']->totalReturn , 2)}}</strong></td>
+                                <td><strong>{{number_format($month['totalBalance'] - $month['totals']->totalPurch + $month['totals']->totalCash + $month['totals']->totalNotes + $month['totals']->totalDisc + $month['totals']->totalReturn , 2)}}</strong>
+                                </td>
                                 <td>{{number_format($month['totals']->totalPurch, 2)}}</td>
                                 <td>{{number_format($month['totals']->totalCash, 2)}}</td>
                                 <td>{{number_format($month['totals']->totalNotes, 2)}}</td>
@@ -35,7 +36,18 @@
                             </tr>
                             @endforeach
                         </tbody>
-        
+                        <tfoot>
+                            <td></td>
+                            <td><strong>Totals:</strong></td>
+                            <td>{{number_format($fullYear['totals']->totalPurch, 2)}}</td>
+                            <td>{{number_format($fullYear['totals']->totalCash, 2).'('. number_format($fullYear['totals']->totalCash/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYear['totals']->totalNotes, 2).'('. number_format($fullYear['totals']->totalNotes/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}</td>
+                            <td>{{number_format($fullYear['totals']->totalDisc, 2) . '('. number_format($fullYear['totals']->totalDisc/$fullYear['totals']->totalPurch*100, 2,'.','').'%)'}}
+                            </td>
+                            <td>{{number_format($fullYear['totals']->totalReturn, 2).'('. number_format($fullYear['totals']->totalReturn/$fullYear['totals']->totalPurch*100, 2,'.', ''). '%)'}}
+                            </td>
+                            <td></td>
+                        </tfoot>
                     </table>
                 </div>
             </div>

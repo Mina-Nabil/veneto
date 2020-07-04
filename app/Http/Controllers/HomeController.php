@@ -32,13 +32,16 @@ class HomeController extends Controller
 
         $thisYear = new DateTime('now');
         $data['months'] = [];
+        
         for ($i = 1; $i <= 12; $i++) {
             $tmpMonth = new DateTime($thisYear->format('Y') . '-' . $i . '-01');
             $totalArr = Clients::getFullTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'));
             $totalArr['monthName'] = $this->getArabicMonthName($i);
             array_push($data['months'], $totalArr);
         }
-
+        $startOfYear = new DateTime($thisYear->format('Y') . '-01-01');
+        $endOfYear = new DateTime($thisYear->format('Y') . '-12-31');
+        $data['fullYear'] = Clients::getFullTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'));
         return view('home', $data);
     }
 
