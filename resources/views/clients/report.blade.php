@@ -209,8 +209,8 @@
                                 @if(!$isClient)
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->CLTR_CLNT_ID)}}"
-                                        title="{{$op->CLNT_NAME}}">
-                                        {{ (strlen($op->CLNT_NAME)>12) ?  mb_substr($op->CLNT_NAME,0,12, "utf-8") . '...' : $op->CLNT_NAME }}
+                                        title="{{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}">
+                                        {{ (strlen($op->CLNT_NAME)>12) ?  mb_substr( (($op->CLNT_SRNO) ? $op->CLNT_SRNO.' - '  : '') . $op->CLNT_NAME,0,12, "utf-8") . '...' : (($op->CLNT_SRNO) ? $op->CLNT_SRNO.' - '  : '') . $op->CLNT_NAME }}
                                     </a>
                                 </td>
                                 @endif

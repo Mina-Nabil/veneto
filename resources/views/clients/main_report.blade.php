@@ -26,7 +26,7 @@
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{$op->CLNT_NAME}}
+                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($ops['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
@@ -42,7 +42,7 @@
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{$op->CLNT_NAME}}
+                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
@@ -75,7 +75,7 @@
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{$op->CLNT_NAME}}
+                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($viaVenetoOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
@@ -91,7 +91,7 @@
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{$op->CLNT_NAME}}
+                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
@@ -124,7 +124,7 @@
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{$op->CLNT_NAME}}
+                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($onlineOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
@@ -140,7 +140,7 @@
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{$op->CLNT_NAME}}
+                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
@@ -173,7 +173,7 @@
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{$op->CLNT_NAME}}
+                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($prodOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
@@ -189,7 +189,7 @@
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{$op->CLNT_NAME}}
+                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
@@ -222,7 +222,7 @@
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{$op->CLNT_NAME}}
+                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($procOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
@@ -238,7 +238,7 @@
                             <tr>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{$op->CLNT_NAME}}
+                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>

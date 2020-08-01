@@ -11,6 +11,7 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Client Name</th>
                                 <th>Arabic Name</th>
                                 <th>Current Balance</th>
@@ -20,6 +21,7 @@
                         <tbody>
                             @foreach($clients as $client)
                             <tr>
+                                <td>{{$client->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $client->id)}}">
                                         {{$client->CLNT_NAME}}

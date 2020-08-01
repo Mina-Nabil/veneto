@@ -18,7 +18,7 @@
                                 <option disabled selected hidden value="">Clients</option>
                                 @foreach($clients as $client)
                                 <option value="{{ $client->id }}">
-                                    {{$client->CLNT_NAME}} </option>
+                                    {{($client->CLNT_SRNO ) ? $client->CLNT_SRNO.' - '  : ''}}{{$client->CLNT_NAME}} </option>
                                 @endforeach
                             </select>
                         </div>

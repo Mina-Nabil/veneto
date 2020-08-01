@@ -304,18 +304,16 @@
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('cash/add')}}"
+                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> CashOp.</a>
                             <a style="font-family: 'Allerta Stencil'" href="{{url('clients/trans/add')}}"
-                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Client
-                                Op.</a>
+                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> ClientOp.</a>
                             <a style="font-family: 'Allerta Stencil'" href="{{url('suppliers/trans/add')}}"
-                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Supplier
-                                Op.</a>
+                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> SupplierOp.</a>
                             <a style="font-family: 'Allerta Stencil'" href="{{url('sales/add')}}"
-                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Sales
-                                Op.</a>
+                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> SalesOp.</a>
                             <a style="font-family: 'Allerta Stencil'" href="{{url('rawinventory/add')}}"
-                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> New Raw
-                                Entry</a>
+                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> New Raw Entry</a>
                         </div>
                     </div>
                 </div>

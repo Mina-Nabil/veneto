@@ -37,6 +37,16 @@
                         </div>
                         <small class="text-danger">{{$errors->first('name')}}</small>
                     </div>
+                    <div class="form-group">
+                        <label>Serial*</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class=" fas fa-barcode"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Example: 101" name=serial aria-label="Client Serial Number" aria-describedby="basic-addon11" value="{{ (isset($client)) ? $client->CLNT_SRNO : old('serial')}}" >
+                        </div>
+                        <small class="text-danger">{{$errors->first('serial')}}</small>
+                    </div>
 
                     <div class="form-group">
                         <label>Balance*</label>

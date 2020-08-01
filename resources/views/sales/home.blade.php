@@ -49,7 +49,7 @@
                                 @if(!($isClntPage))
                                 <td>
                                     <a href="{{url('sales/show/' . $row->SALS_CLNT_ID)}}">
-                                        {{$row->CLNT_NAME}}
+                                        {{($row->CLNT_SRNO ) ? $row->CLNT_SRNO.' - '  : ''}}{{$row->CLNT_NAME}}
                                     </a>
                                 </td>
                                 @endif

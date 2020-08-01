@@ -17,7 +17,7 @@ class Sales extends Model
     public static function getSales($online = -1)
     {
         $query = DB::table("sales")->join('clients', 'SALS_CLNT_ID', '=', 'clients.id')
-            ->select("sales.*", "clients.CLNT_NAME");
+            ->select("sales.*", "clients.CLNT_NAME", "clients.CLNT_SRNO");
         if ($online == 0)
             $query = $query->where([
                 ["SALS_ONLN", 0],
@@ -91,7 +91,7 @@ class Sales extends Model
     public static function getSalesByClient($clientID)
     {
         return DB::table("sales")->join('clients', 'SALS_CLNT_ID', '=', 'clients.id')
-            ->select("sales.*", "clients.CLNT_NAME")
+            ->select("sales.*", "clients.CLNT_NAME", "clients.CLNT_SRNO")
             ->where("SALS_CLNT_ID", $clientID)->get();
     }
 
@@ -136,7 +136,7 @@ class Sales extends Model
     {
         $retArr = array();
         $retArr['sales'] = DB::table("sales")->join('clients', 'SALS_CLNT_ID', '=', 'clients.id')
-            ->select("sales.*", "clients.CLNT_NAME", "clients.CLNT_ADRS", "clients.CLNT_TELE")
+            ->select("sales.*", "clients.CLNT_NAME", "clients.CLNT_SRNO", "clients.CLNT_ADRS", "clients.CLNT_TELE")
             ->selectRaw("DATE_FORMAT(sales.SALS_DATE, '%Y-%m-%d') as formatedDate")
             ->where("sales.id", $id)->get()->first();
 

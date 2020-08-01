@@ -147,7 +147,7 @@ class ClientsController extends Controller
             "name"  => "required",
             "balance" => "required"
         ]);
-        Clients::insert($request->name, $request->arbcName, $request->balance, $request->address, $request->tele, $request->comment, $request->isOnline);
+        Clients::insert($request->name, $request->arbcName, $request->balance, $request->address, $request->tele, $request->comment, $request->isOnline, $request->serial);
 
         return redirect("clients/show");
     }
@@ -171,7 +171,7 @@ class ClientsController extends Controller
             "balance" => "required"
         ]);
 
-        Clients::updateClient($request->id, $request->name, $request->arbcName, $request->balance, $request->address, $request->tele, $request->comment, $request->isOnline);
+        Clients::updateClient($request->id, $request->name, $request->arbcName, $request->balance, $request->address, $request->tele, $request->comment, $request->isOnline, $request->serial);
 
         return redirect("clients/show");
     }

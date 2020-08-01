@@ -15,7 +15,7 @@
                             <select name=client class="select2 form-control custom-select" style="width: 100%; height:36px;">
                                 <option disabled>Pick From Clients</option>
                                 @foreach($clients as $client)
-                                <option value="{{ $client->id }}">{{$client->CLNT_NAME}}</option>
+                                <option value="{{ $client->id }}">{{($client->CLNT_SRNO ) ? $client->CLNT_SRNO.' - '  : ''}}{{$client->CLNT_NAME}}</option>
                                 @endforeach
                             </select>
                         </div>
