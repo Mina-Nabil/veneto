@@ -169,6 +169,107 @@
 
                             @endif
 
+                            @foreach($prodOps['data'] as $op)
+                            <tr>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $op->id)}}">
+                                        {{$op->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{number_format($prodOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
+                                <td>{{number_format($op->totalPurch, 2)}}</td>
+                                <td>{{number_format($op->totalCash, 2)}}</td>
+                                <td>{{number_format($op->totalNotes, 2)}}</td>
+                                <td>{{number_format($op->totalDisc, 2)}}</td>
+                                <td>{{number_format($op->totalReturn, 2)}}</td>
+                                <td>{{number_format($prodOps['balances'][$op->id], 2)}}</td>
+                            </tr>
+                            @endforeach
+                            @foreach($prodOps['others'] as $op)
+                            <tr>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $op->id)}}">
+                                        {{$op->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
+                            </tr>
+                            @endforeach
+
+                            @if(isset($prodOps['onlineTotals']))
+
+                            <tr class="table-info">
+                                <td><strong>Production Totals</strong></td>
+                                <td><strong>{{number_format($prodOps['totalBalance'] - $prodOps['onlineTotals']->totalPurch + $prodOps['onlineTotals']->totalCash + $prodOps['onlineTotals']->totalDisc + $prodOps['onlineTotals']->totalNotes + $prodOps['onlineTotals']->totalReturn, 2)}}</strong>
+                                </td>
+                                <td><strong>{{number_format($prodOps['onlineTotals']->totalPurch, 2)}}</strong></td>
+                                <td><strong>{{number_format($prodOps['onlineTotals']->totalCash, 2)}}</strong></td>
+                                <td><strong>{{number_format($prodOps['onlineTotals']->totalNotes, 2)}}</strong></td>
+                                <td><strong>{{number_format($prodOps['onlineTotals']->totalDisc, 2)}}</strong></td>
+                                <td><strong>{{number_format($prodOps['onlineTotals']->totalReturn, 2)}}</strong></td>
+                                <td><strong>{{number_format($prodOps['totalBalance'], 2)}}</strong></td>
+                            </tr>
+
+                            @endif
+
+                            @foreach($procOps['data'] as $op)
+                            <tr>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $op->id)}}">
+                                        {{$op->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{number_format($procOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
+                                <td>{{number_format($op->totalPurch, 2)}}</td>
+                                <td>{{number_format($op->totalCash, 2)}}</td>
+                                <td>{{number_format($op->totalNotes, 2)}}</td>
+                                <td>{{number_format($op->totalDisc, 2)}}</td>
+                                <td>{{number_format($op->totalReturn, 2)}}</td>
+                                <td>{{number_format($procOps['balances'][$op->id], 2)}}</td>
+                            </tr>
+                            @endforeach
+                            @foreach($procOps['others'] as $op)
+                            <tr>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $op->id)}}">
+                                        {{$op->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
+                            </tr>
+                            @endforeach
+
+                            @if(isset($procOps['onlineTotals']))
+
+                            <tr class="table-info">
+                                <td><strong>Procurment Totals</strong></td>
+                                <td><strong>{{number_format($procOps['totalBalance'] - $procOps['onlineTotals']->totalPurch + $procOps['onlineTotals']->totalCash + $procOps['onlineTotals']->totalDisc + $procOps['onlineTotals']->totalNotes + $procOps['onlineTotals']->totalReturn, 2)}}</strong>
+                                </td>
+                                <td><strong>{{number_format($procOps['onlineTotals']->totalPurch, 2)}}</strong></td>
+                                <td><strong>{{number_format($procOps['onlineTotals']->totalCash, 2)}}</strong></td>
+                                <td><strong>{{number_format($procOps['onlineTotals']->totalNotes, 2)}}</strong></td>
+                                <td><strong>{{number_format($procOps['onlineTotals']->totalDisc, 2)}}</strong></td>
+                                <td><strong>{{number_format($procOps['onlineTotals']->totalReturn, 2)}}</strong></td>
+                                <td><strong>{{number_format($procOps['totalBalance'], 2)}}</strong></td>
+                            </tr>
+
+                            @endif
+
+
+
+
                            
                         </tbody>
                         <tfoot>

@@ -40,6 +40,8 @@ class HomeController extends Controller
         $data['via']['months'] = [];
         $data['veneto']['months'] = [];
         $data['online']['months'] = [];
+        $data['prod']['months'] = [];
+        $data['proc']['months'] = [];
 
         for ($i = 1; $i <= 12; $i++) {
             $tmpMonth = new DateTime($thisYear->format('Y') . '-' . $i . '-01');
@@ -47,16 +49,22 @@ class HomeController extends Controller
             $VentoTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 0);
             $OnlineTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 1);
             $VieVenetoTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 2);
+            $ProdTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 3);
+            $ProcTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 4);
 
             $AllTotals['monthName']         = $this->getArabicMonthName($i);
             $VentoTotals['monthName']       = $this->getArabicMonthName($i);
             $OnlineTotals['monthName']      = $this->getArabicMonthName($i);
             $VieVenetoTotals['monthName']   = $this->getArabicMonthName($i);
+            $ProdTotals['monthName']   = $this->getArabicMonthName($i);
+            $ProcTotals['monthName']   = $this->getArabicMonthName($i);
 
             array_push($data['all']['months'], $AllTotals);
             array_push($data['via']['months'], $VieVenetoTotals);
             array_push($data['veneto']['months'], $VentoTotals);
             array_push($data['online']['months'], $OnlineTotals);
+            array_push($data['prod']['months'], $ProdTotals);
+            array_push($data['proc']['months'], $ProcTotals);
         }
 
 
@@ -64,6 +72,8 @@ class HomeController extends Controller
         $startOfYear = new DateTime($thisYear->format('Y') . '-01-01');
         $endOfYear = new DateTime($thisYear->format('Y') . '-12-31');
         $data['fullYearAll'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'));
+        $data['fullYearProc'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),4);
+        $data['fullYearProd'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),3);
         $data['fullYearVia'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),2);
         $data['fullYearOnline'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),1);
         $data['fullYearVeneto'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),0);

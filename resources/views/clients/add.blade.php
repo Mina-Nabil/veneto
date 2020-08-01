@@ -19,6 +19,8 @@
                             <option value=0 {{ ( isset($client) && $client->CLNT_ONLN==0 ) ? 'selected' : ''}} >Veneto</option>
                             <option value=1 {{ ( isset($client) && $client->CLNT_ONLN==1 ) ? 'selected' : ''}} >Online</option>
                             <option value=2 {{ ( isset($client) && $client->CLNT_ONLN==2 ) ? 'selected' : ''}} >Via Veneto</option>
+                            <option value=3 {{ ( isset($client) && $client->CLNT_ONLN==3 ) ? 'selected' : ''}} >Production</option>
+                            <option value=4 {{ ( isset($client) && $client->CLNT_ONLN==4 ) ? 'selected' : ''}} >Procurement</option>
 
                         </select>
                     </div>

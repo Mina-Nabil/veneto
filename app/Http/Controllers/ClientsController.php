@@ -71,6 +71,8 @@ class ClientsController extends Controller
         $data['ops'] = Clients::getTotals($request->from, $request->to, 0);
         $data['onlineOps'] = Clients::getTotals($request->from, $request->to, 1);
         $data['viaVenetoOps'] = Clients::getTotals($request->from, $request->to, 2);
+        $data['prodOps'] = Clients::getTotals($request->from, $request->to, 3);
+        $data['procOps'] = Clients::getTotals($request->from, $request->to, 4);
         $data['koloTotals'] = Clients::getFullTotals($request->from, $request->to);
         return view('clients.main_report', $data);
     }
