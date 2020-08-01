@@ -32,6 +32,9 @@ class SalesController extends Controller
         } else {
             $data['sales'] = Sales::getSales(0);
             $data['onlineSales'] = Sales::getSales(1);
+            $data['viaSales'] = Sales::getSales(2);
+            $data['prodSales'] = Sales::getSales(3);
+            $data['procSales'] = Sales::getSales(4);
             $data['isClntPage'] = false;
 
         }
