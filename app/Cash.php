@@ -43,6 +43,20 @@ class Cash extends Model
         ])->get()->first();
     }
 
+    static function getCashSpentByType($from, $to, $type)
+    {
+        $from = (new DateTime($from))->format('Y-m-d H:i:s');
+        $to = ((new DateTime($to))->setTime(23, 59, 59))->format('Y-m-d H:i:s');
+        return DB::table('cash')->selectRaw("SUM(CASH_IN) as totalIn, SUM(CASH_OUT) as totalOut ")
+        ->join('trans_subtype', "CASH_TRST_ID", "=", "trans_subtype.id")
+        ->join('trans_type', "TRST_TRTP_ID", "=", "trans_type.id")
+        ->where([
+            ["TRST_TRTP_ID", '=', $type],
+            ["CASH_DATE", '>=', $from],
+            ["CASH_DATE", '<=', $to],
+        ])->get()->first();
+    }
+
     static function insertTran($title, $in = 0, $out = 0, $comment = null, $isError = 0, $transType = null)
     {
 

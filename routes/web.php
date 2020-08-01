@@ -128,6 +128,7 @@ Route::post("ledger/unmark",         'LedgerController@unmarkError')-> middlewar
 
 //Cash Account
 Route::get("cash/show",             'CashController@show')-> middleware('cors');
+Route::get("cash/expenses/show",             'CashController@showTotalTypesPaid')-> middleware('cors');
 Route::get("cash/show/{typeID}",             'CashController@show')-> middleware('cors');
 Route::get("cash/add",              'CashController@addPage')-> middleware('cors');
 Route::post("cash/insert",          'CashController@insert')-> middleware('cors');

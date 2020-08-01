@@ -163,6 +163,7 @@
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="{{url('cash/show')}}">رصيد</a></li>
                                         <li><a href="{{url('cash/prepare/report')}}">كشف حساب</a></li>
+                                        <li><a href="{{url('cash/expenses/show')}}">مجمع مصاريف</a></li>
                                         <li><a href="{{url('cash/add')}}">اضافه</a></li>
                                     </ul>
                                 </li>

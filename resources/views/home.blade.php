@@ -219,7 +219,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Total Procurement</div>
+                <div class="card-header">Total Production</div>
 
                 <div class="card-body">
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
