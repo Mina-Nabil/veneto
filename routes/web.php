@@ -46,6 +46,11 @@ Route::post("clients/trans/unmark",   'ClientsController@unmarkError')-> middlew
 Route::post("clients/account/statement", 'ClientsController@accountStatement')-> middleware('cors');
 Route::post("clients/main/account", 'ClientsController@mainReport')-> middleware('cors');
 
+Route::get('clients/target/current', 'ClientsController@currentTargets')-> middleware('cors');
+Route::get('clients/target/history', 'ClientsController@prepareHistoryTarget')-> middleware('cors');
+Route::post('clients/target/load', 'ClientsController@historyPage')-> middleware('cors');
+Route::post('clients/set/targets', 'ClientsController@setTarget')-> middleware('cors');
+
 Route::get("clients/show",        'ClientsController@home')-> middleware('cors');
 Route::get("clients/add",         'ClientsController@addPage')-> middleware('cors');
 Route::get("clients/edit/{id}",   'ClientsController@edit')-> middleware('cors');

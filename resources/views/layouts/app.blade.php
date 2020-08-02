@@ -23,11 +23,9 @@
     <!-- Form CSS -->
     <link href="{{ asset('dist/css/pages/file-upload.css')}}" rel="stylesheet">
     <link href="{{ asset('assets/node_modules/dropify/dist/css/dropify.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet"
-        type="text/css" />
+    <link href="{{ asset('assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allerta+Stencil" />
 
     <!-- Sweet Alert Notification -->
@@ -67,20 +65,16 @@
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{{ asset('images/dark-logo.png') }}" height=40px alt="homepage"
-                                class="dark-logo" />
+                            <img src="{{ asset('images/dark-logo.png') }}" height=40px alt="homepage" class="dark-logo" />
                             <!-- Light Logo icon -->
-                            <img src="{{ asset('images/light-logo.png') }}" height=40px alt="homepage"
-                                class="light-logo" />
+                            <img src="{{ asset('images/light-logo.png') }}" height=40px alt="homepage" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
                             <!-- dark Logo text -->
-                            <img src="{{ asset('images/dark-text.png') }}" height=40px alt="homepage"
-                                class="dark-logo" />
+                            <img src="{{ asset('images/dark-text.png') }}" height=40px alt="homepage" class="dark-logo" />
                             <!-- Light Logo text -->
-                            <img src="{{ asset('images/light-text.png') }}" height=40px class="light-logo"
-                                alt="homepage" /></span> </a>
+                            <img src="{{ asset('images/light-text.png') }}" height=40px class="light-logo" alt="homepage" /></span> </a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -91,11 +85,8 @@
                     <!-- ============================================================== -->
                     <ul class="navbar-nav mr-auto">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <li class="nav-item"> <a
-                                class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
@@ -112,8 +103,7 @@
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
-                        <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light"
-                                href="javascript:void(0)"><i class="ti-settings"></i></a></li>
+                        <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light" href="javascript:void(0)"><i class="ti-settings"></i></a></li>
                     </ul>
                 </div>
             </nav>
@@ -131,15 +121,12 @@
                 <div class="user-profile">
                     <div class="user-pro-body">
                         @if(isset(Auth::user()->image))
-                        <div><img src="{{ asset( 'storage/'. Auth::user()->image ) }} " alt="user-img"
-                                class="img-circle"></div>
+                        <div><img src="{{ asset( 'storage/'. Auth::user()->image ) }} " alt="user-img" class="img-circle"></div>
                         @else
-                        <div><img src="{{ asset('assets/images/users/def-user.png') }} " alt="user-img"
-                                class="img-circle"></div>
+                        <div><img src="{{ asset('assets/images/users/def-user.png') }} " alt="user-img" class="img-circle"></div>
                         @endif
                         <div class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu"
-                                data-toggle="dropdown" role="button" aria-haspopup="true"
+                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true"
                                 aria-expanded="false">{{ Auth::user()->username }} <span class="caret"></span></a>
                             <div class="dropdown-menu animated flipInY">
                                 <!-- text-->
@@ -154,9 +141,7 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                                aria-expanded="false"><i class="fas fa-list"></i><span
-                                    class="hide-menu">الحسابات</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-list"></i><span class="hide-menu">الحسابات</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li>
                                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">الخزينه</a>
@@ -180,8 +165,7 @@
                         </li>
 
                         <li>
-                            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                                aria-expanded="false"><i class="fas fa-newspaper"></i><span class="hide-menu">حساب
+                            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-newspaper"></i><span class="hide-menu">حساب
                                     عام</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('ledger/show')}}">رصيد</a></li>
@@ -191,9 +175,7 @@
                             </ul>
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                                aria-expanded="false"><i class="icon-people"></i><span
-                                    class="hide-menu">الموردين</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">الموردين</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('suppliers/trans/prepare')}}">كشف حساب</a></li>
                                 <li><a href="{{url('suppliers/trans/quick')}}">تعاملات</a></li>
@@ -204,8 +186,7 @@
                             </ul>
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                                aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">مخزن
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">مخزن
                                     قماش</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('rawinventory/show')}}">متاح قماش</a></li>
@@ -227,24 +208,27 @@
                         </li>
 
 
-                        <li> <a href="{{url('raw/prod/show')}}" aria-expanded="false"><i class=" fas fa-cogs"></i><span
-                                    class="hide-menu">انتاج </span></a>
+                        <li> <a href="{{url('raw/prod/show')}}" aria-expanded="false"><i class=" fas fa-cogs"></i><span class="hide-menu">انتاج </span></a>
 
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                                aria-expanded="false"><i class="icon-people"></i><span
-                                    class="hide-menu">عملاء</span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">عملاء</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('clients/trans/prepare')}}">كشف حساب</a></li>
                                 <li><a href="{{url('clients/trans/quick')}}">تعاملات</a></li>
                                 <li><a href="{{url('clients/show')}}">اجماليات عملاء</a></li>
                                 <li><a href="{{url('clients/add')}}">اضافه عميل</a></li>
+                                <li>
+                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">تحصيل عملاء</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{url('clients/target/current')}}"> الشهر الحالي</a></li>
+                                        <li><a href="{{url('clients/target/history')}}">شهور سابقه </a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                                aria-expanded="false"><i class="fas fa-barcode"></i><span class="hide-menu">مخزن
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-barcode"></i><span class="hide-menu">مخزن
                                     جاهز</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('finished/show')}}">متاح جاهز</a></li>
@@ -260,8 +244,7 @@
                         </li>
                     </ul>
                     </li>
-                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                                class="fas fa-boxes"></i><span class="hide-menu">مبيعات</span></a>
+                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-boxes"></i><span class="hide-menu">مبيعات</span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{{url('sales/show')}}">مجمع مبيعات</a></li>
                             <li><a href="{{url('sales/add')}}">عمليه بيع جديده</a></li>
@@ -270,8 +253,7 @@
                     </li>
 
 
-                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                                class=" fas fa-users"></i><span class="hide-menu">Users</span></a>
+                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" fas fa-users"></i><span class="hide-menu">Users</span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{{url('users/show')}}">Show</a></li>
                             <li><a href="{{url('users/add')}}">Add</a></li>
@@ -305,16 +287,13 @@
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
-                            <a style="font-family: 'Allerta Stencil'" href="{{url('cash/add')}}"
-                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> CashOp.</a>
-                            <a style="font-family: 'Allerta Stencil'" href="{{url('clients/trans/add')}}"
-                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> ClientOp.</a>
-                            <a style="font-family: 'Allerta Stencil'" href="{{url('suppliers/trans/add')}}"
-                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> SupplierOp.</a>
-                            <a style="font-family: 'Allerta Stencil'" href="{{url('sales/add')}}"
-                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> SalesOp.</a>
-                            <a style="font-family: 'Allerta Stencil'" href="{{url('rawinventory/add')}}"
-                                class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> New Raw Entry</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('cash/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> CashOp.</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('clients/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> ClientOp.</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('suppliers/trans/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i>
+                                SupplierOp.</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('sales/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> SalesOp.</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('rawinventory/add')}}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> New Raw
+                                Entry</a>
                         </div>
                     </div>
                 </div>
@@ -339,26 +318,20 @@
                         <div class="r-panel-body">
                             <ul id="themecolors" class="m-t-20">
                                 <li><b>With Light sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-default"
-                                        class="default-theme working">1</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-default" class="default-theme working">1</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-green" class="green-theme">2</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-red" class="red-theme">3</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-blue" class="blue-theme">4</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-purple" class="purple-theme">5</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-megna" class="megna-theme">6</a></li>
                                 <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-default-dark"
-                                        class="default-dark-theme ">7</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-green-dark"
-                                        class="green-dark-theme">8</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme ">7</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-green-dark" class="green-dark-theme">8</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme">9</a>
                                 </li>
-                                <li><a href="javascript:void(0)" data-skin="skin-blue-dark"
-                                        class="blue-dark-theme">10</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-purple-dark"
-                                        class="purple-dark-theme">11</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-megna-dark"
-                                        class="megna-dark-theme ">12</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-blue-dark" class="blue-dark-theme">10</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme ">12</a></li>
                             </ul>
                         </div>
                     </div>
@@ -447,12 +420,10 @@
     <!-- Form JS -->
     <script src="{{ asset('dist/js/pages/jasny-bootstrap.js') }}"></script>
     <script src="{{ asset('assets/node_modules/dropify/dist/js/dropify.min.js')}}"></script>
-    <script src="{{ asset('assets/node_modules/select2/dist/js/select2.full.min.js') }}"
-        type="text/javascript"></script>
+    <script src="{{ asset('assets/node_modules/select2/dist/js/select2.full.min.js') }}" type="text/javascript"></script>
 
     <!-- Start Table Search Script -->
     <script>
-
         $(document).ready(function () {
             $("#print").click(function () {
                 var mode = 'iframe'; //popup
