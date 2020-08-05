@@ -307,8 +307,10 @@
                             <td></td>
                             <td><strong>Totals:</strong></td>
                             <td>{{number_format($fullYearProc['totals']->totalPurch, 2)}}</td>
-                            <td>{{number_format($fullYearProc['totals']->totalCash, 2).'('.($fullYearProc['totals']->totalPurch>0) ? 
-                             number_format($fullYearProc['totals']->totalCash/$fullYearProc['totals']->totalPurch*100, 2,'.','').'%)' : 0}}</td>
+                            <td>{{number_format($fullYearProc['totals']->totalCash, 2).
+                            '('.($fullYearProc['totals']->totalPurch>0) ? 
+                             number_format($fullYearProc['totals']
+                             ->totalCash/$fullYearProc['totals']->totalPurch*100, 2,'.','').'%)' : 0}}</td>
                             <td>{{number_format($fullYearProc['totals']->totalNotes, 2).'('. ($fullYearProc['totals']->totalPurch>0) ?  number_format($fullYearProc['totals']->totalNotes/$fullYearProc['totals']->totalPurch*100, 2,'.','').'%)'  : 0}}
                             </td>
                             <td>{{number_format($fullYearProc['totals']->totalDisc, 2) . '('. ($fullYearProc['totals']->totalPurch>0) ?  number_format($fullYearProc['totals']->totalDisc/$fullYearProc['totals']->totalPurch*100, 2,'.','').'%)' : 0}}
