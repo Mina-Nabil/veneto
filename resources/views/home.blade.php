@@ -265,12 +265,12 @@
                             </td>
                             <td>{{number_format($fullYearProd['totals']->totalDisc, 2)}}
                                 @if($fullYearProd['totals']->totalPurch > 0)
-                                {{ '('. ($fullYearProd['totals']->totalPurch>0) ? number_format($fullYearProd['totals']->totalDisc/$fullYearProd['totals']->totalPurch*100, 2,'.','').'%)'}}
+                                {{ '('. number_format($fullYearProd['totals']->totalDisc/$fullYearProd['totals']->totalPurch*100, 2,'.','').'%)'}}
                                 @endif
                             </td>
                             <td>{{number_format($fullYearProd['totals']->totalReturn, 2)}}
                             @if($fullYearProd['totals']->totalPurch > 0)
-                            {{'('. ($fullYearProd['totals']->totalPurch>0) ? number_format($fullYearProd['totals']->totalReturn/$fullYearProd['totals']->totalPurch*100, 2,'.', ''). '%)'}}
+                            {{'('. number_format($fullYearProd['totals']->totalReturn/$fullYearProd['totals']->totalPurch*100, 2,'.', ''). '%)'}}
                             @endif
                             </td>
                             <td></td>
