@@ -338,7 +338,7 @@
                             </td>
                             <td>{{number_format($fullYearProc['totals']->totalReturn, 2)}}
                                 @if($fullYearProc['totals']->totalPurch > 0)
-                                {{.'('.  number_format($fullYearProc['totals']->totalReturn/$fullYearProc['totals']->totalPurch*100, 2,'.', ''). '%)'}}
+                                {{.'('.  number_format($fullYearProc['totals']->totalReturn/$fullYearProc['totals']->totalPurch*100, 2,'.', '') . '%)'}}
                                 @endif
                             </td>
                             <td></td>
