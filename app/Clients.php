@@ -340,7 +340,7 @@ class Clients extends Model
     /////////////////////////////////////////Clients Table CRUD////////////////////
     static function getClients($type = -1)
     {
-        $query = DB::table('clients')->select('clients.*')->orderBy("CLNT_NAME");
+        $query = DB::table('clients')->select('clients.*')->orderBy("CLNT_SRNO");
         if ($type != -1)
             $query = $query->where('CLNT_ONLN', $type);
         return $query->get();
