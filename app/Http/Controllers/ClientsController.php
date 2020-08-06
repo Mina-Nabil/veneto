@@ -204,7 +204,16 @@ class ClientsController extends Controller
     ///////////Client Pages///////////////////
     function home()
     {
-        $data['clients']  = Clients::getClients();
+        $data['veneto']  = Clients::getClients(0);
+        $data['online']  = Clients::getClients(1);
+        $data['via']  = Clients::getClients(2);
+        $data['prod']  = Clients::getClients(3);
+        $data['proc']  = Clients::getClients(4);
+        $data['totalVeneto']      = Clients::getTotalBalance(0);
+        $data['totalOnline']      = Clients::getTotalBalance(1);
+        $data['totalVia']      = Clients::getTotalBalance(2);
+        $data['totalProd']      = Clients::getTotalBalance(3);
+        $data['totalProc']      = Clients::getTotalBalance(4);
         $data['total']      = Clients::getTotalBalance();
         return view('clients.home', $data);
     }

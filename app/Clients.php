@@ -18,7 +18,7 @@ class Clients extends Model
         $ret = array();
 
         $ret['trans'] = DB::table("client_trans")->join('clients', "CLTR_CLNT_ID", "=", "clients.id")
-            ->select("client_trans.*", "clients.CLNT_NAME","clients.CLNT_SRNO", "clients.CLNT_ARBC_NAME")
+            ->select("client_trans.*", "clients.CLNT_NAME", "clients.CLNT_SRNO", "clients.CLNT_ARBC_NAME")
             ->where([
                 ["CLTR_CLNT_ID", '=', $clientID],
                 ["CLTR_DATE", '>=', $from],
@@ -63,7 +63,7 @@ class Clients extends Model
 
         if ($isOnline != -1) {
             $ret['data'] = $ret['data']->where("CLNT_ONLN", $isOnline);
-        } 
+        }
         $ret['data'] = $ret['data']->groupBy("CLTR_CLNT_ID")->orderBy("CLNT_NAME")->get();
 
         if ($isOnline != -1)
@@ -112,7 +112,7 @@ class Clients extends Model
             $ret['totals'] = $ret['totals']->where("CLNT_ONLN", 0);
         } elseif ($isOnline != -1) {
             $ret['onlineTotals'] = $ret['totals']->where("CLNT_ONLN", $isOnline)->get()->first();
-        } 
+        }
         $ret['totals'] = $ret['totals']->get()->first();
 
         foreach ($ret['others'] as $mloshTrans) {
@@ -211,7 +211,7 @@ class Clients extends Model
     static function getTrans($clientID = null)
     {
         $query = DB::table("client_trans")->join('clients', "CLTR_CLNT_ID", "=", "clients.id")
-            ->select("client_trans.*", "clients.CLNT_NAME","clients.CLNT_SRNO", "clients.CLNT_ARBC_NAME");
+            ->select("client_trans.*", "clients.CLNT_NAME", "clients.CLNT_SRNO", "clients.CLNT_ARBC_NAME");
         if ($clientID !== null) {
             $query = $query->where("CLTR_CLNT_ID", $clientID);
             return $query->orderBy('id', 'asc')->limit(500)->get();
@@ -338,10 +338,12 @@ class Clients extends Model
 
 
     /////////////////////////////////////////Clients Table CRUD////////////////////
-    static function getClients()
+    static function getClients($type = -1)
     {
-        return DB::table('clients')->select('clients.*')->orderBy("CLNT_NAME")
-            ->get();
+        $query = DB::table('clients')->select('clients.*')->orderBy("CLNT_NAME");
+        if ($type != -1)
+            $query = $query->where('CLNT_ONLN', $type);
+        return $query->get();
     }
 
     static function getClient($id)
@@ -351,7 +353,7 @@ class Clients extends Model
             ->first();
     }
 
-    static function insert($name, $arbcName, $balance, $address = null, $tele = null, $comment = null, $isOnline = 0, $serial=null)
+    static function insert($name, $arbcName, $balance, $address = null, $tele = null, $comment = null, $isOnline = 0, $serial = null)
     {
         return DB::table('clients')->insertGetId([
             "CLNT_NAME" => $name,
@@ -365,7 +367,7 @@ class Clients extends Model
         ]);
     }
 
-    static function updateClient($id, $name, $arbcName, $balance, $address = null, $tele = null, $comment = null, $isOnline = 0, $serial=null)
+    static function updateClient($id, $name, $arbcName, $balance, $address = null, $tele = null, $comment = null, $isOnline = 0, $serial = null)
     {
 
         return DB::table('clients')->where('id', $id)->update([
@@ -392,8 +394,11 @@ class Clients extends Model
         return DB::table('clients')->where('id', $clientID)->select("CLNT_BLNC")->first()->CLNT_BLNC;
     }
 
-    static function getTotalBalance()
+    static function getTotalBalance($typeID = -1)
     {
-        return DB::table('clients')->sum('CLNT_BLNC');
+        $query = DB::table('clients');
+        if ($typeID != -1)
+            $query = $query->where('CLNT_ONLN', $typeID);
+        return $query->sum('CLNT_BLNC');
     }
 }

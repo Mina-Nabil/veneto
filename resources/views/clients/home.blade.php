@@ -19,7 +19,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($clients as $client)
+                            @foreach($veneto as $client)
                             <tr>
                                 <td>{{$client->CLNT_SRNO}}</td>
                                 <td>
@@ -32,6 +32,93 @@
                                 <td><a href="{{ url('clients/edit/' . $client->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></a></td>                               
                             </tr> 
                             @endforeach
+                            <tfoot>
+                                <tr>
+                                <td colspan=2><strong>Total Balance: </strong></td>
+                                <td><strong>{{number_format($totalVeneto, 2)}}</strong></td>
+                                <td></td>
+                                </tr>
+                            </tfoot>
+                            @foreach($online as $client)
+                            <tr>
+                                <td>{{$client->CLNT_SRNO}}</td>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $client->id)}}">
+                                        {{$client->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{$client->CLNT_ARBC_NAME}}</td>
+                                <td>{{number_format($client->CLNT_BLNC, 2)}}</td>
+                                <td><a href="{{ url('clients/edit/' . $client->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></a></td>                               
+                            </tr> 
+                            @endforeach
+                            <tfoot>
+                                <tr>
+                                <td colspan=2><strong>Total Balance: </strong></td>
+                                <td><strong>{{number_format($totalOnline, 2)}}</strong></td>
+                                <td></td>
+                                </tr>
+                            </tfoot>
+                            @foreach($via as $client)
+                            <tr>
+                                <td>{{$client->CLNT_SRNO}}</td>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $client->id)}}">
+                                        {{$client->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{$client->CLNT_ARBC_NAME}}</td>
+                                <td>{{number_format($client->CLNT_BLNC, 2)}}</td>
+                                <td><a href="{{ url('clients/edit/' . $client->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></a></td>                               
+                            </tr> 
+                            @endforeach
+                            <tfoot>
+                                <tr>
+                                <td colspan=2><strong>Total Balance: </strong></td>
+                                <td><strong>{{number_format($totalVia, 2)}}</strong></td>
+                                <td></td>
+                                </tr>
+                            </tfoot>
+                            @foreach($prod as $client)
+                            <tr>
+                                <td>{{$client->CLNT_SRNO}}</td>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $client->id)}}">
+                                        {{$client->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{$client->CLNT_ARBC_NAME}}</td>
+                                <td>{{number_format($client->CLNT_BLNC, 2)}}</td>
+                                <td><a href="{{ url('clients/edit/' . $client->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></a></td>                               
+                            </tr> 
+                            @endforeach
+                            <tfoot>
+                                <tr>
+                                <td colspan=2><strong>Total Balance: </strong></td>
+                                <td><strong>{{number_format($totalProd, 2)}}</strong></td>
+                                <td></td>
+                                </tr>
+                            </tfoot>
+                            @foreach($proc as $client)
+                            <tr>
+                                <td>{{$client->CLNT_SRNO}}</td>
+                                <td>
+                                    <a href="{{url('clients/trans/quick/' . $client->id)}}">
+                                        {{$client->CLNT_NAME}}
+                                    </a>
+                                </td>
+                                <td>{{$client->CLNT_ARBC_NAME}}</td>
+                                <td>{{number_format($client->CLNT_BLNC, 2)}}</td>
+                                <td><a href="{{ url('clients/edit/' . $client->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></a></td>                               
+                            </tr> 
+                            @endforeach
+                            <tfoot>
+                                <tr>
+                                <td colspan=2><strong>Total Balance: </strong></td>
+                                <td><strong>{{number_format($totalProc, 2)}}</strong></td>
+                                <td></td>
+                                </tr>
+                            </tfoot>
                         </tbody>
                         <tfoot>
                             <tr>
