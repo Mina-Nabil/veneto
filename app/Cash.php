@@ -133,4 +133,13 @@ class Cash extends Model
             "CASH_EROR" => 1
         ]);
     }
+
+    static function deleteCashSpentByType($type)
+    {
+        return DB::table('cash')->join('trans_subtype', "CASH_TRST_ID", "=", "trans_subtype.id")
+        ->join('trans_type', "TRST_TRTP_ID", "=", "trans_type.id")
+        ->where([
+            ["TRST_TRTP_ID", '=', $type]
+        ])->delete();
+    }
 }

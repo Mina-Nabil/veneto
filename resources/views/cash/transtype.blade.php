@@ -91,6 +91,7 @@
                                 <th>نوع</th>
                                 <th>صنف</th>
                                 <th>Edit</th>
+                                <th>Delete Transactions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -104,6 +105,7 @@
                                 <td>{{$transSubType->TRST_NAME}}</td>
                                 <td><a href="{{ url('transsubtype/edit/' . $transSubType->id) }}"><img
                                             src="{{ asset('images/edit.png') }}" width=25 height=25></a></td>
+                                <td><button class="btn btn-warning mr-2"  onclick="confirmAndGoTo('{{ url('transsubtype/delete/trans/' . $transSubType->id)}}', 'Delete All Transactions')">Delete</button></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -113,4 +115,18 @@
         </div>
     </div>
 </div>
+
+<script>
+       function confirmAndGoTo(url, action){
+            Swal.fire({
+                text: "Are you sure you want to " + action + "?",
+                icon: "warning",
+                showCancelButton: true,
+            }).then((isConfirm) => {
+        if(isConfirm.value){
+            window.location.href = url;
+            }
+        });
+    }
+    </script>
 @endsection

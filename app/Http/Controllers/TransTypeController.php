@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cash;
 use Illuminate\Http\Request;
 
 use App\TransType;
@@ -91,5 +92,11 @@ class TransTypeController extends Controller
             TransType::insertTransType($request->name);
 
         return \redirect("transtype/show");
+    }
+
+      ////////delete transactions by type function
+      function deleteTransactionsByType($type){
+        Cash::deleteCashSpentByType($type);
+        return redirect('transtype/show');
     }
 }

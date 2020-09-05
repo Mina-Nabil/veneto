@@ -148,6 +148,7 @@ Route::get("transtype/edit/{id}",      'TransTypeController@editTransType')-> mi
 Route::post('transtype/update',        'TransTypeController@updateTransType')-> middleware('cors');
 Route::post('transtype/insert',        'TransTypeController@insertTransType')-> middleware('cors');
 Route::get("transsubtype/edit/{id}",      'TransTypeController@editTransSubType')-> middleware('cors');
+Route::get("transsubtype/delete/trans/{id}",      'TransTypeController@deleteTransactionsByType')-> middleware('cors');
 Route::post('transsubtype/update',        'TransTypeController@updateTransSubType')-> middleware('cors');
 Route::post('transsubtype/insert',        'TransTypeController@insertTransSubType')-> middleware('cors');
 
