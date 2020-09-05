@@ -136,10 +136,12 @@ class Cash extends Model
 
     static function deleteCashSpentByType($type)
     {
-        return DB::table('cash')->join('trans_subtype', "CASH_TRST_ID", "=", "trans_subtype.id")
+        DB::table('cash')->join('trans_subtype', "CASH_TRST_ID", "=", "trans_subtype.id")
         ->join('trans_type', "TRST_TRTP_ID", "=", "trans_type.id")
         ->where([
-            ["TRST_TRTP_ID", '=', $type]
+            ["CASH_TRST_ID", '=', $type]
         ])->delete();
+
+        DB::table('trans_subtype')->where('id', '=', $type)->delete();
     }
 }
