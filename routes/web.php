@@ -32,7 +32,10 @@ Route::post("sales/add/payment",        'SalesController@insertPayment')-> middl
 //Finished Prods
 Route::get("finished/show",                 'FinishedController@show')-> middleware('cors');
 Route::get("finished/add",                  'FinishedController@addPage')-> middleware('cors');
+Route::get("finished/models",                  'FinishedController@models')-> middleware('cors');
 Route::post("finished/insert",              'FinishedController@insert')-> middleware('cors');
+Route::get("finished/empty/{id}",              'FinishedController@emptyFinished')-> middleware('cors');
+Route::post("finished/insertModel",              'FinishedController@insertModel')-> middleware('cors');
 Route::post("finished/edit/price",              'FinishedController@editPrice')-> middleware('cors');
 
 //Clients Routes

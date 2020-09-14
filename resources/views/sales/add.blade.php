@@ -13,8 +13,7 @@
                     <div class="col-lg-12">
                         <label>Client</label>
                         <div class="input-group mb-3">
-                            <select name=clientID class="select2 form-control custom-select"
-                                style="width: 100%; height:50px;" required>
+                            <select name=clientID class="select2 form-control custom-select" style="width: 100%; height:50px;" required>
                                 <option disabled selected hidden value="">Clients</option>
                                 @foreach($clients as $client)
                                 <option value="{{ $client->id }}">
@@ -55,14 +54,12 @@
                     <label class="nopadding" for="input-file-now-custom-1"><strong>Entry Details</strong></label>
                     <div class="row ">
 
-                        <div id="dynamicContainer">
-                        </div>
+
 
                         <div class="nopadding row col-lg-12">
                             <div class="col-lg-2">
                                 <div class="input-group mb-2">
-                                    <select name=finished[] id=finished[] class="form-control select2  custom-select"
-                                        required>
+                                    <select name=finished[] id=finished[] class="form-control select2  custom-select" required>
                                         <option disabled hidden selected value="">Finished Inventory</option>
                                         @foreach($items['data'] as $item)
                                         <option value="{{ $item->id }}">
@@ -74,58 +71,43 @@
 
 
                             <div class="col-lg-1">
-                                <input type="number" step=1 min=0 class="form-control amount" placeholder="36"
-                                    name=amount36[] aria-label="Total Amount in Meters"
-                                    aria-describedby="basic-addon11">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="36" name=amount36[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11">
                             </div>
                             <div class="col-lg-1">
-                                <input type="number" step=1 min=0 class="form-control amount" placeholder="38"
-                                    name=amount38[] aria-label="Total Amount in Meters"
-                                    aria-describedby="basic-addon11">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="38" name=amount38[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11">
                             </div>
                             <div class="col-lg-1">
-                                <input type="number" step=1 min=0 class="form-control amount" placeholder="40"
-                                    name=amount40[] aria-label="Total Amount in Meters"
-                                    aria-describedby="basic-addon11">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="40" name=amount40[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11">
                             </div>
 
                             <div class="col-lg-1">
-                                <input type="number" step=1 min=0 class="form-control amount" placeholder="42"
-                                    name=amount42[] aria-label="Total Amount in Meters"
-                                    aria-describedby="basic-addon11">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="42" name=amount42[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11">
                             </div>
                             <div class="col-lg-1">
 
-                                <input type="number" step=1 min=0 class="form-control amount" placeholder="44"
-                                    name=amount44[] aria-label="Total Amount in Meters"
-                                    aria-describedby="basic-addon11">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="44" name=amount44[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11">
                             </div>
                             <div class="col-lg-1">
-                                <input type="number" step=1 min=0 class="form-control amount" placeholder="46"
-                                    name=amount46[] aria-label="Total Amount in Meters"
-                                    aria-describedby="basic-addon11">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="46" name=amount46[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11">
                             </div>
                             <div class="col-lg-1">
-                                <input type="number" step=1 min=0 class="form-control amount" placeholder="48"
-                                    name=amount48[] aria-label="Total Amount in Meters"
-                                    aria-describedby="basic-addon11">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="48" name=amount48[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11">
                             </div>
                             <div class="col-lg-1">
-                                <input type="number" step=1 min=0 class="form-control amount" placeholder="50"
-                                    name=amount50[] aria-label="Total Amount in Meters"
-                                    aria-describedby="basic-addon11">
+                                <input type="number" step=1 min=0 class="form-control amount" placeholder="50" name=amount50[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11">
                             </div>
                             <div class="col-lg-2">
                                 <div class="input-group mb-3">
-                                    <input type="number" step=0.01 class="form-control amount" placeholder="Price"
-                                        name=price[] aria-label="Total Amount in Meters"
-                                        aria-describedby="basic-addon11" required>
+                                    <input type="number" step=0.01 class="form-control amount" placeholder="Price" name=price[] aria-label="Total Amount in Meters" aria-describedby="basic-addon11"
+                                        required>
                                     <div class="input-group-append">
-                                        <button class="btn btn-success" id="dynamicAddButton" type="button"
-                                            onclick="addToab();"><i class="fa fa-plus"></i></button>
+                                        <button class="btn btn-success" id="dynamicAddButton" type="button" onclick="addToab();"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div id="dynamicContainer">
                         </div>
 
                     </div>
@@ -138,7 +120,7 @@
             </div>
         </div>
     </div>
- 
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -149,8 +131,7 @@
                     <div class="col-lg-12 bt-switch">
                         <label>Type</label>
                         <div class="input-group mb-3 ">
-                            <input type="checkbox" data-size="large" data-on-color="info" data-off-color="warning"
-                                data-on-text="Online" data-off-text="Normal" name="isOnline">
+                            <input type="checkbox" data-size="large" data-on-color="info" data-off-color="warning" data-on-text="Online" data-off-text="Normal" name="isOnline">
                         </div>
                         <small class="text-danger">{{$errors->first('paid')}}</small>
                     </div>
@@ -160,8 +141,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-money"></i></span>
                             </div>
-                            <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=paid
-                                value="{{ old('paid') ?? 0}}" required>
+                            <input type="number" step=0.01 class="form-control" placeholder="Example: 1234.56" name=paid value="{{ old('paid') ?? 0}}" required>
                         </div>
                         <small class="text-danger">{{$errors->first('paid')}}</small>
                     </div>
@@ -193,7 +173,7 @@
             </div>
         </div>
     </div>
-  
+
 </form>
 <script>
     var room = 1;
@@ -316,7 +296,86 @@ function calculateTotals(){
     document.getElementById('numberOfInv').innerHTML = numberOfInv;
     document.getElementById('totalPrice').innerHTML = price.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,');
  }
+
+ var bar = ''
+ var selecteds = [];
+    document.onkeyup = function (evt) {
+        try {
+        if (evt.keyCode == 13)// Enter key pressed
+        {
+        selectat = document.forms[1].elements['finished[]'];
+       
+
+        lastSelect = selectat[selectat.length-1]
+        var $selectat = $('select[name ="finished[]"]') 
+        var $lastSelect = $selectat.eq($selectat.length-1)
+        let noOfRows = $selectat.length-1
+        console.log(bar)
+        entries = bar.split(' ');    
+        let selectedID = selectByText($lastSelect, entries[0])
+        if(selectedID){ //found
+        var isFound = isFoundBefore(selectedID);
+        console.log(isFound)
+        if(isFound === false){
+            row = noOfRows
+            $lastSelect.val(selectedID)
+            $lastSelect.trigger('change')
+            addSize(row, entries[1], true)
+            addToab() 
+        } else if (Number.isInteger(isFound)){
+            addSize(isFound, entries[1], false)
+        }
+        calculateTotals()
+
+        }
+        bar=''
+        } else {
+            bar += evt.key;
+        };
+        } catch(e){
+            bar = ''
+        }
+    }
  
+        function selectByText ($el, term) {
+            doma = $el.get(0)
+            opts = doma.options
+            let ret;
+            let found=false;
+            let i = 0;
+            opts = Array.from(opts);
+            for(i=0 ; i < opts.length ; i++) {
+                if(opts[i].innerHTML.toLowerCase().includes(term.toLowerCase())){
+                    console.log(opts[i].innerHTML)
+                    return opts[i].value
+                }
+            }
+
+            return  false;
+        } 
+
+        function isFoundBefore(val){
+            selectatGodad = document.getElementsByName('finished[]');
+            console.log(selectatGodad)
+            for(i=0 ; i < selectatGodad.length ; i++) {
+                if(selectatGodad[i].options[selectatGodad[i].selectedIndex].value == val){
+                    return i
+                }
+            } 
+            return false;
+        } 
+
+        function addSize(row, size){
+            amount = document.getElementsByName('amount' + size + '[]');
+            console.log('amount' + size + '[] : ' + row)
+            if(isNaN(amount[row].value) || amount[row].value == ''){
+                amount[row].value = 1 ;
+            } else {
+                amount[row].value = parseInt(amount[row].value) + 1
+            }
+            
+        }
+
 
 </script>
 @endsection

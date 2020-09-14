@@ -123,4 +123,17 @@ class Finished extends Model
             "FNSH_PRCE" => $price
         ]);
     }
+
+    public static function emptyInventory($id){
+        return DB::table("finished")->where('id', '=', $id)->update([
+            "FNSH_36_AMNT" => 0, 
+            "FNSH_38_AMNT" => 0, 
+            "FNSH_40_AMNT" => 0, 
+            "FNSH_42_AMNT" => 0, 
+            "FNSH_44_AMNT" => 0, 
+            "FNSH_46_AMNT" => 0, 
+            "FNSH_48_AMNT" => 0, 
+            "FNSH_50_AMNT" => 0, 
+        ]);
+    }
 }

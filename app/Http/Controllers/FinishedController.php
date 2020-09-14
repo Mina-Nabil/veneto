@@ -21,10 +21,36 @@ class FinishedController extends Controller
         return view("finished.home", $data);
     }
 
-    public function addPage(){
-
+    public function models(){
         $data['models'] = Models::getModels();
         $data['brands'] = Brands::getBrands();
+
+        $data['finished'] = Finished::getAllFinished();
+
+        $data['pageTitle'] = "Add New Finished Model";
+        $data['pageDescription']  = "Link a brand with a model";
+        $data['formURL'] = url("finished/link");
+
+        return view('finished.models', $data);
+    }
+
+    public function insertModel(Request $request){
+        $request->validate([
+            'model' => 'required',
+            'brand' => 'required'
+        ]);
+        Finished::insertFinished($request->model, $request->brand);
+        return redirect('finished/models');
+    }
+
+    public function emptyFinished($finishedID){
+        Finished::emptyInventory($finishedID);
+        return redirect('finished/show');
+    }
+
+    public function addPage(){
+
+        $data['finished'] = Finished::getAllFinished();
 
         $data['pageTitle'] = "New Finished Entry";
         $data['pageDescription']  = "Add new finished entry";

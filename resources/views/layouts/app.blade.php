@@ -239,6 +239,7 @@
                                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="{{url('brands/show')}}">مركات</a></li>
+                                        <li><a href="{{url('finished/models')}}">اصناف</a></li>
                                     </ul>
                                 </li>
                         </li>
