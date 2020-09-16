@@ -428,11 +428,7 @@
 
 @section('js_content')
     <script>
-        const d = new Date();
-        const year = d.getFullYear(); // 2019
-        const day = d.getDay();
-        const month = d.getMonth();
-        const formatted = day + "/" + month + "/" + year;
+
         $(function () {
 
             var table = $('#myTable3').DataTable({
