@@ -215,12 +215,12 @@
                                 </td>
                                 @endif
 
-                                <td>{{number_format($op->CLTR_SALS_AMNT, 1)}}</td>
-                                <td>{{number_format($op->CLTR_CASH_AMNT, 1)}}</td>
-                                <td>{{number_format($op->CLTR_NTPY_AMNT, 1)}}</td>
-                                <td>{{number_format($op->CLTR_DISC_AMNT, 1)}}</td>
-                                <td>{{number_format($op->CLTR_RTRN_AMNT, 1)}}</td>
-                                <td>{{number_format($op->CLTR_BLNC, 1)}}</td>
+                                <td>{{number_format($op->CLTR_SALS_AMNT, 2)}}</td>
+                                <td>{{number_format($op->CLTR_CASH_AMNT, 2)}}</td>
+                                <td>{{number_format($op->CLTR_NTPY_AMNT, 2)}}</td>
+                                <td>{{number_format($op->CLTR_DISC_AMNT, 2)}}</td>
+                                <td>{{number_format($op->CLTR_RTRN_AMNT, 2)}}</td>
+                                <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
                                 <td>
                                     @if(isset($op->CLTR_CMNT) && strcmp($op->CLTR_CMNT, '')!=0 )
                                     <button type="button" style="padding:.1rem" class="btn btn-secondary"

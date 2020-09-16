@@ -201,12 +201,12 @@
                                     @endif
 
                                 </td>
-                                <td>{{number_format($op->SPTR_PRCH_AMNT, 1)}}</td>
-                                <td>{{number_format($op->SPTR_CASH_AMNT, 1)}}</td>
-                                <td>{{number_format($op->SPTR_NTPY_AMNT, 1)}}</td>
-                                <td>{{number_format($op->SPTR_DISC_AMNT, 1)}}</td>
-                                <td>{{number_format($op->SPTR_RTRN_AMNT, 1)}}</td>
-                                <td>{{number_format($op->SPTR_BLNC, 1)}}</td>
+                                <td>{{number_format($op->SPTR_PRCH_AMNT, 2)}}</td>
+                                <td>{{number_format($op->SPTR_CASH_AMNT, 2)}}</td>
+                                <td>{{number_format($op->SPTR_NTPY_AMNT, 2)}}</td>
+                                <td>{{number_format($op->SPTR_DISC_AMNT, 2)}}</td>
+                                <td>{{number_format($op->SPTR_RTRN_AMNT, 2)}}</td>
+                                <td>{{number_format($op->SPTR_BLNC, 2)}}</td>
                                 <td>
                                     @if(isset($op->SPTR_CMNT) && strcmp($op->SPTR_CMNT, '')!=0 )
                                         <button type="button"  style="padding:.1rem"  class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{$op->SPTR_CMNT}}" data-original-title="Comment:">

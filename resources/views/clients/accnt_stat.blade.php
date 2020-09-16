@@ -76,7 +76,7 @@
                         <tfoot>
                             <tr>
                                 <td ><strong>Start Balance</strong></td>
-                                <td ><strong>{{number_format($startBalance, 1)}}</strong></td>
+                                <td ><strong>{{number_format($startBalance, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalPurch, 2)}} </strong></td>
                                 <td><strong>{{number_format($totals->totalCash, 2)}}</strong></td>
                                 <td><strong>{{number_format($totals->totalNotes, 2)}}</strong></td>

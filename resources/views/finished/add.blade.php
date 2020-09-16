@@ -207,7 +207,6 @@
 
         function isFoundBefore(val){
             selectatGodad = document.getElementsByName('finished[]');
-            console.log(selectatGodad)
             for(i=0 ; i < selectatGodad.length ; i++) {
                 if(selectatGodad[i].options[selectatGodad[i].selectedIndex].value == val){
                     return i
