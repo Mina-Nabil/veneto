@@ -61,7 +61,7 @@
                 <div class="card-header">Total Veneto</div>
 
                 <div class="card-body">
-                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
+                    <table id="myTable2" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th>شهر</th>
@@ -115,7 +115,7 @@
                 <div class="card-header">Total Online</div>
 
                 <div class="card-body">
-                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
+                    <table id="myTable3" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th>شهر</th>
@@ -169,7 +169,7 @@
                 <div class="card-header">Total Via Veneto</div>
 
                 <div class="card-body">
-                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
+                    <table id="myTable4" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th>شهر</th>
@@ -222,7 +222,7 @@
                 <div class="card-header">Total Production</div>
 
                 <div class="card-body">
-                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
+                    <table id="myTable5" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th>شهر</th>
@@ -287,7 +287,7 @@
                 <div class="card-header">Total Procurement</div>
 
                 <div class="card-body">
-                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
+                    <table id="myTable6" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th>شهر</th>
@@ -358,7 +358,7 @@
                 <div class="card-header">مصاريف مجمعه</div>
 
                 <div class="card-body">
-                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
+                    <table id="myTable7" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th></th>
@@ -424,4 +424,228 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js_content')
+    <script>
+        const d = new Date();
+        const year = d.getFullYear(); // 2019
+        const day = d.getDay();
+        const month = d.getMonth();
+        const formatted = day + "/" + month + "/" + year;
+        $(function () {
+
+            var table = $('#myTable3').DataTable({
+                "displayLength": 25,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        title: 'Veneto',
+                        footer: true,
+                        messageTop: "Date: " + formatted,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .prepend('<center><img src="{{asset('images / dark - logo.png')}}" style="position:absolute; margin: auto; ; margin-top: 460px ; left: 0; right: 0; opacity:0.2" /></center>')
+                                .css('font-size', '24px')
+
+                            //$('#stampHeader' ).addClass( 'stampHeader' );
+                            $(win.document.body).find('table')
+                                .css('border', 'solid')
+                                .css('margin-top', '20px')
+                                .css('font-size', 'inherit');
+                            $(win.document.body).find('th')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px')
+                                .css('font-size', 'inherit')
+                            $(win.document.body).find('td')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px');
+                            $(win.document.body).find('tr')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px')
+                        }
+                    }, {
+                        extend: 'excel',
+                        title: 'Veneto',
+                        footer: true,
+
+                    }
+                ]
+            }); 
+            var table = $('#myTable4').DataTable({
+                "displayLength": 25,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        title: 'Veneto',
+                        footer: true,
+                        messageTop: "Date: " + formatted,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .prepend('<center><img src="{{asset('images / dark - logo.png')}}" style="position:absolute; margin: auto; ; margin-top: 460px ; left: 0; right: 0; opacity:0.2" /></center>')
+                                .css('font-size', '24px')
+
+                            //$('#stampHeader' ).addClass( 'stampHeader' );
+                            $(win.document.body).find('table')
+                                .css('border', 'solid')
+                                .css('margin-top', '20px')
+                                .css('font-size', 'inherit');
+                            $(win.document.body).find('th')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px')
+                                .css('font-size', 'inherit')
+                            $(win.document.body).find('td')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px');
+                            $(win.document.body).find('tr')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px')
+                        }
+                    }, {
+                        extend: 'excel',
+                        title: 'Veneto',
+                        footer: true,
+
+                    }
+                ]
+            }); 
+            var table = $('#myTable5').DataTable({
+                "displayLength": 25,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        title: 'Veneto',
+                        footer: true,
+                        messageTop: "Date: " + formatted,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .prepend('<center><img src="{{asset('images / dark - logo.png')}}" style="position:absolute; margin: auto; ; margin-top: 460px ; left: 0; right: 0; opacity:0.2" /></center>')
+                                .css('font-size', '24px')
+
+                            //$('#stampHeader' ).addClass( 'stampHeader' );
+                            $(win.document.body).find('table')
+                                .css('border', 'solid')
+                                .css('margin-top', '20px')
+                                .css('font-size', 'inherit');
+                            $(win.document.body).find('th')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px')
+                                .css('font-size', 'inherit')
+                            $(win.document.body).find('td')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px');
+                            $(win.document.body).find('tr')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px')
+                        }
+                    }, {
+                        extend: 'excel',
+                        title: 'Veneto',
+                        footer: true,
+
+                    }
+                ]
+            }); 
+            var table = $('#myTable6').DataTable({
+                "displayLength": 25,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        title: 'Veneto',
+                        footer: true,
+                        messageTop: "Date: " + formatted,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .prepend('<center><img src="{{asset('images / dark - logo.png')}}" style="position:absolute; margin: auto; ; margin-top: 460px ; left: 0; right: 0; opacity:0.2" /></center>')
+                                .css('font-size', '24px')
+
+                            //$('#stampHeader' ).addClass( 'stampHeader' );
+                            $(win.document.body).find('table')
+                                .css('border', 'solid')
+                                .css('margin-top', '20px')
+                                .css('font-size', 'inherit');
+                            $(win.document.body).find('th')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px')
+                                .css('font-size', 'inherit')
+                            $(win.document.body).find('td')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px');
+                            $(win.document.body).find('tr')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px')
+                        }
+                    }, {
+                        extend: 'excel',
+                        title: 'Veneto',
+                        footer: true,
+
+                    }
+                ]
+            }); 
+            var table = $('#myTable7').DataTable({
+                "displayLength": 25,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        title: 'Veneto',
+                        footer: true,
+                        messageTop: "Date: " + formatted,
+                        customize: function (win) {
+                            $(win.document.body)
+                                .prepend('<center><img src="{{asset('images / dark - logo.png')}}" style="position:absolute; margin: auto; ; margin-top: 460px ; left: 0; right: 0; opacity:0.2" /></center>')
+                                .css('font-size', '24px')
+
+                            //$('#stampHeader' ).addClass( 'stampHeader' );
+                            $(win.document.body).find('table')
+                                .css('border', 'solid')
+                                .css('margin-top', '20px')
+                                .css('font-size', 'inherit');
+                            $(win.document.body).find('th')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px')
+                                .css('font-size', 'inherit')
+                            $(win.document.body).find('td')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px');
+                            $(win.document.body).find('tr')
+                                .css('border', 'solid')
+                                .css('border', '!important')
+                                .css('border-width', '1px')
+                        }
+                    }, {
+                        extend: 'excel',
+                        title: 'Veneto',
+                        footer: true,
+
+                    }
+                ]
+            }); 
+       
+        });
+    </script>
 @endsection

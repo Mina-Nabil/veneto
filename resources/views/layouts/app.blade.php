@@ -658,6 +658,7 @@
 
     </script>
     <!-- End Table Search Script -->
+    @yield('js_content')
 </body>
 
 </html>
