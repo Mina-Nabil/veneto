@@ -35,7 +35,7 @@ Route::get("finished/add",                  'FinishedController@addPage')-> midd
 Route::get("finished/models",                  'FinishedController@models')-> middleware('cors');
 Route::post("finished/insert",              'FinishedController@insert')-> middleware('cors');
 Route::get("finished/empty/{id}",              'FinishedController@emptyFinished')-> middleware('cors');
-Route::post("finished/insertModel",              'FinishedController@insertModel')-> middleware('cors');
+Route::post("finished/link",              'FinishedController@insertModel')-> middleware('cors');
 Route::post("finished/edit/price",              'FinishedController@editPrice')-> middleware('cors');
 
 //Clients Routes
