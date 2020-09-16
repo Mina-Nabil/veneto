@@ -22,7 +22,7 @@ class FinishedController extends Controller
     }
 
     public function models(){
-        $data['models'] = Models::getModels();
+        $data['models'] = Models::getModelNames();
         $data['brands'] = Brands::getBrands();
 
         $data['finished'] = Finished::getAllFinished();

@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="input-group mb-3">
-                                <select name=model[] class="select2 form-control custom-select" required>
+                                <select name=model class="select2 form-control custom-select" required>
                                     <option disabled hidden selected value="">Models</option>
                                     @foreach($models as $model)
                                     <option value="{{ $model->id }}">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="input-group mb-3">
-                                <select name=brand[] class="select2 form-control custom-select" style="width: 100%; height:50px;" required>
+                                <select name=brand class="select2 form-control custom-select" style="width: 100%; height:50px;" required>
                                     <option disabled selected hidden value="">Brands</option>
                                     @foreach($brands as $brand)
                                     <option value="{{ $brand->id }}">

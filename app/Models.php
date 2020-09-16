@@ -102,6 +102,14 @@ class Models extends Model
         ->get();
     }
 
+    static function getModelNames(){
+        return DB::table('models')
+                    ->select('models.MODL_UNID', 'id')
+                    ->whereNotNull('models.MODL_UNID')
+                    ->get();
+
+    }
+
     static function getModel($id){
         return DB::table('models')
                     ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
