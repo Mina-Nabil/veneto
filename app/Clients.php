@@ -64,7 +64,7 @@ class Clients extends Model
         if ($isOnline != -1) {
             $ret['data'] = $ret['data']->where("CLNT_ONLN", $isOnline);
         }
-        $ret['data'] = $ret['data']->groupBy("CLTR_CLNT_ID")->orderBy("CLNT_NAME")->get();
+        $ret['data'] = $ret['data']->groupBy("CLTR_CLNT_ID")->orderBy("CLNT_SRNO")->get();
 
         if ($isOnline != -1)
             $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
@@ -88,7 +88,7 @@ class Clients extends Model
         $ret['others'] = DB::table("clients as t1")->join('client_trans', "CLTR_CLNT_ID", "=", "t1.id")
             ->select(['t1.id', 'CLTR_BLNC', 'CLNT_NAME', 'CLNT_SRNO'])
             ->whereNotIn('t1.id', $balances->pluck('CLTR_CLNT_ID'))
-            ->whereRaw(" client_trans.id = (SELECT MAX(id) FROM client_trans WHERE CLTR_CLNT_ID = t1.id AND CLTR_DATE <= '{$to}' ) ")->orderBy("CLNT_NAME");
+            ->whereRaw(" client_trans.id = (SELECT MAX(id) FROM client_trans WHERE CLTR_CLNT_ID = t1.id AND CLTR_DATE <= '{$to}' ) ")->orderBy("CLNT_SRNO");
 
         $ret['onlineOthers'] = [];
 
