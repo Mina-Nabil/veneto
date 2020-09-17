@@ -42,7 +42,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-money"></i></span>
                             </div>
-                            <input type="number" class="form-control" placeholder="Debit Amout" name=out value=0 required>
+                            <input type="number" step=0.01  class="form-control" placeholder="Debit Amout" name=out value=0 required>
                         </div>
                         <small class="text-danger">{{$errors->first('out')}}</small>
                     </div>
@@ -52,7 +52,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-money"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Credit Amount" name=in value=0 required>
+                            <input type="number" step=0.01  class="form-control" placeholder="Credit Amount" name=in value=0 required>
                         </div>
                         <small class="text-danger">{{$errors->first('in')}}</small>
                     </div>
