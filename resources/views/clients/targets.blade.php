@@ -29,7 +29,7 @@
                             @foreach($targets as $target)
                             <tr>
                                 <td>
-                                    <a href="{{url('clients/trans/quick/' . $target->id)}}">
+                                    <a href="{{url('clients/trans/quick/' . $target->TRGT_CLNT_ID)}}">
                                         {{($target->CLNT_SRNO ) ? $target->CLNT_SRNO.' - '  : ''}}{{$target->CLNT_NAME}}
                                     </a>
                                 </td>
