@@ -17,6 +17,10 @@ class Brands extends Model
         return DB::table('brands')->find($id);
     }
 
+    static function getBrandIDByName($name){
+        return DB::table('brands')->where('BRND_NAME', '=', $name)->get()->first()->id ?? NULL;
+    }
+
     static function insertBrand($name){
         return DB::table('brands')->insertGetId([
             "BRND_NAME" => $name
@@ -28,4 +32,6 @@ class Brands extends Model
             "BRND_NAME" => $name
         ]);
     }
+
+
 }

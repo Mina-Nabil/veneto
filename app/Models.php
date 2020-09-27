@@ -122,6 +122,10 @@ class Models extends Model
 
     }
 
+    static function getModelIDByName($name){
+        return DB::table('models')->where('MODL_UNID', '=', $name)->get()->first()->id ?? NULL;
+    }
+
     static function insertModel($name, $typeID, $colorID, $suppID, $price, $image=null, $serialID=null, $comment=null){
         return DB::table('models')->insertGetId([
             "MODL_NAME" => $name,

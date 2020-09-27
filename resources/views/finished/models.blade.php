@@ -5,8 +5,15 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">{{$pageTitle}}</h4>
-                <h5 class="card-subtitle">Add/Edit Brands</h5>
+                <div class="row">
+                    <div class=col-9>
+                        <h4 class="card-title">{{$pageTitle}}</h4>
+                        <h5 class="card-subtitle">Add/Edit Brands</h5>
+                    </div>
+                    <div class="col-3 m-l-auto">
+                        <button class="btn btn-success mr-2" data-toggle="modal" data-target="#uploadDoc">Upload From Excel Sheet</button>
+                    </div>
+                </div>
                 <form class="form pt-3" method="post" action="{{ $formURL }}" enctype="multipart/form-data">
                     @csrf
 
@@ -33,6 +40,9 @@
                                 </select>
                             </div>
                         </div>
+                        <small class="text-danger">{{$errors->first('model')}}</small>
+                        <small class="text-danger">{{$errors->first('brand')}}</small>
+                        <small class="text-danger">{{$errors->first('modelsFile')}}</small>
                     </div>
 
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
@@ -70,6 +80,34 @@
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="uploadDoc" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Upload Models File</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form action="{{ url('finished/upload/models') }}" method=post enctype="multipart/form-data" >
+                @csrf
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="input-file-now-custom-1">Models File</label>
+                          <div class="input-group mb-3">
+                              <input type="file" id="input-file-now-custom-1" name=modelsFile class="dropify"   />
+                          </div>
+                      </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning waves-effect waves-light">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

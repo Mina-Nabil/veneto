@@ -88,4 +88,39 @@ class FinishedController extends Controller
         }
         return $ret;
     }
+
+    //////////Excel uploads
+    public function uploadModels(Request $request){
+
+        $request->validate([
+            'modelsFile' => "required|mimes:xlsx"
+        ]);
+
+        $fileName = $request->file("modelsFile")->getPathname();
+    
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $reader->setReadDataOnly(true);
+        $spreadsheet = $reader->load($fileName);
+
+        $worksheet = $spreadsheet->getActiveSheet();
+        // Get the highest row and column numbers referenced in the worksheet
+        $highestRow = $worksheet->getHighestRow(); // e.g. 10
+        $highestColumn = $worksheet->getHighestColumn(); // e.g 'F'
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // e.g. 5
+    
+    
+        for ($row = 3; $row <= $highestRow; ++$row) {
+            
+            $brandValue = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+            $modelValue = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+            if(isset($brandValue) && is_string($brandValue) && strlen($brandValue)>0 && isset($modelValue) && strlen($modelValue) > 0){
+                $brandID = Brands::getBrandIDByName($brandValue);
+                $modelID = Models::getModelIDByName($modelValue);
+                if(isset($brandID) && is_int($brandID) && isset($modelID) && is_int($modelID)){
+                    Finished::insertFinished($modelID, $brandID);
+                }
+            }
+
+        }
+    }
 }
