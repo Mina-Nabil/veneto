@@ -120,7 +120,7 @@ class FinishedController extends Controller
                     Finished::insertFinished($modelID, $brandID);
                 }
             }
-
+            return redirect('finished/show');
         }
     }
 }
