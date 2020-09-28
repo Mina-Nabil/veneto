@@ -300,7 +300,7 @@ function calculateTotals(){
  var bar = ''
  var selecteds = [];
     document.onkeyup = function (evt) {
-      console.log(evt.keyCode + "-" ) ;
+    
         try {
         if (evt.keyCode == 13)// Enter key pressed
         {

@@ -104,6 +104,10 @@ class HomeController extends Controller
         return view('home', $data);
     }
 
+    public function empty(){
+        return view('empty');
+    }
+
     public function login(Request $request)
     {
 

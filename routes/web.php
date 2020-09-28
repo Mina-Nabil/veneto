@@ -202,5 +202,6 @@ Route::post("users/update",         'UsersController@update')->middleware('cors'
 Route::get('logout', 'HomeController@logout')->name('logout')->middleware('cors');
 Route::post('login', 'HomeController@login')->name('login')->middleware('cors');
 Route::get('login', 'HomeController@login')->name('loginHome')->middleware('cors');
-Route::get('/home', 'HomeController@index')->name('home')->middleware('cors');
+Route::get('/home', 'HomeController@index')->name('summary')->middleware('cors');
+Route::get('/home', 'HomeController@empty')->name('home')->middleware('cors');
 Route::get('/', 'HomeController@index')->name('home')->middleware('cors');
