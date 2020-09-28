@@ -143,7 +143,7 @@
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-list"></i><span class="hide-menu">الحسابات</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{route('summary')}}">ملخص حسابات</a></li>
+                                <li><a href="{{url('summary')}}">ملخص حسابات</a></li>
                                 <li>
                                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">الخزينه</a>
                                     <ul aria-expanded="false" class="collapse">
