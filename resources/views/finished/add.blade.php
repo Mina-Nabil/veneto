@@ -180,7 +180,7 @@
 
         }
         bar=''
-        } else {
+        } else if (evt.keyCode!=16){
             bar += evt.key;
         };
         }  catch(e){
