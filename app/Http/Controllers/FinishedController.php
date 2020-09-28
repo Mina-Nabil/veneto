@@ -111,8 +111,8 @@ class FinishedController extends Controller
     
         for ($row = 3; $row <= $highestRow; ++$row) {
             
-            $brandValue = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-            $modelValue = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+            $brandValue = trim($worksheet->getCellByColumnAndRow(1, $row)->getValue());
+            $modelValue = trim($worksheet->getCellByColumnAndRow(2, $row)->getValue());
             if(isset($brandValue) && is_string($brandValue) && strlen($brandValue)>0 && isset($modelValue) && strlen($modelValue) > 0){
                 $brandID = Brands::getBrandIDByName($brandValue);
                 $modelID = Models::getModelIDByName($modelValue);

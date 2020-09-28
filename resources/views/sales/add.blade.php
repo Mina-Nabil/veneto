@@ -300,11 +300,12 @@ function calculateTotals(){
  var bar = ''
  var selecteds = [];
     document.onkeyup = function (evt) {
+      console.log(evt.keyCode + "-" ) ;
         try {
         if (evt.keyCode == 13)// Enter key pressed
         {
         selectat = document.forms[1].elements['finished[]'];
-       
+        console.log(bar);
 
         lastSelect = selectat[selectat.length-1]
         var $selectat = $('select[name ="finished[]"]') 
@@ -329,7 +330,7 @@ function calculateTotals(){
 
         }
         bar=''
-        } else {
+        } else if (evt.keyCode!=16){
             bar += evt.key;
         };
         } catch(e){
