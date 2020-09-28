@@ -105,6 +105,7 @@ class HomeController extends Controller
     }
 
     public function empty(){
+        if (!Auth::check()) return redirect('/login');
         return view('empty');
     }
 
