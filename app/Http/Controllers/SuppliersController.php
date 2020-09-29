@@ -30,6 +30,7 @@ class SuppliersController extends Controller
     function report(){
         
         $data['suppliers'] = Suppliers::getSuppliers();
+        $data['types'] = Suppliers::getTypes();
 
         $data['accountStatFormURL'] = url('suppliers/account/statement');
         $data['mainReportFormURL'] = url('suppliers/main/account');
@@ -69,7 +70,7 @@ class SuppliersController extends Controller
     }
 
     function mainReport(Request $request){
-        $data['ops'] = Suppliers::getTotals($request->from, $request->to);
+        $data['ops'] = Suppliers::getTotals($request->from, $request->to, $request->type);
         return view('suppliers.main_report', $data);
     }
 

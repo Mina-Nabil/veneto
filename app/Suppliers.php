@@ -44,7 +44,7 @@ class Suppliers extends Model
     }
 
 
-    static function getTotals($from, $to)
+    static function getTotals($from, $to, $type = -1)
     {
         $ret = array();
         $to = date('Y-m-d', strtotime('+1 day', strtotime($to)));
@@ -52,10 +52,20 @@ class Suppliers extends Model
             ->select("suppliers.SUPP_NAME", "suppliers.id")
             ->selectRaw("SUM(SPTR_CASH_AMNT) as totalCash, SUM(SPTR_PRCH_AMNT) as totalPurch, 
                                                          SUM(SPTR_DISC_AMNT) as totalDisc, SUM(SPTR_RTRN_AMNT) as totalReturn, SUM(SPTR_NTPY_AMNT) as totalNotes")
-            ->whereBetween("SPTR_DATE", [$from, $to])->groupBy("SPTR_SUPP_ID")->get();
+            ->whereBetween("SPTR_DATE", [$from, $to]);
+        if ($type != -1) {
+            $ret['data'] = $ret['data']->where('SUPP_SPTP_ID', '=', $type);
+        }
+
+        $ret['data'] = $ret['data']->groupBy("SPTR_SUPP_ID")->get();
+
+        $balancesWhereString = "SPTR_DATE >= '{$from}' AND SPTR_DATE <= '{$to} '";
+        if ($type != -1) {
+            $balancesWhereString .= " AND SUPP_SPTP_ID = " . $type . ' ';
+        }
 
         $balances = DB::table("supplier_trans as t1")->selectRaw("id, SPTR_SUPP_ID , SPTR_BLNC , SPTR_DATE")
-            ->havingRaw("id = (SELECT max(id) from supplier_trans WHERE t1.SPTR_SUPP_ID = SPTR_SUPP_ID AND  SPTR_DATE >= '{$from}' AND SPTR_DATE <= '{$to}' ) ")
+            ->havingRaw("id = (SELECT max(id) from supplier_trans, supplier_trans suppliers as t2 WHERE  WHERE t1.SPTR_SUPP_ID = SPTR_SUPP_ID AND  {$balancesWhereString} ) ")
             ->get();
 
         $ret['balances'] = [];
@@ -65,12 +75,23 @@ class Suppliers extends Model
 
         $ret['others'] = DB::table("suppliers as t1")->join('supplier_trans', "SPTR_SUPP_ID", "=", "t1.id")
             ->select(['t1.id', 'SPTR_BLNC', 'SUPP_NAME'])->whereNotIn('t1.id', $balances->pluck('SPTR_SUPP_ID'))
-            ->whereRaw(" supplier_trans.id = (SELECT MAX(id) FROM supplier_trans WHERE SPTR_SUPP_ID = t1.id AND SPTR_DATE <= '{$to}' ) ")->get();
+            ->whereRaw(" supplier_trans.id = (SELECT MAX(id) FROM supplier_trans WHERE SPTR_SUPP_ID = t1.id AND SPTR_DATE <= '{$to}' ) ");
+
+        if ($type == -1) {
+            $ret['others'] = $ret['others']->get();
+        } else {
+            $ret['others'] = $ret['others']->where("SUPP_SPLT_ID", $type)->get();
+        }
 
         $ret['totals'] = DB::table("supplier_trans")->join('suppliers', "SPTR_SUPP_ID", "=", "suppliers.id")
             ->selectRaw("SUM(SPTR_CASH_AMNT) as totalCash, SUM(SPTR_PRCH_AMNT) as totalPurch, SUM(DISTINCT suppliers.SUPP_BLNC) as totalBalance, 
                                             SUM(SPTR_DISC_AMNT) as totalDisc, SUM(SPTR_RTRN_AMNT) as totalReturn, SUM(SPTR_NTPY_AMNT) as totalNotes")
-            ->whereBetween("SPTR_DATE", [$from, $to])->get()->first();
+            ->whereBetween("SPTR_DATE", [$from, $to]);
+
+        if ($type != -1) {
+            $ret['totals'] = $ret['totals']->where('SUPP_SPTP_ID', '=', $type);
+        }
+        $ret['totals'] = $ret['totals']->get()->first();
 
 
         foreach ($ret['others'] as $mloshTrans) {
