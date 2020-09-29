@@ -126,8 +126,8 @@ class SuppliersController extends Controller
         $data['types'] = Suppliers::getTypes();
 
         foreach($data['types'] as $type){
-            $data['suppliers'][$type->id]  = Suppliers::getSuppliers($type);
-            $data['total'][$type->id]      = Suppliers::getTotalBalance($type); 
+            $data['suppliers'][$type->id]  = Suppliers::getSuppliers($type->id);
+            $data['total'][$type->id]      = Suppliers::getTotalBalance($type->id); 
         }
         $data['total'][0]      = Suppliers::getTotalBalance(); 
         return view('suppliers.home', $data);
