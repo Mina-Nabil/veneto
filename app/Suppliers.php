@@ -80,7 +80,7 @@ class Suppliers extends Model
         if ($type == -1) {
             $ret['others'] = $ret['others']->get();
         } else {
-            $ret['others'] = $ret['others']->where("SUPP_SPTP_ID", $type)->get();
+            $ret['others'] = $ret['others']->where("SUPP_SPTP_ID", '=', $type)->get();
         }
 
         $ret['totals'] = DB::table("supplier_trans")->join('suppliers', "SPTR_SUPP_ID", "=", "suppliers.id")
