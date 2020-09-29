@@ -75,7 +75,7 @@ class Suppliers extends Model
 
         $ret['others'] = DB::table("suppliers as t1")->join('supplier_trans', "SPTR_SUPP_ID", "=", "t1.id")
             ->select(['t1.id', 'SPTR_BLNC', 'SUPP_NAME'])->whereNotIn('t1.id', $balances->pluck('SPTR_SUPP_ID'))
-            ->whereRaw(" supplier_trans.id = (SELECT MAX(id) FROM supplier_trans WHERE SPTR_SUPP_ID = t1.id AND SPTR_DATE <= '{$to}' ) ");
+            ->whereRaw(" supplier_trans.id = (SELECT MAX(id) FROM supplier_trans HAVING SPTR_SUPP_ID = t1.id AND SPTR_DATE <= '{$to}' ) ");
 
         if ($type == -1) {
             $ret['others'] = $ret['others']->get();
