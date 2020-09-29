@@ -6,9 +6,13 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Main Suppliers Report</h4>
+                @isset($supplierType)
+                <h6 class="card-subtitle">Show  '{{$supplierType}}'  Suppliers totals during the selected period</h6>
+                @else
                 <h6 class="card-subtitle">Show Suppliers totals during the selected period</h6>
+                @endisset
                 <div class="table-responsive m-t-40">
-                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
+                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th>اسم</th>
@@ -36,7 +40,7 @@
                                 <td>{{number_format($op->totalDisc, 2)}}</td>
                                 <td>{{number_format($op->totalReturn, 2)}}</td>
                                 <td>{{number_format($ops['balances'][$op->id], 2)}}</td>
-                            </tr> 
+                            </tr>
                             @endforeach
                             @foreach($ops['others'] as $op)
                             <tr>
@@ -52,14 +56,15 @@
                                 <td>0</td>
                                 <td>0</td>
                                 <td>{{number_format($op->SUPP_BLNC, 2)}}</td>
-                            </tr> 
+                            </tr>
                             @endforeach
                         </tbody>
                         @if(isset($ops['totals']))
                         <tfoot>
                             <tr>
                                 <td><strong>Totals</strong></td>
-                                <td><strong>{{number_format($ops['totals']->totalBalance - $ops['totals']->totalPurch + $ops['totals']->totalCash + $ops['totals']->totalDisc + $ops['totals']->totalNotes + $ops['totals']->totalReturn, 2)}}</strong></td>
+                                <td><strong>{{number_format($ops['totals']->totalBalance - $ops['totals']->totalPurch + $ops['totals']->totalCash + $ops['totals']->totalDisc + $ops['totals']->totalNotes + $ops['totals']->totalReturn, 2)}}</strong>
+                                </td>
                                 <td><strong>{{number_format($ops['totals']->totalPurch, 2)}}</strong></td>
                                 <td><strong>{{number_format($ops['totals']->totalCash, 2)}}</strong></td>
                                 <td><strong>{{number_format($ops['totals']->totalNotes, 2)}}</strong></td>

@@ -71,6 +71,9 @@ class SuppliersController extends Controller
 
     function mainReport(Request $request){
         $data['ops'] = Suppliers::getTotals($request->from, $request->to, $request->type);
+        if($request->type!=-1){
+            $data['supplierType'] = Suppliers::getType($request->type)->SPTP_NAME;
+        }
         return view('suppliers.main_report', $data);
     }
 
