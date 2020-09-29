@@ -65,7 +65,7 @@
                             <label>انواع موردين*</label>
                             <div class="input-group mb-3">
                                 <select name=type class="select2 form-control custom-select" style="width: 100%; height:36px;">
-                                    <option selected>الكل</option>
+                                    <option value=-1 selected>الكل</option>
                                     @foreach($types as $type)
                                     <option value="{{ $type->id }}">{{$type->SPTP_NAME}}</option>
                                     @endforeach
