@@ -165,7 +165,7 @@
                             </ul>
                         </li>
 
-                        <li>
+                        {{-- <li>
                             <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-newspaper"></i><span class="hide-menu">حساب
                                     عام</span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -174,7 +174,7 @@
                                 <li><a href="{{url('ledger/add')}}">اضافه</a></li>
                                 <li><a href="{{url('ledger/types/show')}}">انواع حسابات</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">الموردين</span></a>
                             <ul aria-expanded="false" class="collapse">
