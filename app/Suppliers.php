@@ -59,10 +59,6 @@ class Suppliers extends Model
 
         $ret['data'] = $ret['data']->groupBy("SPTR_SUPP_ID")->get();
 
-        $balancesWhereString = "t2.SPTR_DATE >= '{$from}' AND t2.SPTR_DATE <= '{$to} '";
-        if ($type != -1) {
-            $balancesWhereString .= " AND SUPP_SPTP_ID = " . $type . ' ';
-        }
 
         $balances = DB::table("supplier_trans as t1")->selectRaw("t1.id, SPTR_SUPP_ID , SPTR_BLNC , SPTR_DATE")
             ->join('suppliers', 'SPTR_SUPP_ID', '=', 'suppliers.id');
@@ -70,7 +66,7 @@ class Suppliers extends Model
             $balances = $balances->where('SUPP_SPTP_ID', $type);
         }
 
-        $balances = $balances->havingRaw("id = (SELECT max(supplier_trans.id) from supplier_trans WHERE t1.SPTR_SUPP_ID = SPTR_SUPP_ID AND SPTR_DATE >= '{$from}' AND SPTR_DATE <= '{$to} ) ");
+        $balances = $balances->havingRaw("id = (SELECT max(supplier_trans.id) from supplier_trans WHERE t1.SPTR_SUPP_ID = SPTR_SUPP_ID AND SPTR_DATE >= '{$from}' AND SPTR_DATE <= '{$to}' ) ");
 
         $balances->get();
 
