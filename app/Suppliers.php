@@ -64,7 +64,7 @@ class Suppliers extends Model
             $balancesWhereString .= " AND SUPP_SPTP_ID = " . $type . ' ';
         }
 
-        $balances = DB::table("supplier_trans as t1")->selectRaw("id, SPTR_SUPP_ID , SPTR_BLNC , SPTR_DATE")
+        $balances = DB::table("supplier_trans as t1")->selectRaw("t1.id, SPTR_SUPP_ID , SPTR_BLNC , SPTR_DATE")
             ->havingRaw("id = (SELECT max(id) from supplier_trans, suppliers as t2 WHERE  t1.SPTR_SUPP_ID = SPTR_SUPP_ID AND  {$balancesWhereString} ) ")
             ->get();
 
