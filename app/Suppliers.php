@@ -59,7 +59,7 @@ class Suppliers extends Model
 
         $ret['data'] = $ret['data']->groupBy("SPTR_SUPP_ID")->get();
 
-        $balancesWhereString = "SPTR_DATE >= '{$from}' AND SPTR_DATE <= '{$to} '";
+        $balancesWhereString = "t2.SPTR_DATE >= '{$from}' AND t2.SPTR_DATE <= '{$to} '";
         if ($type != -1) {
             $balancesWhereString .= " AND SUPP_SPTP_ID = " . $type . ' ';
         }
