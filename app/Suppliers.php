@@ -95,8 +95,7 @@ class Suppliers extends Model
 
 
         foreach ($ret['others'] as $mloshTrans) {
-            dd($mloshTrans);
-            $ret['totals']->totalBalance += $mloshTrans->SUPP_BLNC;
+            $ret['totals']->totalBalance += $mloshTrans->SPTR_BLNC;
         }
 
         return $ret;
