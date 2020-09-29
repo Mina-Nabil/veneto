@@ -68,10 +68,10 @@ class Suppliers extends Model
 
         $balances = $balances->havingRaw("id = (SELECT max(supplier_trans.id) from supplier_trans WHERE t1.SPTR_SUPP_ID = SPTR_SUPP_ID AND SPTR_DATE >= '{$from}' AND SPTR_DATE <= '{$to}' ) ");
 
-        $balances->get();
+        $balances = $balances->get();
 
         $ret['balances'] = [];
-        dd($balances);
+   
         foreach ($balances as $balance) {
             $ret['balances'][$balance->SPTR_SUPP_ID] = $balance->SPTR_BLNC;
         }
