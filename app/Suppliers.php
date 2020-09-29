@@ -65,7 +65,7 @@ class Suppliers extends Model
         }
 
         $balances = DB::table("supplier_trans as t1")->selectRaw("t1.id, SPTR_SUPP_ID , SPTR_BLNC , SPTR_DATE")
-            ->havingRaw("id = (SELECT max(t2.id) from supplier_trans as t2, suppliers WHERE  t2.SPTR_SUPP_ID = suppliers.id AND  {$balancesWhereString} ) ")
+            ->havingRaw("id = (SELECT max(t2.id) from supplier_trans as t2 JOIN suppliers ON t2.SPTR_SUPP_ID = suppliers.id WHERE  {$balancesWhereString} ) ")
             ->get();
 
         $ret['balances'] = [];
