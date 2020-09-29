@@ -210,11 +210,14 @@ class Suppliers extends Model
 
 
     //Suppliers Table CRUD
-    static function getSuppliers()
+    static function getSuppliers($type = -1)
     {
-        return DB::table('suppliers')->select('suppliers.*', 'supplier_types.SPTP_NAME')
-            ->join('supplier_types', 'suppliers.SUPP_SPTP_ID', '=', 'supplier_types.id')
-            ->get();
+        $query = DB::table('suppliers')->select('suppliers.*', 'supplier_types.SPTP_NAME')
+            ->join('supplier_types', 'suppliers.SUPP_SPTP_ID', '=', 'supplier_types.id');
+        if ($type != -1) {
+            $query = $query->where('SUPP_SPTP_ID', '=', $type);
+        }
+        return    $query->get();
     }
 
     static function getSupplier($id)
@@ -264,9 +267,13 @@ class Suppliers extends Model
         return DB::table('suppliers')->where('id', $suppID)->select("SUPP_BLNC")->first()->SUPP_BLNC;
     }
 
-    static function getTotalBalance()
+    static function getTotalBalance($type = -1)
     {
-        return DB::table('suppliers')->sum('SUPP_BLNC');
+        $query = DB::table('suppliers');
+        if ($type != -1) {
+            $query = $query->where('SUPP_SPTP_ID', '=', $type);
+        }
+        return $query->sum('SUPP_BLNC');
     }
 
     //////////////////////////////////Supplier Types//////////////////////////////////

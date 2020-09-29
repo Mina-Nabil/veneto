@@ -123,8 +123,13 @@ class SuppliersController extends Controller
     
     //////////////////////////////////////////////Supplier Pages//////////////////////////////////////////////////////
     function home(){
-        $data['suppliers']  = Suppliers::getSuppliers();
-        $data['total']      = Suppliers::getTotalBalance(); 
+        $data['types'] = Suppliers::getTypes();
+
+        foreach($data['types'] as $type){
+            $data['suppliers'][$type->id]  = Suppliers::getSuppliers($type);
+            $data['total'][$type->id]      = Suppliers::getTotalBalance($type); 
+        }
+        $data['total'][0]      = Suppliers::getTotalBalance(); 
         return view('suppliers.home', $data);
     }
 

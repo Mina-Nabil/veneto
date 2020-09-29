@@ -19,7 +19,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($suppliers as $supplier)
+                            @foreach($types as $type)
+                            @foreach($suppliers[$type->id] as $supplier)
                             <tr>
                                 <td>
                                     <a href="{{url('suppliers/trans/quick/' . $supplier->id)}}">
@@ -32,11 +33,19 @@
                                 <td><a href="{{ url('suppliers/edit/' . $supplier->id) }}"><img src="{{ asset('images/edit.png') }}" width=25 height=25></a></td>                               
                             </tr> 
                             @endforeach
+                            <tr>
+                                <tr>
+                                    <td colspan=3><strong>Total '{{$type->SPTP_NAME}}' Balance: </strong></td>
+                                    <td><strong>{{number_format($total[$type->id], 2)}}</strong></td>
+                                    <td></td>
+                                </tr> 
+                            </tr>
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                             <td colspan=3><strong>Total Balance: </strong></td>
-                            <td><strong>{{number_format($total, 2)}}</strong></td>
+                            <td><strong>{{number_format($total[0], 2)}}</strong></td>
                             <td></td>
                             </tr>
                         </tfoot>
