@@ -65,11 +65,15 @@ class Suppliers extends Model
         }
 
         $balances = DB::table("supplier_trans as t1")->selectRaw("t1.id, SPTR_SUPP_ID , SPTR_BLNC , SPTR_DATE")
-            ->havingRaw("id = (SELECT max(t2.id) from supplier_trans as t2 JOIN suppliers ON t2.SPTR_SUPP_ID = suppliers.id WHERE  {$balancesWhereString} ) ");
-            dd($balances->toSql());
+            ->join('suppliers', 'SPTR_SUPP_ID', '=', 'suppliers.id');
+        if ($type != -1) {
+            $balances = $balances->where('SUPP_SPTP_ID', $type);
+        }
 
-            $balances->get();
-      
+        $balances = $balances->havingRaw("id = (SELECT max(supplier_trans.id) from supplier_trans WHERE t1.SPTR_SUPP_ID = SPTR_SUPP_ID AND SPTR_DATE >= '{$from}' AND SPTR_DATE <= '{$to} ) ");
+
+        $balances->get();
+
         $ret['balances'] = [];
         foreach ($balances as $balance) {
             $ret['balances'][$balance->SPTR_SUPP_ID] = $balance->SPTR_BLNC;
