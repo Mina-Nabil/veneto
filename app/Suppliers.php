@@ -71,6 +71,7 @@ class Suppliers extends Model
         $balances->get();
 
         $ret['balances'] = [];
+        dd($balances);
         foreach ($balances as $balance) {
             $ret['balances'][$balance->SPTR_SUPP_ID] = $balance->SPTR_BLNC;
         }
