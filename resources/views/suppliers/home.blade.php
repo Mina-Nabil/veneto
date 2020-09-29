@@ -35,7 +35,7 @@
                             @endforeach
                             <tr>
                                 <tr>
-                                    <td colspan=3><strong>Total '{{$type->SPTP_NAME}}' Balance: </strong></td>
+                                    <td colspan=3><strong>Total  '{{$type->SPTP_NAME}}'  Balance: </strong></td>
                                     <td><strong>{{number_format($total[$type->id], 2)}}</strong></td>
                                     <td></td>
                                 </tr> 
