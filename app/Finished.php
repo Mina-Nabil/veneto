@@ -78,7 +78,7 @@ class Finished extends Model
 
             if($finished == null){
                 $finished = self::getFinishedRow($modelID, $brandID);
-                echo "Finished: " . $finished;
+                echo "Finished: " . (!isset($finished)) ? 'NULL' : $finished;
                 if($finished !== null)
                     $finished = $finished->id;
             }
