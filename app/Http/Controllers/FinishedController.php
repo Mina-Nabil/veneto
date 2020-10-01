@@ -117,8 +117,8 @@ class FinishedController extends Controller
                 $brandID = Brands::getBrandIDByName($brandValue);
                 $modelID = Models::getModelIDByName($modelValue);
                 if(isset($brandID) && is_int($brandID) && isset($modelID) && is_int($modelID)){
+                    echo "<br><br> Brand({$brandValue}): {$brandID} , Model({$modelValue}): {$modelID} " ;
                     Finished::insertFinished($modelID, $brandID);
-                   echo "<br><br> Brand({$brandValue}): {$brandID} , Model({$modelValue}): {$modelID} " ;
                 }
             }
           //  return redirect('finished/add');
