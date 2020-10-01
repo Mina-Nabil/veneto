@@ -234,4 +234,9 @@ class SuppliersController extends Controller
         
         return redirect("suppliers/types/show");
     }
+
+    function deleteType($id){
+        Suppliers::deleteType($id);
+        return redirect("suppliers/types/show");
+    }
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Cash;
 use App\Bank;
+use Exception;
 
 class Suppliers extends Model
 {
@@ -324,5 +325,14 @@ class Suppliers extends Model
             ->update([
                 "SPTP_NAME" => $name
             ]);
+    }
+
+    static function deleteType($id){
+        try {
+             DB::table('supplier_types')->where('id', $id)->delete();
+             return true;
+        } catch (Exception $e){
+            return false;
+        }
     }
 }

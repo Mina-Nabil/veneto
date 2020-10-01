@@ -186,6 +186,7 @@ Route::post("suppliers/update",     'SuppliersController@updateSupplier')->middl
 Route::get("suppliers/types/show",       'SuppliersController@types')->middleware('cors');
 Route::get("suppliers/types/add",        'SuppliersController@addType')->middleware('cors');
 Route::get("suppliers/types/edit/{id}",     'SuppliersController@editType')->middleware('cors');
+Route::get("suppliers/types/delete/{id}",     'SuppliersController@deleteType')->middleware('cors');
 Route::post("suppliers/types/insert",       'SuppliersController@insertType')->middleware('cors');
 Route::post("suppliers/types/update",       'SuppliersController@update')->middleware('cors');
 
