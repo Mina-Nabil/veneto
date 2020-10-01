@@ -78,7 +78,6 @@ class Finished extends Model
 
             if($finished == null){
                 $finished = self::getFinishedRow($modelID, $brandID);
-                echo "Finished: " . (!isset($finished)) ? 'NULL' : $finished;
                 if($finished !== null)
                     $finished = $finished->id;
             }
@@ -97,7 +96,6 @@ class Finished extends Model
                         "FNSH_50_AMNT" => $amount50, 
                         "FNSH_PRCE" => $price
                     ]);
-                    echo "Inserted :" . $id;
                     return $id;
                 }
                 else {
