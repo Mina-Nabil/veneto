@@ -78,12 +78,13 @@ class Finished extends Model
 
             if($finished == null){
                 $finished = self::getFinishedRow($modelID, $brandID);
+                echo "Finished: " . $finished;
                 if($finished !== null)
                     $finished = $finished->id;
             }
             
                 if($finished == null){
-                    return $id = DB::table("finished")->insertGetId([
+                    $id = DB::table("finished")->insertGetId([
                         "FNSH_MODL_ID" => $modelID, 
                         "FNSH_BRND_ID" => $brandID, 
                         "FNSH_36_AMNT" => $amount36, 
@@ -96,6 +97,8 @@ class Finished extends Model
                         "FNSH_50_AMNT" => $amount50, 
                         "FNSH_PRCE" => $price
                     ]);
+                    echo "Inserted :" . $id;
+                    return $id;
                 }
                 else {
                     if($amount36!=0)

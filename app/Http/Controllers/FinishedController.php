@@ -109,7 +109,7 @@ class FinishedController extends Controller
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // e.g. 5
     
     
-        for ($row = 2; $row <= $highestRow; $row++) {
+        for ($row = 1; $row <= $highestRow; $row++) {
             
             $brandValue = trim($worksheet->getCellByColumnAndRow(1, $row)->getValue());
             $modelValue = trim($worksheet->getCellByColumnAndRow(2, $row)->getValue());
@@ -117,8 +117,8 @@ class FinishedController extends Controller
                 $brandID = Brands::getBrandIDByName($brandValue);
                 $modelID = Models::getModelIDByName($modelValue);
                 if(isset($brandID) && is_int($brandID) && isset($modelID) && is_int($modelID)){
-                   // Finished::insertFinished($modelID, $brandID);
-                   echo "Brand({$brandValue}): {$brandID} , Model({$modelValue}): {$modelID} <br><br>" ;
+                    Finished::insertFinished($modelID, $brandID);
+                   echo "<br><br> Brand({$brandValue}): {$brandID} , Model({$modelValue}): {$modelID} " ;
                 }
             }
           //  return redirect('finished/add');
