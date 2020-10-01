@@ -109,7 +109,7 @@ class FinishedController extends Controller
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // e.g. 5
     
     
-        for ($row = 3; $row <= $highestRow; ++$row) {
+        for ($row = 2; $row <= $highestRow; $row++) {
             
             $brandValue = trim($worksheet->getCellByColumnAndRow(1, $row)->getValue());
             $modelValue = trim($worksheet->getCellByColumnAndRow(2, $row)->getValue());
