@@ -71,10 +71,9 @@ class FinishedController extends Controller
 
     private function getItemsArr($request){
         $ret = array();
-        foreach($request->model as $key => $item){
+        foreach($request->finished as $key => $item){
             array_push($ret, [
-                "model"     => $item,
-                "brand"     => $request->brand[$key],
+                "finished"     => $item,
                 "amount36"     => ($request->amount36[$key])?$request->amount36[$key] : 0,
                 "amount38"     => ($request->amount38[$key])?$request->amount38[$key] : 0,
                 "amount40"     => ($request->amount40[$key])?$request->amount40[$key] : 0,

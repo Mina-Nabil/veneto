@@ -61,7 +61,7 @@ class Finished extends Model
     public static function insertFinishedEntry($entryArr){
         DB::transaction(function () use ($entryArr){
             foreach($entryArr as $entry){
-                self::insertFinished($entry['model'], $entry['brand'], $entry['price'], $entry['amount36'], $entry['amount38'], $entry['amount40'], $entry['amount42'], $entry['amount44'], $entry['amount46'], $entry['amount48'], $entry['amount50']);
+                self::insertFinished($entry['model'] ?? -1, $entry['brand'] ?? -1, $entry['price'], $entry['amount36'], $entry['amount38'], $entry['amount40'], $entry['amount42'], $entry['amount44'], $entry['amount46'], $entry['amount48'], $entry['amount50'], $entry['finished']);
             }
         });
     }
