@@ -46,7 +46,9 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan=3><strong>Total Balance: </strong></td>
+                                <td ><strong>Total Balance: </strong></td>
+                                <td></td>
+                                <td></td>
                                 <td><strong>{{number_format($total[0], 2)}}</strong></td>
                                 <td></td>
                             </tr>
