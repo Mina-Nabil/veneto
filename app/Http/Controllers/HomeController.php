@@ -44,7 +44,7 @@ class HomeController extends Controller
         $data['proc']['months'] = [];
 
         for ($i = 1; $i <= 12; $i++) {
-            usleep(1000);
+           
             $tmpMonth = new DateTime($thisYear->format('Y') . '-' . $i . '-01');
             $AllTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'));
             $VentoTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 0);
