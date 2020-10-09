@@ -31,7 +31,7 @@
                         <tbody>
                             @foreach($masareef as $masroof)
                             <tr>
-                                <td><strong>{{$masroof['typeName']}}</strong></td>
+                                <td><strong>{{$masroof['subTypeName']}}</strong></td>
 
                                 <td>{{number_format($masroof[1] ->totalIn - $masroof[1] ->totalOut, 2)}}</td>
                                 <td>{{number_format($masroof[2] ->totalIn - $masroof[2] ->totalOut, 2)}}</td>
