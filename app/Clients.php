@@ -167,9 +167,9 @@ class Clients extends Model
 
         $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE");
         if ($type == -1)
-            $balances->havingRaw("t1.id = (SELECT id from client_trans WHERE  CLTR_DATE BETWEEN '{$from}' AND  '{$to}' ORDER BY id DESC LIMIT 1 ) ");
+            $balances->havingRaw("t1.id = (SELECT client_trans.id from client_trans WHERE  CLTR_DATE BETWEEN '{$from}' AND  '{$to}' ORDER BY id DESC LIMIT 1 ) ");
         else
-            $balances->havingRaw("t1.id = (SELECT id from client_trans, clients WHERE clients.id=CLTR_CLNT_ID AND  CLTR_DATE BETWEEN '{$from}' AND  '{$to}' AND CLNT_ONLN={$type} ORDER BY id DESC LIMIT 1 ) ");
+            $balances->havingRaw("t1.id = (SELECT client_trans.id from client_trans, clients WHERE clients.id=CLTR_CLNT_ID AND  CLTR_DATE BETWEEN '{$from}' AND  '{$to}' AND CLNT_ONLN={$type} ORDER BY id DESC LIMIT 1 ) ");
         $balances = $balances->get();
 
         $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
