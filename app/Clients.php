@@ -165,12 +165,11 @@ class Clients extends Model
         $from = (new DateTime($from))->format('Y-m-d H:i:s');
         $to = ((new DateTime($to))->setTime(23, 59, 59))->format('Y-m-d H:i:s');
 
-        $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
-            ->join("clients", "clients.id", '=', 't1.CLTR_CLNT_ID');
+        $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE");
         if ($type == -1)
-            $balances->havingRaw("t1.id = (SELECT id from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE BETWEEN '{$from}' AND  '{$to}' ORDER BY id DESC LIMIT 1 ) ");
+            $balances->havingRaw("t1.id = (SELECT id from client_trans WHERE  CLTR_DATE BETWEEN '{$from}' AND  '{$to}' ORDER BY id DESC LIMIT 1 ) ");
         else
-            $balances->havingRaw("t1.id = (SELECT id from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE BETWEEN '{$from}' AND  '{$to}' AND CLNT_ONLN={$type} ORDER BY id DESC LIMIT 1 ) ");
+            $balances->havingRaw("t1.id = (SELECT id from client_trans, clients WHERE clients.id=CLTR_CLNT_ID AND  CLTR_DATE BETWEEN '{$from}' AND  '{$to}' AND CLNT_ONLN={$type} ORDER BY id DESC LIMIT 1 ) ");
         $balances = $balances->get();
 
         $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
