@@ -168,18 +168,15 @@ class Clients extends Model
         $balances = DB::table("client_trans as t1")->selectRaw("t1.id, CLTR_CLNT_ID , CLTR_BLNC , CLTR_DATE")
             ->join("clients", "clients.id", '=', 't1.CLTR_CLNT_ID');
         if ($type == -1)
-            $balances->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}'  ) ");
+            $balances->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE BETWEEN '{$from}' AND  '{$to}' ) ");
         else
-            $balances->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE >= '{$from}' AND CLTR_DATE <= '{$to}' AND CLNT_ONLN={$type} ) ");
+            $balances->havingRaw("t1.id = (SELECT max(id) from client_trans WHERE t1.CLTR_CLNT_ID = CLTR_CLNT_ID AND  CLTR_DATE BETWEEN '{$from}' AND  '{$to}' AND CLNT_ONLN={$type} ) ");
         $balances = $balances->get();
 
         $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
             ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch,
                                         SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
-            ->where([
-                ["CLTR_DATE", ">=", $from],
-                ["CLTR_DATE", "<=", $to],
-            ]);
+            ->whereBetween("CLTR_DATE" ,  [$from, $to]);
         if ($type != -1)
             $ret['totals']->where('CLNT_ONLN', '=', $type);
 
