@@ -39,6 +39,7 @@ class CashController extends Controller
     function showTotalTypesPaid()
     {
 
+
         $thisYear = new DateTime('now');
         $startOfYear = new DateTime($thisYear->format('Y') . '-01-01');
         $endOfYear = new DateTime($thisYear->format('Y') . '-12-31');
@@ -49,16 +50,19 @@ class CashController extends Controller
         }
         $types = TransType::getTransTypes();
         foreach ($types as $type) {
-            $data['masareef'][$type->id]['typeID'] = $type->id;
-            $data['masareef'][$type->id]['typeName'] = $type->TRTP_NAME;
-
-            for ($i = 1; $i <= 12; $i++) {
-                $tmpMonth = new DateTime($thisYear->format('Y') . '-' . $i . '-01');
-                $data['masareef'][$type->id][$i] = Cash::getCashSpent($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), $type->id);
-                $data['totals']['masareef'][$i] += ($data['masareef'][$type->id][$i]->totalIn - $data['masareef'][$type->id][$i]->totalOut);
+            $subTypes = TransType::getTransSubTypesByType($type->id);
+            foreach ($subTypes as $subType) {
+                $data['masareef'][$subType->id]['typeID'] = $type->id;
+                $data['masareef'][$subType->id]['typeName'] = $type->TRTP_NAME;
+                $data['masareef'][$subType->id]['subTypeName'] = $subType->TRST_NAME;
+                for ($i = 1; $i <= 12; $i++) {
+                    $tmpMonth = new DateTime($thisYear->format('Y') . '-' . $i . '-01');
+                    $data['masareef'][$subType->id][$i] = Cash::getCashSpent($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), $subType->id);
+                    $data['totals']['masareef'][$i] += ($data['masareef'][$subType->id][$i]->totalIn - $data['masareef'][$subType->id][$i]->totalOut);
+                }
+                $data['masareef'][$subType->id][13] = Cash::getCashSpent($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'), $subType->id);
+                $data['totals']['masareef'][13] += ($data['masareef'][$subType->id][13]->totalIn - $data['masareef'][$subType->id][13]->totalOut);
             }
-            $data['masareef'][$type->id][13] = Cash::getCashSpent($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'), $type->id);
-            $data['totals']['masareef'][13] += ($data['masareef'][$type->id][13]->totalIn - $data['masareef'][$type->id][13]->totalOut);
         }
 
         return view('cash.expenses', $data);
