@@ -6,8 +6,19 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Client Collection Target</h4>
-                <h6 class="card-subtitle">Manage Clients targets for {{$month}} - {{$year}}</h6>
+                <div class=row>
+                    <div class="col-7">
+                        <h4 class="card-title">Client Collection Target</h4>
+                        <h6 class="card-subtitle">Manage Clients targets for {{$month}} - {{$year}}</h6>
+                    </div>
+                    @if (!$isHistory)
+                    <div class="col-lg-5 align-self-center text-right">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('clients/generate/targets')}}" class="btn btn-success d-none d-lg-block m-l-15">Generate New Clients Targets</a>
+                        </div>
+                    </div>
+                    @endif
+                </div>
                 <div class="table-responsive m-t-40">
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
@@ -38,8 +49,10 @@
                                 @endif
                                 <td id="moneyCell{{$target->id}}">{{$target->TRGT_MONY}}</td>
                                 <td id="bankCell{{$target->id}}">{{$target->TRGT_BANK}}</td>
-                                <td>{{number_format($target->cashPaid,2) }}({{($target->TRGT_MONY==0) ? $target->TRGT_MONY.'%':number_format($target->cashPaid/$target->TRGT_MONY*100,2,'.','').'%'}})</td>
-                                <td>{{number_format($target->bankPaid,2) }}({{($target->TRGT_BANK==0) ? $target->TRGT_BANK.'%':number_format($target->bankPaid/$target->TRGT_BANK*100,2,'.','').'%'}})</td>
+                                <td>{{number_format($target->cashPaid,2) }}({{($target->TRGT_MONY==0) ? $target->TRGT_MONY.'%':number_format($target->cashPaid/$target->TRGT_MONY*100,2,'.','').'%'}})
+                                </td>
+                                <td>{{number_format($target->bankPaid,2) }}({{($target->TRGT_BANK==0) ? $target->TRGT_BANK.'%':number_format($target->bankPaid/$target->TRGT_BANK*100,2,'.','').'%'}})
+                                </td>
                                 @if(!$isHistory)
                                 <td>
                                     <div class="btn-group">
@@ -91,8 +104,10 @@
                                 @endif
                                 <td><strong id=moneyTotal>{{$totals->cashTarget}}</strong></td>
                                 <td><strong id=bankTotal>{{$totals->bankTarget}}</strong></td>
-                                <td><strong>{{number_format($totals->cashPaid, 2)}}({{($totals->cashTarget==0) ? $totals->cashTarget.'%':number_format($totals->cashPaid/$totals->cashTarget*100,2,'.','').'%'}})</strong></td>
-                                <td><strong>{{number_format($totals->bankPaid, 2)}}({{($totals->bankTarget==0) ? $totals->bankTarget.'%':number_format($totals->bankPaid/$totals->bankTarget*100,2,'.','').'%'}})</strong></td>
+                                <td><strong>{{number_format($totals->cashPaid, 2)}}({{($totals->cashTarget==0) ? $totals->cashTarget.'%':number_format($totals->cashPaid/$totals->cashTarget*100,2,'.','').'%'}})</strong>
+                                </td>
+                                <td><strong>{{number_format($totals->bankPaid, 2)}}({{($totals->bankTarget==0) ? $totals->bankTarget.'%':number_format($totals->bankPaid/$totals->bankTarget*100,2,'.','').'%'}})</strong>
+                                </td>
                             </tr>
                         </tfoot>
                     </table>

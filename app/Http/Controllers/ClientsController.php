@@ -184,6 +184,13 @@ class ClientsController extends Controller
         return view('clients.prepare_target', $data);
     }
 
+    function generateTargets()
+    {
+        $now = new DateTime();
+        Target::generateTargets($now->format('Y'));
+        return redirect('clients/target/current');
+    }
+
     function setTarget(Request $request){
         $request->validate([
             "id" => "required",

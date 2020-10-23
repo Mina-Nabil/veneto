@@ -51,6 +51,7 @@ Route::post("clients/account/statement", 'ClientsController@accountStatement')->
 Route::post("clients/main/account", 'ClientsController@mainReport')->middleware('cors');
 
 Route::get('clients/target/current', 'ClientsController@currentTargets')->middleware('cors');
+Route::get('clients/generate/targets', 'ClientsController@generateTargets')->middleware('cors');
 Route::get('clients/target/history', 'ClientsController@prepareHistoryTarget')->middleware('cors');
 Route::post('clients/target/load', 'ClientsController@historyPage')->middleware('cors');
 Route::post('clients/set/targets', 'ClientsController@setTarget')->middleware('cors');
