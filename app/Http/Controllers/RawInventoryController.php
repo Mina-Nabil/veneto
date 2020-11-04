@@ -54,6 +54,8 @@ class RawInventoryController extends Controller
 
     public function addPage(Request $request){
 
+        $this->cancelEntries($request, true);
+
         $data['pageTitle'] = "Add New Entry";
         $data['pageDescription'] = "Note: This operation can't be reverted!";
         $data['formURL'] = url("rawinventory/insert");
