@@ -27,6 +27,7 @@ class Target extends Model
             ->leftJoinSub($clientTrans, 'client_trans', 'CLTR_CLNT_ID', '=', 'clients.id')
             ->select('targets.*', 'CLNT_NAME', 'CLNT_SRNO', 'CLNT_BLNC')
             ->selectRaw('SUM(CLTR_CASH_AMNT) as cashPaid, SUM(CLTR_NTPY_AMNT) as bankPaid')
+            ->orderBy('CLNT_ONLN')->orderBy('CLNT_SRNO')
             ->where([['TRGT_YEAR', $year], ['TRGT_MNTH', $month]])
             ->groupBy('targets.id', 'clients.id')
 
