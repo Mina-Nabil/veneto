@@ -194,7 +194,7 @@
                             @foreach($entries as $ent)
                                 <li class="list-group-item">{{$ent['serial']}} &nbsp&nbsp - &nbsp&nbsp{{$ent['typeName']}} : {{$ent['name']}}  &nbsp&nbsp  -  &nbsp&nbsp  {{$ent['colorName']}} </li>
                                 @foreach($ent['items'] as $key => $item)
-                                    <li class="list-group-item">{{$key+1}}# Meters: {{$item}}  &nbsp&nbsp&nbsp&nbsp Price: {{number_format($item*$ent['price'], 2)}}EGP
+                                    <li class="list-group-item">{{($key ?? 0)+1}}# Meters: {{$item}}  &nbsp&nbsp&nbsp&nbsp Price: {{number_format($item*$ent['price'], 2)}}EGP
                                 @endforeach
                             @endforeach
                         </ul>
