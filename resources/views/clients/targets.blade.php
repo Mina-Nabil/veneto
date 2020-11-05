@@ -52,9 +52,9 @@
                                 <td id="moneyCell{{$target->id}}">{{$target->TRGT_MONY}}</td>
                                 <td id="bankCell{{$target->id}}">{{$target->TRGT_BANK}}</td>
                                 <td>{{number_format($target->cashPaid,2) }}</td>
-                                <td>({{($target->TRGT_BANK==0) ? $target->TRGT_BANK.'%':number_format($target->bankPaid/$target->TRGT_BANK*100,2,'.','').'%'}})</td>
+                                <td>{{($target->TRGT_BANK==0) ? '0%':number_format($target->bankPaid/$target->TRGT_BANK*100,2,'.','').'%'}}</td>
                                 <td>{{number_format($target->cashPaid,2) }}</td>
-                                <td>({{($target->TRGT_BANK==0) ? $target->TRGT_BANK.'%':number_format($target->bankPaid/$target->TRGT_BANK*100,2,'.','').'%'}})</td>
+                                <td>{{($target->TRGT_BANK==0) ? '0%':number_format($target->bankPaid/$target->TRGT_BANK*100,2,'.','').'%'}}</td>
                                 @if(!$isHistory)
                                 <td>
                                     <div class="btn-group">
