@@ -30,7 +30,9 @@
                                 <th>Cash Target</th>
                                 <th>Bank Target</th>
                                 <th>Cash Paid</th>
+                                <th>%</th>
                                 <th>Bank Paid</th>
+                                <th>%</th>
                                 @if(!$isHistory)
                                 <th>Action</th>
                                 @endif
@@ -49,10 +51,10 @@
                                 @endif
                                 <td id="moneyCell{{$target->id}}">{{$target->TRGT_MONY}}</td>
                                 <td id="bankCell{{$target->id}}">{{$target->TRGT_BANK}}</td>
-                                <td>{{number_format($target->cashPaid,2) }}({{($target->TRGT_MONY==0) ? $target->TRGT_MONY.'%':number_format($target->cashPaid/$target->TRGT_MONY*100,2,'.','').'%'}})
-                                </td>
-                                <td>{{number_format($target->bankPaid,2) }}({{($target->TRGT_BANK==0) ? $target->TRGT_BANK.'%':number_format($target->bankPaid/$target->TRGT_BANK*100,2,'.','').'%'}})
-                                </td>
+                                <td>{{number_format($target->cashPaid,2) }}</td>
+                                <td>({{($target->TRGT_BANK==0) ? $target->TRGT_BANK.'%':number_format($target->bankPaid/$target->TRGT_BANK*100,2,'.','').'%'}})</td>
+                                <td>{{number_format($target->cashPaid,2) }}</td>
+                                <td>({{($target->TRGT_BANK==0) ? $target->TRGT_BANK.'%':number_format($target->bankPaid/$target->TRGT_BANK*100,2,'.','').'%'}})</td>
                                 @if(!$isHistory)
                                 <td>
                                     <div class="btn-group">
