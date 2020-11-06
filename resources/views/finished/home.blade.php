@@ -98,6 +98,7 @@
                                 <td><strong>{{$finished['totals']->total48}}</strong></td>
                                 <td><strong>{{$finished['totals']->total50}}</strong></td>
                                 <td></td>
+                                <td></td>
                             </tr>
                         </tfoot>
                     </table>

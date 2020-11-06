@@ -74,7 +74,7 @@ class Finished extends Model
     {
         DB::transaction(function () use ($entryArr, $isReturn) {
             foreach ($entryArr as $entry) {
-                self::insertFinished(null, null, $isReturn * $entry['price'], $isReturn * $entry['amount36'], $isReturn * $entry['amount38'], $isReturn * $entry['amount40'], $isReturn * $entry['amount42'], $isReturn * $entry['amount44'], $isReturn * $entry['amount46'], $isReturn * $entry['amount48'], $isReturn * $entry['amount50'], $entry['finished']);
+                self::insertFinished(null, null, $isReturn*$entry['price'], $isReturn * $entry['amount36'], $isReturn * $entry['amount38'], $isReturn * $entry['amount40'], $isReturn * $entry['amount42'], $isReturn * $entry['amount44'], $isReturn * $entry['amount46'], $isReturn * $entry['amount48'], $isReturn * $entry['amount50'], $entry['finished']);
             }
         });
     }
@@ -120,7 +120,7 @@ class Finished extends Model
                 DB::table("finished")->where("id", $finished)->increment("FNSH_48_AMNT", $amount48);
             if ($amount50 != 0)
                 DB::table("finished")->where("id", $finished)->increment("FNSH_50_AMNT", $amount50);
-            if ($price != 0 && is_numeric($price))
+            if ($price > 0 && is_numeric($price))
                 DB::table("finished")->where('id', '=', $finished)->update([
                     "FNSH_PRCE" => $price
                 ]);
