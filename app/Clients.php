@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Cash;
 use App\Bank;
 use DateTime;
+use Illuminate\Database\Eloquent\Collection;
 
 class Clients extends Model
 {
@@ -118,8 +119,8 @@ class Clients extends Model
         foreach ($ret['others'] as $mloshTrans) {
             $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
-        dd($ret['data']);
-        $ret['data'] = array_merge($ret['data'], $ret['others']);
+   
+        $ret['data']->merge($ret['others']);
     
         return $ret;
     }
