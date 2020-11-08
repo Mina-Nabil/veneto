@@ -209,7 +209,8 @@ class Clients extends Model
     static function getTrans($clientID = null)
     {
         $query = DB::table("client_trans")->join('clients', "CLTR_CLNT_ID", "=", "clients.id")
-            ->select("client_trans.*", "clients.CLNT_NAME", "clients.CLNT_SRNO", "clients.CLNT_ARBC_NAME");
+            ->select("client_trans.*", "clients.CLNT_NAME", "clients.CLNT_SRNO", "clients.CLNT_ARBC_NAME")
+            ->where('CLTR_HDDN', 0);
         if ($clientID !== null) {
             $query = $query->where("CLTR_CLNT_ID", $clientID);
             return $query->orderBy('id', 'asc')->limit(500)->get();
@@ -220,7 +221,7 @@ class Clients extends Model
 
     static function getLastTransaction($clientID)
     {
-        return DB::table("client_trans")->where("CLTR_CLNT_ID", $clientID)->orderBy('id', 'desc')->first();
+        return DB::table("client_trans")->where("CLTR_CLNT_ID", $clientID)->where('CLTR_HDDN', 0)->orderBy('id', 'desc')->first();
     }
 
     static function insertTrans($client, $sales, $cash, $notespay, $discount, $return, $comment, $desc = null)
@@ -311,6 +312,14 @@ class Clients extends Model
             return 0;
         }
     }
+
+    static public function hideTrans($clientID, $date)
+    {
+        return DB::table("client_trans")->where('CLTR_CLNT_ID', $clientID)->whereDate("CLTR_DATE", '<', $date)->update([
+            "CLTR_HDDN" => 1
+        ]);
+    }
+
 
     static function unmarkTranError($id)
     {

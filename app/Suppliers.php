@@ -110,7 +110,7 @@ class Suppliers extends Model
     static function getTrans($suppID = null)
     {
         $query = DB::table("supplier_trans")->join('suppliers', "SPTR_SUPP_ID", "=", "suppliers.id")
-            ->select("supplier_trans.*", "suppliers.SUPP_NAME", "suppliers.SUPP_ARBC_NAME");
+            ->select("supplier_trans.*", "suppliers.SUPP_NAME", "suppliers.SUPP_ARBC_NAME")->where('SPTR_HDDN', 0);
         if ($suppID !== null)
             $query = $query->where("SPTR_SUPP_ID", $suppID);
         return $query->orderBy('id', 'asc')->limit(500)->get();
@@ -118,7 +118,7 @@ class Suppliers extends Model
 
     static function getLastTransaction($suppID)
     {
-        return DB::table("supplier_trans")->where("SPTR_SUPP_ID", $suppID)->orderBy('id', 'desc')->first();
+        return DB::table("supplier_trans")->where("SPTR_SUPP_ID", $suppID)->where('SPTR_HDDN', 0)->orderBy('id', 'desc')->first();
     }
 
     static function insertTrans($supp, $purchase, $cash, $notespay, $discount, $return, $comment, $desc = null)
@@ -193,7 +193,12 @@ class Suppliers extends Model
         });
     }
 
-
+    static public function hideTrans($supplierID, $date)
+    {
+        return DB::table("supplier_trans")->where('SPTR_SUPP_ID', $supplierID)->whereDate("SPTR_DATE", '<', $date)->update([
+            "SPTR_HDDN" => 1
+        ]);
+    }
 
 
     static function correctFaultyTran($id)

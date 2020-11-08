@@ -123,7 +123,7 @@
             <div class="card-body">
 
                 <div class=row>
-                    <div class="col-lg-7">
+                    <div class="col-9">
                         @if($isClient)
                         <h4 class="card-title">'{{$client->CLNT_NAME}}' Quick Report</h4>
                         <h6 class="card-subtitle">
@@ -135,19 +135,48 @@
                         @endif
                     </div>
                     @if($isClient)
-                    <div class="col-lg-5 align-self-center text-right">
+                    <div class="col-lg-2 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
-                            <a style="font-family: 'Allerta Stencil'" href="{{url('sales/show/'.$client->id)}}"
-                                class="btn btn-success d-none d-lg-block m-l-15">Client Sales</a>
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('sales/show/'.$client->id)}}" class="btn btn-success d-none d-lg-block m-l-15">Client Sales</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 align-self-center text-right">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <button style="font-family: 'Allerta Stencil'" data-toggle="modal" data-target="#hideTrans" class="btn btn-success d-none d-lg-block m-l-15">Hide</button>
+                        </div>
+                    </div>
+                    <div id="hideTrans" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Hide Transaction</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                </div>
+                                <form action="{{ url('clients/trans/hide') }}" method=post>
+                                    @csrf
+                                    <div class="modal-body">
+                                        <input type=hidden name=clientID value="{{$client->id}}">
+
+                                        <div class="form-group col-md-12 m-t-0">
+                                            <h5>Date</h5>
+                                            <input type="date" class="form-control form-control-line" name=date required>
+                                            <small>Hide Transactions till the mentioned date</small>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-warning waves-effect waves-light">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     @endif
                 </div>
 
                 <div class="table-responsive m-t-40">
-                    <table id="myTable"
-                        class="table color-bordered-table table-striped full-color-table full-info-table hover-table"
-                        data-display-length='-1' data-order="[]">
+                    <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
                                 <th>تاريخ</th>
@@ -165,7 +194,26 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php 
+                            if(isset($totals)){
+                                $totals->CLTR_SALS_BLNC =0 ;
+                                $totals->CLTR_CASH_BLNC =0 ;
+                                $totals->CLTR_NTPY_BLNC =0 ;
+                                $totals->CLTR_DISC_BLNC =0 ;
+                                $totals->CLTR_RTRN_BLNC =0 ;
+                            }
+                        
+                            ?>
                             @foreach($ops as $key => $op)
+                            <?php  
+                             if(isset($totals)){
+                            $totals->CLTR_SALS_BLNC  += $op->CLTR_SALS_AMNT ;
+                            $totals->CLTR_CASH_BLNC  += $op->CLTR_CASH_AMNT ;
+                            $totals->CLTR_NTPY_BLNC  += $op->CLTR_NTPY_AMNT ;
+                            $totals->CLTR_DISC_BLNC  += $op->CLTR_DISC_AMNT ;
+                            $totals->CLTR_RTRN_BLNC  += $op->CLTR_RTRN_AMNT ;
+                             }
+                            ?>
                             <tr @if($op->CLTR_EROR==1)
 
                                 style="background-color: #ffbdbd;"
@@ -191,7 +239,7 @@
                                     <a href="{{url('/sales/items/' . $descArr[1]) }}">
                                         مبيعات {{$descArr[1]}}
                                     </a>
-                                    @elseif(isset($descArr) && $descArr[0]=='Sales' && $descArr[1]=='Return') 
+                                    @elseif(isset($descArr) && $descArr[0]=='Sales' && $descArr[1]=='Return')
                                     <a href="{{url('/sales/items/' . $descArr[2]) }}">
                                         مرتجع {{$descArr[2]}}
                                     </a>
@@ -208,8 +256,7 @@
                                 </td>
                                 @if(!$isClient)
                                 <td>
-                                    <a href="{{url('clients/trans/quick/' . $op->CLTR_CLNT_ID)}}"
-                                        title="{{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}">
+                                    <a href="{{url('clients/trans/quick/' . $op->CLTR_CLNT_ID)}}" title="{{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}">
                                         {{ (strlen($op->CLNT_NAME)>12) ?  mb_substr( (($op->CLNT_SRNO) ? $op->CLNT_SRNO.' - '  : '') . $op->CLNT_NAME,0,12, "utf-8") . '...' : (($op->CLNT_SRNO) ? $op->CLNT_SRNO.' - '  : '') . $op->CLNT_NAME }}
                                     </a>
                                 </td>
@@ -223,21 +270,18 @@
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
                                 <td>
                                     @if(isset($op->CLTR_CMNT) && strcmp($op->CLTR_CMNT, '')!=0 )
-                                    <button type="button" style="padding:.1rem" class="btn btn-secondary"
-                                        data-container="body" title="" data-toggle="popover" data-placement="bottom"
+                                    <button type="button" style="padding:.1rem" class="btn btn-secondary" data-container="body" title="" data-toggle="popover" data-placement="bottom"
                                         data-content="{{$op->CLTR_CMNT}}" data-original-title="Comment:">
                                         @endif
                                         <i class="far fa-list-alt"></i>
                                     </button>
                                     @if($op->CLTR_EROR==0)
                                     <button style="padding:.1rem" class="btn btn-success">
-                                        <i class="fas fa-exclamation-triangle"
-                                            onclick="confirmError({{$op->id}}, {{$op->CLTR_EROR}})"></i>
+                                        <i class="fas fa-exclamation-triangle" onclick="confirmError({{$op->id}}, {{$op->CLTR_EROR}})"></i>
                                     </button>
                                     @else
                                     <button style="padding:.1rem" class="btn btn-danger">
-                                        <i class="fas fa-exclamation-triangle"
-                                            onclick="unmarkError({{$op->id}}, {{$op->CLTR_EROR}})"></i>
+                                        <i class="fas fa-exclamation-triangle" onclick="unmarkError({{$op->id}}, {{$op->CLTR_EROR}})"></i>
                                     </button>
                                     @endif
                                 </td>

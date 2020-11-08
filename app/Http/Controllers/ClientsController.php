@@ -74,7 +74,7 @@ class ClientsController extends Controller
     function mainReport(Request $request)
     {
         $data['ops'] = Clients::getTotals($request->from, $request->to, 0);
-    
+
         $data['onlineOps'] = Clients::getTotals($request->from, $request->to, 1);
         $data['viaVenetoOps'] = Clients::getTotals($request->from, $request->to, 2);
         $data['prodOps'] = Clients::getTotals($request->from, $request->to, 3);
@@ -143,6 +143,18 @@ class ClientsController extends Controller
         return;
     }
 
+    function hideTrans(Request $request)
+    {
+
+        $request->validate([
+            'clientID' => 'required',
+            'date' => 'required',
+        ]);
+
+        Clients::hideTrans($request->clientID, $request->date);
+        return back();
+    }
+
     //////////////////////////Targets Functions
 
     function historyPage(Request $request)
@@ -157,7 +169,7 @@ class ClientsController extends Controller
         $data['year'] = $request->year;
         $data['month'] = $request->month;
         $data['isHistory'] = true;
-        
+
         return view('clients.targets', $data);
     }
 
@@ -192,7 +204,8 @@ class ClientsController extends Controller
         return redirect('clients/target/current');
     }
 
-    function setTarget(Request $request){
+    function setTarget(Request $request)
+    {
         $request->validate([
             "id" => "required",
             "money" => 'required|numeric|min:0',

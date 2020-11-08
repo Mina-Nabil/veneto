@@ -50,6 +50,8 @@ Route::post("clients/trans/unmark",   'ClientsController@unmarkError')->middlewa
 Route::post("clients/account/statement", 'ClientsController@accountStatement')->middleware('cors');
 Route::post("clients/main/account", 'ClientsController@mainReport')->middleware('cors');
 
+Route::post("clients/trans/hide",   'ClientsController@hideTrans')->middleware('cors');
+
 Route::get('clients/target/current', 'ClientsController@currentTargets')->middleware('cors');
 Route::get('clients/generate/targets', 'ClientsController@generateTargets')->middleware('cors');
 Route::get('clients/target/history', 'ClientsController@prepareHistoryTarget')->middleware('cors');
@@ -177,6 +179,8 @@ Route::post("suppliers/trans/error",   'SuppliersController@markError')->middlew
 Route::post("suppliers/trans/unmark",   'SuppliersController@unmarkError')->middleware('cors');
 Route::post("suppliers/account/statement", 'SuppliersController@accountStatement')->middleware('cors');
 Route::post("suppliers/main/account", 'SuppliersController@mainReport')->middleware('cors');
+
+Route::post("suppliers/trans/hide",   'SuppliersController@hideTrans')->middleware('cors');
 
 Route::get("suppliers/show",        'SuppliersController@home')->middleware('cors');
 Route::get("suppliers/add",         'SuppliersController@addPage')->middleware('cors');

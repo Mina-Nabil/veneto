@@ -15,11 +15,12 @@ class SuppliersController extends Controller
     }
 
     //////////////////////////////////////////////////Supplier Transactions////////////////////////////////////////////
-    function quickReport($id=null){
+    function quickReport($id = null)
+    {
 
         $data['ops'] = Suppliers::getTrans($id);
         $data['isSupplier'] = ($id != null);
-        if($data['isSupplier']){
+        if ($data['isSupplier']) {
             $data['totals'] = Suppliers::getLastTransaction($id);
             $data['supplier'] = Suppliers::getSupplier($id);
         }
@@ -27,8 +28,9 @@ class SuppliersController extends Controller
     }
 
     //prepare report page
-    function report(){
-        
+    function report()
+    {
+
         $data['suppliers'] = Suppliers::getSuppliers();
         $data['types'] = Suppliers::getTypes();
 
@@ -37,19 +39,20 @@ class SuppliersController extends Controller
 
         return view('suppliers.prepare', $data);
     }
-    
-    function accountStatement(Request $request){
+
+    function accountStatement(Request $request)
+    {
 
         $data['arr'] = Suppliers::getAccountStatement($request->supplier, $request->from, $request->to);
         $data['supplier'] = Suppliers::getSupplier($request->supplier);
 
-        if($data['supplier'] == null) return abort(404);
+        if ($data['supplier'] == null) return abort(404);
 
         $data['totals'] = $data['arr']['totals'];
         $data['ops']    = $data['arr']['trans'];
         $data['balance']    = $data['arr']['balance'];
 
-        if($data['totals'] == null){
+        if ($data['totals'] == null) {
             $data['totals'] = (object)[
                 'totalPurch' => 0,
                 'totalDisc' => 0,
@@ -63,21 +66,22 @@ class SuppliersController extends Controller
         $data['reportDesc'] = $data['supplier']->SUPP_NAME . " Current Balance is " . $data['supplier']->SUPP_BLNC;
 
         $data['startBalance'] = $data['balance'] - $data['totals']->totalPurch + $data['totals']->totalDisc + $data['totals']->totalCash +
-                                $data['totals']->totalReturn + $data['totals']->totalNotes ;
+            $data['totals']->totalReturn + $data['totals']->totalNotes;
 
         return view('suppliers.accnt_stat', $data);
-
     }
 
-    function mainReport(Request $request){
+    function mainReport(Request $request)
+    {
         $data['ops'] = Suppliers::getTotals($request->from, $request->to, $request->type);
-        if($request->type!=-1){
+        if ($request->type != -1) {
             $data['supplierType'] = Suppliers::getType($request->type)->SPTP_NAME;
         }
         return view('suppliers.main_report', $data);
     }
 
-    function addTransPage(){
+    function addTransPage()
+    {
 
         $data['suppliers']  = Suppliers::getSuppliers();
 
@@ -87,17 +91,26 @@ class SuppliersController extends Controller
 
         return view('suppliers.add_trans', $data);
     }
-    
-    function insertTrans(Request $request){
 
-        Suppliers::insertTrans( $request->supplier, $request->purchase, $request->cash, 
-                                $request->notes, $request->disc, $request->return, $request->comment, $request->desc);
-        
+    function insertTrans(Request $request)
+    {
+
+        Suppliers::insertTrans(
+            $request->supplier,
+            $request->purchase,
+            $request->cash,
+            $request->notes,
+            $request->disc,
+            $request->return,
+            $request->comment,
+            $request->desc
+        );
+
         return redirect("suppliers/trans/quick");
-
     }
 
-    function markError(Request $request){
+    function markError(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'tranId' => 'required'
@@ -111,7 +124,8 @@ class SuppliersController extends Controller
         return;
     }
 
-    function unmarkError(Request $request){
+    function unmarkError(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'tranId' => 'required'
@@ -124,21 +138,35 @@ class SuppliersController extends Controller
 
         return;
     }
-    
+
+    function hideTrans(Request $request)
+    {
+
+        $request->validate([
+            'supplierID' => 'required',
+            'date' => 'required',
+        ]);
+
+        Suppliers::hideTrans($request->supplierID, $request->date);
+        return back();
+    }
+
     //////////////////////////////////////////////Supplier Pages//////////////////////////////////////////////////////
-    function home(){
+    function home()
+    {
         $data['types'] = Suppliers::getTypes();
 
-        foreach($data['types'] as $type){
+        foreach ($data['types'] as $type) {
             $data['suppliers'][$type->id]  = Suppliers::getSuppliers($type->id);
-            $data['total'][$type->id]      = Suppliers::getTotalBalance($type->id); 
+            $data['total'][$type->id]      = Suppliers::getTotalBalance($type->id);
         }
-        $data['total'][0]      = Suppliers::getTotalBalance(); 
+        $data['total'][0]      = Suppliers::getTotalBalance();
         return view('suppliers.home', $data);
     }
 
-    function addPage(){
-        
+    function addPage()
+    {
+
         $data['types']      =   Suppliers::getTypes();
 
         $data['pageTitle'] = "New Supplier";
@@ -148,7 +176,8 @@ class SuppliersController extends Controller
         return view("suppliers.add", $data);
     }
 
-    function insert(Request $request){
+    function insert(Request $request)
+    {
         $validatedData = $request->validate([
             "name"  => "required",
             "type"  => "required",
@@ -160,22 +189,23 @@ class SuppliersController extends Controller
         return redirect("suppliers/show");
     }
 
-    function edit($id){
+    function edit($id)
+    {
 
         $data['types']      =   Suppliers::getTypes();
         $data['supplier']   =   Suppliers::getSupplier($id);
 
-        if($data['supplier'] == null )abort(404);
+        if ($data['supplier'] == null) abort(404);
 
         $data['pageTitle'] = "Supplier: " . $data['supplier']->SUPP_NAME;
         $data['pageDescription'] = "Edit ("  . $data['supplier']->SUPP_NAME .  ") - Data Required: Name - Type - Balance";
         $data['formURL']        =   url("suppliers/update");
 
-        return view("suppliers.add", $data);  
-
+        return view("suppliers.add", $data);
     }
 
-    function updateSupplier(Request $request){
+    function updateSupplier(Request $request)
+    {
         $validatedData = $request->validate([
             "id"    => "required",
             "name"  => "required",
@@ -191,7 +221,8 @@ class SuppliersController extends Controller
 
 
     //////////////////////////Supplier Types Function/////////////////////////
-    function types(){
+    function types()
+    {
         $data['types'] = Suppliers::getTypes();
 
         $data['pageTitle'] = "Supplier Type";
@@ -201,18 +232,20 @@ class SuppliersController extends Controller
         return view('suppliers.types', $data);
     }
 
-    function insertType(Request $request){
+    function insertType(Request $request)
+    {
 
         $validatedData = $request->validate([
             "name"  => "required"
         ]);
 
         Suppliers::insertType($request->name);
-        
-        return redirect("suppliers/types/show"); 
+
+        return redirect("suppliers/types/show");
     }
 
-    function editType($id){
+    function editType($id)
+    {
 
         $data['types'] = Suppliers::getTypes();
 
@@ -224,18 +257,20 @@ class SuppliersController extends Controller
         return view('suppliers.types', $data);
     }
 
-    function update(Request $request){
+    function update(Request $request)
+    {
 
         $validatedData = $request->validate([
             "id" => "required",
             "name"  => "required"
         ]);
         Suppliers::editType($request->id, $request->name);
-        
+
         return redirect("suppliers/types/show");
     }
 
-    function deleteType($id){
+    function deleteType($id)
+    {
         Suppliers::deleteType($id);
         return redirect("suppliers/types/show");
     }
