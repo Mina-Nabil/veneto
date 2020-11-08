@@ -118,6 +118,7 @@ class Clients extends Model
         foreach ($ret['others'] as $mloshTrans) {
             $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
+        dd($ret['data']);
         $ret['data'] = array_merge($ret['data'], $ret['others']);
     
         return $ret;
