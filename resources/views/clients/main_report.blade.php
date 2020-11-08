@@ -42,9 +42,10 @@
                             @endforeach
                             @foreach($ops['others'] as $op)
                             <tr>
+                                <td>{{$op->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
+                                        {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
@@ -60,6 +61,7 @@
                             @if(isset($ops['totals']))
 
                             <tr class="table-info">
+                                <td></td>
                                 <td><strong>Veneto Totals</strong></td>
                                 <td><strong>{{number_format($ops['totalBalance'] - $ops['totals']->totalPurch + $ops['totals']->totalCash + $ops['totals']->totalDisc + $ops['totals']->totalNotes + $ops['totals']->totalReturn, 2)}}</strong>
                                 </td>
@@ -75,9 +77,10 @@
 
                             @foreach($viaVenetoOps['data'] as $op)
                             <tr>
+                                <td>{{$op->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
+                                        {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($viaVenetoOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
@@ -91,9 +94,10 @@
                             @endforeach
                             @foreach($viaVenetoOps['others'] as $op)
                             <tr>
+                                <td>{{$op->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
+                                        {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
@@ -109,6 +113,7 @@
                             @if(isset($viaVenetoOps['onlineTotals']))
 
                             <tr class="table-info">
+                                <td></td>
                                 <td><strong>Via Veneto Totals</strong></td>
                                 <td><strong>{{number_format($viaVenetoOps['totalBalance'] - $viaVenetoOps['onlineTotals']->totalPurch + $viaVenetoOps['onlineTotals']->totalCash + $viaVenetoOps['onlineTotals']->totalDisc + $viaVenetoOps['onlineTotals']->totalNotes + $viaVenetoOps['onlineTotals']->totalReturn, 2)}}</strong>
                                 </td>
@@ -124,9 +129,10 @@
 
                             @foreach($onlineOps['data'] as $op)
                             <tr>
+                                <td>{{$op->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
+                                        {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($onlineOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
@@ -140,9 +146,10 @@
                             @endforeach
                             @foreach($onlineOps['others'] as $op)
                             <tr>
+                                <td>{{$op->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
+                                        {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
@@ -158,6 +165,7 @@
                             @if(isset($onlineOps['onlineTotals']))
 
                             <tr class="table-info">
+                                <td></td>
                                 <td><strong>Online Totals</strong></td>
                                 <td><strong>{{number_format($onlineOps['totalBalance'] - $onlineOps['onlineTotals']->totalPurch + $onlineOps['onlineTotals']->totalCash + $onlineOps['onlineTotals']->totalDisc + $onlineOps['onlineTotals']->totalNotes + $onlineOps['onlineTotals']->totalReturn, 2)}}</strong>
                                 </td>
@@ -173,9 +181,10 @@
 
                             @foreach($prodOps['data'] as $op)
                             <tr>
+                                <td>{{$op->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
+                                        {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($prodOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
@@ -189,9 +198,10 @@
                             @endforeach
                             @foreach($prodOps['others'] as $op)
                             <tr>
+                                <td>{{$op->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
+                                        {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
@@ -207,6 +217,7 @@
                             @if(isset($prodOps['onlineTotals']))
 
                             <tr class="table-info">
+                                <td></td>
                                 <td><strong>Production Totals</strong></td>
                                 <td><strong>{{number_format($prodOps['totalBalance'] - $prodOps['onlineTotals']->totalPurch + $prodOps['onlineTotals']->totalCash + $prodOps['onlineTotals']->totalDisc + $prodOps['onlineTotals']->totalNotes + $prodOps['onlineTotals']->totalReturn, 2)}}</strong>
                                 </td>
@@ -222,9 +233,10 @@
 
                             @foreach($procOps['data'] as $op)
                             <tr>
+                                <td>{{$op->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
+                                        {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($procOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
@@ -238,9 +250,10 @@
                             @endforeach
                             @foreach($procOps['others'] as $op)
                             <tr>
+                                <td>{{$op->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
+                                        {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($op->CLTR_BLNC, 2)}}</td>
@@ -256,6 +269,7 @@
                             @if(isset($procOps['onlineTotals']))
 
                             <tr class="table-info">
+                                <td></td>
                                 <td><strong>Procurment Totals</strong></td>
                                 <td><strong>{{number_format($procOps['totalBalance'] - $procOps['onlineTotals']->totalPurch + $procOps['onlineTotals']->totalCash + $procOps['onlineTotals']->totalDisc + $procOps['onlineTotals']->totalNotes + $procOps['onlineTotals']->totalReturn, 2)}}</strong>
                                 </td>
@@ -272,7 +286,7 @@
 
 
 
-                           
+
                         </tbody>
                         <tfoot>
                             @if(isset($koloTotals))
