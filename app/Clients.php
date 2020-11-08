@@ -119,7 +119,7 @@ class Clients extends Model
             $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
 
-        $ret['data']->merge($ret['others']);
+        $ret['data']=$ret['data']->merge($ret['others']);
         $ret['data']->sortBy('CLNT_SRNO');
         return $ret;
     }
