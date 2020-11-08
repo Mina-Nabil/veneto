@@ -74,10 +74,15 @@ class ClientsController extends Controller
     function mainReport(Request $request)
     {
         $data['ops'] = Clients::getTotals($request->from, $request->to, 0);
+        $data['ops']->sort('CLNT_SRNO');
         $data['onlineOps'] = Clients::getTotals($request->from, $request->to, 1);
+        $data['onlineOps']->sort('CLNT_SRNO');
         $data['viaVenetoOps'] = Clients::getTotals($request->from, $request->to, 2);
+        $data['viaVenetoOps']->sort('CLNT_SRNO');
         $data['prodOps'] = Clients::getTotals($request->from, $request->to, 3);
+        $data['prodOps']->sort('CLNT_SRNO');
         $data['procOps'] = Clients::getTotals($request->from, $request->to, 4);
+        $data['procOps']->sort('CLNT_SRNO');
         $data['koloTotals'] = Clients::getFullTotals($request->from, $request->to);
         return view('clients.main_report', $data);
     }

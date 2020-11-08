@@ -11,6 +11,7 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>اسم</th>
                                 <th>رصيد مبدئي</th>
                                 <th>مبيعات</th>
@@ -24,9 +25,10 @@
                         <tbody>
                             @foreach($ops['data'] as $op)
                             <tr>
+                                <td>{{$op->CLNT_SRNO}}</td>
                                 <td>
                                     <a href="{{url('clients/trans/quick/' . $op->id)}}">
-                                        {{($op->CLNT_SRNO ) ? $op->CLNT_SRNO.' - '  : ''}}{{$op->CLNT_NAME}}
+                                        {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
                                 <td>{{number_format($ops['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn, 2)}}</td>
