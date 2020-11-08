@@ -45,7 +45,6 @@ class Clients extends Model
         return $ret;
     }
 
-
     static function getTotals($from, $to, $isOnline = -1)
     {
 
@@ -119,9 +118,14 @@ class Clients extends Model
         foreach ($ret['others'] as $mloshTrans) {
             $ret['totalBalance'] += $mloshTrans->CLTR_BLNC;
         }
-   
+
         $ret['data']->merge($ret['others']);
-    
+        $ret['data']->sortBy(function ($a, $b) {
+            if ($a->CLNT_SRNO == $b->CLNT_SRNO) {
+                return 0;
+            }
+            return ($a->CLNT_SRNO < $b->CLNT_SRNO) ? -1 : 1;
+        });
         return $ret;
     }
 
@@ -178,7 +182,7 @@ class Clients extends Model
         $ret['totals'] = DB::table("clients")->join('client_trans', "CLTR_CLNT_ID", "=", "clients.id")
             ->selectRaw("SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch,
                                         SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
-            ->whereBetween("CLTR_DATE" ,  [$from, $to]);
+            ->whereBetween("CLTR_DATE",  [$from, $to]);
         if ($type != -1)
             $ret['totals']->where('CLNT_ONLN', '=', $type);
 
