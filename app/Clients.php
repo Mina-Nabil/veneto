@@ -120,13 +120,7 @@ class Clients extends Model
         }
 
         $ret['data']->merge($ret['others']);
-        $ret['data']->sortBy(function ($a, $b) {
-            dd($b);
-            if ($a->CLNT_SRNO == $b->CLNT_SRNO) {
-                return 0;
-            }
-            return ($a->CLNT_SRNO < $b->CLNT_SRNO) ? -1 : 1;
-        });
+        $ret['data']->sortBy('CLNT_SRNO');
         return $ret;
     }
 
