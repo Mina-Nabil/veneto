@@ -104,7 +104,7 @@
                                         {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
-                                <td>{{number_format( ($onlineOps['balances'][$op->id]) ? ($onlineOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn) : $op->CLTR_BLNC, 2)}}
+                                <td>{{number_format( (isset($onlineOps['balances'][$op->id])) ? ($onlineOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn) : $op->CLTR_BLNC, 2)}}
                                 </td>
                                 <td>{{number_format($op->totalPurch ?? 0, 2)}}</td>
                                 <td>{{number_format($op->totalCash ?? 0, 2)}}</td>
@@ -140,7 +140,7 @@
                                         {{$op->CLNT_NAME}}
                                     </a>
                                 </td>
-                                <td>{{number_format(($prodOps['balances'][$op->id]) ? ($prodOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn) : $op->CLTR_BLNC, 2)}}
+                                <td>{{number_format((isset($prodOps['balances'][$op->id])) ? ($prodOps['balances'][$op->id] - $op->totalPurch + $op->totalCash + $op->totalDisc + $op->totalNotes + $op->totalReturn) : $op->CLTR_BLNC, 2)}}
                                 </td>
                                 <td>{{number_format($op->totalPurch ?? 0, 2)}}</td>
                                 <td>{{number_format($op->totalCash ?? 0, 2)}}</td>
