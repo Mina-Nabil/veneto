@@ -120,7 +120,7 @@ class Clients extends Model
         }
 
         $ret['data']=$ret['data']->merge($ret['others']);
-        $ret['data']->sortBy('CLNT_SRNO');
+        $ret['data']=$ret['data']->sortBy('CLNT_SRNO');
         return $ret;
     }
 
