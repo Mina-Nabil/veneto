@@ -74,6 +74,7 @@ class ClientsController extends Controller
     function mainReport(Request $request)
     {
         $data['ops'] = Clients::getTotals($request->from, $request->to, 0);
+        dd($ops);
         $data['onlineOps'] = Clients::getTotals($request->from, $request->to, 1);
         $data['viaVenetoOps'] = Clients::getTotals($request->from, $request->to, 2);
         $data['prodOps'] = Clients::getTotals($request->from, $request->to, 3);
