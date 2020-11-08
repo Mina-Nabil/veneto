@@ -121,6 +121,7 @@ class Clients extends Model
 
         $ret['data']->merge($ret['others']);
         $ret['data']->sortBy(function ($a, $b) {
+            dd($a);
             if ($a->CLNT_SRNO == $b->CLNT_SRNO) {
                 return 0;
             }
