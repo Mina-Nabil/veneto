@@ -65,6 +65,7 @@
                             <tr>
                                 <th>Brand</th>
                                 <th>Model</th>
+                                <th>Hide</th>
                                 <th>Empty</th>
                             </tr>
                         </thead>
@@ -73,6 +74,11 @@
                             <tr>
                                 <td>{{$row->BRND_NAME}}</td>
                                 <td>{{$row->MODL_UNID}}</td>
+                                @if($row->FNSH_HDDN) 
+                                <td><button class="btn btn-success mr-2" onclick="confirmAndGoTo('{{ url('finished/show/' . $row->id)}}', 'show this inventory item')">Show</button></td>
+                                @else 
+                                <td><button class="btn btn-danger mr-2" onclick="confirmAndGoTo('{{ url('finished/hide/' . $row->id)}}', 'hide this inventory item')">Hide</button></td>
+                                @endif
                                 <td><button class="btn btn-warning mr-2" onclick="confirmAndGoTo('{{ url('finished/empty/' . $row->id)}}', 'Delete All Inventory Items')">Empty Inventory</button></td>
                             </tr>
                             @endforeach

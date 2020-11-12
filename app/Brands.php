@@ -9,8 +9,12 @@ use Illuminate\Support\Facades\DB;
 class Brands extends Model
 {
     //
-    static function getBrands(){
-        return DB::table('brands')->get();
+    static function getBrands($getHidden=0){
+        $query = DB::table('brands'); 
+        if(!$getHidden){
+            $query = $query->where('BRND_HDDN',0);
+        }
+        return $query->get();
     }
 
     static function getBrand($id){
@@ -33,5 +37,10 @@ class Brands extends Model
         ]);
     }
 
+    static function toggleHidden($id, $hidden){
+        return DB::table('brands')->where("id", $id)->update([
+            "BRND_HDDN" => $hidden
+        ]);
+    }
 
 }

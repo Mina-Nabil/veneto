@@ -13,22 +13,24 @@ class ModelsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     ////////////////////////////////////////////Models/////////////////////////////////////////
 
-    function showModels(){
+    function show()
+    {
 
         $data['types'] = Models::getTypes();
         $data['colors']  = Models::getColors();
-        $data['models']  = Models::getModels();
-        
+        $data['models']  = Models::getModels(1);
+
         $data['pageTitle'] = "Add New Model";
         $data['formURL'] = url("models/insert");
 
         return view("models.models", $data);
     }
 
-    function editModel($id){
+    function editModel($id)
+    {
 
         $data['types'] = Models::getTypes();
         $data['colors']  = Models::getColors();
@@ -36,14 +38,15 @@ class ModelsController extends Controller
         $data['suppliers']  = Suppliers::getSuppliers();
         $data['model']  = Models::getModel($id);
 
-        $data['pageTitle'] = "Edit " . $data['model']->RAW_NAME . ' ' . $data['model']->TYPS_NAME . ' ' . $data['model']->MODL_NAME ;
+        $data['pageTitle'] = "Edit " . $data['model']->RAW_NAME . ' ' . $data['model']->TYPS_NAME . ' ' . $data['model']->MODL_NAME;
         $data['formURL'] = url('models/update');
 
         return view("models.models", $data);
     }
 
-    function updateModel(Request $request){
-        
+    function updateModel(Request $request)
+    {
+
         $validate = $request->validate([
             "type" => "required",
             "color" => "required",
@@ -58,63 +61,65 @@ class ModelsController extends Controller
         if ($request->hasFile('photo')) {
             $path = $request->photo->store('images/models', 'public');
         }
-        
+
         Models::updateModel($request->id, $request->name, $request->type, $request->color, $request->supplier, $request->price, $path, $request->serial, $request->comment);
 
         return \redirect("models/show");
-
     }
 
-    // function insertModel(Request $request){
-    //     $validate = $request->validate([
-    //         "type" => "required",
-    //         "color" => "required"
-    //     ]);
-    //     $path = null;
-    //     if ($request->hasFile('photo')) {
-    //         $path = $request->photo->store('images/models', 'public');
-    //     }
-        
-    //     Models::insertModel($request->name, $request->type, $request->color, $path, $request->serial, $request->comment);
 
-    //     return \redirect("models/show");
-    // }
+    function hideModel($id)
+    {
 
+        Models::toggleHidden($id, 1);
+
+        return \redirect("models/show");
+    }
+    function showModel($id)
+    {
+
+        Models::toggleHidden($id, 0);
+
+        return \redirect("models/show");
+    }
 
     ////////////////////////////////////////////Raw Materials/////////////////////////////////
-    function showRaw(){
+    function showRaw()
+    {
         $data['raws'] = Models::getRawMaterials();
         $data['pageTitle'] = "Add New Raw Material";
         $data['formURL'] = url("raw/insert");
         return view("models.raws", $data);
     }
 
-    function editRaw($id){
+    function editRaw($id)
+    {
         $data['raws'] = Models::getRawMaterials();
         $data['raw']  = Models::getRawMaterial($id);
-        $data['pageTitle'] = "Edit " . $data['raw']->RAW_NAME ;
+        $data['pageTitle'] = "Edit " . $data['raw']->RAW_NAME;
         $data['formURL'] = url('raw/update');
         return view("models.raws", $data);
     }
 
-    function updateRaw(Request $request){
-        
+    function updateRaw(Request $request)
+    {
+
         $validate = $request->validate([
             "name" => "required",
             "id"    => "required"
         ]);
-        
+
         Models::updateRawMaterial($request->id, $request->name, $request->code);
 
         return \redirect("raw/show");
-
     }
 
-    function insertRaw(Request $request){
+    function insertRaw(Request $request)
+    {
         $validate = $request->validate([
             "name" => "required"
-            ]);
-        
+        ]);
+
         Models::insertRawMaterial($request->name);
 
         return \redirect("raw/show");
@@ -122,7 +127,8 @@ class ModelsController extends Controller
 
 
     ///////////////////////////////////////////Types/////////////////////////////////////////
-    function showTypes(){
+    function showTypes()
+    {
         $data['types'] = Models::getTypes();
         $data['raws']  = Models::getRawMaterials();
         $data['pageTitle'] = "Add New Type";
@@ -130,35 +136,37 @@ class ModelsController extends Controller
         return view("models.types", $data);
     }
 
-    function editType($id){
+    function editType($id)
+    {
         $data['types'] = Models::getTypes();
         $data['raws']  = Models::getRawMaterials();
         $data['type']  = Models::getType($id);
-        $data['pageTitle'] = "Edit " . $data['type']->TYPS_NAME ;
+        $data['pageTitle'] = "Edit " . $data['type']->TYPS_NAME;
         $data['formURL'] = url('types/update');
         return view("models.types", $data);
     }
 
-    function updateType(Request $request){
-        
+    function updateType(Request $request)
+    {
+
         $validate = $request->validate([
             "name" => "required",
             "raw" => "required",
             "id"    => "required"
         ]);
-        
+
         Models::updateType($request->id, $request->name, $request->raw);
 
         return \redirect("types/show");
-
     }
 
-    function insertType(Request $request){
+    function insertType(Request $request)
+    {
         $validate = $request->validate([
             "name" => "required",
             "raw"  => "required"
         ]);
-        
+
         Models::insertType($request->name, $request->raw);
 
         return \redirect("types/show");
@@ -167,14 +175,16 @@ class ModelsController extends Controller
 
 
     /////////////////////////////////////////Colors//////////////////////////////////////////
-    function showColors(){
+    function showColors()
+    {
         $data['colors'] = Models::getColors();
         $data['pageTitle'] = "Add New Color";
         $data['formURL'] = url("colors/insert");
         return view("models.colors", $data);
     }
 
-    function editColor($id){
+    function editColor($id)
+    {
         $data['colors'] = Models::getColors();
         $data['color']  = Models::getColor($id);
         $data['pageTitle'] = "Edit " . $data['color']->COLR_NAME . " Color";
@@ -182,26 +192,27 @@ class ModelsController extends Controller
         return view("models.colors", $data);
     }
 
-    function updateColor(Request $request){
-        
+    function updateColor(Request $request)
+    {
+
         $validate = $request->validate([
             "name" => "required",
             "code" => "required",
             "id"    => "required"
         ]);
-        
+
         Models::updateColor($request->id, $request->name, $request->code);
 
         return \redirect("colors/show");
-
     }
 
-    function insertColor(Request $request){
+    function insertColor(Request $request)
+    {
         $validate = $request->validate([
             "name" => "required",
             "code" => "required"
         ]);
-        
+
         Models::insertColor($request->name, $request->code);
 
         return \redirect("colors/show");

@@ -25,7 +25,7 @@ class FinishedController extends Controller
         $data['models'] = Models::getModelNames();
         $data['brands'] = Brands::getBrands();
 
-        $data['finished'] = Finished::getAllFinished();
+        $data['finished'] = Finished::getAllFinished(1);
 
         $data['pageTitle'] = "Add New Finished Model";
         $data['pageDescription']  = "Link a brand with a model";
@@ -86,6 +86,21 @@ class FinishedController extends Controller
             ]);
         }
         return $ret;
+    }
+
+    function hideFinished($id)
+    {
+
+        Finished::toggleHidden($id, 1);
+
+        return back();
+    }
+    function showFinished($id)
+    {
+
+        Finished::toggleHidden($id, 0);
+
+        return back();
     }
 
     //////////Excel uploads

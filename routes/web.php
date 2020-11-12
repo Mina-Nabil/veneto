@@ -38,6 +38,8 @@ Route::get("finished/empty/{id}",              'FinishedController@emptyFinished
 Route::post("finished/link",              'FinishedController@insertModel')->middleware('cors');
 Route::post("finished/edit/price",              'FinishedController@editPrice')->middleware('cors');
 Route::post("finished/upload/models",              'FinishedController@uploadModels')->middleware('cors');
+Route::get('finished/show/{id}',        'FinishedController@showFinished')->middleware('cors');
+Route::get('finished/hide/{id}',        'FinishedController@hideFinished')->middleware('cors');
 
 //Clients Routes
 Route::get("clients/trans/prepare",     'ClientsController@report')->middleware('cors');
@@ -89,10 +91,12 @@ Route::post('raw/adjust/entry', 'RawInventoryController@adjustEntry')->middlewar
 Route::post('rawinventory/tran/addentry'   ,   'RawInventoryController@addTranEntry')->middleware('cors');
 
 //Models
-Route::get("models/show",   'ModelsController@showModels')->middleware('cors');
+Route::get("models/show",   'ModelsController@show')->middleware('cors');
 Route::get("models/edit/{id}",  'ModelsController@editModel')->middleware('cors');
 Route::post("models/update",  'ModelsController@updateModel')->middleware('cors');
 Route::post("models/insert",  'ModelsController@insertModel')->middleware('cors');
+Route::get('models/show/{id}',        'ModelsController@showModel')->middleware('cors');
+Route::get('models/hide/{id}',        'ModelsController@hideModel')->middleware('cors');
 
 //Colors
 Route::get("colors/show",   'ModelsController@showColors')->middleware('cors');
@@ -101,10 +105,12 @@ Route::post("colors/update",  'ModelsController@updateColor')->middleware('cors'
 Route::post("colors/insert",  'ModelsController@insertColor')->middleware('cors');
 
 //Brands
-Route::get("brands/show",           'BrandsController@showBrand')->middleware('cors');
+Route::get("brands/show",           'BrandsController@show')->middleware('cors');
 Route::get("brands/edit/{id}",      'BrandsController@editBrand')->middleware('cors');
 Route::post('brands/update',        'BrandsController@updateBrand')->middleware('cors');
 Route::post('brands/insert',        'BrandsController@insertBrand')->middleware('cors');
+Route::get('brands/show/{id}',        'BrandsController@showBrand')->middleware('cors');
+Route::get('brands/hide/{id}',        'BrandsController@hideBrand')->middleware('cors');
 
 //Raws
 Route::get("raw/show",          'ModelsController@showRaw')->middleware('cors');

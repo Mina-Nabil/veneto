@@ -14,15 +14,15 @@ class BrandsController extends Controller
         $this->middleware('auth');
     }
     
-    function showBrand(){
-        $data['brands'] = Brands::getBrands();
+    function show(){
+        $data['brands'] = Brands::getBrands(1);
         $data['pageTitle'] = "Add New Brand";
         $data['formURL'] = url("brands/insert");
         return view("finished.brands", $data);
     }
 
     function editBrand($id){
-        $data['brands'] = Brands::getBrands();
+        $data['brands'] = Brands::getBrands(1);
         $data['brand']  = Brands::getBrand($id);
         $data['pageTitle'] = "Edit " . $data['brand']->BRND_NAME ;
         $data['formURL'] = url('brands/update');
@@ -51,4 +51,20 @@ class BrandsController extends Controller
 
         return \redirect("brands/show");
     }
+
+    function hideBrand($id){
+        
+        Brands::toggleHidden($id, 1);
+
+        return \redirect("brands/show");
+
+    }
+    function showBrand($id){
+        
+        Brands::toggleHidden($id, 0);
+
+        return \redirect("brands/show");
+
+    }
+
 }
