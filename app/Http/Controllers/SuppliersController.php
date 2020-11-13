@@ -42,8 +42,8 @@ class SuppliersController extends Controller
 
     function accountStatement(Request $request)
     {
-
-        $data['arr'] = Suppliers::getAccountStatement($request->supplier, $request->from, $request->to);
+        $isHidden = $request->isHidden ?? false;
+        $data['arr'] = Suppliers::getAccountStatement($request->supplier, $request->from, $request->to, $isHidden);
         $data['supplier'] = Suppliers::getSupplier($request->supplier);
 
         if ($data['supplier'] == null) return abort(404);

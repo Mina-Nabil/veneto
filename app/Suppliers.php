@@ -13,32 +13,31 @@ use Exception;
 class Suppliers extends Model
 {
     ///////////////////////Reports/////////////////////
-    static function getAccountStatement($suppID, $from, $to)
+    static function getAccountStatement($suppID, $from, $to, $isHidden = false)
     {
         $ret = array();
 
+        $whereArr = [
+            ["SPTR_SUPP_ID", '=', $suppID],
+            ["SPTR_DATE", '>=', $from],
+            ["SPTR_EROR", 0],
+            ["SPTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
+        ];
+
+        if (!$isHidden) {
+            array_push($whereArr, ["SPTR_HDDN", '=', 0]);
+        }
+
         $ret['trans'] = DB::table("supplier_trans")->join('suppliers', "SPTR_SUPP_ID", "=", "suppliers.id")
             ->select("supplier_trans.*", "suppliers.SUPP_NAME", "suppliers.SUPP_ARBC_NAME")
-            ->where([
-                ["SPTR_SUPP_ID", '=', $suppID],
-                ["SPTR_DATE", '>=', $from],
-                ["SPTR_EROR", 0],
-                ["SPTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
-            ])->orderBy('id', 'asc')->get();
+            ->where($whereArr)->orderBy('id', 'asc')->get();
+
 
         $ret['totals']  =   DB::table("supplier_trans")->selectRaw("SUM(SPTR_CASH_AMNT) as totalCash, SUM(SPTR_PRCH_AMNT) as totalPurch, 
                                                                     SUM(SPTR_DISC_AMNT) as totalDisc, SUM(SPTR_RTRN_AMNT) as totalReturn, SUM(SPTR_NTPY_AMNT) as totalNotes")
-            ->where([
-                ["SPTR_SUPP_ID", '=', $suppID],
-                ["SPTR_DATE", '>=', $from],
-                ["SPTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
-            ])->groupBy("SPTR_SUPP_ID")->first();
+            ->where($whereArr)->groupBy("SPTR_SUPP_ID")->first();
 
-        $ret['balance'] =   DB::table("supplier_trans")->select("SPTR_BLNC")->where([
-            ["SPTR_SUPP_ID", '=', $suppID],
-            ["SPTR_DATE", '>=', $from],
-            ["SPTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
-        ])
+        $ret['balance'] =   DB::table("supplier_trans")->select("SPTR_BLNC")->where($whereArr)
             ->orderBy('id', 'desc')->first()->SPTR_BLNC ?? 0;
 
         return $ret;
@@ -72,7 +71,7 @@ class Suppliers extends Model
         $balances = $balances->get();
 
         $ret['balances'] = [];
-   
+
         foreach ($balances as $balance) {
             $ret['balances'][$balance->SPTR_SUPP_ID] = $balance->SPTR_BLNC;
         }
@@ -332,11 +331,12 @@ class Suppliers extends Model
             ]);
     }
 
-    static function deleteType($id){
+    static function deleteType($id)
+    {
         try {
-             DB::table('supplier_types')->where('id', $id)->delete();
-             return true;
-        } catch (Exception $e){
+            DB::table('supplier_types')->where('id', $id)->delete();
+            return true;
+        } catch (Exception $e) {
             return false;
         }
     }

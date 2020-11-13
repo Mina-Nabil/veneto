@@ -42,8 +42,9 @@ class ClientsController extends Controller
 
     function accountStatement(Request $request)
     {
+        $isHidden = $request->isHidden ?? false;
 
-        $data['arr'] = Clients::getAccountStatement($request->client, $request->from, $request->to);
+        $data['arr'] = Clients::getAccountStatement($request->client, $request->from, $request->to, $isHidden);
         $data['client'] = Clients::getClient($request->client);
 
         if ($data['client'] == null) return abort(404);

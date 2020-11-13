@@ -43,6 +43,10 @@
                         </div>
                         <small class="text-danger">{{$errors->first('to')}}</small>
                     </div>
+                    <div class="custom-control custom-checkbox mr-sm-2 mb-3">
+                        <input type="checkbox" class="custom-control-input" id="checkbox0" name="isHidden" value="true">
+                        <label class="custom-control-label" for="checkbox0">Show Hidden</label>
+                    </div>
 
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
 

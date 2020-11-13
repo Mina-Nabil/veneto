@@ -14,32 +14,30 @@ use Illuminate\Database\Eloquent\Collection;
 class Clients extends Model
 {
     ///////////////////////Reports/////////////////////
-    static function getAccountStatement($clientID, $from, $to)
+    static function getAccountStatement($clientID, $from, $to, $isHidden)
     {
         $ret = array();
 
+        $whereArr = [
+            ["CLTR_CLNT_ID", '=', $clientID],
+            ["CLTR_DATE", '>=', $from],
+            ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))],
+            ["CLTR_EROR", 0]
+        ];
+
+        if (!$isHidden) {
+            array_push($whereArr, ["CLTR_HDDN", '=', 0]);
+        }
+
         $ret['trans'] = DB::table("client_trans")->join('clients', "CLTR_CLNT_ID", "=", "clients.id")
             ->select("client_trans.*", "clients.CLNT_NAME", "clients.CLNT_SRNO", "clients.CLNT_ARBC_NAME")
-            ->where([
-                ["CLTR_CLNT_ID", '=', $clientID],
-                ["CLTR_DATE", '>=', $from],
-                ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))],
-                ["CLTR_EROR", 0]
-            ])->orderBy('id', 'asc')->get();
+            ->where($whereArr)->orderBy('id', 'asc')->get();
 
         $ret['totals']  =   DB::table("client_trans")->selectRaw(" SUM(CLTR_CASH_AMNT) as totalCash, SUM(CLTR_SALS_AMNT) as totalPurch, 
                                                                     SUM(CLTR_DISC_AMNT) as totalDisc, SUM(CLTR_RTRN_AMNT) as totalReturn, SUM(CLTR_NTPY_AMNT) as totalNotes")
-            ->where([
-                ["CLTR_CLNT_ID", '=', $clientID],
-                ["CLTR_DATE", '>=', $from],
-                ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
-            ])->groupBy("CLTR_CLNT_ID")->first();
+            ->where($whereArr)->groupBy("CLTR_CLNT_ID")->first();
 
-        $ret['balance'] =   DB::table("client_trans")->select("CLTR_BLNC")->where([
-            ["CLTR_CLNT_ID", '=', $clientID],
-            ["CLTR_DATE", '>=', $from],
-            ["CLTR_DATE", '<=',  date('Y-m-d', strtotime('+1 day', strtotime($to)))]
-        ])
+        $ret['balance'] =   DB::table("client_trans")->select("CLTR_BLNC")->where($whereArr)
             ->orderBy('id', 'desc')->first()->CLTR_BLNC ?? 0;
 
         return $ret;
