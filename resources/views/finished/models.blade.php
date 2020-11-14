@@ -57,8 +57,15 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">ماركات</h4>
-                <h6 class="card-subtitle">Show Available Models</h6>
+                <div class=row>
+                    <div class=col-9>
+                        <h4 class="card-title">ماركات</h4>
+                        <h6 class="card-subtitle">Show Available Models</h6>
+                    </div>
+                    <div class="col-3 m-l-auto">
+                        <button class="btn btn-success mr-2" onclick="confirmAndGoTo('{{url('finished/empty/all')}}', 'Reset All Inventory')">Reset All Inventory!</button>
+                    </div>
+                </div>
                 <div class="table-responsive m-t-40">
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
@@ -74,9 +81,9 @@
                             <tr>
                                 <td>{{$row->BRND_NAME}}</td>
                                 <td>{{$row->MODL_UNID}}</td>
-                                @if($row->FNSH_HDDN) 
+                                @if($row->FNSH_HDDN)
                                 <td><button class="btn btn-success mr-2" onclick="confirmAndGoTo('{{ url('finished/show/' . $row->id)}}', 'show this inventory item')">Show</button></td>
-                                @else 
+                                @else
                                 <td><button class="btn btn-danger mr-2" onclick="confirmAndGoTo('{{ url('finished/hide/' . $row->id)}}', 'hide this inventory item')">Hide</button></td>
                                 @endif
                                 <td><button class="btn btn-warning mr-2" onclick="confirmAndGoTo('{{ url('finished/empty/' . $row->id)}}', 'Delete All Inventory Items')">Empty Inventory</button></td>
@@ -97,16 +104,16 @@
                 <h4 class="modal-title">Upload Models File</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form action="{{ url('finished/upload/models') }}" method=post enctype="multipart/form-data" >
+            <form action="{{ url('finished/upload/models') }}" method=post enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
 
                     <div class="form-group">
                         <label for="input-file-now-custom-1">Models File</label>
-                          <div class="input-group mb-3">
-                              <input type="file" id="input-file-now-custom-1" name=modelsFile class="dropify"   />
-                          </div>
-                      </div>
+                        <div class="input-group mb-3">
+                            <input type="file" id="input-file-now-custom-1" name=modelsFile class="dropify" />
+                        </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">

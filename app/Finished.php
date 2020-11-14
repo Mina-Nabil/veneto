@@ -75,7 +75,7 @@ class Finished extends Model
     {
         DB::transaction(function () use ($entryArr) {
             foreach ($entryArr as $entry) {
-                self::insertFinished($entry['model'] ?? -1, $entry['brand'] ?? -1, $entry['price'], $entry['amount36'], $entry['amount38'], $entry['amount40'], $entry['amount42'], $entry['amount44'], $entry['amount46'], $entry['amount48'], $entry['amount50'], $entry['finished'] ?? null);
+                self::insertFinished($entry['model'] ?? -1, $entry['brand'] ?? -1, $entry['price'], $entry['amount36'], $entry['amount38'], $entry['amount40'], $entry['amount42'], $entry['amount44'], $entry['amount46'], $entry['amount48'], $entry['amount50'], $entry['finished'] ?? null, true);
             }
         });
     }
@@ -89,7 +89,7 @@ class Finished extends Model
         });
     }
 
-    public static function insertFinished($modelID, $brandID, $price = 0, $amount36 = 0, $amount38 = 0, $amount40 = 0, $amount42 = 0, $amount44 = 0, $amount46 = 0, $amount48 = 0, $amount50 = 0, $finished = null)
+    public static function insertFinished($modelID, $brandID, $price = 0, $amount36 = 0, $amount38 = 0, $amount40 = 0, $amount42 = 0, $amount44 = 0, $amount46 = 0, $amount48 = 0, $amount50 = 0, $finished = null, $isUpdatePrice = false)
     {
 
         if ($finished == null) {
@@ -130,7 +130,7 @@ class Finished extends Model
                 DB::table("finished")->where("id", $finished)->increment("FNSH_48_AMNT", $amount48);
             if ($amount50 != 0)
                 DB::table("finished")->where("id", $finished)->increment("FNSH_50_AMNT", $amount50);
-            if ($price > 0 && is_numeric($price))
+            if ($price > 0 && is_numeric($price) && $isUpdatePrice)
                 DB::table("finished")->where('id', '=', $finished)->update([
                     "FNSH_PRCE" => $price
                 ]);
@@ -147,6 +147,7 @@ class Finished extends Model
     public static function emptyInventory($id)
     {
         return DB::table("finished")->where('id', '=', $id)->update([
+            "FNSH_PRCE" => 0,
             "FNSH_36_AMNT" => 0,
             "FNSH_38_AMNT" => 0,
             "FNSH_40_AMNT" => 0,
@@ -155,6 +156,23 @@ class Finished extends Model
             "FNSH_46_AMNT" => 0,
             "FNSH_48_AMNT" => 0,
             "FNSH_50_AMNT" => 0,
+            "FNSH_52_AMNT" => 0
+        ]);
+    }
+
+    public static function resetInventory()
+    {
+        return DB::table("finished")->update([
+            "FNSH_PRCE" => 0,
+            "FNSH_36_AMNT" => 0,
+            "FNSH_38_AMNT" => 0,
+            "FNSH_40_AMNT" => 0,
+            "FNSH_42_AMNT" => 0,
+            "FNSH_44_AMNT" => 0,
+            "FNSH_46_AMNT" => 0,
+            "FNSH_48_AMNT" => 0,
+            "FNSH_50_AMNT" => 0,
+            "FNSH_52_AMNT" => 0
         ]);
     }
 

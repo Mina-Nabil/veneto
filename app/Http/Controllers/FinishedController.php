@@ -48,6 +48,11 @@ class FinishedController extends Controller
         return redirect('finished/show');
     }
 
+    public function resetAll(){
+        Finished::resetInventory();
+        return redirect('finished/show');
+    }
+
     public function addPage(){
 
         $data['finished'] = Finished::getAllFinished();
