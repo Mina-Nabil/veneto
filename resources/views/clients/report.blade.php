@@ -2,6 +2,18 @@
 
 @section('content')
 <script>
+    function confirmAndGoTo(url, action){
+         Swal.fire({
+             text: "Are you sure you want to " + action + "?",
+             icon: "warning",
+             showCancelButton: true,
+         }).then((isConfirm) => {
+     if(isConfirm.value){
+         window.location.href = url;
+         }
+     });
+ }
+ 
     function IsNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
@@ -123,7 +135,7 @@
             <div class="card-body">
 
                 <div class=row>
-                    <div class="col-9">
+                    <div class="col-8">
                         @if($isClient)
                         <h4 class="card-title">'{{$client->CLNT_NAME}}' Quick Report</h4>
                         <h6 class="card-subtitle">
@@ -143,6 +155,12 @@
                     <div class="col-lg-1 align-self-center text-right">
                         <div class="d-flex justify-content-start align-items-center">
                             <button style="font-family: 'Allerta Stencil'" data-toggle="modal" data-target="#hideTrans" class="btn btn-success d-none d-lg-block m-l-15">Hide</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 align-self-center text-right">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <button style="font-family: 'Allerta Stencil'" onclick="confirmAndGoTo('{{url('clients/trans/show/'.$client->id)}}','Show the Client Transactions')"
+                                class="btn btn-success d-none d-lg-block m-l-15">Show</button>
                         </div>
                     </div>
                     <div id="hideTrans" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

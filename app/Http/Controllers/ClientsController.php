@@ -156,6 +156,12 @@ class ClientsController extends Controller
         return back();
     }
 
+    function showTrans($id)
+    {
+        Clients::showTrans($id);
+        return back();
+    }
+
     //////////////////////////Targets Functions
 
     function historyPage(Request $request)

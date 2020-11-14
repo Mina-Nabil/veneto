@@ -151,6 +151,12 @@ class SuppliersController extends Controller
         return back();
     }
 
+    function showTrans($id)
+    {
+        Suppliers::showTrans($id);
+        return back();
+    }
+
     //////////////////////////////////////////////Supplier Pages//////////////////////////////////////////////////////
     function home()
     {

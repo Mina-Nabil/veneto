@@ -318,6 +318,12 @@ class Clients extends Model
         ]);
     }
 
+    static public function showTrans($clientID)
+    {
+        return DB::table("client_trans")->where('CLTR_CLNT_ID', $clientID)->update([
+            "CLTR_HDDN" => 0
+        ]);
+    }
 
     static function unmarkTranError($id)
     {

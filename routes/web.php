@@ -54,6 +54,7 @@ Route::post("clients/account/statement", 'ClientsController@accountStatement')->
 Route::post("clients/main/account", 'ClientsController@mainReport')->middleware('cors');
 
 Route::post("clients/trans/hide",   'ClientsController@hideTrans')->middleware('cors');
+Route::get("clients/trans/show/{id}",   'ClientsController@showTrans')->middleware('cors');
 
 Route::get('clients/target/current', 'ClientsController@currentTargets')->middleware('cors');
 Route::get('clients/generate/targets', 'ClientsController@generateTargets')->middleware('cors');
@@ -188,6 +189,7 @@ Route::post("suppliers/account/statement", 'SuppliersController@accountStatement
 Route::post("suppliers/main/account", 'SuppliersController@mainReport')->middleware('cors');
 
 Route::post("suppliers/trans/hide",   'SuppliersController@hideTrans')->middleware('cors');
+Route::get("suppliers/trans/show/{id}",   'SuppliersController@showTrans')->middleware('cors');
 
 Route::get("suppliers/show",        'SuppliersController@home')->middleware('cors');
 Route::get("suppliers/add",         'SuppliersController@addPage')->middleware('cors');

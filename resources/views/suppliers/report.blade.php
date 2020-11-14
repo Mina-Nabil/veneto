@@ -3,6 +3,17 @@
 @section('content')
 
 <script>
+    function confirmAndGoTo(url, action){
+         Swal.fire({
+             text: "Are you sure you want to " + action + "?",
+             icon: "warning",
+             showCancelButton: true,
+         }).then((isConfirm) => {
+     if(isConfirm.value){
+         window.location.href = url;
+         }
+     });
+ }
     function IsNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
@@ -133,9 +144,17 @@
                     </div>
                     @if($isSupplier)
                     <div class=col-3>
-                        <div class="col-lg-12 align-self-center text-right">
-                            <div class="d-flex justify-content-end align-items-center">
-                                <button style="font-family: 'Allerta Stencil'" data-toggle="modal" data-target="#hideTrans" class="btn btn-success d-none d-lg-block m-l-15">Hide</button>
+                        <div class=row>
+                            <div class="col-lg-6 align-self-center text-right">
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <button style="font-family: 'Allerta Stencil'" data-toggle="modal" data-target="#hideTrans" class="btn btn-success d-none d-lg-block m-l-15">Hide</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 align-self-center text-right">
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <button style="font-family: 'Allerta Stencil'" onclick="confirmAndGoTo('{{url('suppliers/trans/show/'.$supplier->id)}}','Show the Suppliers Transactions')"
+                                        class="btn btn-success d-none d-lg-block m-l-15">Show</button>
+                                </div>
                             </div>
                         </div>
                         <div id="hideTrans" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

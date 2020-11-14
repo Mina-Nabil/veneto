@@ -199,6 +199,12 @@ class Suppliers extends Model
         ]);
     }
 
+    static public function showTrans($clientID)
+    {
+        return DB::table("supplier_trans")->where('SPTR_SUPP_ID', $clientID)->update([
+            "SPTR_HDDN" => 0
+        ]);
+    }
 
     static function correctFaultyTran($id)
     {
