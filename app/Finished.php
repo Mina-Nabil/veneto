@@ -182,4 +182,11 @@ class Finished extends Model
             "FNSH_HDDN" => $hidden
         ]);
     }
+
+    static function hideAll()
+    {
+        return DB::table('finished')->update([
+            "FNSH_HDDN" => 1
+        ]);
+    }
 }

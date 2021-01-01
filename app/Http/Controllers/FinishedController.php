@@ -60,7 +60,7 @@ class FinishedController extends Controller
 
     public function hideModels()
     {
-        Models::hideAll();
+        Finished::hideAll();
         return redirect('finished/models');
     }
 

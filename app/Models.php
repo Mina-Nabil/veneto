@@ -189,12 +189,4 @@ class Models extends Model
         ]);
     }
 
-    //////hide all
-
-    static function hideAll()
-    {
-        return DB::table('models')->update([
-            "MODL_HDDN" => 1
-        ]);
-    }
 }
