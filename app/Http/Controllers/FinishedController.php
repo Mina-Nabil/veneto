@@ -16,12 +16,14 @@ class FinishedController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(){
+    public function show()
+    {
         $data['finished'] = Finished::getAvailable();
         return view("finished.home", $data);
     }
 
-    public function models(){
+    public function models()
+    {
         $data['models'] = Models::getModelNames();
         $data['brands'] = Brands::getBrands();
 
@@ -34,7 +36,8 @@ class FinishedController extends Controller
         return view('finished.models', $data);
     }
 
-    public function insertModel(Request $request){
+    public function insertModel(Request $request)
+    {
         $request->validate([
             'model' => 'required',
             'brand' => 'required'
@@ -43,17 +46,26 @@ class FinishedController extends Controller
         return redirect('finished/models');
     }
 
-    public function emptyFinished($finishedID){
+    public function emptyFinished($finishedID)
+    {
         Finished::emptyInventory($finishedID);
         return redirect('finished/show');
     }
 
-    public function resetAll(){
-        Finished::resetInventory();
+    public function resetAll()
+    {
+        $res = Finished::resetInventory();
         return redirect('finished/show');
     }
 
-    public function addPage(){
+    public function hideModels()
+    {
+        Models::hideAll();
+        return redirect('finished/models');
+    }
+
+    public function addPage()
+    {
 
         $data['finished'] = Finished::getAllFinished();
 
@@ -64,29 +76,32 @@ class FinishedController extends Controller
         return view('finished.add', $data);
     }
 
-    public function insert(Request $request){
+    public function insert(Request $request)
+    {
         Finished::insertFinishedEntry($this->getItemsArr($request));
         return redirect("finished/show");
     }
 
-    public function editPrice(Request $request){
+    public function editPrice(Request $request)
+    {
         Finished::updatePrice($request->id, $request->price);
         return back();
     }
 
-    private function getItemsArr($request){
+    private function getItemsArr($request)
+    {
         $ret = array();
-        foreach($request->finished as $key => $item){
+        foreach ($request->finished as $key => $item) {
             array_push($ret, [
                 "finished"     => $item,
-                "amount36"     => ($request->amount36[$key])?$request->amount36[$key] : 0,
-                "amount38"     => ($request->amount38[$key])?$request->amount38[$key] : 0,
-                "amount40"     => ($request->amount40[$key])?$request->amount40[$key] : 0,
-                "amount42"     => ($request->amount42[$key])?$request->amount42[$key] : 0,
-                "amount44"     => ($request->amount44[$key])?$request->amount44[$key] : 0,
-                "amount46"     => ($request->amount46[$key])?$request->amount46[$key] : 0,
-                "amount48"     => ($request->amount48[$key])?$request->amount48[$key] : 0,
-                "amount50"     => ($request->amount50[$key])?$request->amount50[$key] : 0,
+                "amount36"     => ($request->amount36[$key]) ? $request->amount36[$key] : 0,
+                "amount38"     => ($request->amount38[$key]) ? $request->amount38[$key] : 0,
+                "amount40"     => ($request->amount40[$key]) ? $request->amount40[$key] : 0,
+                "amount42"     => ($request->amount42[$key]) ? $request->amount42[$key] : 0,
+                "amount44"     => ($request->amount44[$key]) ? $request->amount44[$key] : 0,
+                "amount46"     => ($request->amount46[$key]) ? $request->amount46[$key] : 0,
+                "amount48"     => ($request->amount48[$key]) ? $request->amount48[$key] : 0,
+                "amount50"     => ($request->amount50[$key]) ? $request->amount50[$key] : 0,
                 "price"     => $request->price[$key],
             ]);
         }
@@ -109,14 +124,15 @@ class FinishedController extends Controller
     }
 
     //////////Excel uploads
-    public function uploadModels(Request $request){
+    public function uploadModels(Request $request)
+    {
 
         $request->validate([
             'modelsFile' => "required|mimes:xlsx"
         ]);
 
         $fileName = $request->file("modelsFile")->getPathname();
-    
+
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $reader->setReadDataOnly(true);
         $spreadsheet = $reader->load($fileName);
@@ -126,16 +142,16 @@ class FinishedController extends Controller
         $highestRow = $worksheet->getHighestRow(); // e.g. 10
         $highestColumn = $worksheet->getHighestColumn(); // e.g 'F'
         $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // e.g. 5
-    
-    
+
+
         for ($row = 1; $row <= $highestRow; $row++) {
-            
+
             $brandValue = trim($worksheet->getCellByColumnAndRow(1, $row)->getValue());
             $modelValue = trim($worksheet->getCellByColumnAndRow(2, $row)->getValue());
-            if(isset($brandValue) && is_string($brandValue) && strlen($brandValue)>0 && isset($modelValue) && strlen($modelValue) > 0){
+            if (isset($brandValue) && is_string($brandValue) && strlen($brandValue) > 0 && isset($modelValue) && strlen($modelValue) > 0) {
                 $brandID = Brands::getBrandIDByName($brandValue);
                 $modelID = Models::getModelIDByName($modelValue);
-                if(isset($brandID) && is_int($brandID) && isset($modelID) && is_int($modelID)){
+                if (isset($brandID) && is_int($brandID) && isset($modelID) && is_int($modelID)) {
                     Finished::insertFinished($modelID, $brandID);
                 }
             }

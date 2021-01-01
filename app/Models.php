@@ -188,4 +188,13 @@ class Models extends Model
             "MODL_HDDN" => $hidden
         ]);
     }
+
+    //////hide all
+
+    static function hideAll()
+    {
+        return DB::table('models')->update([
+            "MODL_HDDN" => 1
+        ]);
+    }
 }

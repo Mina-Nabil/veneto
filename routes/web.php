@@ -34,8 +34,9 @@ Route::get("finished/show",                 'FinishedController@show')->middlewa
 Route::get("finished/add",                  'FinishedController@addPage')->middleware('cors');
 Route::get("finished/models",                  'FinishedController@models')->middleware('cors');
 Route::post("finished/insert",              'FinishedController@insert')->middleware('cors');
-Route::get("finished/empty/{id}",              'FinishedController@emptyFinished')->middleware('cors');
 Route::get("finished/empty/all",              'FinishedController@resetAll')->middleware('cors');
+Route::get("finished/empty/{id}",              'FinishedController@emptyFinished')->middleware('cors');
+Route::get("finished/hide/models",              'FinishedController@hideModels')->middleware('cors');
 Route::post("finished/link",              'FinishedController@insertModel')->middleware('cors');
 Route::post("finished/edit/price",              'FinishedController@editPrice')->middleware('cors');
 Route::post("finished/upload/models",              'FinishedController@uploadModels')->middleware('cors');

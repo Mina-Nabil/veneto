@@ -58,12 +58,15 @@
         <div class="card">
             <div class="card-body">
                 <div class=row>
-                    <div class=col-9>
+                    <div class=col-6>
                         <h4 class="card-title">ماركات</h4>
                         <h6 class="card-subtitle">Show Available Models</h6>
                     </div>
                     <div class="col-3 m-l-auto">
                         <button class="btn btn-success mr-2" onclick="confirmAndGoTo('{{url('finished/empty/all')}}', 'Reset All Inventory')">Reset All Inventory!</button>
+                    </div>
+                    <div class="col-3 m-l-auto">
+                        <button class="btn btn-success mr-2" onclick="confirmAndGoTo('{{url('finished/hide/models')}}', 'Reset All Inventory')">Hide All Models</button>
                     </div>
                 </div>
                 <div class="table-responsive m-t-40">
