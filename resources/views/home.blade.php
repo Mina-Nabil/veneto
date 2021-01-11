@@ -36,6 +36,7 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        @if($fullYearAll['totals']->totalPurch != 0)
                         <tfoot>
                             <td></td>
                             <td><strong>Totals:</strong></td>
@@ -49,6 +50,7 @@
                             </td>
                             <td></td>
                         </tfoot>
+                        @endif
                     </table>
                 </div>
             </div>
@@ -89,6 +91,7 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        @if($fullYearVeneto['totals']->totalPurch!=0)
                         <tfoot>
                             <td></td>
                             <td><strong>Totals:</strong></td>
@@ -103,6 +106,7 @@
                             </td>
                             <td></td>
                         </tfoot>
+                        @endif
                     </table>
                 </div>
             </div>
@@ -143,6 +147,7 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        @if($fullYearOnline['totals']->totalPurch!=0)
                         <tfoot>
                             <td></td>
                             <td><strong>Totals:</strong></td>
@@ -157,6 +162,7 @@
                             </td>
                             <td></td>
                         </tfoot>
+                        @endif
                     </table>
                 </div>
             </div>
@@ -197,6 +203,7 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        @if($fullYearVia['totals']->totalPurch)
                         <tfoot>
                             <td></td>
                             <td><strong>Totals:</strong></td>
@@ -210,6 +217,7 @@
                             </td>
                             <td></td>
                         </tfoot>
+                        @endif
                     </table>
                 </div>
             </div>
@@ -250,6 +258,7 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        @if($fullYearProd['totals']->totalPurch!=0)
                         <tfoot>
                             <td></td>
                             <td><strong>Totals:</strong></td>
@@ -257,7 +266,7 @@
                             <td>{{number_format($fullYearProd['totals']->totalCash, 2)}}
                                 @if($fullYearProd['totals']->totalPurch > 0)
                                 {{'('. number_format($fullYearProd['totals']->totalCash/$fullYearProd['totals']->totalPurch*100, 2,'.','').'%)'}}
-                            @endif</td>
+                                @endif</td>
                             <td>{{number_format($fullYearProd['totals']->totalNotes, 2)}}
                                 @if($fullYearProd['totals']->totalPurch > 0)
                                 {{'('. number_format($fullYearProd['totals']->totalNotes/$fullYearProd['totals']->totalPurch*100, 2,'.','').'%)'}}
@@ -269,12 +278,13 @@
                                 @endif
                             </td>
                             <td>{{number_format($fullYearProd['totals']->totalReturn, 2)}}
-                            @if($fullYearProd['totals']->totalPurch > 0)
-                            {{'('. number_format($fullYearProd['totals']->totalReturn/$fullYearProd['totals']->totalPurch*100, 2,'.', ''). '%)'}}
-                            @endif
+                                @if($fullYearProd['totals']->totalPurch > 0)
+                                {{'('. number_format($fullYearProd['totals']->totalReturn/$fullYearProd['totals']->totalPurch*100, 2,'.', ''). '%)'}}
+                                @endif
                             </td>
                             <td></td>
                         </tfoot>
+                        @endif
                     </table>
                 </div>
             </div>
@@ -315,18 +325,19 @@
                             </tr>
                             @endforeach
                         </tbody>
+                   
                         <tfoot>
                             <td></td>
                             <td><strong>Totals:</strong></td>
                             <td>{{number_format($fullYearProc['totals']->totalPurch, 2)}}</td>
                             <td>{{number_format($fullYearProc['totals']->totalCash, 2)}}
                                 @if($fullYearProc['totals']->totalPurch > 0)
-                            {{'('.
+                                {{'('.
                              number_format($fullYearProc['totals']
                              ->totalCash/$fullYearProc['totals']->totalPurch*100, 2,'.','').'%)'}}
-                             @endif
+                                @endif
                             </td>
-                            <td>{{number_format($fullYearProc['totals']->totalNotes, 2)}} 
+                            <td>{{number_format($fullYearProc['totals']->totalNotes, 2)}}
                                 @if($fullYearProc['totals']->totalPurch > 0)
                                 {{'('. number_format($fullYearProc['totals']->totalNotes/$fullYearProc['totals']->totalPurch*100, 2,'.','').'%)'  }}
                                 @endif
@@ -350,7 +361,7 @@
     </div>
 
 
-    
+
 
     {{-- <div class="row justify-content-center">
         <div class="col-md-12">
@@ -382,54 +393,53 @@
                             @foreach($masareef as $masroof)
                             <tr>
                                 <td><strong>{{$masroof['typeName']}}</strong></td>
-                                <td><strong>{{$masroof['subTypeName']}}</strong></td>
+    <td><strong>{{$masroof['subTypeName']}}</strong></td>
 
-                                <td>{{number_format($masroof[1] ->totalIn - $masroof[1] ->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[2] ->totalIn - $masroof[2] ->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[3] ->totalIn - $masroof[3] ->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[4] ->totalIn - $masroof[4] ->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[5] ->totalIn - $masroof[5] ->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[6] ->totalIn - $masroof[6] ->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[7] ->totalIn - $masroof[7] ->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[8] ->totalIn - $masroof[8] ->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[9] ->totalIn - $masroof[9] ->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[10]->totalIn - $masroof[10]->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[11]->totalIn - $masroof[11]->totalOut, 2)}}</td>
-                                <td>{{number_format($masroof[12]->totalIn - $masroof[12]->totalOut, 2)}}</td>
-                                <td><strong>{{number_format($masroof[13]->totalIn - $masroof[13]->totalOut, 2)}}</strong></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <td></td>
-                            <td><strong>Totals</strong></td>
+    <td>{{number_format($masroof[1] ->totalIn - $masroof[1] ->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[2] ->totalIn - $masroof[2] ->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[3] ->totalIn - $masroof[3] ->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[4] ->totalIn - $masroof[4] ->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[5] ->totalIn - $masroof[5] ->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[6] ->totalIn - $masroof[6] ->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[7] ->totalIn - $masroof[7] ->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[8] ->totalIn - $masroof[8] ->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[9] ->totalIn - $masroof[9] ->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[10]->totalIn - $masroof[10]->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[11]->totalIn - $masroof[11]->totalOut, 2)}}</td>
+    <td>{{number_format($masroof[12]->totalIn - $masroof[12]->totalOut, 2)}}</td>
+    <td><strong>{{number_format($masroof[13]->totalIn - $masroof[13]->totalOut, 2)}}</strong></td>
+    </tr>
+    @endforeach
+    </tbody>
+    <tfoot>
+        <td></td>
+        <td><strong>Totals</strong></td>
 
-                            <td>{{number_format($totals['masareef'][1], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][2], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][3], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][4], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][5], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][6], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][7], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][8], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][9], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][10], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][11], 2)}}</td>
-                            <td>{{number_format($totals['masareef'][12], 2)}}</td>
-                            <td><strong>{{number_format($totals['masareef'][13], 2)}}</strong></td>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+        <td>{{number_format($totals['masareef'][1], 2)}}</td>
+        <td>{{number_format($totals['masareef'][2], 2)}}</td>
+        <td>{{number_format($totals['masareef'][3], 2)}}</td>
+        <td>{{number_format($totals['masareef'][4], 2)}}</td>
+        <td>{{number_format($totals['masareef'][5], 2)}}</td>
+        <td>{{number_format($totals['masareef'][6], 2)}}</td>
+        <td>{{number_format($totals['masareef'][7], 2)}}</td>
+        <td>{{number_format($totals['masareef'][8], 2)}}</td>
+        <td>{{number_format($totals['masareef'][9], 2)}}</td>
+        <td>{{number_format($totals['masareef'][10], 2)}}</td>
+        <td>{{number_format($totals['masareef'][11], 2)}}</td>
+        <td>{{number_format($totals['masareef'][12], 2)}}</td>
+        <td><strong>{{number_format($totals['masareef'][13], 2)}}</strong></td>
+    </tfoot>
+    </table>
+</div>
+</div>
+</div>
+</div> --}}
 </div>
 @endsection
 
 @section('js_content')
-    <script>
-
-        $(function () {
+<script>
+    $(function () {
 
             var table = $('#myTable3').DataTable({
                 "displayLength": 25,
@@ -643,5 +653,5 @@
             }); 
        
         });
-    </script>
+</script>
 @endsection

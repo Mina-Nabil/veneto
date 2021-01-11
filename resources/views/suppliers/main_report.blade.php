@@ -49,13 +49,13 @@
                                         {{$op->SUPP_NAME}}
                                     </a>
                                 </td>
-                                <td>{{number_format($op->SUPP_BLNC, 2)}}</td>
+                                <td>{{number_format($op->SPTR_BLNC, 2)}}</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
-                                <td>{{number_format($op->SUPP_BLNC, 2)}}</td>
+                                <td>{{number_format($op->SPTR_BLNC, 2)}}</td>
                             </tr>
                             @endforeach
                         </tbody>
