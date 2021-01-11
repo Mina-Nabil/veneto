@@ -25,6 +25,8 @@
     <link href="{{ asset('assets/node_modules/dropify/dist/css/dropify.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    {{-- Toaster CSS --}}
+    <link href="{{ asset('assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allerta+Stencil" />
 
@@ -161,6 +163,13 @@
                                         <li><a href="{{url('bank/add')}}">اضافه</a></li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">حسابات عامه</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{url('accounts/home')}}">اعرض</a></li>
+                                        <li><a href="{{url('accounts/query')}}">كشف حساب</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="{{url('transtype/show')}}">اعدادات</a></li>
                             </ul>
                         </li>
@@ -170,80 +179,80 @@
                                     عام</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('ledger/show')}}">رصيد</a></li>
-                                <li><a href="{{url('ledger/prepare/report')}}">كشف حساب</a></li>
-                                <li><a href="{{url('ledger/add')}}">اضافه</a></li>
-                                <li><a href="{{url('ledger/types/show')}}">انواع حسابات</a></li>
-                            </ul>
-                        </li> --}}
+                        <li><a href="{{url('ledger/prepare/report')}}">كشف حساب</a></li>
+                        <li><a href="{{url('ledger/add')}}">اضافه</a></li>
+                        <li><a href="{{url('ledger/types/show')}}">انواع حسابات</a></li>
+                    </ul>
+                    </li> --}}
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">الموردين</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('suppliers/trans/prepare')}}">كشف حساب</a></li>
-                                <li><a href="{{url('suppliers/trans/quick')}}">تعاملات</a></li>
-                                <li><a href="{{url('suppliers/show')}}">اجماليات موردين</a></li>
-                                <li><a href="{{url('suppliers/add')}}">اضافه مورد</a></li>
-                                <li><a href="{{url('suppliers/trans/add')}}">عمليه جديده</a></li>
-                                <li><a href="{{url('suppliers/types/show')}}">انواع</a></li>
-                            </ul>
-                        </li>
+                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">الموردين</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{url('suppliers/trans/prepare')}}">كشف حساب</a></li>
+                            <li><a href="{{url('suppliers/trans/quick')}}">تعاملات</a></li>
+                            <li><a href="{{url('suppliers/show')}}">اجماليات موردين</a></li>
+                            <li><a href="{{url('suppliers/add')}}">اضافه مورد</a></li>
+                            <li><a href="{{url('suppliers/trans/add')}}">عمليه جديده</a></li>
+                            <li><a href="{{url('suppliers/types/show')}}">انواع</a></li>
+                        </ul>
+                    </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">مخزن
-                                    قماش</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('rawinventory/show')}}">متاح قماش</a></li>
-                                <li><a href="{{url('rawinventory/tran')}}">مجمع تعاملات</a></li>
-                                <li><a href="{{url('rawinventory/add')}}">وارد جديد</a></li>
-                                <li><a href="{{url('raw/tran/add')}}">عمليه جديده</a></li>
+                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">مخزن
+                                قماش</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{url('rawinventory/show')}}">متاح قماش</a></li>
+                            <li><a href="{{url('rawinventory/tran')}}">مجمع تعاملات</a></li>
+                            <li><a href="{{url('rawinventory/add')}}">وارد جديد</a></li>
+                            <li><a href="{{url('raw/tran/add')}}">عمليه جديده</a></li>
 
-                                <li>
-                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="{{url('models/show')}}">متاح مجمع موديلات</a></li>
-                                        <li><a href="{{url('types/show')}}">اصناف خامات</a></li>
-                                        <li><a href="{{url('colors/show')}}">الوان</a></li>
-                                        <li><a href="{{url('raw/show')}}">انواع خامات</a></li>
-                                    </ul>
-                                </li>
+                            <li>
+                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{url('models/show')}}">متاح مجمع موديلات</a></li>
+                                    <li><a href="{{url('types/show')}}">اصناف خامات</a></li>
+                                    <li><a href="{{url('colors/show')}}">الوان</a></li>
+                                    <li><a href="{{url('raw/show')}}">انواع خامات</a></li>
+                                </ul>
+                            </li>
 
-                            </ul>
-                        </li>
+                        </ul>
+                    </li>
 
 
-                        <li> <a href="{{url('raw/prod/show')}}" aria-expanded="false"><i class=" fas fa-cogs"></i><span class="hide-menu">انتاج </span></a>
+                    <li> <a href="{{url('raw/prod/show')}}" aria-expanded="false"><i class=" fas fa-cogs"></i><span class="hide-menu">انتاج </span></a>
 
-                        </li>
+                    </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">عملاء</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('clients/trans/prepare')}}">كشف حساب</a></li>
-                                <li><a href="{{url('clients/trans/quick')}}">تعاملات</a></li>
-                                <li><a href="{{url('clients/show')}}">اجماليات عملاء</a></li>
-                                <li><a href="{{url('clients/add')}}">اضافه عميل</a></li>
-                                <li>
-                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">تحصيل عملاء</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="{{url('clients/target/current')}}"> الشهر الحالي</a></li>
-                                        <li><a href="{{url('clients/target/history')}}">شهور سابقه </a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">عملاء</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{url('clients/trans/prepare')}}">كشف حساب</a></li>
+                            <li><a href="{{url('clients/trans/quick')}}">تعاملات</a></li>
+                            <li><a href="{{url('clients/show')}}">اجماليات عملاء</a></li>
+                            <li><a href="{{url('clients/add')}}">اضافه عميل</a></li>
+                            <li>
+                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">تحصيل عملاء</a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{url('clients/target/current')}}"> الشهر الحالي</a></li>
+                                    <li><a href="{{url('clients/target/history')}}">شهور سابقه </a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-barcode"></i><span class="hide-menu">مخزن
-                                    جاهز</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('finished/show')}}">متاح جاهز</a></li>
-                                <li><a href="{{url('finished/add')}}">وارد جديد</a></li>
-                                <li><a href="{{url('sales/sold')}}">مجمع جاهز مباع</a></li>
-                                <li>
-                                <li>
-                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="{{url('brands/show')}}">مركات</a></li>
-                                        <li><a href="{{url('finished/models')}}">اصناف</a></li>
-                                    </ul>
-                                </li>
-                        </li>
+                    <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-barcode"></i><span class="hide-menu">مخزن
+                                جاهز</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{url('finished/show')}}">متاح جاهز</a></li>
+                            <li><a href="{{url('finished/add')}}">وارد جديد</a></li>
+                            <li><a href="{{url('sales/sold')}}">مجمع جاهز مباع</a></li>
+                            <li>
+                            <li>
+                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{url('brands/show')}}">مركات</a></li>
+                                    <li><a href="{{url('finished/models')}}">اصناف</a></li>
+                                </ul>
+                            </li>
+                    </li>
                     </ul>
                     </li>
                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-boxes"></i><span class="hide-menu">مبيعات</span></a>
@@ -423,6 +432,8 @@
     <script src="{{ asset('dist/js/pages/jasny-bootstrap.js') }}"></script>
     <script src="{{ asset('assets/node_modules/dropify/dist/js/dropify.min.js')}}"></script>
     <script src="{{ asset('assets/node_modules/select2/dist/js/select2.full.min.js') }}" type="text/javascript"></script>
+    <script src="{{asset('assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
+
 
     <!-- Start Table Search Script -->
     <script>

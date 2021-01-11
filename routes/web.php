@@ -14,6 +14,15 @@
 
 use Illuminate\Support\Facades\Route;
 
+//accounts
+Route::get("accounts/home", "GAccountsController@home")->middleware('cors');
+Route::get("accounts/query", "GAccountsController@queryPage")->middleware('cors');
+Route::post("accounts/query", "GAccountsController@queryLoad")->middleware('cors');
+Route::post("accounts/insert/new", "GAccountsController@insertAccount")->middleware('cors');
+Route::post("accounts/update", "GAccountsController@editAccount")->middleware('cors');
+Route::post("accounts/insert/trans", "GAccountsController@insertTrans")->middleware('cors');
+Route::post("accounts/delete", "GAccountsController@deleteAccount")->middleware('cors');
+
 Route::get("sales/return/add", "SalesController@addReturnPage")->middleware('cors');
 Route::post("sales/return/insert", "SalesController@insertReturn")->middleware('cors');
 

@@ -24,7 +24,7 @@
 
                         </select>
                     </div>
-                    <small class="text-danger">{{$errors->first('paid')}}</small>
+                    <small class="text-danger">{{$errors->first('isOnline')}}</small>
                 </div>
 
                     <div class="form-group">
