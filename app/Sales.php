@@ -91,6 +91,11 @@ class Sales extends Model
             ->where("SALS_CLNT_ID", $clientID)->get();
     }
 
+    public static function getSalesYears()
+    {
+        return DB::table("sales")->selectRaw("DISTINCT YEAR(SALS_DATE) as toto")->get();
+    }
+
     public static function getSalesItemsByClient($clientID)
     {
         return DB::table("sales_items")

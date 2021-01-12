@@ -6,6 +6,33 @@
     <div class="row justify-content-center" >
         <div class="col-md-12">
             <div class="card">
+                <div class="card-header">Previous Years</div>
+                <div class="card-body">
+                    <form class="form pt-3" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label>Year</label>
+                            <div class="input-group mb-3">
+                                <select name=year class="select form-control custom-select" style="width: 100%; height:36px;">
+                                    <option disabled>Pick A Year</option>
+                                    @foreach($years as $year)
+                                    <option value="{{ $year->toto }}"  
+                                        @if($thisYear == $year->toto)
+                                        selected
+                                        @endif                                        
+                                        >{{$year->toto}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <small class="text-danger">{{$errors->first('year')}}</small>
+                        </div>
+                        <div class=p-10>
+                            <button type="submit" id=checker class="btn btn-success mr-2">&emsp;Submit&emsp;</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
                 <div class="card-header">مصاريف مجمعه</div>
 
                 <div class="card-body" style="overflow-x: scroll; width:auto; white-space: nowrap;">

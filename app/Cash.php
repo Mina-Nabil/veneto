@@ -98,6 +98,11 @@ class Cash extends Model
             return 0;
     }
 
+    public static function getCashYears()
+    {
+        return DB::table("cash")->selectRaw("DISTINCT YEAR(CASH_DATE) as toto")->get();
+    }
+
     static function correctFaultyTran($id)
     {
         $faulty = self::getOneRecord($id);

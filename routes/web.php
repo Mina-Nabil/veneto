@@ -159,6 +159,7 @@ Route::post("ledger/unmark",         'LedgerController@unmarkError')->middleware
 //Cash Account
 Route::get("cash/show",             'CashController@show')->middleware('cors');
 Route::get("cash/expenses/show",             'CashController@showTotalTypesPaid')->middleware('cors');
+Route::post("cash/expenses/show",             'CashController@showTotalTypesPaid')->middleware('cors');
 Route::get("cash/show/{typeID}",             'CashController@show')->middleware('cors');
 Route::get("cash/add",              'CashController@addPage')->middleware('cors');
 Route::post("cash/insert",          'CashController@insert')->middleware('cors');
@@ -228,5 +229,6 @@ Route::get('logout', 'HomeController@logout')->name('logout')->middleware('cors'
 Route::post('login', 'HomeController@login')->name('login')->middleware('cors');
 Route::get('login', 'HomeController@login')->name('loginHome')->middleware('cors');
 Route::get('/summary', 'HomeController@index')->name('summary')->middleware('cors');
+Route::post('/summary/year', 'HomeController@yearlySummary')->name('summary')->middleware('cors');
 Route::get('/home', 'HomeController@empty')->name('home')->middleware('cors');
 Route::get('/', 'HomeController@empty')->name('summary')->middleware('cors');

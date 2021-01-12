@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cash;
 use App\Clients;
+use App\Sales;
 use App\TransType;
 use DateTime;
 use Illuminate\Http\Request;
@@ -34,8 +35,31 @@ class HomeController extends Controller
 
         $thisYear = new DateTime('now');
 
-        /////////////////////////////////////// Sales ///////////////////////////////////
+        $data = $this->getSalesSummary($thisYear);
+        $data['years'] = Sales::getSalesYears();
+        $data['loadYearSummaryURL'] = url('summary/year');
+        $data['thisYear'] = $thisYear->format('Y');
+        return view('home', $data);
+    }
 
+    public function yearlySummary(Request $request)
+    {
+        if (!Auth::check()) return redirect('/login');
+
+        $request->validate([
+            "year" => "required"
+        ]);
+
+        $thisYear = new DateTime($request->year . "-01-01");
+
+        $data = $this->getSalesSummary($thisYear);
+        $data['years'] = Sales::getSalesYears();
+        $data['loadYearSummaryURL'] = url('summary/year');
+        $data['thisYear'] = $thisYear->format('Y');
+        return view('home', $data);
+    }
+
+    private function getSalesSummary(DateTime $year){
         $data['all']['months'] = [];
         $data['via']['months'] = [];
         $data['veneto']['months'] = [];
@@ -45,7 +69,7 @@ class HomeController extends Controller
 
         for ($i = 1; $i <= 12; $i++) {
            
-            $tmpMonth = new DateTime($thisYear->format('Y') . '-' . $i . '-01');
+            $tmpMonth = new DateTime($year->format('Y') . '-' . $i . '-01');
             $AllTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'));
             $VentoTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 0);
             $OnlineTotals = Clients::getHomeTotals($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), 1);
@@ -70,8 +94,8 @@ class HomeController extends Controller
 
 
 
-        $startOfYear = new DateTime($thisYear->format('Y') . '-01-01');
-        $endOfYear = new DateTime($thisYear->format('Y') . '-12-31');
+        $startOfYear = new DateTime($year->format('Y') . '-01-01');
+        $endOfYear = new DateTime($year->format('Y') . '-12-31');
         $data['fullYearAll'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'));
         $data['fullYearProc'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),4);
         $data['fullYearProd'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),3);
@@ -79,30 +103,7 @@ class HomeController extends Controller
         $data['fullYearOnline'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),1);
         $data['fullYearVeneto'] = Clients::getHomeTotals($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'),0);
 
-        ////////////////////// Masareeef ///////////////////////////
-
-        // $data['masareef'] = [];
-        // for ($i = 1; $i <= 13; $i++) {
-        // $data['totals']['masareef'][$i] = 0;
-        // }
-        // $types = TransType::getTransTypes();
-        // foreach($types as $type){
-        //     $subTypes = TransType::getTransSubTypesByType($type->id);
-        //     foreach($subTypes as $subType){
-        //         $data['masareef'][$subType->id]['typeID'] = $type->id;
-        //         $data['masareef'][$subType->id]['typeName'] = $type->TRTP_NAME;
-        //         $data['masareef'][$subType->id]['subTypeName'] = $subType->TRST_NAME;
-        //         for ($i = 1; $i <= 12; $i++) {
-        //             $tmpMonth = new DateTime($thisYear->format('Y') . '-' . $i . '-01');
-        //             $data['masareef'][$subType->id][$i] = Cash::getCashSpent($tmpMonth->format('Y-m-d'), $tmpMonth->format('Y-m-t'), $subType->id);
-        //             $data['totals']['masareef'][$i] += ($data['masareef'][$subType->id][$i]->totalIn - $data['masareef'][$subType->id][$i]->totalOut);
-        //         }
-        //         $data['masareef'][$subType->id][13] = Cash::getCashSpent($startOfYear->format('Y-m-d'), $endOfYear->format('Y-m-d'), $subType->id);
-        //         $data['totals']['masareef'][13] += ($data['masareef'][$subType->id][13]->totalIn - $data['masareef'][$subType->id][13]->totalOut);
-        //     }
-        // }
-        
-        return view('home', $data);
+        return $data;
     }
 
     public function empty(){
