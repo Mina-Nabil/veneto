@@ -3,6 +3,7 @@
 namespace App;
 
 use DateTime;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\DB;
