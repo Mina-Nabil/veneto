@@ -49,7 +49,7 @@ class Target extends Model
             ->join('clients', 'TRGT_CLNT_ID', '=', 'clients.id')
             ->leftJoinSub($clientTrans, 'c1', 'CLTR_CLNT_ID', '=', 'clients.id')
             ->selectRaw('c1.*, SUM(CLNT_BLNC) as balanceTotal, SUM(TRGT_MONY) as cashTarget, SUM(TRGT_BANK) as bankTarget')
-            ->where([['TRGT_YEAR', '=',$year], ['TRGT_MNTH', '=',$month]])->get();
+            ->where([['TRGT_YEAR', '=',$year], ['TRGT_MNTH', '=',$month]])->get()->first();
            
     }
 
