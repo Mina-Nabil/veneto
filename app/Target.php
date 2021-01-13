@@ -48,7 +48,7 @@ class Target extends Model
 
         $targetsTotal = DB::table('targets')
             ->join('clients', 'TRGT_CLNT_ID', '=', 'clients.id')
-            ->selectRaw('c1.*, SUM(TRGT_MONY) as cashTarget, SUM(TRGT_BANK) as bankTarget')
+            ->selectRaw('SUM(TRGT_MONY) as cashTarget, SUM(TRGT_BANK) as bankTarget')
             ->where([['TRGT_YEAR', '=', $year], ['TRGT_MNTH', '=', $month]])->get();
 
         return $targetsTotal->merge($transTotals);
