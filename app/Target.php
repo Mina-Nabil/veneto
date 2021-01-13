@@ -43,15 +43,14 @@ class Target extends Model
         $clientTrans = DB::table('client_trans')->where([
             ["CLTR_DATE", ">=", $startDate],
             ["CLTR_DATE", "<=", $endDate],
-        ])->groupBy("CLTR_CLNT_ID");
+        ])->selectRaw("CLTR_CLNT_ID, SUM(CLTR_CASH_AMNT) as cashPaid, SUM(CLTR_NTPY_AMNT) as bankPaid")
+            ->groupBy("CLTR_CLNT_ID");
 
-        $query = DB::table('targets')
+        return DB::table('targets')
             ->join('clients', 'TRGT_CLNT_ID', '=', 'clients.id')
-            ->leftJoinSub($clientTrans, 'client_trans', 'CLTR_CLNT_ID', '=', 'clients.id')
-            ->selectRaw('SUM(CLNT_BLNC) as balanceTotal, SUM(CLTR_CASH_AMNT) as cashPaid, SUM(CLTR_NTPY_AMNT) as bankPaid, SUM(TRGT_MONY) as cashTarget, SUM(TRGT_BANK) as bankTarget')
-            ->where([['TRGT_YEAR', '=',$year], ['TRGT_MNTH', '=',$month]]);
-            dd($query->toSql(), $query->getBindings());
-           
+            ->leftJoinSub($clientTrans, 'c1', 'CLTR_CLNT_ID', '=', 'clients.id')
+            ->selectRaw('c1.*, SUM(TRGT_MONY) as cashTarget, SUM(TRGT_BANK) as bankTarget')
+            ->where([['TRGT_YEAR', '=', $year], ['TRGT_MNTH', '=', $month]])->get();
     }
 
     public static function createYearlyTargets($year)
