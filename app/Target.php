@@ -43,7 +43,7 @@ class Target extends Model
         $clientTrans = DB::table('client_trans')->where([
             ["CLTR_DATE", ">=", $startDate],
             ["CLTR_DATE", "<=", $endDate],
-        ]);
+        ])->groupBy("CLTR_CLNT_ID");
 
         $query = DB::table('targets')
             ->join('clients', 'TRGT_CLNT_ID', '=', 'clients.id')
