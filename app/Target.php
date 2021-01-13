@@ -40,17 +40,18 @@ class Target extends Model
         $startDate = $currMonth->format('Y-m-01 H:i:s');
         $endDate = $currMonth->format('Y-m-t H:i:s');
 
-        $clientTrans = DB::table('client_trans')->where([
+        $transTotals = DB::table('client_trans')->where([
             ["CLTR_DATE", ">=", $startDate],
             ["CLTR_DATE", "<=", $endDate],
         ])->selectRaw("CLTR_CLNT_ID, SUM(CLTR_CASH_AMNT) as cashPaid, SUM(CLTR_NTPY_AMNT) as bankPaid")
-            ->groupBy("CLTR_CLNT_ID");
+            ->groupBy("CLTR_CLNT_ID")->get();
 
-        return DB::table('targets')
+        $targetsTotal = DB::table('targets')
             ->join('clients', 'TRGT_CLNT_ID', '=', 'clients.id')
-            ->leftJoinSub($clientTrans, 'c1', 'CLTR_CLNT_ID', '=', 'clients.id')
             ->selectRaw('c1.*, SUM(TRGT_MONY) as cashTarget, SUM(TRGT_BANK) as bankTarget')
             ->where([['TRGT_YEAR', '=', $year], ['TRGT_MNTH', '=', $month]])->get();
+
+        return $targetsTotal->merge($transTotals);
     }
 
     public static function createYearlyTargets($year)
