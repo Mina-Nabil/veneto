@@ -190,7 +190,7 @@ class ClientsController extends Controller
         }
         $data['targets'] = $targets;
         $data['totals'] = Target::getTargetTotals($now->format('Y'), $now->format('m'));
-
+        dd($data['totals']);
         $data['year'] = $now->format('Y');
         $data['month'] = $now->format('M');
         $data['isHistory'] = false;
