@@ -72,7 +72,7 @@ class GAccountsController extends Controller
     public function insertTrans(Request $request)
     {
         $request->validate([
-            "accountID"   =>  "required|exists:gen_accounts_title,id",
+            "accountID"   =>  "required|exists:gen_accounts,id",
             "title"    =>  "required",
             "type"    =>  "required",
             "value"    =>  "required",
