@@ -116,11 +116,11 @@ class GAccount extends Model
     }
 
 
-    public static function addTransaction($accountID, $title, $credit = 0, $debit = 0, $comment = null)
+    public static function addTransaction($accountID, $title, $credit = 0, $debit = 0, $comment = null, $isCash = false)
     {
         if ($credit != 0  || $debit != 0) {
             try {
-                DB::transaction(function () use ($accountID, $title, $credit, $debit, $comment) {
+                DB::transaction(function () use ($accountID, $title, $credit, $debit, $comment, $isCash) {
                     $account = self::getAccount($accountID);
                     $oldBalance = $account->GNAC_BLNC ?? 0;
                     if ($account->GNAC_NATR == 1) { //debit nature
@@ -138,6 +138,9 @@ class GAccount extends Model
                         "GNTR_CMNT" =>  $comment
                     ]);
                     self::setAccountBalance($accountID, $newBalance);
+                    if($isCash){
+                        Cash::insertTran("General Account - " . self::getAccountName($accountID) . " : (" . $title . ")", $debit, $credit, $comment, 0, null);
+                    }
                 });
                 return true;
             } catch (Exception $e) {
@@ -179,5 +182,14 @@ class GAccount extends Model
         if ($force || count($accounts) == 0) {
             return DB::table('gen_accounts_title')->where('id', $id)->delete();
         }
+    }
+
+    public static function getAccountName($id) {
+        $res = DB::table('gen_accounts')->where("id", $id)->first();
+        if($res) {
+            return $res->GNAC_NAME ?? null;
+        }
+        return null;
+
     }
 }

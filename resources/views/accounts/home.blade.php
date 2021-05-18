@@ -177,6 +177,12 @@
                             <small class="text-danger">{{$errors->first('type')}}</small>
                         </div>
                     </div>
+                    <div class="col-lg-12 bt-switch">
+                        <label>Reflect on Cash?</label>
+                        <div class="input-group mb-3 ">
+                            <input type="checkbox" data-size="large" data-on-color="success" data-off-color="danger" data-on-text="Yes" data-off-text="No" name="isCash">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Comment</label>
                         <div class="input-group mb-3">

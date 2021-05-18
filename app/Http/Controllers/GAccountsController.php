@@ -84,7 +84,9 @@ class GAccountsController extends Controller
             $credit = 0;
             $debit = $request->value;
         }
-        GAccount::addTransaction($request->accountID, $request->title, $credit, $debit, $request->comment);
+
+        $isCash = (isset($request->isCash) && $request->isCash == true) ? true : false;
+        GAccount::addTransaction($request->accountID, $request->title, $credit, $debit, $request->comment, $isCash);
        return redirect($this->homeURL);
     }
 
