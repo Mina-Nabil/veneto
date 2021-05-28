@@ -123,10 +123,10 @@ class GAccount extends Model
                 DB::transaction(function () use ($accountID, $title, $credit, $debit, $comment, $isCash) {
                     $account = self::getAccount($accountID);
                     $oldBalance = $account->GNAC_BLNC ?? 0;
-                    if ($account->GNAC_NATR == 1) { //debit nature
-                        $newBalance = $oldBalance + $debit - $credit;
-                    } else { //credit nature
+                    if ($account->GNAC_NATR == 1) { //credit nature
                         $newBalance = $oldBalance - $debit +  $credit;
+                    } else { //debit nature
+                        $newBalance = $oldBalance + $debit - $credit;
                     }
                     DB::table("gen_accounts_trans")->insert([
                         "GNTR_GNAC_ID" => $accountID,
