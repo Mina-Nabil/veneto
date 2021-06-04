@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GAccount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GAccountsController extends Controller
 {
@@ -109,5 +110,35 @@ class GAccountsController extends Controller
         ]);
         if (GAccount::deleteAccount($request->id))
             echo "1";
+    }
+
+    function markError(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'tranId' => 'required'
+        ]);
+
+        if ($validator->fails())
+            echo 0;
+        else
+            echo GAccount::markTranError($request->tranId);
+
+        return;
+    }
+
+    function unmarkError(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'tranId' => 'required'
+        ]);
+
+        if ($validator->fails())
+            echo 0;
+        else
+            echo GAccount::unmarkTranError($request->tranId);
+
+        return;
     }
 }

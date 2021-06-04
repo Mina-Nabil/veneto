@@ -149,6 +149,19 @@ class GAccount extends Model
         }
     }
 
+    static function unmarkTranError($id)
+    {
+        return DB::table("gen_accounts_trans")->where('id', $id)->update([
+            "GNTR_EROR" => 0
+        ]);
+    }
+
+    static function markTranError($id)
+    {
+        return DB::table("gen_accounts_trans")->where('id', $id)->update([
+            "GNTR_EROR" => 1
+        ]);
+    }
 
     ////////////account titles (fixed - current..)
     public static function getAccountTitles()

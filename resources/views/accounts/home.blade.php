@@ -34,12 +34,19 @@
                                             <th>Credit</th>
                                             <th>Debit</th>
                                             <th>Balance</th>
-                                            <th>Comment</th>
+                                            <th>Actions</th>
+                                    
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($trans[$account->id] as $op)
-                                        <tr>
+                                        <tr @if($op->GNTR_EROR==1)
+
+                                            style="background-color: #ffbdbd;"
+                                            title="Wrong Transaction"
+
+                                            @endif
+                                            >
                                             <td>
                                                 {{date_format(date_create($op->GNTR_DATE), "d-m-Y")}}
                                             </td>
@@ -56,7 +63,17 @@
                                                     @endif
                                                     <i class="fas fa-list-alt"></i>
                                                 </button>
-                                            </td>
+                                      
+                                            @if($op->GNTR_EROR==0)
+                                            <button style="padding:.1rem" class="btn btn-success">
+                                                    <i class="fas fa-exclamation-triangle" onclick="confirmError({{$op->id}}, {{$op->GNTR_EROR}})"></i>
+                                                </button>
+                                            @else
+                                            <button style="padding:.1rem" class="btn btn-danger">
+                                                    <i class="fas fa-exclamation-triangle" onclick="unmarkError({{$op->id}}, {{$op->GNTR_EROR}})"></i>
+                                                </button>
+                                            @endif
+                                        </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -376,6 +393,122 @@
 
 
 <script>
+    function IsNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+    
+    function getMeta(metaName) {
+      const metas = document.getElementsByTagName('meta');
+    
+      for (let i = 0; i < metas.length; i++) {
+        if (metas[i].getAttribute('name') === metaName) {
+          return metas[i].getAttribute('content');
+        }
+      }
+    
+      return '';
+    }
+    
+    function confirmError(id, errorState){
+    
+    if(errorState==1){
+        Swal.fire({
+            title: 'Transaction already is marked as an Error',
+            text: "You won't be able to mark this!",
+            icon: 'warning',
+        });
+    } else {
+        Swal.fire({
+            title: 'Transaction Error, Are you sure?',
+            text: "You can revert this in the future",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, mark it!'
+        }).then((result) => {
+            if (result.value) {
+                const csrf = getMeta('csrf-token');
+                var http = new XMLHttpRequest();
+                var url  = '{{url("accounts/error")}}';
+                var params = '_token=' + csrf + '&tranId=' + id;
+                http.open('POST', url, true);
+                //Send the proper header information along with the request
+                http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                http.onreadystatechange = function() {
+                    console.log(this.responseText=='1')
+                    if (IsNumeric(this.responseText) && this.responseText=='1' && this.readyState == 4 && this.status == 200) {
+                        Swal.fire({
+                            title: 'Marked!',
+                            text: 'Please refresh for an updated view!',
+                            icon: 'success',
+                            confirmButtonText: 'Refresh'
+                            }).then((refresh) => {
+                                document.location.reload();
+                            })
+                        
+                    } else if(this.readyState == 4 && this.status == 200 && IsNumeric(this.responseText) && this.responseText=='0') {
+                        Swal.fire("Error", "Process Failed, please try again", 'error');
+                    } 
+                    };
+                http.send(params);
+            }
+        })
+    }
+
+    
+}
+
+function unmarkError(id, errorState){
+
+    if(errorState==0){
+        Swal.fire({
+            title: 'Transaction already is unmarked',
+            text: "You won't be able to unmark this!",
+            icon: 'warning',
+        });
+    } else {
+        Swal.fire({
+            title: 'Transaction not Error, Are you sure?',
+            text: "You can revert this in the future",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, unmark it!'
+        }).then((result) => {
+            if (result.value) {
+                const csrf = getMeta('csrf-token');
+                var http = new XMLHttpRequest();
+                var url  = '{{url("accounts/unmark")}}';
+                var params = '_token=' + csrf + '&tranId=' + id;
+                http.open('POST', url, true);
+                //Send the proper header information along with the request
+                http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                http.onreadystatechange = function() {
+                    console.log(this.responseText=='1')
+                    if (IsNumeric(this.responseText) && this.responseText=='1' && this.readyState == 4 && this.status == 200) {
+                        Swal.fire({
+                            title: 'Unmarked!',
+                            text: 'please refresh for updated view!',
+                            icon: 'success',
+                            confirmButtonText: 'Refresh'
+                            }).then((refresh) => {
+                                document.location.reload();
+                            })
+                        
+                    } else if(this.readyState == 4 && this.status == 200 && IsNumeric(this.responseText) && this.responseText=='0') {
+                        Swal.fire("Error", "Process Failed, please try again", 'error');
+                    } 
+                    };
+                http.send(params);
+            }
+        })
+    }
+
+    
+}
+
     @foreach ($accounts as $account)
     var table = $('#myTable-{{$account->id}}').DataTable({
     "displayLength": 25,

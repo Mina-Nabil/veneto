@@ -22,6 +22,8 @@ Route::post("accounts/insert/new", "GAccountsController@insertAccount")->middlew
 Route::post("accounts/update", "GAccountsController@editAccount")->middleware('cors');
 Route::post("accounts/insert/trans", "GAccountsController@insertTrans")->middleware('cors');
 Route::post("accounts/delete", "GAccountsController@deleteAccount")->middleware('cors');
+Route::post("accounts/error",  'GAccountsController@markError')->middleware('cors');
+Route::post("accounts/unmark",  'GAccountsController@unmarkError')->middleware('cors');
 
 Route::get("sales/return/add", "SalesController@addReturnPage")->middleware('cors');
 Route::post("sales/return/insert", "SalesController@insertReturn")->middleware('cors');
