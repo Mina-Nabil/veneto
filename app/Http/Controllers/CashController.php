@@ -39,7 +39,7 @@ class CashController extends Controller
 
     function showTotalTypesPaid(Request $request)
     {
-        if(isset($request->year) && is_numeric($request->year)){
+        if (isset($request->year) && is_numeric($request->year)) {
             $thisYear = new DateTime($request->year . "-01-01");
         } else {
             $thisYear = new DateTime('now');
@@ -50,8 +50,9 @@ class CashController extends Controller
         return view('cash.expenses', $data);
     }
 
-    private function getYearlyExpenses(DateTime $year){
-   
+    private function getYearlyExpenses(DateTime $year)
+    {
+
         $startOfYear = new DateTime($year->format('Y') . '-01-01');
         $endOfYear = new DateTime($year->format('Y') . '-12-31');
 
@@ -93,13 +94,9 @@ class CashController extends Controller
     function insert(Request $request)
     {
 
-        $validatedDate = $request->validate([
-            "name" => "required",
-            'in'    => "required",
-            'out'   => "required",
-        ]);
-
-        Cash::insertTran($request->name, $request->in, $request->out, $request->comment, 0, $request->typeID);
+        foreach ($request->name as $key => $val)
+            if (isset($val))
+                Cash::insertTran($val, $request->in[$key] ?? 0, $request->out[$key] ?? 0, $request->comment[$key], 0, $request->typeID[$key]);
 
         return \redirect("cash/show");
     }
