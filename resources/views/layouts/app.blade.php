@@ -185,7 +185,7 @@
                             </ul>
                         </li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">مخزن
+                        {{-- <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti ti-package"></i><span class="hide-menu">مخزن
                                     قماش</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('rawinventory/show')}}">متاح قماش</a></li>
@@ -209,21 +209,18 @@
 
                         <li> <a href="{{url('raw/prod/show')}}" aria-expanded="false"><i class=" fas fa-cogs"></i><span class="hide-menu">انتاج </span></a>
 
-                        </li>
+                        </li> --}}
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">عملاء</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('clients/trans/prepare')}}">كشف حساب</a></li>
+                                <li><a href="{{url('sales/show')}}">مجمع مبيعات</a></li>
+                                <li><a href="{{url('sales/add')}}">عمليه بيع جديده</a></li>
+                                <li><a href="{{url('sales/return/add')}}">عمليه مرتجع</a></li>
                                 <li><a href="{{url('clients/trans/quick')}}">تعاملات</a></li>
                                 <li><a href="{{url('clients/show')}}">اجماليات عملاء</a></li>
+                                <li><a href="{{url('clients/trans/prepare')}}">كشف حساب</a></li>
                                 <li><a href="{{url('clients/add')}}">اضافه عميل</a></li>
-                                <li>
-                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">تحصيل عملاء</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="{{url('clients/target/current')}}"> الشهر الحالي</a></li>
-                                        <li><a href="{{url('clients/target/history')}}">شهور سابقه </a></li>
-                                    </ul>
-                                </li>
+                         
                             </ul>
                         </li>
 
@@ -232,7 +229,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('finished/show')}}">متاح جاهز</a></li>
                                 <li><a href="{{url('finished/add')}}">وارد جديد</a></li>
-                                <li><a href="{{url('sales/sold')}}">مجمع جاهز مباع</a></li>
+                                {{-- <li><a href="{{url('sales/sold')}}">مجمع جاهز مباع</a></li> --}}
                                 <li>
                                 <li>
                                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
@@ -243,14 +240,7 @@
                                 </li>
                             </ul>
                         </li>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-boxes"></i><span class="hide-menu">مبيعات</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('sales/show')}}">مجمع مبيعات</a></li>
-                                <li><a href="{{url('sales/add')}}">عمليه بيع جديده</a></li>
-                                <li><a href="{{url('sales/return/add')}}">عمليه مرتجع</a></li>
-                            </ul>
-                        </li>
+                   
 
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" fas fa-users"></i><span class="hide-menu">Users</span></a>
