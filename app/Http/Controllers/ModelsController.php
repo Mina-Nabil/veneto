@@ -19,14 +19,12 @@ class ModelsController extends Controller
     function show()
     {
 
-        $data['types'] = Models::getTypes();
-        $data['colors']  = Models::getColors();
         $data['models']  = Models::getModels(1);
 
         $data['pageTitle'] = "Add New Model";
         $data['formURL'] = url("models/insert");
 
-        return view("models.models", $data);
+        return view("finished.modellat", $data);
     }
 
     function editModel($id)
@@ -41,7 +39,7 @@ class ModelsController extends Controller
         $data['pageTitle'] = "Edit " . $data['model']->RAW_NAME . ' ' . $data['model']->TYPS_NAME . ' ' . $data['model']->MODL_NAME;
         $data['formURL'] = url('models/update');
 
-        return view("models.models", $data);
+        return view("finished.modellat", $data);
     }
 
     function updateModel(Request $request)
