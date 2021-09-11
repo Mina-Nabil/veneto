@@ -143,18 +143,20 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-list"></i><span class="hide-menu">تقارير</span></a>
-                            <li><a href="{{url('summary')}}">ملخص حسابات</a></li>
-                            <li><a href="{{url('cash/expenses/show')}}">مجمع مصاريف</a></li>
-                            <li>
-                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">تحصيل عملاء</a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li><a href="{{url('clients/target/current')}}"> الشهر الحالي</a></li>
-                                    <li><a href="{{url('clients/target/history')}}">شهور سابقه </a></li>
-                                </ul>
-                            </li>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('summary')}}">ملخص حسابات</a></li>
+                                <li><a href="{{url('cash/expenses/show')}}">مجمع مصاريف</a></li>
+                                <li>
+                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">تحصيل عملاء</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{url('clients/target/current')}}"> الشهر الحالي</a></li>
+                                        <li><a href="{{url('clients/target/history')}}">شهور سابقه </a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
 
-                    
+
 
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-list"></i><span class="hide-menu">الحسابات</span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -168,8 +170,8 @@
                                         <li><a href="{{url('cash/add')}}">اضافه</a></li>
                                     </ul>
                                 </li>
-                              
-                              
+
+
                                 <li><a href="{{url('transtype/show')}}">اعدادات</a></li>
                             </ul>
                         </li>
@@ -200,21 +202,21 @@
                                 قماش</span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{{url('rawinventory/show')}}">متاح قماش</a></li>
-                            <li><a href="{{url('rawinventory/tran')}}">مجمع تعاملات</a></li>
-                            <li><a href="{{url('rawinventory/add')}}">وارد جديد</a></li>
-                            <li><a href="{{url('raw/tran/add')}}">عمليه جديده</a></li>
+                    <li><a href="{{url('rawinventory/tran')}}">مجمع تعاملات</a></li>
+                    <li><a href="{{url('rawinventory/add')}}">وارد جديد</a></li>
+                    <li><a href="{{url('raw/tran/add')}}">عمليه جديده</a></li>
 
-                            <li>
-                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li><a href="{{url('models/show')}}">متاح مجمع موديلات</a></li>
-                                    <li><a href="{{url('types/show')}}">اصناف خامات</a></li>
-                                    <li><a href="{{url('colors/show')}}">الوان</a></li>
-                                    <li><a href="{{url('raw/show')}}">انواع خامات</a></li>
-                                </ul>
-                            </li>
-
+                    <li>
+                        <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{url('models/show')}}">متاح مجمع موديلات</a></li>
+                            <li><a href="{{url('types/show')}}">اصناف خامات</a></li>
+                            <li><a href="{{url('colors/show')}}">الوان</a></li>
+                            <li><a href="{{url('raw/show')}}">انواع خامات</a></li>
                         </ul>
+                    </li>
+
+                    </ul>
                     </li>
 
 
@@ -243,15 +245,16 @@
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{{url('finished/show')}}">متاح جاهز</a></li>
                             <li><a href="{{url('finished/add')}}">وارد جديد</a></li>
-                            {{-- <li><a href="{{url('sales/sold')}}">مجمع جاهز مباع</a></li> --}}
-                            <li>
-                            <li>
-                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li><a href="{{url('brands/show')}}">مركات</a></li>
-                                    <li><a href="{{url('finished/models')}}">اصناف</a></li>
-                                </ul>
-                            </li>
+                            {{-- <li><a href="{{url('sales/sold')}}">مجمع جاهز مباع</a>
+                    </li> --}}
+                    <li>
+                    <li>
+                        <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">اعدادات</a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{url('brands/show')}}">مركات</a></li>
+                            <li><a href="{{url('finished/models')}}">اصناف</a></li>
+                        </ul>
+                    </li>
                     </li>
                     </ul>
                     </li>
