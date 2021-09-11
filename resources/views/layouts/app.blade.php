@@ -143,15 +143,17 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-list"></i><span class="hide-menu">تقارير</span></a>
-                        <li><a href="{{url('summary')}}">ملخص حسابات</a></li>
-                        <li><a href="{{url('cash/expenses/show')}}">مجمع مصاريف</a></li>
-                        <li>
-                            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">تحصيل عملاء</a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{url('clients/target/current')}}"> الشهر الحالي</a></li>
-                                <li><a href="{{url('clients/target/history')}}">شهور سابقه </a></li>
+                                <li><a href="{{url('summary')}}">ملخص حسابات</a></li>
+                                <li><a href="{{url('cash/expenses/show')}}">مجمع مصاريف</a></li>
+                                <li>
+                                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)">تحصيل عملاء</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{url('clients/target/current')}}"> الشهر الحالي</a></li>
+                                        <li><a href="{{url('clients/target/history')}}">شهور سابقه </a></li>
+                                    </ul>
+                                </li>
                             </ul>
-                        </li>
                         </li>
 
                         <li>
