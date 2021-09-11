@@ -97,11 +97,11 @@ class Models extends Model
     static function getModels($isHidden = 0)
     {
         $query = DB::table('models')
-            ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
-            ->join('raw', 'types.TYPS_RAW_ID', '=', 'raw.id')
-            ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
-            ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
-            ->select('models.*', 'types.TYPS_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'raw.RAW_NAME', 'suppliers.SUPP_NAME');
+            // ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
+            // ->join('raw', 'types.TYPS_RAW_ID', '=', 'raw.id')
+            // ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
+            // ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
+            ->select('models.*' /*, 'types.TYPS_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'raw.RAW_NAME', 'suppliers.SUPP_NAME'*/);
 
         if (!$isHidden)
             $query = $query->where('MODL_HDDN', 0);
@@ -111,10 +111,10 @@ class Models extends Model
     static function getModelList()
     {
         return DB::table('models')
-            ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
-            ->join('raw', 'types.TYPS_RAW_ID', '=', 'raw.id')
-            ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
-            ->select('models.id', 'models.MODL_NAME', 'models.MODL_UNID', 'types.TYPS_NAME', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE')
+            // ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
+            // ->join('raw', 'types.TYPS_RAW_ID', '=', 'raw.id')
+            // ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
+            ->select('models.id', 'models.MODL_NAME', 'models.MODL_UNID'/*, 'types.TYPS_NAME', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE'*/)
             ->where('MODL_HDDN', 0)
             ->get();
     }
@@ -131,11 +131,11 @@ class Models extends Model
     static function getModel($id)
     {
         return DB::table('models')
-            ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
-            ->join('raw', 'types.TYPS_RAW_ID', '=', 'raw.id')
-            ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
-            ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
-            ->select('models.*', 'types.TYPS_NAME', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'suppliers.SUPP_NAME')
+            // ->join('types', 'MODL_TYPS_ID', '=', 'types.id')
+            // ->join('raw', 'types.TYPS_RAW_ID', '=', 'raw.id')
+            // ->join('suppliers', 'MODL_SUPP_ID', '=', 'suppliers.id')
+            // ->join('colors', 'MODL_COLR_ID', '=', 'colors.id')
+            ->select('models.*' /*, 'types.TYPS_NAME', 'raw.RAW_NAME', 'colors.COLR_NAME', 'colors.COLR_CODE', 'suppliers.SUPP_NAME'*/)
             ->where('models.id', $id)
             ->first();
     }
@@ -145,39 +145,39 @@ class Models extends Model
         return DB::table('models')->where('MODL_UNID', '=', $name)->get()->first()->id ?? NULL;
     }
 
-    static function insertModel($name, $typeID, $colorID, $suppID, $price, $image = null, $serialID = null, $comment = null)
+    static function insertModel($name, $serialID /*$typeID, $colorID, $suppID, $price, $image = null, $serialID = null, $comment = null */)
     {
         return DB::table('models')->insertGetId([
             "MODL_NAME" => $name,
-            "MODL_TYPS_ID" => $typeID,
-            "MODL_COLR_ID" => $colorID,
-            "MODL_SUPP_ID" => $suppID,
-            "MODL_PRCE" => $price,
-            "MODL_IMGE" => $image,
+            // "MODL_TYPS_ID" => $typeID,
+            // "MODL_COLR_ID" => $colorID,
+            // "MODL_SUPP_ID" => $suppID,
+            // "MODL_PRCE" => $price,
+            // "MODL_IMGE" => $image,
             "MODL_UNID" => $serialID,
-            "MODL_CMNT" => $comment
+            // "MODL_CMNT" => $comment
         ]);
     }
 
-    static function updateModel($id, $name, $typeID, $colorID, $suppID, $price, $image = null, $serialID = null, $comment = null, $oldPath = null)
+    static function updateModel($id, $name, $serialID  /*, $typeID, $colorID, $suppID, $price, $image = null, $serialID = null, $comment = null, $oldPath = null*/)
     {
 
         $updateArr = [
             "MODL_NAME" => $name,
-            "MODL_TYPS_ID" => $typeID,
-            "MODL_COLR_ID" => $colorID,
-            "MODL_SUPP_ID" => $suppID,
-            "MODL_PRCE" => $price,
+            // "MODL_TYPS_ID" => $typeID,
+            // "MODL_COLR_ID" => $colorID,
+            // "MODL_SUPP_ID" => $suppID,
+            // "MODL_PRCE" => $price,
             "MODL_UNID" => $serialID,
-            "MODL_CMNT" => $comment
+            // "MODL_CMNT" => $comment
         ];
 
-        if ($image !== null && strcmp($image, '') != 0) {
-            $updateArr['MODL_IMGE']     =   $image;
-            if (file_exists($oldPath)) {
-                unlink($oldPath);
-            }
-        }
+        // if ($image !== null && strcmp($image, '') != 0) {
+        //     $updateArr['MODL_IMGE']     =   $image;
+        //     if (file_exists($oldPath)) {
+        //         unlink($oldPath);
+        //     }
+        // }
 
         return DB::table('models')->where('id', $id)->update($updateArr);
     }
@@ -188,5 +188,4 @@ class Models extends Model
             "MODL_HDDN" => $hidden
         ]);
     }
-
 }

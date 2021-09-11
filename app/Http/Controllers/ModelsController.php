@@ -30,27 +30,39 @@ class ModelsController extends Controller
     function editModel($id)
     {
 
-        $data['types'] = Models::getTypes();
-        $data['colors']  = Models::getColors();
+      
         $data['models']  = Models::getModels();
-        $data['suppliers']  = Suppliers::getSuppliers();
         $data['model']  = Models::getModel($id);
 
-        $data['pageTitle'] = "Edit " . $data['model']->RAW_NAME . ' ' . $data['model']->TYPS_NAME . ' ' . $data['model']->MODL_NAME;
+        $data['pageTitle'] = "Edit " . $data['model']->MODL_NAME . ' ' . $data['model']->MODL_UNID ;
         $data['formURL'] = url('models/update');
 
         return view("finished.modellat", $data);
+    }
+
+    function insertModel(Request $request)
+    {
+
+        $validate = $request->validate([
+    
+            "serial"    => "required",
+            "name" => "required",
+       
+        ]);
+
+        Models::insertModel($request->name, $request->serial);
+
+        return \redirect("models/show");
     }
 
     function updateModel(Request $request)
     {
 
         $validate = $request->validate([
-            "type" => "required",
-            "color" => "required",
-            "id"    => "required",
-            "supplier" => "required",
-            "price"     => "required"
+    
+            "serial"    => "required",
+            "name" => "required",
+       
         ]);
 
         $path = null;
@@ -60,7 +72,7 @@ class ModelsController extends Controller
             $path = $request->photo->store('images/models', 'public');
         }
 
-        Models::updateModel($request->id, $request->name, $request->type, $request->color, $request->supplier, $request->price, $path, $request->serial, $request->comment);
+        Models::updateModel($request->id, $request->name, $request->serial);
 
         return \redirect("models/show");
     }

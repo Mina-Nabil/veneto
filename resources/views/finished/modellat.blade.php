@@ -14,16 +14,26 @@
                     <input name=id type=hidden value="{{$model->id}}">
                     @endif
 
-                    <div class="form-group">
-                        <label>Models</label>
+                    <div class="col-6 form-group">
+                        <label>Name</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="ti-eraser"></i></span>
                             </div>
-                            <input type="text" placeholder="Enter Model Name" class="form-control" name=name value="{{ (isset($model)) ? $model->MODL_NAME : old('name') }}"
-                                required>
+                            <input type="text" placeholder="Enter Model Name" class="form-control" name=name value="{{ (isset($model)) ? $model->MODL_NAME : old('name') }}" required>
                         </div>
                         <small class="text-danger">{{$errors->first('name')}}</small>
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label>ID</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon11"><i class="ti-barcode"></i></span>
+                            </div>
+                            <input type="text" placeholder="Enter Model Name" class="form-control" name=serial value="{{ (isset($model)) ? $model->MODL_UNID : old('serial') }}" required>
+                        </div>
+                        <small class="text-danger">{{$errors->first('serial')}}</small>
                     </div>
 
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
@@ -86,4 +96,3 @@
  }
 </script>
 @endsection
-
