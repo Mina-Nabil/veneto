@@ -236,6 +236,7 @@
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="{{url('brands/show')}}">مركات</a></li>
                                         <li><a href="{{url('finished/models')}}">اصناف</a></li>
+                                        <li><a href="{{url('models/show')}}">موديلات</a></li>
                                     </ul>
                                 </li>
                             </ul>

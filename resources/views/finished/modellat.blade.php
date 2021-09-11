@@ -31,7 +31,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon11"><i class="ti-barcode"></i></span>
                                 </div>
-                                <input type="text" placeholder="Enter Model Name" class="form-control" name=serial value="{{ (isset($model)) ? $model->MODL_UNID : old('serial') }}" required>
+                                <input type="text" placeholder="Enter Model ID" class="form-control" name=serial value="{{ (isset($model)) ? $model->MODL_UNID : old('serial') }}" required>
                             </div>
                             <small class="text-danger">{{$errors->first('serial')}}</small>
                         </div>
