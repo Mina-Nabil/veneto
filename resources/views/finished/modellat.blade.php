@@ -44,6 +44,7 @@
                     <table id="myTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Show</th>
                                 <th>Edit</th>
@@ -52,6 +53,7 @@
                         <tbody>
                             @foreach($models as $model)
                             <tr>
+                                <td>{{$model->MODL_UNID}}</td>
                                 <td>{{$model->MODL_NAME}}</td>
                                 <td> @if($model->MODL_HDDN)
                                     <button class="btn btn-success mr-2" onclick="confirmAndGoTo('{{ url('models/hide/' . $model->id)}}', 'show this model')">Show</button>
