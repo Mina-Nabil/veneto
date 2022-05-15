@@ -470,8 +470,8 @@
         });
         const d = new Date();
         const year = d.getFullYear(); // 2019
-        const day = d.getDay();
-        const month = d.getMonth();
+        const day = d.getDate();
+        const month = d.getMonth()+1;
         const formatted = day + "/" + month + "/" + year;
         $(function () {
             $(function () {

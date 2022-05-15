@@ -109,8 +109,8 @@
 <script>
     const dclient = new Date();
         const yearClient = dclient.getFullYear(); // 2019
-        const dayClient = dclient.getDay();
-        const monthClient = dclient.getMonth();
+        const dayClient = dclient.getDate();
+        const monthClient = dclient.getMonth()+1;
         const formattedClient = dayClient + "/" + monthClient + "/" + yearClient;
 
 
