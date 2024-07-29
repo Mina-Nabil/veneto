@@ -165,6 +165,12 @@ class ClientsController extends Controller
         return back();
     }
 
+    function deleteClient($id)
+    {
+        Clients::findOrFail($id)->deleteClient();
+        return back();
+    }
+
     //////////////////////////Targets Functions
 
     function historyPage(Request $request)

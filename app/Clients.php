@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Cash;
 use App\Bank;
 use DateTime;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
 class Clients extends Model
@@ -411,5 +412,18 @@ class Clients extends Model
         if ($typeID != -1)
             $query = $query->where('CLNT_ONLN', $typeID);
         return $query->sum('CLNT_BLNC');
+    }
+
+    ////model functions
+    public function deleteClient()
+    {
+        DB::transaction(function(){
+            DB::table('client_transactions')->where('CLTR_CLNT_ID', $this->id)->delete();
+            $sales_ids = DB::table('sales')->where('SALS_CLNT_ID', $this->id)->get()->pluck('id')->toArray();
+            DB::table('sales_items')->whereIN('id', $sales_ids)->delete();
+            DB::table('sales')->whereIN('id', $sales_ids)->delete();
+            DB::table('targets')->where('TRGT_CLNT_ID', $this->id)->delete();
+
+        });
     }
 }

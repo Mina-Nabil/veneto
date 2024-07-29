@@ -20,6 +20,12 @@
                                 class="btn btn-success d-none d-lg-block m-l-15">Client Transactions</a>
                         </div>
                     </div>
+                    <div class="col-lg-5 align-self-center text-right">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('clients/delete/'.$client->id)}}"
+                                class="btn btn-danger d-none d-lg-block m-l-15">Delete Client</a>
+                        </div>
+                    </div>
                     @endif
                 </div>
                 <div class="table-responsive m-t-40">

@@ -64,6 +64,7 @@ Route::post("clients/trans/error",   'ClientsController@markError')->middleware(
 Route::post("clients/trans/unmark",   'ClientsController@unmarkError')->middleware('cors');
 Route::post("clients/account/statement", 'ClientsController@accountStatement')->middleware('cors');
 Route::post("clients/main/account", 'ClientsController@mainReport')->middleware('cors');
+Route::get("clients/delete/{id}",     'ClientsController@deleteClient')->middleware('cors');
 
 Route::post("clients/trans/hide",   'ClientsController@hideTrans')->middleware('cors');
 Route::get("clients/trans/show/{id}",   'ClientsController@showTrans')->middleware('cors');
