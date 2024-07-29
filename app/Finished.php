@@ -12,10 +12,10 @@ class Finished extends Model
     public static function getAvailable()
     {
         $ret = array();
-        $ret['data'] = DB::table("finished")->join("models", "FNSH_MODL_ID", '=', 'models.id')
-            ->join("brands", "FNSH_BRND_ID", '=', "brands.id")
-            ->join("types", "MODL_TYPS_ID", '=', 'types.id')
-            ->join("raw", "TYPS_RAW_ID", '=', 'raw.id')
+        $ret['data'] = DB::table("finished")->leftjoin("models", "FNSH_MODL_ID", '=', 'models.id')
+            ->leftjoin("brands", "FNSH_BRND_ID", '=', "brands.id")
+            ->leftjoin("types", "MODL_TYPS_ID", '=', 'types.id')
+            ->leftjoin("raw", "TYPS_RAW_ID", '=', 'raw.id')
             ->select("finished.*", "brands.BRND_NAME", "models.MODL_UNID", "models.MODL_IMGE", "types.TYPS_NAME", "raw.RAW_NAME")
             ->selectRaw("SUM(FNSH_36_AMNT + FNSH_38_AMNT + FNSH_40_AMNT + FNSH_42_AMNT + FNSH_44_AMNT + FNSH_46_AMNT + FNSH_48_AMNT + FNSH_50_AMNT + FNSH_52_AMNT) as itemsCount")
             ->where('FNSH_HDDN', 0)
