@@ -418,7 +418,7 @@ class Clients extends Model
     public function deleteClient()
     {
         DB::transaction(function(){
-            DB::table('client_transactions')->where('CLTR_CLNT_ID', $this->id)->delete();
+            DB::table('client_trans')->where('CLTR_CLNT_ID', $this->id)->delete();
             $sales_ids = DB::table('sales')->where('SALS_CLNT_ID', $this->id)->get()->pluck('id')->toArray();
             DB::table('sales_items')->whereIN('id', $sales_ids)->delete();
             DB::table('sales')->whereIN('id', $sales_ids)->delete();
