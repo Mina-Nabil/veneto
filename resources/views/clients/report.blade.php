@@ -152,6 +152,12 @@
                             <a style="font-family: 'Allerta Stencil'" href="{{url('sales/show/'.$client->id)}}" class="btn btn-success d-none d-lg-block m-l-15">Client Sales</a>
                         </div>
                     </div>
+                    <div class="col-lg-2 align-self-center text-right">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a style="font-family: 'Allerta Stencil'" href="{{url('clients/delete/'.$client->id)}}" class="btn btn-danger d-none d-lg-block m-l-15">Delete Client</a>
+                        </div>
+                    </div>
+
                     <div class="col-lg-1 align-self-center text-right">
                         <div class="d-flex justify-content-start align-items-center">
                             <button style="font-family: 'Allerta Stencil'" data-toggle="modal" data-target="#hideTrans" class="btn btn-success d-none d-lg-block m-l-15">Hide</button>
