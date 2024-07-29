@@ -168,7 +168,7 @@ class ClientsController extends Controller
     function deleteClient($id)
     {
         Clients::findOrFail($id)->deleteClient();
-        return back();
+        return self::home();
     }
 
     //////////////////////////Targets Functions

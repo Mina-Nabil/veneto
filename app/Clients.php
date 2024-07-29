@@ -423,7 +423,7 @@ class Clients extends Model
             DB::table('sales_items')->whereIN('id', $sales_ids)->delete();
             DB::table('sales')->whereIN('id', $sales_ids)->delete();
             DB::table('targets')->where('TRGT_CLNT_ID', $this->id)->delete();
-
+            $this->delete();
         });
     }
 }
