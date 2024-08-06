@@ -154,7 +154,7 @@
                     </div>
                     <div class="col-lg-1 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
-                            <a style="font-family: 'Allerta Stencil'" href="{{url('clients/delete/'.$client->id)}}" class="btn btn-danger d-none d-lg-block m-l-15">Delete Client</a>
+                            <a style="font-family: 'Allerta Stencil'" onclick="confirmAndGoTo('{{url('clients/delete/'.$client->id)}}','delete the Suppliers Transactions')" class="btn btn-danger d-none d-lg-block m-l-15">Delete Client</a>
                         </div>
                     </div>
 

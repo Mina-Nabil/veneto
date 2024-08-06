@@ -145,12 +145,17 @@
                     @if($isSupplier)
                     <div class=col-3>
                         <div class=row>
-                            <div class="col-lg-6 align-self-center text-right">
+                            <div class="col-lg-4 align-self-center text-right">
                                 <div class="d-flex justify-content-end align-items-center">
                                     <button style="font-family: 'Allerta Stencil'" data-toggle="modal" data-target="#hideTrans" class="btn btn-success d-none d-lg-block m-l-15">Hide</button>
                                 </div>
                             </div>
-                            <div class="col-lg-6 align-self-center text-right">
+                            <div class="col-lg-4 align-self-center text-right">
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <a style="font-family: 'Allerta Stencil'" onclick="confirmAndGoTo('{{url('suppliers/delete/'.$supplier->id)}}','delete the Suppliers Transactions')" class="btn btn-danger d-none d-lg-block m-l-15">Delete</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 align-self-center text-right">
                                 <div class="d-flex justify-content-start align-items-center">
                                     <button style="font-family: 'Allerta Stencil'" onclick="confirmAndGoTo('{{url('suppliers/trans/show/'.$supplier->id)}}','Show the Suppliers Transactions')"
                                         class="btn btn-success d-none d-lg-block m-l-15">Show</button>

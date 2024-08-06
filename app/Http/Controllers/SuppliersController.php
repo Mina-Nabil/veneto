@@ -224,6 +224,12 @@ class SuppliersController extends Controller
         return redirect("suppliers/show");
     }
 
+    function deleteSupplier($id)
+    {
+        Suppliers::findOrFail($id)->deleteSupplier();
+        return self::home();
+    }
+
 
 
     //////////////////////////Supplier Types Function/////////////////////////

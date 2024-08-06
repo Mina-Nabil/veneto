@@ -311,6 +311,16 @@ class Suppliers extends Model
         return $query->sum('SUPP_BLNC');
     }
 
+    public function deleteSupplier()
+    {
+        DB::transaction(function(){
+            DB::table('supplier_trans')->where('SPTR_SUPP_ID', $this->id)->delete();
+            DB::table('models')->where('MODL_SUPP_ID', $this->id)->delete();
+            DB::table('raw_inventory')->where('RINV_SUPP_ID', $this->id)->delete();
+            $this->delete();
+        });
+    }
+
     //////////////////////////////////Supplier Types//////////////////////////////////
     static function getTypes()
     {

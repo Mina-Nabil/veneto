@@ -201,6 +201,7 @@ Route::post("suppliers/trans/error",   'SuppliersController@markError')->middlew
 Route::post("suppliers/trans/unmark",   'SuppliersController@unmarkError')->middleware('cors');
 Route::post("suppliers/account/statement", 'SuppliersController@accountStatement')->middleware('cors');
 Route::post("suppliers/main/account", 'SuppliersController@mainReport')->middleware('cors');
+Route::get("suppliers/delete/{id}",     'SuppliersController@deleteSupplier')->middleware('cors');
 
 Route::post("suppliers/trans/hide",   'SuppliersController@hideTrans')->middleware('cors');
 Route::get("suppliers/trans/show/{id}",   'SuppliersController@showTrans')->middleware('cors');
