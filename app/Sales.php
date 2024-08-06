@@ -142,11 +142,11 @@ class Sales extends Model
             ->where("sales.id", $id)->get()->first();
 
         $retArr['items']   = DB::table("sales_items")
-            ->join("finished", "SLIT_FNSH_ID", '=', 'finished.id')
-            ->join("models", "FNSH_MODL_ID", '=', 'models.id')
-            ->join("types", "MODL_TYPS_ID", '=', 'types.id')
-            ->join("raw", "TYPS_RAW_ID", '=', 'raw.id')
-            ->join("brands", "FNSH_BRND_ID", '=', "brands.id")
+            ->leftjoin("finished", "SLIT_FNSH_ID", '=', 'finished.id')
+            ->leftjoin("models", "FNSH_MODL_ID", '=', 'models.id')
+            ->leftjoin("types", "MODL_TYPS_ID", '=', 'types.id')
+            ->leftjoin("raw", "TYPS_RAW_ID", '=', 'raw.id')
+            ->leftjoin("brands", "FNSH_BRND_ID", '=', "brands.id")
             ->select(
                 "sales_items.*",
                 "brands.BRND_NAME",
