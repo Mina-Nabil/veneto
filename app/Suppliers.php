@@ -316,7 +316,6 @@ class Suppliers extends Model
         DB::transaction(function(){
             DB::table('supplier_trans')->where('SPTR_SUPP_ID', $this->id)->delete();
             DB::table('models')->where('MODL_SUPP_ID', $this->id)->delete();
-            DB::table('raw_inventory')->where('RINV_SUPP_ID', $this->id)->delete();
             $this->delete();
         });
     }
